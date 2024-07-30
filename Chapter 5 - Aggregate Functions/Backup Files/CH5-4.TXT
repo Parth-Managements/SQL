@@ -1,0 +1,389 @@
+SQL> 
+SQL> SET LINES 200 PAGES 24
+SQL> 
+SQL> REM DECODE ( COLUMNNAME , VALUE1 , ACTION1 , VALUE2 , ACTION2 ... ACTIONn )
+SQL> 
+SQL> REM CASE SYNTAX 1 : CASE COLUMNNAME WHEN VALUE1 THEN ACTION1 WHEN VALUE2 THEN ACTION2 ELSE ACTIONn END
+SQL> 
+SQL> REM ABOVE TWO FUNCTIONS CAN PERFORM ONLY EQUALITY COMPARISON.
+SQL> 
+SQL> REM THEY DON'T ALLOW US TO WRITE ANY CONDITION, SO WE CAN USE < > ANY SOME ALL BETWEEN LIKE IN ...
+SQL> 
+SQL> 
+SQL> SELECT FIRST_NAME , SALARY FROM EMPLOYEES ORDER BY 1;
+
+FIRST_NAME          SALARY                                                                                                                                                                              
+--------------- ----------                                                                                                                                                                              
+Alexander             9000                                                                                                                                                                              
+Bruce                 6000                                                                                                                                                                              
+Curtis                3100                                                                                                                                                                              
+Diana                 4200                                                                                                                                                                              
+Eleni                10500                                                                                                                                                                              
+Ellen                11000                                                                                                                                                                              
+Jennifer              4400                                                                                                                                                                              
+Jonathon              8600                                                                                                                                                                              
+Kevin                 5800                                                                                                                                                                              
+Kimerely              7000                                                                                                                                                                              
+Lex                  17000                                                                                                                                                                              
+Michael              13000                                                                                                                                                                              
+Neena                17000                                                                                                                                                                              
+Pat                   6000                                                                                                                                                                              
+Peter                 2500                                                                                                                                                                              
+Randall               2600                                                                                                                                                                              
+Shelley              12000                                                                                                                                                                              
+Steven               24000                                                                                                                                                                              
+Trenna                3500                                                                                                                                                                              
+William               8300                                                                                                                                                                              
+
+20 rows selected.
+
+SQL> REM SALARY RANGE : 0-6000 40% , 6001-9000 30% , 9001-13000 20% , REMAINING 10%
+SQL> 
+SQL> SELECT FIRST_NAME , SALARY FROM EMPLOYEES ORDER BY 2 DESC;
+
+FIRST_NAME          SALARY                                                                                                                                                                              
+--------------- ----------                                                                                                                                                                              
+Steven               24000                                                                                                                                                                              
+Neena                17000                                                                                                                                                                              
+Lex                  17000                                                                                                                                                                              
+Michael              13000                                                                                                                                                                              
+Shelley              12000                                                                                                                                                                              
+Ellen                11000                                                                                                                                                                              
+Eleni                10500                                                                                                                                                                              
+Alexander             9000                                                                                                                                                                              
+Jonathon              8600                                                                                                                                                                              
+William               8300                                                                                                                                                                              
+Kimerely              7000                                                                                                                                                                              
+Bruce                 6000                                                                                                                                                                              
+Pat                   6000                                                                                                                                                                              
+Kevin                 5800                                                                                                                                                                              
+Jennifer              4400                                                                                                                                                                              
+Diana                 4200                                                                                                                                                                              
+Trenna                3500                                                                                                                                                                              
+Curtis                3100                                                                                                                                                                              
+Randall               2600                                                                                                                                                                              
+Peter                 2500                                                                                                                                                                              
+
+20 rows selected.
+
+SQL> REM SALARY RANGE : 0-6000 40% , 6001-9000 30% , 9001-13000 20% , REMAINING 10%
+SQL> 
+SQL> SELECT FIRST_NAME , SALARY FROM EMPLOYEES ORDER BY 2;
+
+FIRST_NAME          SALARY                                                                                                                                                                              
+--------------- ----------                                                                                                                                                                              
+Peter                 2500                                                                                                                                                                              
+Randall               2600                                                                                                                                                                              
+Curtis                3100                                                                                                                                                                              
+Trenna                3500                                                                                                                                                                              
+Diana                 4200                                                                                                                                                                              
+Jennifer              4400                                                                                                                                                                              
+Kevin                 5800                                                                                                                                                                              
+Bruce                 6000                                                                                                                                                                              
+Pat                   6000                                                                                                                                                                              
+Kimerely              7000                                                                                                                                                                              
+William               8300                                                                                                                                                                              
+Jonathon              8600                                                                                                                                                                              
+Alexander             9000                                                                                                                                                                              
+Eleni                10500                                                                                                                                                                              
+Ellen                11000                                                                                                                                                                              
+Shelley              12000                                                                                                                                                                              
+Michael              13000                                                                                                                                                                              
+Neena                17000                                                                                                                                                                              
+Lex                  17000                                                                                                                                                                              
+Steven               24000                                                                                                                                                                              
+
+20 rows selected.
+
+SQL> REM IF WE NEED TO WRITE CONDITION, WE MUST HAVE TO USE SECOND SYNTAX OF CASE FUNCTION LIKE BELOW.
+SQL> 
+SQL> SELECT FIRST_NAME , SALARY ,
+  2  CASE WHEN SALARY <= 6000 THEN SALARY * 1.4
+  3       WHEN SALARY BETWEEN 6001 AND 9000 THEN SALARY * 1.3
+  4       WHEN SALARY >= 9001 AND SALARY <= 13000 THEN SALARY * 1.2 ELSE SALARY * 1.1 END NEW_SALARY
+  5  FROM EMPLOYEES
+  6  ORDER BY 2;
+
+FIRST_NAME          SALARY NEW_SALARY                                                                                                                                                                   
+--------------- ---------- ----------                                                                                                                                                                   
+Peter                 2500       3500                                                                                                                                                                   
+Randall               2600       3640                                                                                                                                                                   
+Curtis                3100       4340                                                                                                                                                                   
+Trenna                3500       4900                                                                                                                                                                   
+Diana                 4200       5880                                                                                                                                                                   
+Jennifer              4400       6160                                                                                                                                                                   
+Kevin                 5800       8120                                                                                                                                                                   
+Bruce                 6000       8400                                                                                                                                                                   
+Pat                   6000       8400                                                                                                                                                                   
+Kimerely              7000       9100                                                                                                                                                                   
+William               8300      10790                                                                                                                                                                   
+Jonathon              8600      11180                                                                                                                                                                   
+Alexander             9000      11700                                                                                                                                                                   
+Eleni                10500      12600                                                                                                                                                                   
+Ellen                11000      13200                                                                                                                                                                   
+Shelley              12000      14400                                                                                                                                                                   
+Michael              13000      15600                                                                                                                                                                   
+Neena                17000      18700                                                                                                                                                                   
+Lex                  17000      18700                                                                                                                                                                   
+Steven               24000      26400                                                                                                                                                                   
+
+20 rows selected.
+
+SQL> REM MIN_SAL_UPTO_YEAR_94   AVG_SAL_YEAR_95_97   MAX_SAL_YEAR-98_ONWARDS
+SQL> 
+SQL> SELECT MIN(CASE WHEN HIRE_DATE <= '31DEC94' THEN SALARY END) MIN_SAL_UPTO_YEAR_94,
+  2         AVG(CASE WHEN HIRE_DATE > '31DEC94' AND HIRE_DATE < '1JAN98' THEN SALARY END) AVG_SAL_YEAR_95_97
+  3         MAX(CASE WHEN HIRE_DATE >= '1JAN98' THEN SALARY END) MAX_SAL_YEAR-98_ONWARDS
+  4  FROM EMPLOYEES
+  5  
+SQL> 
+SQL> SELECT MIN(CASE WHEN HIRE_DATE <= '31DEC94' THEN SALARY END) MIN_SAL_UPTO_YEAR_94,
+  2         AVG(CASE WHEN HIRE_DATE > '31DEC94' AND HIRE_DATE < '1JAN98' THEN SALARY END) AVG_SAL_YEAR_95_97,
+  3         MAX(CASE WHEN HIRE_DATE >= '1JAN98' THEN SALARY END) MAX_SAL_YEAR-98_ONWARDS
+  4  FROM EMPLOYEES
+  5  ;
+       MAX(CASE WHEN HIRE_DATE >= '1JAN98' THEN SALARY END) MAX_SAL_YEAR-98_ONWARDS
+                                                                        *
+ERROR at line 3:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> SELECT MIN(CASE WHEN HIRE_DATE <= '31DEC94' THEN SALARY END) MIN_SAL_UPTO_YEAR_94,
+  2         AVG(CASE WHEN HIRE_DATE > '31DEC94' AND HIRE_DATE < '1JAN98' THEN SALARY END) AVG_SAL_YEAR_95_97,
+  3         MAX(CASE WHEN HIRE_DATE >= '1JAN98' THEN SALARY END) MAX_SAL_YEAR_98_ONWARDS
+  4  FROM EMPLOYEES;
+
+MIN_SAL_UPTO_YEAR_94 AVG_SAL_YEAR_95_97 MAX_SAL_YEAR_98_ONWARDS                                                                                                                                         
+-------------------- ------------------ -----------------------                                                                                                                                         
+                4400               7320                   10500                                                                                                                                         
+
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+20 rows selected.
+
+SQL> REM 1 DEPT_10_50_MIN_SAL     DEPT_20_60_90_AVG_SAL    DEPT_80,110_MAX_SAL
+SQL> 
+SQL> REM 2 HM_JAN_JUN_JUL_MAX_SAL    HM_MAR_MAY_AUG_AVG_SAL    HM_OCT_NOV_MIN_SAL
+SQL> 
+SQL> REM 3 FIRST_NAME_A_D_CNT       FIRST_NAME_E_H_CNT    FIRST_NAME_I_N_CNT   FIRST_NAME_OTHERS_CNT
+SQL> 
+SQL> REM 4 JOB_ID_ENDS_WITH_P_MIN_SAL   JOB_ID_STARTS_WITH_I_AVG_SAL
+SQL> 
+SQL> REM 5 LENGTH_OF_LN_EVEN_CNT    LENGTH_OF_LN_ODD_CNT
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 1 DEPT_10_50_MIN_SAL     DEPT_20_60_90_AVG_SAL    DEPT_80,110_MAX_SAL
+SQL> 
+SQL> SELECT MIN(CASE WHEN DEPARTMENT_ID IN (10,50) THEN SALARY END) DEPT_10_50_MIN_SAL,
+  2         AVG(CASE WHEN DEPARTMENT_ID = ANY (20,60,90) THEN SALARY END) DEPT_20_60_90_AVG_SAL,
+  3         MAX(CASE WHEN DEPARTMENT_ID = 80 OR DEPARTMENT_ID = 110 THEN SALARY END) DEPT_80,110_MAX_SAL
+  4  FROM EMPLOYEES;
+       MAX(CASE WHEN DEPARTMENT_ID = 80 OR DEPARTMENT_ID = 110 THEN SALARY END) DEPT_80,110_MAX_SAL
+                                                                                           *
+ERROR at line 3:
+ORA-00911: invalid character 
+
+
+SQL> SELECT MIN(CASE WHEN DEPARTMENT_ID IN (10,50) THEN SALARY END) DEPT_10_50_MIN_SAL,
+  2         AVG(CASE WHEN DEPARTMENT_ID = ANY (20,60,90) THEN SALARY END) DEPT_20_60_90_AVG_SAL,
+  3         MAX(CASE WHEN DEPARTMENT_ID = 80 OR DEPARTMENT_ID = 110 THEN SALARY END) DEPT_80_110_MAX_SAL
+  4  FROM EMPLOYEES;
+
+DEPT_10_50_MIN_SAL DEPT_20_60_90_AVG_SAL DEPT_80_110_MAX_SAL                                                                                                                                            
+------------------ --------------------- -------------------                                                                                                                                            
+              2500                 12025               12000                                                                                                                                            
+
+SQL> REM 2 HM_JAN_JUN_JUL_MAX_SAL    HM_MAR_MAY_AUG_AVG_SAL    HM_OCT_NOV_MIN_SAL
+SQL> 
+SQL> SELECT MAX(CASE WHEN HIRE_DATE LIKE '%J%' THEN SALARY END) HM_JAN_JUN_JUL_MAX_SAL,
+  2         AVG(CASE WHEN SUBSTR(HIRE_dATE,4,3) IN ('MAR','MAY','AUG') THEN SALARY END) HM_MAR_MAY_AUG_AVG_SAL,
+  3         MIN(CASE WHEN INSTR(HIRE_DATE,'O') > 0 THEN SALARY END) HM_OCT_NOV_MIN_SAL
+  4  FROM EMPLOYEES;
+
+HM_JAN_JUN_JUL_MAX_SAL HM_MAR_MAY_AUG_AVG_SAL HM_OCT_NOV_MIN_SAL                                                                                                                                        
+---------------------- ---------------------- ------------------                                                                                                                                        
+                 24000             6866.66667               3500                                                                                                                                        
+
+SQL> REM 3 FIRST_NAME_A_D_CNT       FIRST_NAME_E_H_CNT    FIRST_NAME_I_N_CNT   FIRST_NAME_OTHERS_CNT
+SQL> 
+SQL> SELECT COUNT(CASE WHEN SUBSTR(FIRST_NAME,1,1) BETWEEN 'A' AND 'D' END) FIRST_NAME_A_D_CNT,
+  2         COUNT(CASE WHEN FIRST_NAME BETWEEN 'E' AND 'Hzz' THEN '*' END) FIRST_NAME_A_D_CNT,
+  3  
+SQL> SELECT COUNT(CASE WHEN SUBSTR(FIRST_NAME,1,1) BETWEEN 'A' AND 'D' THEN '*' END) FIRST_NAME_A_D_CNT,
+  2         COUNT(CASE WHEN FIRST_NAME BETWEEN 'E' AND 'Hzz' THEN '*' END) FIRST_NAME_E_H_CNT,
+  3         COUNT(CASE WHEN SUBSTR(FIRST_NAME,1,1) BETWEEN 'I' AND 'N' THEN '*' END) FIRST_NAME_I_N_CNT,
+  4         COUNT(CASE WHEN FIRST_NAME >= 'O' THEN '*' END) FIRST_NAME_OTHERS_CNT
+  5  FROM EMPLOYEES;
+
+FIRST_NAME_A_D_CNT FIRST_NAME_E_H_CNT FIRST_NAME_I_N_CNT FIRST_NAME_OTHERS_CNT                                                                                                                          
+------------------ ------------------ ------------------ ---------------------                                                                                                                          
+                 4                  2                  7                     7                                                                                                                          
+
+SQL> REM 4 JOB_ID_ENDS_WITH_P_MIN_SAL   JOB_ID_STARTS_WITH_I_AVG_SAL
+SQL> 
+SQL> SELECT MIN(CASE WHEN JOB_ID LIKE '%P' THEN SALARY END) JOB_ID_ENDS_WITH_P_MIN_SAL,
+  2         AVG(CASE WHEN JOB_ID LIKE 'I%' THEN SALARY END) JOB_ID_STARTS_WITH_I_AVG_SAL
+  3  FROM EMPLOYEES;
+
+JOB_ID_ENDS_WITH_P_MIN_SAL JOB_ID_STARTS_WITH_I_AVG_SAL                                                                                                                                                 
+-------------------------- ----------------------------                                                                                                                                                 
+                      6000                         6400                                                                                                                                                 
+
+SQL> REM 5 LENGTH_OF_LN_EVEN_CNT    LENGTH_OF_LN_ODD_CNT
+SQL> 
+SQL> SELECT COUNT(CASE WHEN MOD(LENGTH(LAST_NAME),2) = 0 THEN '*' END) LENGTH_OF_LN_EVEN_CNT,
+  2         COUNT(CASE WHEN MOD(LENGTH(LAST_NAME),2) = 1 THEN '*' END) LENGTH_OF_LN_ODD_CNT
+  3  FROM EMPLOYEES;
+
+LENGTH_OF_LN_EVEN_CNT LENGTH_OF_LN_ODD_CNT                                                                                                                                                              
+--------------------- --------------------                                                                                                                                                              
+                    8                   12                                                                                                                                                              
+
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+20 rows selected.
+
+SQL> REM 1 MIN_SAL_FN_a    AVG_SAL_FN_e    MAX_SAL_FN_i   SUM_SAL_FN_o    CNT_FN_u
+SQL> 
+SQL> REM 2 MIN_SAL_LN_a    AVG_SAL_LN_e    MAX_SAL_LN_i   SUM_SAL_LN_o    CNT_LN_u  (RIGHT MOST)
+SQL> 
+SQL> REM 3 CNT_VOWELS_1    CNT_VOWELS_2    CNT_VOWELS_3   (IN FULL NAME)
+SQL> 
+SQL> REM 4 MIN_SAL_WOM_1    AVG_SAL_WOM_2    MAX_SAL_WOM_3   SUM_SAL_WOM_4    CNT_FN_WOM_5
+SQL> 
+SQL> REM 5 MAX_SAL_HIRED_IN_FH_YEAR     MIN_SAL_HIRED_IN_SH_YEAR
+SQL> 
+SQL> 
+SQL> REM 1 MIN_SAL_FN_a    AVG_SAL_FN_e    MAX_SAL_FN_i   SUM_SAL_FN_o    CNT_FN_u
+SQL> 
+SQL> SELECT MIN(CASE WHEN SUBSTR(LTRIM(LOWER(FIRST_NAME),'qwrtypsdfghjklzxcvbnm'),1,1) = 'a' THEN SALARY END) MIN_SAL_FN_a,
+  2         AVG(CASE WHEN SUBSTR(LTRIM(LOWER(FIRST_NAME),'qwrtypsdfghjklzxcvbnm'),1,1) = 'e' THEN SALARY END) AVG_SAL_FN_e,
+  3         MAX(CASE WHEN SUBSTR(LTRIM(LOWER(FIRST_NAME),'qwrtypsdfghjklzxcvbnm'),1,1) = 'i' THEN SALARY END) AVG_SAL_FN_i,
+  4         SUM(CASE WHEN SUBSTR(LTRIM(LOWER(FIRST_NAME),'qwrtypsdfghjklzxcvbnm'),1,1) = 'o' THEN SALARY END) SUM_SAL_FN_o,
+  5         COUNT(CASE WHEN SUBSTR(LTRIM(LOWER(FIRST_NAME),'qwrtypsdfghjklzxcvbnm'),1,1) = 'u' THEN '*' END) CNT_SAL_FN_u
+  6  
+SQL> SELECT MIN(CASE WHEN SUBSTR(LTRIM(LOWER(FIRST_NAME),'qwrtypsdfghjklzxcvbnm'),1,1) = 'a' THEN SALARY END) MIN_SAL_FN_a,
+  2         AVG(CASE WHEN SUBSTR(LTRIM(LOWER(FIRST_NAME),'qwrtypsdfghjklzxcvbnm'),1,1) = 'e' THEN SALARY END) AVG_SAL_FN_e,
+  3         MAX(CASE WHEN SUBSTR(LTRIM(LOWER(FIRST_NAME),'qwrtypsdfghjklzxcvbnm'),1,1) = 'i' THEN SALARY END) MAX_SAL_FN_i,
+  4         SUM(CASE WHEN SUBSTR(LTRIM(LOWER(FIRST_NAME),'qwrtypsdfghjklzxcvbnm'),1,1) = 'o' THEN SALARY END) SUM_SAL_FN_o,
+  5         COUNT(CASE WHEN SUBSTR(LTRIM(LOWER(FIRST_NAME),'qwrtypsdfghjklzxcvbnm'),1,1) = 'u' THEN '*' END) CNT_SAL_FN_u
+  6  FROM EMPLOYEES;
+
+MIN_SAL_FN_A AVG_SAL_FN_E MAX_SAL_FN_I SUM_SAL_FN_O CNT_SAL_FN_U                                                                                                                                        
+------------ ------------ ------------ ------------ ------------                                                                                                                                        
+        2600        10770        13000         8600            2                                                                                                                                        
+
+SQL> REM 2 MIN_SAL_LN_a    AVG_SAL_LN_e    MAX_SAL_LN_i   SUM_SAL_LN_o    CNT_LN_u  (RIGHT MOST)
+SQL> 
+SQL> SELECT MIN(CASE WHEN SUBSTR(LTRIM(LOWER(LAST_NAME),'qwrtypsdfghjklzxcvbnm'),-1,1) = 'a' THEN SALARY END) MIN_SAL_FN_a,
+  2         AVG(CASE WHEN SUBSTR(LTRIM(LOWER(LAST_NAME),'qwrtypsdfghjklzxcvbnm'),-1,1) = 'e' THEN SALARY END) AVG_SAL_FN_e,
+  3         MAX(CASE WHEN SUBSTR(LTRIM(LOWER(LAST_NAME),'qwrtypsdfghjklzxcvbnm'),-1,1) = 'i' THEN SALARY END) MAX_SAL_FL_i,
+  4         SUM(CASE WHEN SUBSTR(LTRIM(LOWER(LAST_NAME),'qwrtypsdfghjklzxcvbnm'),-1,1) = 'o' THEN SALARY END) SUM_SAL_LN_o,
+  5         COUNT(CASE WHEN SUBSTR(LTRIM(LOWER(LAST_NAME),'qwrtypsdfghjklzxcvbnm'),-1,1) = 'u' THEN '*' END) CNT_SAL_LN_u
+  6  
+SQL> SELECT MIN(CASE WHEN SUBSTR(LTRIM(LOWER(LAST_NAME),'qwrtypsdfghjklzxcvbnm'),-1,1) = 'a' THEN SALARY END) MIN_SAL_LN_a,
+  2         AVG(CASE WHEN SUBSTR(LTRIM(LOWER(LAST_NAME),'qwrtypsdfghjklzxcvbnm'),-1,1) = 'e' THEN SALARY END) AVG_SAL_LN_e,
+  3         MAX(CASE WHEN SUBSTR(LTRIM(LOWER(LAST_NAME),'qwrtypsdfghjklzxcvbnm'),-1,1) = 'i' THEN SALARY END) MAX_SAL_LN_i,
+  4         SUM(CASE WHEN SUBSTR(LTRIM(LOWER(LAST_NAME),'qwrtypsdfghjklzxcvbnm'),-1,1) = 'o' THEN SALARY END) SUM_SAL_LN_o,
+  5         COUNT(CASE WHEN SUBSTR(LTRIM(LOWER(LAST_NAME),'qwrtypsdfghjklzxcvbnm'),-1,1) = 'u' THEN '*' END) CNT_SAL_LN_u
+  6  FROM EMPLOYEES;
+
+MIN_SAL_LN_A AVG_SAL_LN_E MAX_SAL_LN_I SUM_SAL_LN_O CNT_SAL_LN_U                                                                                                                                        
+------------ ------------ ------------ ------------ ------------                                                                                                                                        
+                                                               0                                                                                                                                        
+
+SQL> SELECT MIN(CASE WHEN SUBSTR(RTRIM(LOWER(LAST_NAME),'qwrtypsdfghjklzxcvbnm'),-1,1) = 'a' THEN SALARY END) MIN_SAL_LN_a,
+  2         AVG(CASE WHEN SUBSTR(RTRIM(LOWER(LAST_NAME),'qwrtypsdfghjklzxcvbnm'),-1,1) = 'e' THEN SALARY END) AVG_SAL_LN_e,
+  3         MAX(CASE WHEN SUBSTR(RTRIM(LOWER(LAST_NAME),'qwrtypsdfghjklzxcvbnm'),-1,1) = 'i' THEN SALARY END) MAX_SAL_LN_i,
+  4         SUM(CASE WHEN SUBSTR(RTRIM(LOWER(LAST_NAME),'qwrtypsdfghjklzxcvbnm'),-1,1) = 'o' THEN SALARY END) SUM_SAL_LN_o,
+  5         COUNT(CASE WHEN SUBSTR(RTRIM(LOWER(LAST_NAME),'qwrtypsdfghjklzxcvbnm'),-1,1) = 'u' THEN '*' END) CNT_SAL_LN_u
+  6  FROM EMPLOYEES;
+
+MIN_SAL_LN_A AVG_SAL_LN_E MAX_SAL_LN_I SUM_SAL_LN_O CNT_SAL_LN_U                                                                                                                                        
+------------ ------------ ------------ ------------ ------------                                                                                                                                        
+        2500   6785.71429        24000        26000            0                                                                                                                                        
+
+SQL> REM 3 CNT_VOWELS_1    CNT_VOWELS_2    CNT_VOWELS_3   (IN FULL NAME)
+SQL> 
+SQL> SELECT COUNT(CASE WHEN LENGTH(TRANSLATE(LOWER(FIRST_NAME||LAST_NAME),'#qwrtypsdfghjklzxcvbnm','#')) = 1 THEN '*' END) CNT_VOWELS_1,
+  2         COUNT(CASE WHEN LENGTH(TRANSLATE(LOWER(FIRST_NAME||LAST_NAME),'#qwrtypsdfghjklzxcvbnm','#')) = 2 THEN '*' END) CNT_VOWELS_2,
+  3         COUNT(CASE WHEN LENGTH(TRANSLATE(LOWER(FIRST_NAME||LAST_NAME),'#qwrtypsdfghjklzxcvbnm','#')) = 3 THEN '*' END) CNT_VOWELS_3
+  4  FROM EMPLOYEES;
+
+CNT_VOWELS_1 CNT_VOWELS_2 CNT_VOWELS_3                                                                                                                                                                  
+------------ ------------ ------------                                                                                                                                                                  
+           0            1            3                                                                                                                                                                  
+
+SQL> REM 4 MIN_SAL_WOM_1    AVG_SAL_WOM_2    MAX_SAL_WOM_3   SUM_SAL_WOM_4    CNT_FN_WOM_5
+SQL> 
+SQL> SELECT MIN(CASE WHEN TO_CHAR(HIRE_DATE,'W') = 1 THEN SALARY END) MIN_SAL_WOM_1,
+  2         AVG(CASE WHEN TO_CHAR(HIRE_DATE,'W') = 2 THEN SALARY END) AVG_SAL_WOM_2,
+  3         MAX(CASE WHEN TO_CHAR(HIRE_DATE,'W') = 3 THEN SALARY END) MAX_SAL_WOM_3,
+  4         SUM(CASE WHEN TO_CHAR(HIRE_DATE,'W') = 4 THEN SALARY END) SUM_SAL_WOM_4,
+  5         COUNT(CASE WHEN TO_CHAR(HIRE_DATE,'W') = 5 THEN '*' END) CNT_SAL_WOM_5
+  6  FROM EMPLOYEES;
+
+MIN_SAL_WOM_1 AVG_SAL_WOM_2 MAX_SAL_WOM_3 SUM_SAL_WOM_4 CNT_SAL_WOM_5                                                                                                                                   
+------------- ------------- ------------- ------------- -------------                                                                                                                                   
+         4200    10166.6667         24000         15600             2                                                                                                                                   
+
+SQL> REM 5 MAX_SAL_HIRED_IN_FH_YEAR     MIN_SAL_HIRED_IN_SH_YEAR
+SQL> 
+SQL> SELECT MAX(CASE WHEN TO_CHAR(HIRE_DATE,'Q') IN (1,2) THEN SALARY END) MAX_SAL_HIRED_IN_FH_YEAR,
+  2         MIN(CASE WHEN TO_CHAR(HIRE_DATE,'Q') IN (3,4) THEN SALARY END) MIN_SAL_HIRED_IN_SH_YEAR
+  3  FROM EMPLOYEES;
+
+MAX_SAL_HIRED_IN_FH_YEAR MIN_SAL_HIRED_IN_SH_YEAR                                                                                                                                                       
+------------------------ ------------------------                                                                                                                                                       
+                   17000                     2500                                                                                                                                                       
+
+SQL> SPOOL OFF

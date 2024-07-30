@@ -1,0 +1,588 @@
+SQL> 
+SQL> REM DATE FUNCTIONS : SYSDATE CURRENT_DATE ADD_MONTHS MONTHS_BETWEEN LAST_DAY NEXT_DAY TRUNC ROUND
+SQL> 
+SQL> REM LAST_DAY : IT WILL RETURN LAST DATE OF INPUT MONTH.
+SQL> 
+SQL> CONN SCOTT/TIGER
+Connected.
+SQL> 
+SQL> SELECT SYSDATE , LAST_DAY( STSDATE ) FROM DUAL;
+SELECT SYSDATE , LAST_DAY( STSDATE ) FROM DUAL
+                           *
+ERROR at line 1:
+ORA-00904: "STSDATE": invalid identifier 
+
+
+SQL> SELECT SYSDATE , LAST_DAY( SYSDATE ) FROM DUAL;
+
+SYSDATE   LAST_DAY(                                                                                 
+--------- ---------                                                                                 
+15-MAR-24 31-MAR-24                                                                                 
+
+SQL> REM COMPANY PAYS MONTHLY SALARY ON LAST DATE OF EACH MONTH.
+SQL> 
+SQL> REM FIND FIRST SALARY.
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_DATE , LAST_DAY(HIRE_DATE) FMSD FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE FMSD                                                                      
+--------------- --------- ---------                                                                 
+Steven          17-JUL-87 31-JUL-87                                                                 
+Neena           21-SEP-89 30-SEP-89                                                                 
+Lex             13-JAN-93 31-JAN-93                                                                 
+Alexander       03-JAN-90 31-JAN-90                                                                 
+Bruce           21-MAY-91 31-MAY-91                                                                 
+Diana           07-FEB-99 28-FEB-99                                                                 
+Kevin           16-NOV-99 30-NOV-99                                                                 
+Trenna          17-OCT-95 31-OCT-95                                                                 
+Curtis          29-JAN-97 31-JAN-97                                                                 
+Randall         15-MAR-98 31-MAR-98                                                                 
+Peter           09-JUL-98 31-JUL-98                                                                 
+Eleni           29-JAN-00 31-JAN-00                                                                 
+Ellen           11-MAY-96 31-MAY-96                                                                 
+Jonathon        24-MAR-98 31-MAR-98                                                                 
+Kimerely        24-MAY-99 31-MAY-99                                                                 
+Jennifer        17-SEP-87 30-SEP-87                                                                 
+Michael         17-FEB-96 29-FEB-96                                                                 
+Pat             17-AUG-97 31-AUG-97                                                                 
+Shelley         07-JUN-94 30-JUN-94                                                                 
+William         07-JUN-94 30-JUN-94                                                                 
+
+20 rows selected.
+
+SQL> REM 1 COMPANY PAYS MONTHLY SALARY IN NEXT MONTH ON 1st DATE. FIND FIRST SALARY DATE.
+SQL> 
+SQL> REM 2 COMPANY PAYS MONTHLY SALARY IN NEXT MONTH ON 7th DATE. FIND 4th MONTHLY SALARY DATE.
+SQL> 
+SQL> REM 3 FIND NUMBER OF DAYS WORKED IN JOINING MONTH.
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 1 COMPANY PAYS MONTHLY SALARY IN NEXT MONTH ON 1st DATE. FIND FIRST SALARY DATE.
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_DATE , LAST_DAY(HIRE_DATE)+1 FMSD FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE FMSD                                                                      
+--------------- --------- ---------                                                                 
+Steven          17-JUL-87 01-AUG-87                                                                 
+Neena           21-SEP-89 01-OCT-89                                                                 
+Lex             13-JAN-93 01-FEB-93                                                                 
+Alexander       03-JAN-90 01-FEB-90                                                                 
+Bruce           21-MAY-91 01-JUN-91                                                                 
+Diana           07-FEB-99 01-MAR-99                                                                 
+Kevin           16-NOV-99 01-DEC-99                                                                 
+Trenna          17-OCT-95 01-NOV-95                                                                 
+Curtis          29-JAN-97 01-FEB-97                                                                 
+Randall         15-MAR-98 01-APR-98                                                                 
+Peter           09-JUL-98 01-AUG-98                                                                 
+Eleni           29-JAN-00 01-FEB-00                                                                 
+Ellen           11-MAY-96 01-JUN-96                                                                 
+Jonathon        24-MAR-98 01-APR-98                                                                 
+Kimerely        24-MAY-99 01-JUN-99                                                                 
+Jennifer        17-SEP-87 01-OCT-87                                                                 
+Michael         17-FEB-96 01-MAR-96                                                                 
+Pat             17-AUG-97 01-SEP-97                                                                 
+Shelley         07-JUN-94 01-JUL-94                                                                 
+William         07-JUN-94 01-JUL-94                                                                 
+
+20 rows selected.
+
+SQL> REM 2 COMPANY PAYS MONTHLY SALARY IN NEXT MONTH ON 7th DATE. FIND 4th MONTHLY SALARY DATE.
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_DATE , ADD_MONTHS(LAST_DAY(HIRE_DATE),3) + 7 "4th MSD" FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE 4th MSD                                                                   
+--------------- --------- ---------                                                                 
+Steven          17-JUL-87 07-NOV-87                                                                 
+Neena           21-SEP-89 07-JAN-90                                                                 
+Lex             13-JAN-93 07-MAY-93                                                                 
+Alexander       03-JAN-90 07-MAY-90                                                                 
+Bruce           21-MAY-91 07-SEP-91                                                                 
+Diana           07-FEB-99 07-JUN-99                                                                 
+Kevin           16-NOV-99 07-MAR-00                                                                 
+Trenna          17-OCT-95 07-FEB-96                                                                 
+Curtis          29-JAN-97 07-MAY-97                                                                 
+Randall         15-MAR-98 07-JUL-98                                                                 
+Peter           09-JUL-98 07-NOV-98                                                                 
+Eleni           29-JAN-00 07-MAY-00                                                                 
+Ellen           11-MAY-96 07-SEP-96                                                                 
+Jonathon        24-MAR-98 07-JUL-98                                                                 
+Kimerely        24-MAY-99 07-SEP-99                                                                 
+Jennifer        17-SEP-87 07-JAN-88                                                                 
+Michael         17-FEB-96 07-JUN-96                                                                 
+Pat             17-AUG-97 07-DEC-97                                                                 
+Shelley         07-JUN-94 07-OCT-94                                                                 
+William         07-JUN-94 07-OCT-94                                                                 
+
+20 rows selected.
+
+SQL> REM 3 FIND NUMBER OF DAYS WORKED IN JOINING MONTH.
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_DATE , LAST_DAY(HIRE_DATE) , LAST_DAY(HIRE_DATE) - HIRE_DATE + 1 "DAYS WORKED" FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE LAST_DAY( DAYS WORKED                                                     
+--------------- --------- --------- -----------                                                     
+Steven          17-JUL-87 31-JUL-87          15                                                     
+Neena           21-SEP-89 30-SEP-89          10                                                     
+Lex             13-JAN-93 31-JAN-93          19                                                     
+Alexander       03-JAN-90 31-JAN-90          29                                                     
+Bruce           21-MAY-91 31-MAY-91          11                                                     
+Diana           07-FEB-99 28-FEB-99          22                                                     
+Kevin           16-NOV-99 30-NOV-99          15                                                     
+Trenna          17-OCT-95 31-OCT-95          15                                                     
+Curtis          29-JAN-97 31-JAN-97           3                                                     
+Randall         15-MAR-98 31-MAR-98          17                                                     
+Peter           09-JUL-98 31-JUL-98          23                                                     
+Eleni           29-JAN-00 31-JAN-00           3                                                     
+Ellen           11-MAY-96 31-MAY-96          21                                                     
+Jonathon        24-MAR-98 31-MAR-98           8                                                     
+Kimerely        24-MAY-99 31-MAY-99           8                                                     
+Jennifer        17-SEP-87 30-SEP-87          14                                                     
+Michael         17-FEB-96 29-FEB-96          13                                                     
+Pat             17-AUG-97 31-AUG-97          15                                                     
+Shelley         07-JUN-94 30-JUN-94          24                                                     
+William         07-JUN-94 30-JUN-94          24                                                     
+
+20 rows selected.
+
+SQL> REM NEXT_DAY : IT WILL RETURN DATE ON WHICH SPECIFIED DAY FALLS.
+SQL> 
+SQL> ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MONTH-RRRR DAY';
+
+Session altered.
+
+SQL> SELECT SYSDATE FROM DUAL;
+
+SYSDATE                                                                                             
+---------------------------                                                                         
+15-MARCH    -2024 FRIDAY                                                                            
+
+SQL> SELECT SYSDATE , NEXT_DAY ( SYSDATE , 'TUE' ) FROM DUAL;
+
+SYSDATE                     NEXT_DAY(SYSDATE,'TUE')                                                 
+--------------------------- ---------------------------                                             
+15-MARCH    -2024 FRIDAY    19-MARCH    -2024 TUESDAY                                               
+
+SQL> SELECT SYSDATE , NEXT_DAY ( SYSDATE , 'FRI' ) FROM DUAL;
+
+SYSDATE                     NEXT_DAY(SYSDATE,'FRI')                                                 
+--------------------------- ---------------------------                                             
+15-MARCH    -2024 FRIDAY    22-MARCH    -2024 FRIDAY                                                
+
+SQL> SELECT SYSDATE , NEXT_DAY ( SYSDATE , 'FRIDAY' ) FROM DUAL;
+
+SYSDATE                     NEXT_DAY(SYSDATE,'FRIDAY')                                              
+--------------------------- ---------------------------                                             
+15-MARCH    -2024 FRIDAY    22-MARCH    -2024 FRIDAY                                                
+
+SQL> SELECT SYSDATE , NEXT_DAY ( SYSDATE , 'FRI123' ) FROM DUAL;
+
+SYSDATE                     NEXT_DAY(SYSDATE,'FRI123')                                              
+--------------------------- ---------------------------                                             
+15-MARCH    -2024 FRIDAY    22-MARCH    -2024 FRIDAY                                                
+
+SQL> SELECT SYSDATE , NEXT_DAY ( SYSDATE , 'FRIXYZ' ) FROM DUAL;
+
+SYSDATE                     NEXT_DAY(SYSDATE,'FRIXYZ')                                              
+--------------------------- ---------------------------                                             
+15-MARCH    -2024 FRIDAY    22-MARCH    -2024 FRIDAY                                                
+
+SQL> SELECT SYSDATE , NEXT_DAY ( SYSDATE , 'FRID' ) FROM DUAL;
+
+SYSDATE                     NEXT_DAY(SYSDATE,'FRID')                                                
+--------------------------- ---------------------------                                             
+15-MARCH    -2024 FRIDAY    22-MARCH    -2024 FRIDAY                                                
+
+SQL> SELECT SYSDATE , NEXT_DAY ( SYSDATE , 'FRIDA' ) FROM DUAL;
+
+SYSDATE                     NEXT_DAY(SYSDATE,'FRIDA')                                               
+--------------------------- ---------------------------                                             
+15-MARCH    -2024 FRIDAY    22-MARCH    -2024 FRIDAY                                                
+
+SQL> SELECT SYSDATE , NEXT_DAY ( SYSDATE , 'FRIDAY' ) FROM DUAL;
+
+SYSDATE                     NEXT_DAY(SYSDATE,'FRIDAY')                                              
+--------------------------- ---------------------------                                             
+15-MARCH    -2024 FRIDAY    22-MARCH    -2024 FRIDAY                                                
+
+SQL> 
+SQL> 
+SQL> REM COMPANY PAYS WEEKLY SALARY ON EVERY WEDNESDAY.
+SQL> 
+SQL> REM FIND FIRST WEEKLY SALARY DATE FOR EACH EMPLOYEE AFTER JOINING THIS COMPANY.
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_DATE , NEXT_DAY(HIRE_DATE,'WED') FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE                   NEXT_DAY(HIRE_DATE,'WED')                               
+--------------- --------------------------- ---------------------------                             
+Steven          17-JULY     -1987 FRIDAY    22-JULY     -1987 WEDNESDAY                             
+Neena           21-SEPTEMBER-1989 THURSDAY  27-SEPTEMBER-1989 WEDNESDAY                             
+Lex             13-JANUARY  -1993 WEDNESDAY 20-JANUARY  -1993 WEDNESDAY                             
+Alexander       03-JANUARY  -1990 WEDNESDAY 10-JANUARY  -1990 WEDNESDAY                             
+Bruce           21-MAY      -1991 TUESDAY   22-MAY      -1991 WEDNESDAY                             
+Diana           07-FEBRUARY -1999 SUNDAY    10-FEBRUARY -1999 WEDNESDAY                             
+Kevin           16-NOVEMBER -1999 TUESDAY   17-NOVEMBER -1999 WEDNESDAY                             
+Trenna          17-OCTOBER  -1995 TUESDAY   18-OCTOBER  -1995 WEDNESDAY                             
+Curtis          29-JANUARY  -1997 WEDNESDAY 05-FEBRUARY -1997 WEDNESDAY                             
+Randall         15-MARCH    -1998 SUNDAY    18-MARCH    -1998 WEDNESDAY                             
+Peter           09-JULY     -1998 THURSDAY  15-JULY     -1998 WEDNESDAY                             
+Eleni           29-JANUARY  -2000 SATURDAY  02-FEBRUARY -2000 WEDNESDAY                             
+Ellen           11-MAY      -1996 SATURDAY  15-MAY      -1996 WEDNESDAY                             
+Jonathon        24-MARCH    -1998 TUESDAY   25-MARCH    -1998 WEDNESDAY                             
+Kimerely        24-MAY      -1999 MONDAY    26-MAY      -1999 WEDNESDAY                             
+Jennifer        17-SEPTEMBER-1987 THURSDAY  23-SEPTEMBER-1987 WEDNESDAY                             
+Michael         17-FEBRUARY -1996 SATURDAY  21-FEBRUARY -1996 WEDNESDAY                             
+Pat             17-AUGUST   -1997 SUNDAY    20-AUGUST   -1997 WEDNESDAY                             
+Shelley         07-JUNE     -1994 TUESDAY   08-JUNE     -1994 WEDNESDAY                             
+William         07-JUNE     -1994 TUESDAY   08-JUNE     -1994 WEDNESDAY                             
+
+20 rows selected.
+
+SQL> REM 1 COMPANY PAYS WEEKLY SALARY ON EVERY TUESDAY. FIND FIRST SALARY DATE.
+SQL> 
+SQL> REM 2 COMPANY PAYS WEEKLY SALARY ON EVERY SATURDAY. FIND 3rd SALARY DATE.
+SQL> 
+SQL> REM 3 COMPANY PAYS WEEKLY SALARY ON EVERY MONDAY. FIND NEXT SALARY DATE.
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 1 COMPANY PAYS WEEKLY SALARY ON EVERY TUESDAY. FIND FIRST SALARY DATE.
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_DATE , NEXT_DAY(HIRE_DATE,'TUE') FWSD FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE                   FWSD                                                    
+--------------- --------------------------- ---------------------------                             
+Steven          17-JULY     -1987 FRIDAY    21-JULY     -1987 TUESDAY                               
+Neena           21-SEPTEMBER-1989 THURSDAY  26-SEPTEMBER-1989 TUESDAY                               
+Lex             13-JANUARY  -1993 WEDNESDAY 19-JANUARY  -1993 TUESDAY                               
+Alexander       03-JANUARY  -1990 WEDNESDAY 09-JANUARY  -1990 TUESDAY                               
+Bruce           21-MAY      -1991 TUESDAY   28-MAY      -1991 TUESDAY                               
+Diana           07-FEBRUARY -1999 SUNDAY    09-FEBRUARY -1999 TUESDAY                               
+Kevin           16-NOVEMBER -1999 TUESDAY   23-NOVEMBER -1999 TUESDAY                               
+Trenna          17-OCTOBER  -1995 TUESDAY   24-OCTOBER  -1995 TUESDAY                               
+Curtis          29-JANUARY  -1997 WEDNESDAY 04-FEBRUARY -1997 TUESDAY                               
+Randall         15-MARCH    -1998 SUNDAY    17-MARCH    -1998 TUESDAY                               
+Peter           09-JULY     -1998 THURSDAY  14-JULY     -1998 TUESDAY                               
+Eleni           29-JANUARY  -2000 SATURDAY  01-FEBRUARY -2000 TUESDAY                               
+Ellen           11-MAY      -1996 SATURDAY  14-MAY      -1996 TUESDAY                               
+Jonathon        24-MARCH    -1998 TUESDAY   31-MARCH    -1998 TUESDAY                               
+Kimerely        24-MAY      -1999 MONDAY    25-MAY      -1999 TUESDAY                               
+Jennifer        17-SEPTEMBER-1987 THURSDAY  22-SEPTEMBER-1987 TUESDAY                               
+Michael         17-FEBRUARY -1996 SATURDAY  20-FEBRUARY -1996 TUESDAY                               
+Pat             17-AUGUST   -1997 SUNDAY    19-AUGUST   -1997 TUESDAY                               
+Shelley         07-JUNE     -1994 TUESDAY   14-JUNE     -1994 TUESDAY                               
+William         07-JUNE     -1994 TUESDAY   14-JUNE     -1994 TUESDAY                               
+
+20 rows selected.
+
+SQL> REM 2 COMPANY PAYS WEEKLY SALARY ON EVERY SATURDAY. FIND 3rd SALARY DATE.
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_DATE , NEXT_DAY(HIRE_DATE,'SAT') + 7*2 "3rdSALARY" FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE                   3rdSALARY                                               
+--------------- --------------------------- ---------------------------                             
+Steven          17-JULY     -1987 FRIDAY    01-AUGUST   -1987 SATURDAY                              
+Neena           21-SEPTEMBER-1989 THURSDAY  07-OCTOBER  -1989 SATURDAY                              
+Lex             13-JANUARY  -1993 WEDNESDAY 30-JANUARY  -1993 SATURDAY                              
+Alexander       03-JANUARY  -1990 WEDNESDAY 20-JANUARY  -1990 SATURDAY                              
+Bruce           21-MAY      -1991 TUESDAY   08-JUNE     -1991 SATURDAY                              
+Diana           07-FEBRUARY -1999 SUNDAY    27-FEBRUARY -1999 SATURDAY                              
+Kevin           16-NOVEMBER -1999 TUESDAY   04-DECEMBER -1999 SATURDAY                              
+Trenna          17-OCTOBER  -1995 TUESDAY   04-NOVEMBER -1995 SATURDAY                              
+Curtis          29-JANUARY  -1997 WEDNESDAY 15-FEBRUARY -1997 SATURDAY                              
+Randall         15-MARCH    -1998 SUNDAY    04-APRIL    -1998 SATURDAY                              
+Peter           09-JULY     -1998 THURSDAY  25-JULY     -1998 SATURDAY                              
+Eleni           29-JANUARY  -2000 SATURDAY  19-FEBRUARY -2000 SATURDAY                              
+Ellen           11-MAY      -1996 SATURDAY  01-JUNE     -1996 SATURDAY                              
+Jonathon        24-MARCH    -1998 TUESDAY   11-APRIL    -1998 SATURDAY                              
+Kimerely        24-MAY      -1999 MONDAY    12-JUNE     -1999 SATURDAY                              
+Jennifer        17-SEPTEMBER-1987 THURSDAY  03-OCTOBER  -1987 SATURDAY                              
+Michael         17-FEBRUARY -1996 SATURDAY  09-MARCH    -1996 SATURDAY                              
+Pat             17-AUGUST   -1997 SUNDAY    06-SEPTEMBER-1997 SATURDAY                              
+Shelley         07-JUNE     -1994 TUESDAY   25-JUNE     -1994 SATURDAY                              
+William         07-JUNE     -1994 TUESDAY   25-JUNE     -1994 SATURDAY                              
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE , NEXT_DAY(HIRE_DATE,'SAT') "3rdSALARY" FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE                   3rdSALARY                                               
+--------------- --------------------------- ---------------------------                             
+Steven          17-JULY     -1987 FRIDAY    18-JULY     -1987 SATURDAY                              
+Neena           21-SEPTEMBER-1989 THURSDAY  23-SEPTEMBER-1989 SATURDAY                              
+Lex             13-JANUARY  -1993 WEDNESDAY 16-JANUARY  -1993 SATURDAY                              
+Alexander       03-JANUARY  -1990 WEDNESDAY 06-JANUARY  -1990 SATURDAY                              
+Bruce           21-MAY      -1991 TUESDAY   25-MAY      -1991 SATURDAY                              
+Diana           07-FEBRUARY -1999 SUNDAY    13-FEBRUARY -1999 SATURDAY                              
+Kevin           16-NOVEMBER -1999 TUESDAY   20-NOVEMBER -1999 SATURDAY                              
+Trenna          17-OCTOBER  -1995 TUESDAY   21-OCTOBER  -1995 SATURDAY                              
+Curtis          29-JANUARY  -1997 WEDNESDAY 01-FEBRUARY -1997 SATURDAY                              
+Randall         15-MARCH    -1998 SUNDAY    21-MARCH    -1998 SATURDAY                              
+Peter           09-JULY     -1998 THURSDAY  11-JULY     -1998 SATURDAY                              
+Eleni           29-JANUARY  -2000 SATURDAY  05-FEBRUARY -2000 SATURDAY                              
+Ellen           11-MAY      -1996 SATURDAY  18-MAY      -1996 SATURDAY                              
+Jonathon        24-MARCH    -1998 TUESDAY   28-MARCH    -1998 SATURDAY                              
+Kimerely        24-MAY      -1999 MONDAY    29-MAY      -1999 SATURDAY                              
+Jennifer        17-SEPTEMBER-1987 THURSDAY  19-SEPTEMBER-1987 SATURDAY                              
+Michael         17-FEBRUARY -1996 SATURDAY  24-FEBRUARY -1996 SATURDAY                              
+Pat             17-AUGUST   -1997 SUNDAY    23-AUGUST   -1997 SATURDAY                              
+Shelley         07-JUNE     -1994 TUESDAY   11-JUNE     -1994 SATURDAY                              
+William         07-JUNE     -1994 TUESDAY   11-JUNE     -1994 SATURDAY                              
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE , NEXT_DAY(HIRE_DATE,'SAT') + 7 "3rdSALARY" FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE                   3rdSALARY                                               
+--------------- --------------------------- ---------------------------                             
+Steven          17-JULY     -1987 FRIDAY    25-JULY     -1987 SATURDAY                              
+Neena           21-SEPTEMBER-1989 THURSDAY  30-SEPTEMBER-1989 SATURDAY                              
+Lex             13-JANUARY  -1993 WEDNESDAY 23-JANUARY  -1993 SATURDAY                              
+Alexander       03-JANUARY  -1990 WEDNESDAY 13-JANUARY  -1990 SATURDAY                              
+Bruce           21-MAY      -1991 TUESDAY   01-JUNE     -1991 SATURDAY                              
+Diana           07-FEBRUARY -1999 SUNDAY    20-FEBRUARY -1999 SATURDAY                              
+Kevin           16-NOVEMBER -1999 TUESDAY   27-NOVEMBER -1999 SATURDAY                              
+Trenna          17-OCTOBER  -1995 TUESDAY   28-OCTOBER  -1995 SATURDAY                              
+Curtis          29-JANUARY  -1997 WEDNESDAY 08-FEBRUARY -1997 SATURDAY                              
+Randall         15-MARCH    -1998 SUNDAY    28-MARCH    -1998 SATURDAY                              
+Peter           09-JULY     -1998 THURSDAY  18-JULY     -1998 SATURDAY                              
+Eleni           29-JANUARY  -2000 SATURDAY  12-FEBRUARY -2000 SATURDAY                              
+Ellen           11-MAY      -1996 SATURDAY  25-MAY      -1996 SATURDAY                              
+Jonathon        24-MARCH    -1998 TUESDAY   04-APRIL    -1998 SATURDAY                              
+Kimerely        24-MAY      -1999 MONDAY    05-JUNE     -1999 SATURDAY                              
+Jennifer        17-SEPTEMBER-1987 THURSDAY  26-SEPTEMBER-1987 SATURDAY                              
+Michael         17-FEBRUARY -1996 SATURDAY  02-MARCH    -1996 SATURDAY                              
+Pat             17-AUGUST   -1997 SUNDAY    30-AUGUST   -1997 SATURDAY                              
+Shelley         07-JUNE     -1994 TUESDAY   18-JUNE     -1994 SATURDAY                              
+William         07-JUNE     -1994 TUESDAY   18-JUNE     -1994 SATURDAY                              
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE , NEXT_DAY(HIRE_DATE,'SAT') + 7*2 "3rdSALARY" FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE                   3rdSALARY                                               
+--------------- --------------------------- ---------------------------                             
+Steven          17-JULY     -1987 FRIDAY    01-AUGUST   -1987 SATURDAY                              
+Neena           21-SEPTEMBER-1989 THURSDAY  07-OCTOBER  -1989 SATURDAY                              
+Lex             13-JANUARY  -1993 WEDNESDAY 30-JANUARY  -1993 SATURDAY                              
+Alexander       03-JANUARY  -1990 WEDNESDAY 20-JANUARY  -1990 SATURDAY                              
+Bruce           21-MAY      -1991 TUESDAY   08-JUNE     -1991 SATURDAY                              
+Diana           07-FEBRUARY -1999 SUNDAY    27-FEBRUARY -1999 SATURDAY                              
+Kevin           16-NOVEMBER -1999 TUESDAY   04-DECEMBER -1999 SATURDAY                              
+Trenna          17-OCTOBER  -1995 TUESDAY   04-NOVEMBER -1995 SATURDAY                              
+Curtis          29-JANUARY  -1997 WEDNESDAY 15-FEBRUARY -1997 SATURDAY                              
+Randall         15-MARCH    -1998 SUNDAY    04-APRIL    -1998 SATURDAY                              
+Peter           09-JULY     -1998 THURSDAY  25-JULY     -1998 SATURDAY                              
+Eleni           29-JANUARY  -2000 SATURDAY  19-FEBRUARY -2000 SATURDAY                              
+Ellen           11-MAY      -1996 SATURDAY  01-JUNE     -1996 SATURDAY                              
+Jonathon        24-MARCH    -1998 TUESDAY   11-APRIL    -1998 SATURDAY                              
+Kimerely        24-MAY      -1999 MONDAY    12-JUNE     -1999 SATURDAY                              
+Jennifer        17-SEPTEMBER-1987 THURSDAY  03-OCTOBER  -1987 SATURDAY                              
+Michael         17-FEBRUARY -1996 SATURDAY  09-MARCH    -1996 SATURDAY                              
+Pat             17-AUGUST   -1997 SUNDAY    06-SEPTEMBER-1997 SATURDAY                              
+Shelley         07-JUNE     -1994 TUESDAY   25-JUNE     -1994 SATURDAY                              
+William         07-JUNE     -1994 TUESDAY   25-JUNE     -1994 SATURDAY                              
+
+20 rows selected.
+
+SQL> REM 3 COMPANY PAYS WEEKLY SALARY ON EVERY MONDAY. FIND NEXT SALARY DATE.
+SQL> 
+SQL> SELECT SYSDATE , NEXT_DAY(SYSDATE,'MON') NWSD FROM DUAL;
+
+SYSDATE                     NWSD                                                                    
+--------------------------- ---------------------------                                             
+15-MARCH    -2024 FRIDAY    18-MARCH    -2024 MONDAY                                                
+
+SQL> SELECT FIRST_NAME , SYSDATE , NEXT_DAY(SYSDATE,'MON') NWSD FROM EMPLOYEES;
+
+FIRST_NAME      SYSDATE                     NWSD                                                    
+--------------- --------------------------- ---------------------------                             
+Steven          15-MARCH    -2024 FRIDAY    18-MARCH    -2024 MONDAY                                
+Neena           15-MARCH    -2024 FRIDAY    18-MARCH    -2024 MONDAY                                
+Lex             15-MARCH    -2024 FRIDAY    18-MARCH    -2024 MONDAY                                
+Alexander       15-MARCH    -2024 FRIDAY    18-MARCH    -2024 MONDAY                                
+Bruce           15-MARCH    -2024 FRIDAY    18-MARCH    -2024 MONDAY                                
+Diana           15-MARCH    -2024 FRIDAY    18-MARCH    -2024 MONDAY                                
+Kevin           15-MARCH    -2024 FRIDAY    18-MARCH    -2024 MONDAY                                
+Trenna          15-MARCH    -2024 FRIDAY    18-MARCH    -2024 MONDAY                                
+Curtis          15-MARCH    -2024 FRIDAY    18-MARCH    -2024 MONDAY                                
+Randall         15-MARCH    -2024 FRIDAY    18-MARCH    -2024 MONDAY                                
+Peter           15-MARCH    -2024 FRIDAY    18-MARCH    -2024 MONDAY                                
+Eleni           15-MARCH    -2024 FRIDAY    18-MARCH    -2024 MONDAY                                
+Ellen           15-MARCH    -2024 FRIDAY    18-MARCH    -2024 MONDAY                                
+Jonathon        15-MARCH    -2024 FRIDAY    18-MARCH    -2024 MONDAY                                
+Kimerely        15-MARCH    -2024 FRIDAY    18-MARCH    -2024 MONDAY                                
+Jennifer        15-MARCH    -2024 FRIDAY    18-MARCH    -2024 MONDAY                                
+Michael         15-MARCH    -2024 FRIDAY    18-MARCH    -2024 MONDAY                                
+Pat             15-MARCH    -2024 FRIDAY    18-MARCH    -2024 MONDAY                                
+Shelley         15-MARCH    -2024 FRIDAY    18-MARCH    -2024 MONDAY                                
+William         15-MARCH    -2024 FRIDAY    18-MARCH    -2024 MONDAY                                
+
+20 rows selected.
+
+SQL> SELECT SYSDATE , NEXT_DAY(SYSDATE,'MON')-7 LWSD FROM DUAL;
+
+SYSDATE                     LWSD                                                                    
+--------------------------- ---------------------------                                             
+15-MARCH    -2024 FRIDAY    11-MARCH    -2024 MONDAY                                                
+
+SQL> REM COMPANY PAYS MONTHLY SALARY IN NEXT MONTH ON 3rd WEDNESDAY.
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_DATE , NEXT_DAY(LAST_DAY(HIRE_DATE),'WED') + 7*2 FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE                   NEXT_DAY(LAST_DAY(HIRE_DATE                             
+--------------- --------------------------- ---------------------------                             
+Steven          17-JULY     -1987 FRIDAY    19-AUGUST   -1987 WEDNESDAY                             
+Neena           21-SEPTEMBER-1989 THURSDAY  18-OCTOBER  -1989 WEDNESDAY                             
+Lex             13-JANUARY  -1993 WEDNESDAY 17-FEBRUARY -1993 WEDNESDAY                             
+Alexander       03-JANUARY  -1990 WEDNESDAY 21-FEBRUARY -1990 WEDNESDAY                             
+Bruce           21-MAY      -1991 TUESDAY   19-JUNE     -1991 WEDNESDAY                             
+Diana           07-FEBRUARY -1999 SUNDAY    17-MARCH    -1999 WEDNESDAY                             
+Kevin           16-NOVEMBER -1999 TUESDAY   15-DECEMBER -1999 WEDNESDAY                             
+Trenna          17-OCTOBER  -1995 TUESDAY   15-NOVEMBER -1995 WEDNESDAY                             
+Curtis          29-JANUARY  -1997 WEDNESDAY 19-FEBRUARY -1997 WEDNESDAY                             
+Randall         15-MARCH    -1998 SUNDAY    15-APRIL    -1998 WEDNESDAY                             
+Peter           09-JULY     -1998 THURSDAY  19-AUGUST   -1998 WEDNESDAY                             
+Eleni           29-JANUARY  -2000 SATURDAY  16-FEBRUARY -2000 WEDNESDAY                             
+Ellen           11-MAY      -1996 SATURDAY  19-JUNE     -1996 WEDNESDAY                             
+Jonathon        24-MARCH    -1998 TUESDAY   15-APRIL    -1998 WEDNESDAY                             
+Kimerely        24-MAY      -1999 MONDAY    16-JUNE     -1999 WEDNESDAY                             
+Jennifer        17-SEPTEMBER-1987 THURSDAY  21-OCTOBER  -1987 WEDNESDAY                             
+Michael         17-FEBRUARY -1996 SATURDAY  20-MARCH    -1996 WEDNESDAY                             
+Pat             17-AUGUST   -1997 SUNDAY    17-SEPTEMBER-1997 WEDNESDAY                             
+Shelley         07-JUNE     -1994 TUESDAY   20-JULY     -1994 WEDNESDAY                             
+William         07-JUNE     -1994 TUESDAY   20-JULY     -1994 WEDNESDAY                             
+
+20 rows selected.
+
+SQL> 
+SQL> REM COMPANY PAYS MONTHLY SALARY IN NEXT MONTH ON 2nd FRIDAY. FIND FIRST MONTHLY SALARY DATE.
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_DATE , NEXT_DAY(LAST_DAY(HIRE_DATE),'FRI')+7 FMSD FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE                   FMSD                                                    
+--------------- --------------------------- ---------------------------                             
+Steven          17-JULY     -1987 FRIDAY    14-AUGUST   -1987 FRIDAY                                
+Neena           21-SEPTEMBER-1989 THURSDAY  13-OCTOBER  -1989 FRIDAY                                
+Lex             13-JANUARY  -1993 WEDNESDAY 12-FEBRUARY -1993 FRIDAY                                
+Alexander       03-JANUARY  -1990 WEDNESDAY 09-FEBRUARY -1990 FRIDAY                                
+Bruce           21-MAY      -1991 TUESDAY   14-JUNE     -1991 FRIDAY                                
+Diana           07-FEBRUARY -1999 SUNDAY    12-MARCH    -1999 FRIDAY                                
+Kevin           16-NOVEMBER -1999 TUESDAY   10-DECEMBER -1999 FRIDAY                                
+Trenna          17-OCTOBER  -1995 TUESDAY   10-NOVEMBER -1995 FRIDAY                                
+Curtis          29-JANUARY  -1997 WEDNESDAY 14-FEBRUARY -1997 FRIDAY                                
+Randall         15-MARCH    -1998 SUNDAY    10-APRIL    -1998 FRIDAY                                
+Peter           09-JULY     -1998 THURSDAY  14-AUGUST   -1998 FRIDAY                                
+Eleni           29-JANUARY  -2000 SATURDAY  11-FEBRUARY -2000 FRIDAY                                
+Ellen           11-MAY      -1996 SATURDAY  14-JUNE     -1996 FRIDAY                                
+Jonathon        24-MARCH    -1998 TUESDAY   10-APRIL    -1998 FRIDAY                                
+Kimerely        24-MAY      -1999 MONDAY    11-JUNE     -1999 FRIDAY                                
+Jennifer        17-SEPTEMBER-1987 THURSDAY  09-OCTOBER  -1987 FRIDAY                                
+Michael         17-FEBRUARY -1996 SATURDAY  08-MARCH    -1996 FRIDAY                                
+Pat             17-AUGUST   -1997 SUNDAY    12-SEPTEMBER-1997 FRIDAY                                
+Shelley         07-JUNE     -1994 TUESDAY   08-JULY     -1994 FRIDAY                                
+William         07-JUNE     -1994 TUESDAY   08-JULY     -1994 FRIDAY                                
+
+20 rows selected.
+
+SQL> REM COMPANY PAYS MONTHLY SALARY IN NEXT MONTH ON 4th SATURDAY. FIND FIRST MONTHLY SALARY DATE.
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_DATE , NEXT_DAY(LAST_DAY(HIRE_DATE),'SAT')+(7*3) FMSD FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE                   FMSD                                                    
+--------------- --------------------------- ---------------------------                             
+Steven          17-JULY     -1987 FRIDAY    22-AUGUST   -1987 SATURDAY                              
+Neena           21-SEPTEMBER-1989 THURSDAY  28-OCTOBER  -1989 SATURDAY                              
+Lex             13-JANUARY  -1993 WEDNESDAY 27-FEBRUARY -1993 SATURDAY                              
+Alexander       03-JANUARY  -1990 WEDNESDAY 24-FEBRUARY -1990 SATURDAY                              
+Bruce           21-MAY      -1991 TUESDAY   22-JUNE     -1991 SATURDAY                              
+Diana           07-FEBRUARY -1999 SUNDAY    27-MARCH    -1999 SATURDAY                              
+Kevin           16-NOVEMBER -1999 TUESDAY   25-DECEMBER -1999 SATURDAY                              
+Trenna          17-OCTOBER  -1995 TUESDAY   25-NOVEMBER -1995 SATURDAY                              
+Curtis          29-JANUARY  -1997 WEDNESDAY 22-FEBRUARY -1997 SATURDAY                              
+Randall         15-MARCH    -1998 SUNDAY    25-APRIL    -1998 SATURDAY                              
+Peter           09-JULY     -1998 THURSDAY  22-AUGUST   -1998 SATURDAY                              
+Eleni           29-JANUARY  -2000 SATURDAY  26-FEBRUARY -2000 SATURDAY                              
+Ellen           11-MAY      -1996 SATURDAY  22-JUNE     -1996 SATURDAY                              
+Jonathon        24-MARCH    -1998 TUESDAY   25-APRIL    -1998 SATURDAY                              
+Kimerely        24-MAY      -1999 MONDAY    26-JUNE     -1999 SATURDAY                              
+Jennifer        17-SEPTEMBER-1987 THURSDAY  24-OCTOBER  -1987 SATURDAY                              
+Michael         17-FEBRUARY -1996 SATURDAY  23-MARCH    -1996 SATURDAY                              
+Pat             17-AUGUST   -1997 SUNDAY    27-SEPTEMBER-1997 SATURDAY                              
+Shelley         07-JUNE     -1994 TUESDAY   23-JULY     -1994 SATURDAY                              
+William         07-JUNE     -1994 TUESDAY   23-JULY     -1994 SATURDAY                              
+
+20 rows selected.
+
+SQL> REM 1 COMPANY PAYS MONTHLY SALARY IN NEXT MONTH ON 3rd THURSDAY. FIND 3rd MONTHLY SALARY DATE.
+SQL> 
+SQL> REM 2 COMPANY PAYS MONTHLY SALARY IN NEXT MONTH ON 2nd MONDAY. FIND 46th MONTHLY SALARY DATE.
+SQL> 
+SQL> 
+SQL> REM 1 COMPANY PAYS MONTHLY SALARY IN NEXT MONTH ON 3rd THURSDAY. FIND 3rd MONTHLY SALARY DATE.
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_DATE , NEXT_DAY(ADD_MONTHS(LAST_DAY(HIRE_DATE),2),'THU')+(7*2) "3rd MSD" FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE                   3rd MSD                                                 
+--------------- --------------------------- ---------------------------                             
+Steven          17-JULY     -1987 FRIDAY    15-OCTOBER  -1987 THURSDAY                              
+Neena           21-SEPTEMBER-1989 THURSDAY  21-DECEMBER -1989 THURSDAY                              
+Lex             13-JANUARY  -1993 WEDNESDAY 15-APRIL    -1993 THURSDAY                              
+Alexander       03-JANUARY  -1990 WEDNESDAY 19-APRIL    -1990 THURSDAY                              
+Bruce           21-MAY      -1991 TUESDAY   15-AUGUST   -1991 THURSDAY                              
+Diana           07-FEBRUARY -1999 SUNDAY    20-MAY      -1999 THURSDAY                              
+Kevin           16-NOVEMBER -1999 TUESDAY   17-FEBRUARY -2000 THURSDAY                              
+Trenna          17-OCTOBER  -1995 TUESDAY   18-JANUARY  -1996 THURSDAY                              
+Curtis          29-JANUARY  -1997 WEDNESDAY 17-APRIL    -1997 THURSDAY                              
+Randall         15-MARCH    -1998 SUNDAY    18-JUNE     -1998 THURSDAY                              
+Peter           09-JULY     -1998 THURSDAY  15-OCTOBER  -1998 THURSDAY                              
+Eleni           29-JANUARY  -2000 SATURDAY  20-APRIL    -2000 THURSDAY                              
+Ellen           11-MAY      -1996 SATURDAY  15-AUGUST   -1996 THURSDAY                              
+Jonathon        24-MARCH    -1998 TUESDAY   18-JUNE     -1998 THURSDAY                              
+Kimerely        24-MAY      -1999 MONDAY    19-AUGUST   -1999 THURSDAY                              
+Jennifer        17-SEPTEMBER-1987 THURSDAY  17-DECEMBER -1987 THURSDAY                              
+Michael         17-FEBRUARY -1996 SATURDAY  16-MAY      -1996 THURSDAY                              
+Pat             17-AUGUST   -1997 SUNDAY    20-NOVEMBER -1997 THURSDAY                              
+Shelley         07-JUNE     -1994 TUESDAY   15-SEPTEMBER-1994 THURSDAY                              
+William         07-JUNE     -1994 TUESDAY   15-SEPTEMBER-1994 THURSDAY                              
+
+20 rows selected.
+
+SQL> REM 2 COMPANY PAYS MONTHLY SALARY IN NEXT MONTH ON 2nd MONDAY. FIND 46th MONTHLY SALARY DATE.
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_DATE , NEXT_DAY(ADD_MONTHS(LAST_DAY(HIRE_DATE),45),'MON')+7 "46th MSD" FROM DUAL;
+SELECT FIRST_NAME , HIRE_DATE , NEXT_DAY(ADD_MONTHS(LAST_DAY(HIRE_DATE),45),'MON')+7 "46th MSD" FROM DUAL
+                                                             *
+ERROR at line 1:
+ORA-00904: "HIRE_DATE": invalid identifier 
+
+
+SQL> SELECT FIRST_NAME , HIRE_DATE , NEXT_DAY(ADD_MONTHS(LAST_DAY(HIRE_DATE),45),'MON')+7 "46th MSD" FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE                   46th MSD                                                
+--------------- --------------------------- ---------------------------                             
+Steven          17-JULY     -1987 FRIDAY    13-MAY      -1991 MONDAY                                
+Neena           21-SEPTEMBER-1989 THURSDAY  12-JULY     -1993 MONDAY                                
+Lex             13-JANUARY  -1993 WEDNESDAY 11-NOVEMBER -1996 MONDAY                                
+Alexander       03-JANUARY  -1990 WEDNESDAY 08-NOVEMBER -1993 MONDAY                                
+Bruce           21-MAY      -1991 TUESDAY   13-MARCH    -1995 MONDAY                                
+Diana           07-FEBRUARY -1999 SUNDAY    09-DECEMBER -2002 MONDAY                                
+Kevin           16-NOVEMBER -1999 TUESDAY   08-SEPTEMBER-2003 MONDAY                                
+Trenna          17-OCTOBER  -1995 TUESDAY   09-AUGUST   -1999 MONDAY                                
+Curtis          29-JANUARY  -1997 WEDNESDAY 13-NOVEMBER -2000 MONDAY                                
+Randall         15-MARCH    -1998 SUNDAY    14-JANUARY  -2002 MONDAY                                
+Peter           09-JULY     -1998 THURSDAY  13-MAY      -2002 MONDAY                                
+Eleni           29-JANUARY  -2000 SATURDAY  10-NOVEMBER -2003 MONDAY                                
+Ellen           11-MAY      -1996 SATURDAY  13-MARCH    -2000 MONDAY                                
+Jonathon        24-MARCH    -1998 TUESDAY   14-JANUARY  -2002 MONDAY                                
+Kimerely        24-MAY      -1999 MONDAY    10-MARCH    -2003 MONDAY                                
+Jennifer        17-SEPTEMBER-1987 THURSDAY  08-JULY     -1991 MONDAY                                
+Michael         17-FEBRUARY -1996 SATURDAY  13-DECEMBER -1999 MONDAY                                
+Pat             17-AUGUST   -1997 SUNDAY    11-JUNE     -2001 MONDAY                                
+Shelley         07-JUNE     -1994 TUESDAY   13-APRIL    -1998 MONDAY                                
+William         07-JUNE     -1994 TUESDAY   13-APRIL    -1998 MONDAY                                
+
+20 rows selected.
+
+SQL> SPOOL OFF

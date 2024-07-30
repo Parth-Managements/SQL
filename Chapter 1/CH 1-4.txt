@@ -1,0 +1,715 @@
+
+SQL>
+SQL>
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50
+        144 Peter           Vargas          PVARGAS    650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110
+
+20 rows selected.
+
+SQL> REM : 000
+SQL>
+SQL> SELECT FIRST_NAME, MANAGER_ID, NVL(MANAGER_ID,000) FROM EMPLOYEES;
+
+FIRST_NAME      MANAGER_ID NVL(MANAGER_ID,000)
+--------------- ---------- -------------------
+Steven                                       0
+Neena                  100                 100
+Lex                    100                 100
+Alexander              102                 102
+Bruce                  103                 103
+Diana                  103                 103
+Kevin                  100                 100
+Trenna                 124                 124
+Curtis                 124                 124
+Randall                124                 124
+Peter                  124                 124
+Eleni                  100                 100
+Ellen                  149                 149
+Jonathon               149                 149
+Kimerely               149                 149
+Jennifer               101                 101
+Michael                100                 100
+Pat                    201                 201
+Shelley                101                 101
+William                205                 205
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME, MANAGER_ID, NVL(MANAGER_ID,111) FROM EMPLOYEES;
+
+FIRST_NAME      MANAGER_ID NVL(MANAGER_ID,111)
+--------------- ---------- -------------------
+Steven                                     111
+Neena                  100                 100
+Lex                    100                 100
+Alexander              102                 102
+Bruce                  103                 103
+Diana                  103                 103
+Kevin                  100                 100
+Trenna                 124                 124
+Curtis                 124                 124
+Randall                124                 124
+Peter                  124                 124
+Eleni                  100                 100
+Ellen                  149                 149
+Jonathon               149                 149
+Kimerely               149                 149
+Jennifer               101                 101
+Michael                100                 100
+Pat                    201                 201
+Shelley                101                 101
+William                205                 205
+
+20 rows selected.
+
+SQL> REM : ||
+SQL>
+SQL> SELECT FIRST_NAME, LAST_NAME FROM EMPLOYEES;
+
+FIRST_NAME      LAST_NAME
+--------------- ---------------
+Steven          King
+Neena           Kochhar
+Lex             De Haan
+Alexander       Hunold
+Bruce           Ernst
+Diana           Lorentz
+Kevin           Mourgos
+Trenna          Rajs
+Curtis          Davies
+Randall         Matos
+Peter           Vargas
+Eleni           Zlotkey
+Ellen           Abel
+Jonathon        Taylor
+Kimerely        Grant
+Jennifer        Whalen
+Michael         Hartstein
+Pat             Fay
+Shelley         Higgins
+William         Gietz
+
+20 rows selected.
+
+SQL>
+SQL> REM : || : TO JOIN/CLUB TO COLUMNS/ITEMS.
+SQL>
+SQL>
+SQL> SELECT FIRST_NAME || LAST_NAME FROM EMPLOYEES;
+
+FIRST_NAME||LAST_NAME
+------------------------------
+StevenKing
+NeenaKochhar
+LexDe Haan
+AlexanderHunold
+BruceErnst
+DianaLorentz
+KevinMourgos
+TrennaRajs
+CurtisDavies
+RandallMatos
+PeterVargas
+EleniZlotkey
+EllenAbel
+JonathonTaylor
+KimerelyGrant
+JenniferWhalen
+MichaelHartstein
+PatFay
+ShelleyHiggins
+WilliamGietz
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME || LAST_NAME FULL_#$NAME FROM EMPLOYEES;
+
+FULL_#$NAME
+------------------------------
+StevenKing
+NeenaKochhar
+LexDe Haan
+AlexanderHunold
+BruceErnst
+DianaLorentz
+KevinMourgos
+TrennaRajs
+CurtisDavies
+RandallMatos
+PeterVargas
+EleniZlotkey
+EllenAbel
+JonathonTaylor
+KimerelyGrant
+JenniferWhalen
+MichaelHartstein
+PatFay
+ShelleyHiggins
+WilliamGietz
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME | | LAST_NAME FULL_#$NAME FROM EMPLOYEES;
+
+FULL_#$NAME
+------------------------------
+StevenKing
+NeenaKochhar
+LexDe Haan
+AlexanderHunold
+BruceErnst
+DianaLorentz
+KevinMourgos
+TrennaRajs
+CurtisDavies
+RandallMatos
+PeterVargas
+EleniZlotkey
+EllenAbel
+JonathonTaylor
+KimerelyGrant
+JenniferWhalen
+MichaelHartstein
+PatFay
+ShelleyHiggins
+WilliamGietz
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME || ' ' LAST_NAME FULL_#$NAME FROM EMPLOYEES;
+SELECT FIRST_NAME || ' ' LAST_NAME FULL_#$NAME FROM EMPLOYEES
+                                   *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> SELECT FIRST_NAME || ' ' || LAST_NAME FULL_#$NAME FROM EMPLOYEES;
+
+FULL_#$NAME
+-------------------------------
+Steven King
+Neena Kochhar
+Lex De Haan
+Alexander Hunold
+Bruce Ernst
+Diana Lorentz
+Kevin Mourgos
+Trenna Rajs
+Curtis Davies
+Randall Matos
+Peter Vargas
+Eleni Zlotkey
+Ellen Abel
+Jonathon Taylor
+Kimerely Grant
+Jennifer Whalen
+Michael Hartstein
+Pat Fay
+Shelley Higgins
+William Gietz
+
+20 rows selected.
+
+SQL>
+SQL> SELECT FIRST_NAME || ' : ' || LAST_NAME FULL_#$NAME FROM EMPLOYEES;
+
+FULL_#$NAME
+---------------------------------
+Steven : King
+Neena : Kochhar
+Lex : De Haan
+Alexander : Hunold
+Bruce : Ernst
+Diana : Lorentz
+Kevin : Mourgos
+Trenna : Rajs
+Curtis : Davies
+Randall : Matos
+Peter : Vargas
+Eleni : Zlotkey
+Ellen : Abel
+Jonathon : Taylor
+Kimerely : Grant
+Jennifer : Whalen
+Michael : Hartstein
+Pat : Fay
+Shelley : Higgins
+William : Gietz
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME || '--->' || LAST_NAME FULL_#$NAME FROM EMPLOYEES;
+
+FULL_#$NAME
+----------------------------------
+Steven--->King
+Neena--->Kochhar
+Lex--->De Haan
+Alexander--->Hunold
+Bruce--->Ernst
+Diana--->Lorentz
+Kevin--->Mourgos
+Trenna--->Rajs
+Curtis--->Davies
+Randall--->Matos
+Peter--->Vargas
+Eleni--->Zlotkey
+Ellen--->Abel
+Jonathon--->Taylor
+Kimerely--->Grant
+Jennifer--->Whalen
+Michael--->Hartstein
+Pat--->Fay
+Shelley--->Higgins
+William--->Gietz
+
+20 rows selected.
+
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50
+        144 Peter           Vargas          PVARGAS    650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110
+
+20 rows selected.
+
+SQL> REM : Steven works in department 90.
+SQL>
+SQL> select first_name || department_id from employees;
+
+FIRST_NAME||DEPARTMENT_ID
+-------------------------------------------------------
+Steven90
+Neena90
+Lex90
+Alexander60
+Bruce60
+Diana60
+Kevin50
+Trenna50
+Curtis50
+Randall50
+Peter50
+Eleni80
+Ellen80
+Jonathon80
+Kimerely
+Jennifer10
+Michael20
+Pat20
+Shelley110
+William110
+
+20 rows selected.
+
+SQL> select first_name || 'works in department' || department_id from employees;
+
+FIRST_NAME||'WORKSINDEPARTMENT'||DEPARTMENT_ID
+--------------------------------------------------------------------------
+Stevenworks in department90
+Neenaworks in department90
+Lexworks in department90
+Alexanderworks in department60
+Bruceworks in department60
+Dianaworks in department60
+Kevinworks in department50
+Trennaworks in department50
+Curtisworks in department50
+Randallworks in department50
+Peterworks in department50
+Eleniworks in department80
+Ellenworks in department80
+Jonathonworks in department80
+Kimerelyworks in department
+Jenniferworks in department10
+Michaelworks in department20
+Patworks in department20
+Shelleyworks in department110
+Williamworks in department110
+
+20 rows selected.
+
+SQL> select first_name || ' works in department ' || department_id from employees;
+
+FIRST_NAME||'WORKSINDEPARTMENT'||DEPARTMENT_ID
+----------------------------------------------------------------------------
+Steven works in department 90
+Neena works in department 90
+Lex works in department 90
+Alexander works in department 60
+Bruce works in department 60
+Diana works in department 60
+Kevin works in department 50
+Trenna works in department 50
+Curtis works in department 50
+Randall works in department 50
+Peter works in department 50
+Eleni works in department 80
+Ellen works in department 80
+Jonathon works in department 80
+Kimerely works in department
+Jennifer works in department 10
+Michael works in department 20
+Pat works in department 20
+Shelley works in department 110
+William works in department 110
+
+20 rows selected.
+
+SQL> select first_name || ' works in department ' || department_id || '.' from employees;
+
+FIRST_NAME||'WORKSINDEPARTMENT'||DEPARTMENT_ID||'.'
+-----------------------------------------------------------------------------
+Steven works in department 90.
+Neena works in department 90.
+Lex works in department 90.
+Alexander works in department 60.
+Bruce works in department 60.
+Diana works in department 60.
+Kevin works in department 50.
+Trenna works in department 50.
+Curtis works in department 50.
+Randall works in department 50.
+Peter works in department 50.
+Eleni works in department 80.
+Ellen works in department 80.
+Jonathon works in department 80.
+Kimerely works in department .
+Jennifer works in department 10.
+Michael works in department 20.
+Pat works in department 20.
+Shelley works in department 110.
+William works in department 110.
+
+20 rows selected.
+
+SQL> REM : Steven works in department 90.
+SQL>
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50
+        144 Peter           Vargas          PVARGAS    650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110
+
+20 rows selected.
+
+SQL> REM : King works as AD_PRES.
+SQL>
+SQL> select last_name ||' works as '||job_id ||'.' from employees;
+
+LAST_NAME||'WORKSAS'||JOB_ID||'.'
+------------------------------------
+King works as AD_PRES.
+Kochhar works as AD_VP.
+De Haan works as AD_VP.
+Hunold works as IT_PROG.
+Ernst works as IT_PROG.
+Lorentz works as IT_PROG.
+Mourgos works as ST_MAN.
+Rajs works as ST_CLERK.
+Davies works as ST_CLERK.
+Matos works as ST_CLERK.
+Vargas works as ST_CLERK.
+Zlotkey works as SA_MAN.
+Abel works as SA_REP.
+Taylor works as SA_REP.
+Grant works as SA_REP.
+Whalen works as AD_ASST.
+Hartstein works as MK_MAN.
+Fay works as MK_REP.
+Higgins works as AC_MGR.
+Gietz works as AC_ACCOUNT.
+
+20 rows selected.
+
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50
+        144 Peter           Vargas          PVARGAS    650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110
+
+20 rows selected.
+
+SQL> REM : Steven gets 288000 as annual salary.
+SQL>
+SQL> select first_name || ' gets' || salary,(salary*12) annual salary || 'as annual salary' from employees;
+select first_name || ' gets' || salary,(salary*12) annual salary || 'as annual salary' from employees
+                                                          *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select first_name || ' gets' || salary,(salary*12) || 'as annual salary' from employees;
+
+FIRST_NAME||'GETS'||SALARY                                   (SALARY*12)||'ASANNUALSALARY'
+------------------------------------------------------------ --------------------------------------------------------
+Steven gets24000                                             288000as annual salary
+Neena gets17000                                              204000as annual salary
+Lex gets17000                                                204000as annual salary
+Alexander gets9000                                           108000as annual salary
+Bruce gets6000                                               72000as annual salary
+Diana gets4200                                               50400as annual salary
+Kevin gets5800                                               69600as annual salary
+Trenna gets3500                                              42000as annual salary
+Curtis gets3100                                              37200as annual salary
+Randall gets2600                                             31200as annual salary
+Peter gets2500                                               30000as annual salary
+Eleni gets10500                                              126000as annual salary
+Ellen gets11000                                              132000as annual salary
+Jonathon gets8600                                            103200as annual salary
+Kimerely gets7000                                            84000as annual salary
+Jennifer gets4400                                            52800as annual salary
+Michael gets13000                                            156000as annual salary
+Pat gets6000                                                 72000as annual salary
+Shelley gets12000                                            144000as annual salary
+William gets8300                                             99600as annual salary
+
+20 rows selected.
+
+SQL> select first_name || ' gets' || salary*12 || 'as annual salary.' from employees;
+
+FIRST_NAME||'GETS'||SALARY*12||'ASANNUALSALARY.'
+-----------------------------------------------------------------------------
+Steven gets288000as annual salary.
+Neena gets204000as annual salary.
+Lex gets204000as annual salary.
+Alexander gets108000as annual salary.
+Bruce gets72000as annual salary.
+Diana gets50400as annual salary.
+Kevin gets69600as annual salary.
+Trenna gets42000as annual salary.
+Curtis gets37200as annual salary.
+Randall gets31200as annual salary.
+Peter gets30000as annual salary.
+Eleni gets126000as annual salary.
+Ellen gets132000as annual salary.
+Jonathon gets103200as annual salary.
+Kimerely gets84000as annual salary.
+Jennifer gets52800as annual salary.
+Michael gets156000as annual salary.
+Pat gets72000as annual salary.
+Shelley gets144000as annual salary.
+William gets99600as annual salary.
+
+20 rows selected.
+
+SQL> select first_name || ' gets ' || salary*12 || 'as annual salary.' from employees;
+
+FIRST_NAME||'GETS'||SALARY*12||'ASANNUALSALARY.'
+------------------------------------------------------------------------------
+Steven gets 288000as annual salary.
+Neena gets 204000as annual salary.
+Lex gets 204000as annual salary.
+Alexander gets 108000as annual salary.
+Bruce gets 72000as annual salary.
+Diana gets 50400as annual salary.
+Kevin gets 69600as annual salary.
+Trenna gets 42000as annual salary.
+Curtis gets 37200as annual salary.
+Randall gets 31200as annual salary.
+Peter gets 30000as annual salary.
+Eleni gets 126000as annual salary.
+Ellen gets 132000as annual salary.
+Jonathon gets 103200as annual salary.
+Kimerely gets 84000as annual salary.
+Jennifer gets 52800as annual salary.
+Michael gets 156000as annual salary.
+Pat gets 72000as annual salary.
+Shelley gets 144000as annual salary.
+William gets 99600as annual salary.
+
+20 rows selected.
+
+SQL> select first_name || ' gets ' || salary*12 || ' as annual salary.' from employees;
+
+FIRST_NAME||'GETS'||SALARY*12||'ASANNUALSALARY.'
+-------------------------------------------------------------------------------
+Steven gets 288000 as annual salary.
+Neena gets 204000 as annual salary.
+Lex gets 204000 as annual salary.
+Alexander gets 108000 as annual salary.
+Bruce gets 72000 as annual salary.
+Diana gets 50400 as annual salary.
+Kevin gets 69600 as annual salary.
+Trenna gets 42000 as annual salary.
+Curtis gets 37200 as annual salary.
+Randall gets 31200 as annual salary.
+Peter gets 30000 as annual salary.
+Eleni gets 126000 as annual salary.
+Ellen gets 132000 as annual salary.
+Jonathon gets 103200 as annual salary.
+Kimerely gets 84000 as annual salary.
+Jennifer gets 52800 as annual salary.
+Michael gets 156000 as annual salary.
+Pat gets 72000 as annual salary.
+Shelley gets 144000 as annual salary.
+William gets 99600 as annual salary.
+
+20 rows selected.
+
+SQL> select * from employees;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50
+        144 Peter           Vargas          PVARGAS    650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110
+
+20 rows selected.
+
+SQL> rem : Steven 17-JUL-87 24000
+SQL>
+SQL> select  first_name  ||  hire_date  ||  salary from employees;
+
+FIRST_NAME||HIRE_DATE||SALARY
+-------------------------------------------------------------------------
+Steven17-JUL-8724000
+Neena21-SEP-8917000
+Lex13-JAN-9317000
+Alexander03-JAN-909000
+Bruce21-MAY-916000
+Diana07-FEB-994200
+Kevin16-NOV-995800
+Trenna17-OCT-953500
+Curtis29-JAN-973100
+Randall15-MAR-982600
+Peter09-JUL-982500
+Eleni29-JAN-0010500
+Ellen11-MAY-9611000
+Jonathon24-MAR-988600
+Kimerely24-MAY-997000
+Jennifer17-SEP-874400
+Michael17-FEB-9613000
+Pat17-AUG-976000
+Shelley07-JUN-9412000
+William07-JUN-948300
+
+20 rows selected.
+
+SQL> select  first_name  ||  ' ' || hire_date  ||  ' ' || salary from employees;
+
+FIRST_NAME||''||HIRE_DATE||''||SALARY
+---------------------------------------------------------------------------
+Steven 17-JUL-87 24000
+Neena 21-SEP-89 17000
+Lex 13-JAN-93 17000
+Alexander 03-JAN-90 9000
+Bruce 21-MAY-91 6000
+Diana 07-FEB-99 4200
+Kevin 16-NOV-99 5800
+Trenna 17-OCT-95 3500
+Curtis 29-JAN-97 3100
+Randall 15-MAR-98 2600
+Peter 09-JUL-98 2500
+Eleni 29-JAN-00 10500
+Ellen 11-MAY-96 11000
+Jonathon 24-MAR-98 8600
+Kimerely 24-MAY-99 7000
+Jennifer 17-SEP-87 4400
+Michael 17-FEB-96 13000
+Pat 17-AUG-97 6000
+Shelley 07-JUN-94 12000
+William 07-JUN-94 8300
+
+20 rows selected.
+
+SQL> REM : Q : '''
+SQL>
+SQL>
+SQL>

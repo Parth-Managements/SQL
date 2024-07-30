@@ -1,0 +1,903 @@
+
+SQL>
+SQL>
+SQL> REM : Q  q
+SQL>
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50
+        144 Peter           Vargas          PVARGAS    650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110
+
+20 rows selected.
+
+SQL> REM : Steven's get Rs.24000.
+SQL>
+SQL> SELECT FIRST_NAME || 's get Rs.'|| SALARY || '.' FROM EMPLOYEES;
+
+FIRST_NAME||'SGETRS.'||SALARY||'.'
+-----------------------------------------------------------------
+Stevens get Rs.24000.
+Neenas get Rs.17000.
+Lexs get Rs.17000.
+Alexanders get Rs.9000.
+Bruces get Rs.6000.
+Dianas get Rs.4200.
+Kevins get Rs.5800.
+Trennas get Rs.3500.
+Curtiss get Rs.3100.
+Randalls get Rs.2600.
+Peters get Rs.2500.
+Elenis get Rs.10500.
+Ellens get Rs.11000.
+Jonathons get Rs.8600.
+Kimerelys get Rs.7000.
+Jennifers get Rs.4400.
+Michaels get Rs.13000.
+Pats get Rs.6000.
+Shelleys get Rs.12000.
+Williams get Rs.8300.
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME || ''s get Rs.'|| SALARY || '.' FROM EMPLOYEES;
+ERROR:
+ORA-01756: quoted string not properly terminated
+
+
+SQL> SELECT FIRST_NAME || '''s get Rs.'|| SALARY || '.' FROM EMPLOYEES;
+
+FIRST_NAME||'''SGETRS.'||SALARY||'.'
+------------------------------------------------------------------
+Steven's get Rs.24000.
+Neena's get Rs.17000.
+Lex's get Rs.17000.
+Alexander's get Rs.9000.
+Bruce's get Rs.6000.
+Diana's get Rs.4200.
+Kevin's get Rs.5800.
+Trenna's get Rs.3500.
+Curtis's get Rs.3100.
+Randall's get Rs.2600.
+Peter's get Rs.2500.
+Eleni's get Rs.10500.
+Ellen's get Rs.11000.
+Jonathon's get Rs.8600.
+Kimerely's get Rs.7000.
+Jennifer's get Rs.4400.
+Michael's get Rs.13000.
+Pat's get Rs.6000.
+Shelley's get Rs.12000.
+William's get Rs.8300.
+
+20 rows selected.
+
+SQL>
+SQL>
+SQL> REM : Q'
+SQL>
+SQL> REM : Q' : ALPHABETS,NUMBER, SPECIAL CHARACTERS
+SQL>
+SQL> SELECT FIRST_NAME || Q'A's get Rs.A'|| SALARY || '.' FROM EMPLOYEES;
+
+FIRST_NAME||Q'A'SGETRS.A'||SALARY||'.'
+------------------------------------------------------------------
+Steven's get Rs.24000.
+Neena's get Rs.17000.
+Lex's get Rs.17000.
+Alexander's get Rs.9000.
+Bruce's get Rs.6000.
+Diana's get Rs.4200.
+Kevin's get Rs.5800.
+Trenna's get Rs.3500.
+Curtis's get Rs.3100.
+Randall's get Rs.2600.
+Peter's get Rs.2500.
+Eleni's get Rs.10500.
+Ellen's get Rs.11000.
+Jonathon's get Rs.8600.
+Kimerely's get Rs.7000.
+Jennifer's get Rs.4400.
+Michael's get Rs.13000.
+Pat's get Rs.6000.
+Shelley's get Rs.12000.
+William's get Rs.8300.
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME || Q'A's get Rs.'|| SALARY || '.' FROM EMPLOYEES;
+ERROR:
+ORA-01756: quoted string not properly terminated
+
+
+SQL> SELECT FIRST_NAME || Q'A's get Rs.A|| SALARY || '.' FROM EMPLOYEES;
+ERROR:
+ORA-01756: quoted string not properly terminated
+
+
+SQL> SELECT FIRST_NAME || Q'A's get Rs.A'|| SALARY || '.' FROM EMPLOYEES;
+
+FIRST_NAME||Q'A'SGETRS.A'||SALARY||'.'
+------------------------------------------------------------------
+Steven's get Rs.24000.
+Neena's get Rs.17000.
+Lex's get Rs.17000.
+Alexander's get Rs.9000.
+Bruce's get Rs.6000.
+Diana's get Rs.4200.
+Kevin's get Rs.5800.
+Trenna's get Rs.3500.
+Curtis's get Rs.3100.
+Randall's get Rs.2600.
+Peter's get Rs.2500.
+Eleni's get Rs.10500.
+Ellen's get Rs.11000.
+Jonathon's get Rs.8600.
+Kimerely's get Rs.7000.
+Jennifer's get Rs.4400.
+Michael's get Rs.13000.
+Pat's get Rs.6000.
+Shelley's get Rs.12000.
+William's get Rs.8300.
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME || Q'A's get Rs.a'|| SALARY || '.' FROM EMPLOYEES;
+ERROR:
+ORA-01756: quoted string not properly terminated
+
+
+SQL> SELECT FIRST_NAME || Q'4's get Rs.4'|| SALARY || '.' FROM EMPLOYEES;
+
+FIRST_NAME||Q'4'SGETRS.4'||SALARY||'.'
+------------------------------------------------------------------
+Steven's get Rs.24000.
+Neena's get Rs.17000.
+Lex's get Rs.17000.
+Alexander's get Rs.9000.
+Bruce's get Rs.6000.
+Diana's get Rs.4200.
+Kevin's get Rs.5800.
+Trenna's get Rs.3500.
+Curtis's get Rs.3100.
+Randall's get Rs.2600.
+Peter's get Rs.2500.
+Eleni's get Rs.10500.
+Ellen's get Rs.11000.
+Jonathon's get Rs.8600.
+Kimerely's get Rs.7000.
+Jennifer's get Rs.4400.
+Michael's get Rs.13000.
+Pat's get Rs.6000.
+Shelley's get Rs.12000.
+William's get Rs.8300.
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME || Q'4's get Rs.3'|| SALARY || '.' FROM EMPLOYEES;
+ERROR:
+ORA-01756: quoted string not properly terminated
+
+
+SQL>
+SQL> SELECT FIRST_NAME || Q'#'s get Rs.#'|| SALARY || '.' FROM EMPLOYEES;
+
+FIRST_NAME||Q'#'SGETRS.#'||SALARY||'.'
+------------------------------------------------------------------
+Steven's get Rs.24000.
+Neena's get Rs.17000.
+Lex's get Rs.17000.
+Alexander's get Rs.9000.
+Bruce's get Rs.6000.
+Diana's get Rs.4200.
+Kevin's get Rs.5800.
+Trenna's get Rs.3500.
+Curtis's get Rs.3100.
+Randall's get Rs.2600.
+Peter's get Rs.2500.
+Eleni's get Rs.10500.
+Ellen's get Rs.11000.
+Jonathon's get Rs.8600.
+Kimerely's get Rs.7000.
+Jennifer's get Rs.4400.
+Michael's get Rs.13000.
+Pat's get Rs.6000.
+Shelley's get Rs.12000.
+William's get Rs.8300.
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME || Q'#'s get Rs.@'|| SALARY || '.' FROM EMPLOYEES;
+ERROR:
+ORA-01756: quoted string not properly terminated
+
+
+SQL>
+SQL>
+SQL> SELECT FIRST_NAME || Q'('s get Rs.)'|| SALARY || '.' FROM EMPLOYEES;
+
+FIRST_NAME||Q'('SGETRS.)'||SALARY||'.'
+------------------------------------------------------------------
+Steven's get Rs.24000.
+Neena's get Rs.17000.
+Lex's get Rs.17000.
+Alexander's get Rs.9000.
+Bruce's get Rs.6000.
+Diana's get Rs.4200.
+Kevin's get Rs.5800.
+Trenna's get Rs.3500.
+Curtis's get Rs.3100.
+Randall's get Rs.2600.
+Peter's get Rs.2500.
+Eleni's get Rs.10500.
+Ellen's get Rs.11000.
+Jonathon's get Rs.8600.
+Kimerely's get Rs.7000.
+Jennifer's get Rs.4400.
+Michael's get Rs.13000.
+Pat's get Rs.6000.
+Shelley's get Rs.12000.
+William's get Rs.8300.
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME || Q')'s get Rs.)'|| SALARY || '.' FROM EMPLOYEES;
+
+FIRST_NAME||Q')'SGETRS.)'||SALARY||'.'
+------------------------------------------------------------------
+Steven's get Rs.24000.
+Neena's get Rs.17000.
+Lex's get Rs.17000.
+Alexander's get Rs.9000.
+Bruce's get Rs.6000.
+Diana's get Rs.4200.
+Kevin's get Rs.5800.
+Trenna's get Rs.3500.
+Curtis's get Rs.3100.
+Randall's get Rs.2600.
+Peter's get Rs.2500.
+Eleni's get Rs.10500.
+Ellen's get Rs.11000.
+Jonathon's get Rs.8600.
+Kimerely's get Rs.7000.
+Jennifer's get Rs.4400.
+Michael's get Rs.13000.
+Pat's get Rs.6000.
+Shelley's get Rs.12000.
+William's get Rs.8300.
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME || Q')'s get Rs.('|| SALARY || '.' FROM EMPLOYEES;
+ERROR:
+ORA-01756: quoted string not properly terminated
+
+
+SQL>
+SQL>
+SQL> REM : 1. [ } = X
+SQL>
+SQL> REM : 2. } }
+SQL>
+SQL> REM : 3. ( (
+SQL>
+SQL>
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50
+        144 Peter           Vargas          PVARGAS    650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110
+
+20 rows selected.
+
+SQL> REM : King's worked in department 90.
+SQL>
+SQL> select FIRST_NAME || LAST_NAME || Q'A's Department is A' || DEPARTMENT_ID from EMPLOYEES;
+
+FIRST_NAME||LAST_NAME||Q'A'SDEPARTMENTISA'||DEPARTMENT_ID
+---------------------------------------------------------------------------------------
+StevenKing's Department is 90
+NeenaKochhar's Department is 90
+LexDe Haan's Department is 90
+AlexanderHunold's Department is 60
+BruceErnst's Department is 60
+DianaLorentz's Department is 60
+KevinMourgos's Department is 50
+TrennaRajs's Department is 50
+CurtisDavies's Department is 50
+RandallMatos's Department is 50
+PeterVargas's Department is 50
+EleniZlotkey's Department is 80
+EllenAbel's Department is 80
+JonathonTaylor's Department is 80
+KimerelyGrant's Department is
+JenniferWhalen's Department is 10
+MichaelHartstein's Department is 20
+PatFay's Department is 20
+ShelleyHiggins's Department is 110
+WilliamGietz's Department is 110
+
+20 rows selected.
+
+SQL> select LAST_NAME || Q'A's Department is A' || DEPARTMENT_ID from EMPLOYEES;
+
+LAST_NAME||Q'A'SDEPARTMENTISA'||DEPARTMENT_ID
+------------------------------------------------------------------------
+King's Department is 90
+Kochhar's Department is 90
+De Haan's Department is 90
+Hunold's Department is 60
+Ernst's Department is 60
+Lorentz's Department is 60
+Mourgos's Department is 50
+Rajs's Department is 50
+Davies's Department is 50
+Matos's Department is 50
+Vargas's Department is 50
+Zlotkey's Department is 80
+Abel's Department is 80
+Taylor's Department is 80
+Grant's Department is
+Whalen's Department is 10
+Hartstein's Department is 20
+Fay's Department is 20
+Higgins's Department is 110
+Gietz's Department is 110
+
+20 rows selected.
+
+SQL> select department_id from employees;
+
+DEPARTMENT_ID
+-------------
+           90
+           90
+           90
+           60
+           60
+           60
+           50
+           50
+           50
+           50
+           50
+           80
+           80
+           80
+
+           10
+           20
+           20
+          110
+          110
+
+20 rows selected.
+
+SQL> select department_id from employees OREDR BY 1;
+select department_id from employees OREDR BY 1
+                                          *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select department_id from employees ORDER BY 1;
+
+DEPARTMENT_ID
+-------------
+           10
+           20
+           20
+           50
+           50
+           50
+           50
+           50
+           60
+           60
+           60
+           80
+           80
+           80
+           90
+           90
+           90
+          110
+          110
+
+
+20 rows selected.
+
+SQL> REM : UNIQUE/DISTINCT : TO REMOVE DUPLICATE VALUES.
+SQL>
+SQL>
+SQL> select UNIQUE department_id from employees ORDER BY 1;
+
+DEPARTMENT_ID
+-------------
+           10
+           20
+           50
+           60
+           80
+           90
+          110
+
+
+8 rows selected.
+
+SQL> select DISTINCT department_id from employees ORDER BY 1;
+
+DEPARTMENT_ID
+-------------
+           10
+           20
+           50
+           60
+           80
+           90
+          110
+
+
+8 rows selected.
+
+SQL> select DISTINCT UNIQUE department_id from employees ORDER BY 1;
+select DISTINCT UNIQUE department_id from employees ORDER BY 1
+                *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL>
+SQL> SELECT JOB_ID FROM EMPLOYEES ORDER BY 1;
+
+JOB_ID
+----------
+AC_ACCOUNT
+AC_MGR
+AD_ASST
+AD_PRES
+AD_VP
+AD_VP
+IT_PROG
+IT_PROG
+IT_PROG
+MK_MAN
+MK_REP
+SA_MAN
+SA_REP
+SA_REP
+SA_REP
+ST_CLERK
+ST_CLERK
+ST_CLERK
+ST_CLERK
+ST_MAN
+
+20 rows selected.
+
+SQL> SELECT UNIQUE JOB_ID FROM EMPLOYEES ORDER BY 1;
+
+JOB_ID
+----------
+AC_ACCOUNT
+AC_MGR
+AD_ASST
+AD_PRES
+AD_VP
+IT_PROG
+MK_MAN
+MK_REP
+SA_MAN
+SA_REP
+ST_CLERK
+ST_MAN
+
+12 rows selected.
+
+SQL> SELECT MANAGER_ID FROM EMPLOYEES ORDER BY 1;
+
+MANAGER_ID
+----------
+       100
+       100
+       100
+       100
+       100
+       101
+       101
+       102
+       103
+       103
+       124
+       124
+       124
+       124
+       149
+       149
+       149
+       201
+       205
+
+
+20 rows selected.
+
+SQL> SELECT UNIQUE MANAGER_ID FROM EMPLOYEES ORDER BY 1;
+
+MANAGER_ID
+----------
+       100
+       101
+       102
+       103
+       124
+       149
+       201
+       205
+
+
+9 rows selected.
+
+SQL> SELECT DEPARTMENT_ID, JOB_ID FROM EMPLOYEES ORDER BY 1,2;
+
+DEPARTMENT_ID JOB_ID
+------------- ----------
+           10 AD_ASST
+           20 MK_MAN
+           20 MK_REP
+           50 ST_CLERK
+           50 ST_CLERK
+           50 ST_CLERK
+           50 ST_CLERK
+           50 ST_MAN
+           60 IT_PROG
+           60 IT_PROG
+           60 IT_PROG
+           80 SA_MAN
+           80 SA_REP
+           80 SA_REP
+           90 AD_PRES
+           90 AD_VP
+           90 AD_VP
+          110 AC_ACCOUNT
+          110 AC_MGR
+              SA_REP
+
+20 rows selected.
+
+SQL> SELECT DISTINCT DEPARTMENT_ID, JOB_ID FROM EMPLOYEES ORDER BY 1,2;
+
+DEPARTMENT_ID JOB_ID
+------------- ----------
+           10 AD_ASST
+           20 MK_MAN
+           20 MK_REP
+           50 ST_CLERK
+           50 ST_MAN
+           60 IT_PROG
+           80 SA_MAN
+           80 SA_REP
+           90 AD_PRES
+           90 AD_VP
+          110 AC_ACCOUNT
+          110 AC_MGR
+              SA_REP
+
+13 rows selected.
+
+SQL>
+SQL> SELECT DISTINCT DEPARTMENT_ID, UNIQUE JOB_ID FROM EMPLOYEES ORDER BY 1,2;
+SELECT DISTINCT DEPARTMENT_ID, UNIQUE JOB_ID FROM EMPLOYEES ORDER BY 1,2
+                               *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL>
+SQL> SELECT  DEPARTMENT_ID, UNIQUE JOB_ID FROM EMPLOYEES ORDER BY 1,2;
+SELECT  DEPARTMENT_ID, UNIQUE JOB_ID FROM EMPLOYEES ORDER BY 1,2
+                       *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> SELECT DEPARTMENT_ID, MANAGER_ID FROM EMPLOYEES ORDER BY 1,2;
+
+DEPARTMENT_ID MANAGER_ID
+------------- ----------
+           10        101
+           20        100
+           20        201
+           50        100
+           50        124
+           50        124
+           50        124
+           50        124
+           60        102
+           60        103
+           60        103
+           80        100
+           80        149
+           80        149
+           90        100
+           90        100
+           90
+          110        101
+          110        205
+                     149
+
+20 rows selected.
+
+SQL> SELECT UNIQUE DEPARTMENT_ID,  MANAGER_ID FROM EMPLOYEES ORDER BY 1,2;
+
+DEPARTMENT_ID MANAGER_ID
+------------- ----------
+           10        101
+           20        100
+           20        201
+           50        100
+           50        124
+           60        102
+           60        103
+           80        100
+           80        149
+           90        100
+           90
+          110        101
+          110        205
+                     149
+
+14 rows selected.
+
+SQL> REM : DUAL  - DUMMY TABLE - IT HAS ONE ROW & ONE COLUMN
+SQL>
+SQL> SELECT * FROM DUAL;
+
+D
+-
+X
+
+SQL> DESC DUAL;
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ DUMMY                                                                                                                      VARCHAR2(1)
+
+SQL>
+SQL> SELECT SYADATE FROM DUAL;
+SELECT SYADATE FROM DUAL
+       *
+ERROR at line 1:
+ORA-00904: "SYADATE": invalid identifier
+
+
+SQL> SELECT SYSDATE FROM DUAL;
+
+SYSDATE
+---------
+08-NOV-23
+
+SQL>
+SQL>
+SQL> SELECT SYSDATE FROM EMPLOYEES;
+
+SYSDATE
+---------
+08-NOV-23
+08-NOV-23
+08-NOV-23
+08-NOV-23
+08-NOV-23
+08-NOV-23
+08-NOV-23
+08-NOV-23
+08-NOV-23
+08-NOV-23
+08-NOV-23
+08-NOV-23
+08-NOV-23
+08-NOV-23
+08-NOV-23
+08-NOV-23
+08-NOV-23
+08-NOV-23
+08-NOV-23
+08-NOV-23
+
+20 rows selected.
+
+SQL> SELECT 5+5 FROM EMPLOYEES;
+
+       5+5
+----------
+        10
+        10
+        10
+        10
+        10
+        10
+        10
+        10
+        10
+        10
+        10
+        10
+        10
+        10
+        10
+        10
+        10
+        10
+        10
+        10
+
+20 rows selected.
+
+SQL> SELECT 5+5 FROM DEPARTMENTS;
+
+       5+5
+----------
+        10
+        10
+        10
+        10
+        10
+        10
+        10
+        10
+
+8 rows selected.
+
+SQL> SELECT UNIQUE 5+5 FROM DEPARTMENTS;
+
+       5+5
+----------
+        10
+
+SQL> SELECT SYSDATE FROM DUAL;
+
+SYSDATE
+---------
+08-NOV-23
+
+SQL> SELECT SYSDATE, 5+5, 5-5, 5*5, 5/5, 5||5, CURRENT_DATE, ROWNUM FROM DUAL;
+
+SYSDATE          5+5        5-5        5*5        5/5 5| CURRENT_D     ROWNUM
+--------- ---------- ---------- ---------- ---------- -- --------- ----------
+08-NOV-23         10          0         25          1 55 08-NOV-23          1
+
+SQL>
+SQL> REM : ROWNUM ROWID
+SQL>
+SQL> SELECT ROWID FROM EMPLOYEES;
+
+ROWID
+------------------
+AAAR7DAAHAAAAF9AAA
+AAAR7DAAHAAAAF9AAB
+AAAR7DAAHAAAAF9AAC
+AAAR7DAAHAAAAF9AAD
+AAAR7DAAHAAAAF9AAE
+AAAR7DAAHAAAAF9AAF
+AAAR7DAAHAAAAF9AAG
+AAAR7DAAHAAAAF9AAH
+AAAR7DAAHAAAAF9AAI
+AAAR7DAAHAAAAF9AAJ
+AAAR7DAAHAAAAF9AAK
+AAAR7DAAHAAAAF9AAL
+AAAR7DAAHAAAAF9AAM
+AAAR7DAAHAAAAF9AAN
+AAAR7DAAHAAAAF9AAO
+AAAR7DAAHAAAAF9AAP
+AAAR7DAAHAAAAF9AAQ
+AAAR7DAAHAAAAF9AAR
+AAAR7DAAHAAAAF9AAS
+AAAR7DAAHAAAAF9AAT
+
+20 rows selected.
+
+SQL> SELECT ROWID, FIRST_NAME FROM EMPLOYEES;
+
+ROWID              FIRST_NAME
+------------------ ---------------
+AAAR7DAAHAAAAF9AAA Steven
+AAAR7DAAHAAAAF9AAB Neena
+AAAR7DAAHAAAAF9AAC Lex
+AAAR7DAAHAAAAF9AAD Alexander
+AAAR7DAAHAAAAF9AAE Bruce
+AAAR7DAAHAAAAF9AAF Diana
+AAAR7DAAHAAAAF9AAG Kevin
+AAAR7DAAHAAAAF9AAH Trenna
+AAAR7DAAHAAAAF9AAI Curtis
+AAAR7DAAHAAAAF9AAJ Randall
+AAAR7DAAHAAAAF9AAK Peter
+AAAR7DAAHAAAAF9AAL Eleni
+AAAR7DAAHAAAAF9AAM Ellen
+AAAR7DAAHAAAAF9AAN Jonathon
+AAAR7DAAHAAAAF9AAO Kimerely
+AAAR7DAAHAAAAF9AAP Jennifer
+AAAR7DAAHAAAAF9AAQ Michael
+AAAR7DAAHAAAAF9AAR Pat
+AAAR7DAAHAAAAF9AAS Shelley
+AAAR7DAAHAAAAF9AAT William
+
+20 rows selected.
+
+SQL> SELECT ROWID, ROWNUM, FIRST_NAME FROM EMPLOYEES;
+
+ROWID                  ROWNUM FIRST_NAME
+------------------ ---------- ---------------
+AAAR7DAAHAAAAF9AAA          1 Steven
+AAAR7DAAHAAAAF9AAB          2 Neena
+AAAR7DAAHAAAAF9AAC          3 Lex
+AAAR7DAAHAAAAF9AAD          4 Alexander
+AAAR7DAAHAAAAF9AAE          5 Bruce
+AAAR7DAAHAAAAF9AAF          6 Diana
+AAAR7DAAHAAAAF9AAG          7 Kevin
+AAAR7DAAHAAAAF9AAH          8 Trenna
+AAAR7DAAHAAAAF9AAI          9 Curtis
+AAAR7DAAHAAAAF9AAJ         10 Randall
+AAAR7DAAHAAAAF9AAK         11 Peter
+AAAR7DAAHAAAAF9AAL         12 Eleni
+AAAR7DAAHAAAAF9AAM         13 Ellen
+AAAR7DAAHAAAAF9AAN         14 Jonathon
+AAAR7DAAHAAAAF9AAO         15 Kimerely
+AAAR7DAAHAAAAF9AAP         16 Jennifer
+AAAR7DAAHAAAAF9AAQ         17 Michael
+AAAR7DAAHAAAAF9AAR         18 Pat
+AAAR7DAAHAAAAF9AAS         19 Shelley
+AAAR7DAAHAAAAF9AAT         20 William
+
+20 rows selected.
+
+SQL> SELECT ROWID, ROWNUM, FIRST_NAME FROM EMPLOYEES WHERE SALARY>10000;
+
+ROWID                  ROWNUM FIRST_NAME
+------------------ ---------- ---------------
+AAAR7DAAHAAAAF9AAA          1 Steven
+AAAR7DAAHAAAAF9AAB          2 Neena
+AAAR7DAAHAAAAF9AAC          3 Lex
+AAAR7DAAHAAAAF9AAL          4 Eleni
+AAAR7DAAHAAAAF9AAM          5 Ellen
+AAAR7DAAHAAAAF9AAQ          6 Michael
+AAAR7DAAHAAAAF9AAS          7 Shelley
+
+7 rows selected.
+
+SQL>

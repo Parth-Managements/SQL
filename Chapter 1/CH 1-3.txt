@@ -1,0 +1,671 @@
+
+SQL> REM : ARTHMETIC OPERATORS
+SQL>
+SQL>
+SQL> REM : ARTHMETIC OPERATORS : / * + -
+>
+SQL> SELECT FIRST_NAME, SALARY FROM EMPLOYEES;
+
+FIRST_NAME          SALARY
+--------------- ----------
+Steven               24000
+Neena                17000
+Lex                  17000
+Alexander             9000
+Bruce                 6000
+Diana                 4200
+Kevin                 5800
+Trenna                3500
+Curtis                3100
+Randall               2600
+Peter                 2500
+Eleni                10500
+Ellen                11000
+Jonathon              8600
+Kimerely              7000
+Jennifer              4400
+Michael              13000
+Pat                   6000
+Shelley              12000
+William               8300
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME, SALARY, SALARY + 1000 FROM EMPLOYEES;
+
+FIRST_NAME          SALARY SALARY+1000
+--------------- ---------- -----------
+Steven               24000       25000
+Neena                17000       18000
+Lex                  17000       18000
+Alexander             9000       10000
+Bruce                 6000        7000
+Diana                 4200        5200
+Kevin                 5800        6800
+Trenna                3500        4500
+Curtis                3100        4100
+Randall               2600        3600
+Peter                 2500        3500
+Eleni                10500       11500
+Ellen                11000       12000
+Jonathon              8600        9600
+Kimerely              7000        8000
+Jennifer              4400        5400
+Michael              13000       14000
+Pat                   6000        7000
+Shelley              12000       13000
+William               8300        9300
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME, SALARY, SALARY + 1000 NEW_SALARY FROM EMPLOYEES;
+
+FIRST_NAME          SALARY NEW_SALARY
+--------------- ---------- ----------
+Steven               24000      25000
+Neena                17000      18000
+Lex                  17000      18000
+Alexander             9000      10000
+Bruce                 6000       7000
+Diana                 4200       5200
+Kevin                 5800       6800
+Trenna                3500       4500
+Curtis                3100       4100
+Randall               2600       3600
+Peter                 2500       3500
+Eleni                10500      11500
+Ellen                11000      12000
+Jonathon              8600       9600
+Kimerely              7000       8000
+Jennifer              4400       5400
+Michael              13000      14000
+Pat                   6000       7000
+Shelley              12000      13000
+William               8300       9300
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME, SALARY, SALARY - 500 NEW_SALARY FROM EMPLOYEES;
+
+FIRST_NAME          SALARY NEW_SALARY
+--------------- ---------- ----------
+Steven               24000      23500
+Neena                17000      16500
+Lex                  17000      16500
+Alexander             9000       8500
+Bruce                 6000       5500
+Diana                 4200       3700
+Kevin                 5800       5300
+Trenna                3500       3000
+Curtis                3100       2600
+Randall               2600       2100
+Peter                 2500       2000
+Eleni                10500      10000
+Ellen                11000      10500
+Jonathon              8600       8100
+Kimerely              7000       6500
+Jennifer              4400       3900
+Michael              13000      12500
+Pat                   6000       5500
+Shelley              12000      11500
+William               8300       7800
+
+20 rows selected.
+
+SQL> REM : 1 YEAR = 12 MONTHS
+SQL>
+SQL> SELECT FIRST_NAME, SALARY, SALARY * 12 ANNUAL_SALARY FROM EMPLOYEES;
+
+FIRST_NAME          SALARY ANNUAL_SALARY
+--------------- ---------- -------------
+Steven               24000        288000
+Neena                17000        204000
+Lex                  17000        204000
+Alexander             9000        108000
+Bruce                 6000         72000
+Diana                 4200         50400
+Kevin                 5800         69600
+Trenna                3500         42000
+Curtis                3100         37200
+Randall               2600         31200
+Peter                 2500         30000
+Eleni                10500        126000
+Ellen                11000        132000
+Jonathon              8600        103200
+Kimerely              7000         84000
+Jennifer              4400         52800
+Michael              13000        156000
+Pat                   6000         72000
+Shelley              12000        144000
+William               8300         99600
+
+20 rows selected.
+
+SQL> REM : 1 MONTH = 30 DAYS
+SQL>
+SQL> SELECT FIRST_NAME, SALARY, SALARY / 30 DAILY_SALARY FROM EMPLOYEES;
+
+FIRST_NAME          SALARY DAILY_SALARY
+--------------- ---------- ------------
+Steven               24000          800
+Neena                17000   566.666667
+Lex                  17000   566.666667
+Alexander             9000          300
+Bruce                 6000          200
+Diana                 4200          140
+Kevin                 5800   193.333333
+Trenna                3500   116.666667
+Curtis                3100   103.333333
+Randall               2600   86.6666667
+Peter                 2500   83.3333333
+Eleni                10500          350
+Ellen                11000   366.666667
+Jonathon              8600   286.666667
+Kimerely              7000   233.333333
+Jennifer              4400   146.666667
+Michael              13000   433.333333
+Pat                   6000          200
+Shelley              12000          400
+William               8300   276.666667
+
+20 rows selected.
+
+SQL>
+SQL>
+SQL>
+SQL> REM : 1. ( ) : ( ) ( ) - LEFT TO RIGHT : ( ( ) ) - NESTED BRACKETS - INNER TO OUTER
+SQL>
+SQL> REM : 2. POWER ( )
+SQL>
+SQL> REM : 3. / * - LEFT TO RIGHT
+SQL>
+SQL> REM : 4. + - || - LEFT TO RIGHT
+SQL>
+SQL>
+SQL> SELECT FIRST_NAME, SALARY FROM EMPLOYEES;
+
+FIRST_NAME          SALARY
+--------------- ----------
+Steven               24000
+Neena                17000
+Lex                  17000
+Alexander             9000
+Bruce                 6000
+Diana                 4200
+Kevin                 5800
+Trenna                3500
+Curtis                3100
+Randall               2600
+Peter                 2500
+Eleni                10500
+Ellen                11000
+Jonathon              8600
+Kimerely              7000
+Jennifer              4400
+Michael              13000
+Pat                   6000
+Shelley              12000
+William               8300
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME, SALARY, SALARY+1000*12 FROM EMPLOYEES;
+
+FIRST_NAME          SALARY SALARY+1000*12
+--------------- ---------- --------------
+Steven               24000          36000
+Neena                17000          29000
+Lex                  17000          29000
+Alexander             9000          21000
+Bruce                 6000          18000
+Diana                 4200          16200
+Kevin                 5800          17800
+Trenna                3500          15500
+Curtis                3100          15100
+Randall               2600          14600
+Peter                 2500          14500
+Eleni                10500          22500
+Ellen                11000          23000
+Jonathon              8600          20600
+Kimerely              7000          19000
+Jennifer              4400          16400
+Michael              13000          25000
+Pat                   6000          18000
+Shelley              12000          24000
+William               8300          20300
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME, SALARY, (SALARY+1000)*12 FROM EMPLOYEES;
+
+FIRST_NAME          SALARY (SALARY+1000)*12
+--------------- ---------- ----------------
+Steven               24000           300000
+Neena                17000           216000
+Lex                  17000           216000
+Alexander             9000           120000
+Bruce                 6000            84000
+Diana                 4200            62400
+Kevin                 5800            81600
+Trenna                3500            54000
+Curtis                3100            49200
+Randall               2600            43200
+Peter                 2500            42000
+Eleni                10500           138000
+Ellen                11000           144000
+Jonathon              8600           115200
+Kimerely              7000            96000
+Jennifer              4400            64800
+Michael              13000           168000
+Pat                   6000            84000
+Shelley              12000           156000
+William               8300           111600
+
+20 rows selected.
+
+SQL> select FIRST_NAME, salary, (salary+2000)/30 DAILY_SALARY FROM EMPLOYEES;
+
+FIRST_NAME          SALARY DAILY_SALARY
+--------------- ---------- ------------
+Steven               24000   866.666667
+Neena                17000   633.333333
+Lex                  17000   633.333333
+Alexander             9000   366.666667
+Bruce                 6000   266.666667
+Diana                 4200   206.666667
+Kevin                 5800          260
+Trenna                3500   183.333333
+Curtis                3100          170
+Randall               2600   153.333333
+Peter                 2500          150
+Eleni                10500   416.666667
+Ellen                11000   433.333333
+Jonathon              8600   353.333333
+Kimerely              7000          300
+Jennifer              4400   213.333333
+Michael              13000          500
+Pat                   6000   266.666667
+Shelley              12000   466.666667
+William               8300   343.333333
+
+20 rows selected.
+
+SQL> select first_name,salary,salary+2000 DAILY_SALARY FROM EMPLOYESS;
+select first_name,salary,salary+2000 DAILY_SALARY FROM EMPLOYESS
+                                                       *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> select first_name,salary,salary+2000 DAILY_SALARY FROM EMPLOYEES;
+
+FIRST_NAME          SALARY DAILY_SALARY
+--------------- ---------- ------------
+Steven               24000        26000
+Neena                17000        19000
+Lex                  17000        19000
+Alexander             9000        11000
+Bruce                 6000         8000
+Diana                 4200         6200
+Kevin                 5800         7800
+Trenna                3500         5500
+Curtis                3100         5100
+Randall               2600         4600
+Peter                 2500         4500
+Eleni                10500        12500
+Ellen                11000        13000
+Jonathon              8600        10600
+Kimerely              7000         9000
+Jennifer              4400         6400
+Michael              13000        15000
+Pat                   6000         8000
+Shelley              12000        14000
+William               8300        10300
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME, SALARY, COMMISSION_PCT FROM EMPLOYEES;
+
+FIRST_NAME          SALARY COMMISSION_PCT
+--------------- ---------- --------------
+Steven               24000
+Neena                17000
+Lex                  17000
+Alexander             9000
+Bruce                 6000
+Diana                 4200
+Kevin                 5800
+Trenna                3500
+Curtis                3100
+Randall               2600
+Peter                 2500
+Eleni                10500             .2
+Ellen                11000             .3
+Jonathon              8600             .3
+Kimerely              7000            .15
+Jennifer              4400
+Michael              13000
+Pat                   6000
+Shelley              12000
+William               8300
+
+20 rows selected.
+
+SQL> REM : FIND COMMISSION_AMT
+SQL>
+SQL>
+SQL> REM :  COMMISSION_AMT = SALARY * COMMISSION_PCT
+SQL>
+SQL>
+SQL> select first name, salary, commission_pct, (salary *commission_pct) Comission_AMt from employees;
+select first name, salary, commission_pct, (salary *commission_pct) Comission_AMt from employees
+       *
+ERROR at line 1:
+ORA-00904: "FIRST": invalid identifier
+
+
+SQL> select first_name, salary, commission_pct, (salary *commission_pct) Comission_AMt from employees;
+
+FIRST_NAME          SALARY COMMISSION_PCT COMISSION_AMT
+--------------- ---------- -------------- -------------
+Steven               24000
+Neena                17000
+Lex                  17000
+Alexander             9000
+Bruce                 6000
+Diana                 4200
+Kevin                 5800
+Trenna                3500
+Curtis                3100
+Randall               2600
+Peter                 2500
+Eleni                10500             .2          2100
+Ellen                11000             .3          3300
+Jonathon              8600             .3          2580
+Kimerely              7000            .15          1050
+Jennifer              4400
+Michael              13000
+Pat                   6000
+Shelley              12000
+William               8300
+
+20 rows selected.
+
+SQL> REM : TOTAL_SALARY
+SQL>
+SQL> SELECT FIRST_NAME, SALARY, COMMISSION_PCT, SALARY*COMMISSION_PCT COMM_AMT, SALARY+COMM_AMT FROM EMPLOYEES;
+SELECT FIRST_NAME, SALARY, COMMISSION_PCT, SALARY*COMMISSION_PCT COMM_AMT, SALARY+COMM_AMT FROM EMPLOYEES
+                                                                                  *
+ERROR at line 1:
+ORA-00904: "COMM_AMT": invalid identifier
+
+
+SQL> SELECT FIRST_NAME, SALARY, COMMISSION_PCT, SALARY*COMMISSION_PCT COMM_AMT, SALARY+SALARY*COMMISSION_PCT TOTAL_SALARY FROM EMPLOYEES;
+
+FIRST_NAME          SALARY COMMISSION_PCT   COMM_AMT TOTAL_SALARY
+--------------- ---------- -------------- ---------- ------------
+Steven               24000
+Neena                17000
+Lex                  17000
+Alexander             9000
+Bruce                 6000
+Diana                 4200
+Kevin                 5800
+Trenna                3500
+Curtis                3100
+Randall               2600
+Peter                 2500
+Eleni                10500             .2       2100        12600
+Ellen                11000             .3       3300        14300
+Jonathon              8600             .3       2580        11180
+Kimerely              7000            .15       1050         8050
+Jennifer              4400
+Michael              13000
+Pat                   6000
+Shelley              12000
+William               8300
+
+20 rows selected.
+
+SQL> REM :  NULL
+SQL>
+SQL>
+SQL> SELECT 5+5, 5-5, 5*5, 5/5 FROM DUAL;
+
+       5+5        5-5        5*5        5/5
+---------- ---------- ---------- ----------
+        10          0         25          1
+
+SQL> SELECT 5+NULL, 5-NULL, 5*NULL, 5/NULL FROM DUAL;
+
+    5+NULL     5-NULL     5*NULL     5/NULL
+---------- ---------- ---------- ----------
+
+
+SQL> REM : NVL - NULL VALUE LOCATOR
+SQL>
+SQL>
+SQL> SELECT FIRST_NAME, SALARY, COMMISSION_PCT FROM EMPLOYEES;
+
+FIRST_NAME          SALARY COMMISSION_PCT
+--------------- ---------- --------------
+Steven               24000
+Neena                17000
+Lex                  17000
+Alexander             9000
+Bruce                 6000
+Diana                 4200
+Kevin                 5800
+Trenna                3500
+Curtis                3100
+Randall               2600
+Peter                 2500
+Eleni                10500             .2
+Ellen                11000             .3
+Jonathon              8600             .3
+Kimerely              7000            .15
+Jennifer              4400
+Michael              13000
+Pat                   6000
+Shelley              12000
+William               8300
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME, SALARY, COMMISSION_PCT, NVL(COMMISSION_PCT,0) FROM EMPLOYEES;
+
+FIRST_NAME          SALARY COMMISSION_PCT NVL(COMMISSION_PCT,0)
+--------------- ---------- -------------- ---------------------
+Steven               24000                                    0
+Neena                17000                                    0
+Lex                  17000                                    0
+Alexander             9000                                    0
+Bruce                 6000                                    0
+Diana                 4200                                    0
+Kevin                 5800                                    0
+Trenna                3500                                    0
+Curtis                3100                                    0
+Randall               2600                                    0
+Peter                 2500                                    0
+Eleni                10500             .2                    .2
+Ellen                11000             .3                    .3
+Jonathon              8600             .3                    .3
+Kimerely              7000            .15                   .15
+Jennifer              4400                                    0
+Michael              13000                                    0
+Pat                   6000                                    0
+Shelley              12000                                    0
+William               8300                                    0
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME, SALARY, COMMISSION_PCT, NVL(COMMISSION_PCT,1000000000) FROM EMPLOYEES;
+
+FIRST_NAME          SALARY COMMISSION_PCT NVL(COMMISSION_PCT,1000000000)
+--------------- ---------- -------------- ------------------------------
+Steven               24000                                    1000000000
+Neena                17000                                    1000000000
+Lex                  17000                                    1000000000
+Alexander             9000                                    1000000000
+Bruce                 6000                                    1000000000
+Diana                 4200                                    1000000000
+Kevin                 5800                                    1000000000
+Trenna                3500                                    1000000000
+Curtis                3100                                    1000000000
+Randall               2600                                    1000000000
+Peter                 2500                                    1000000000
+Eleni                10500             .2                             .2
+Ellen                11000             .3                             .3
+Jonathon              8600             .3                             .3
+Kimerely              7000            .15                            .15
+Jennifer              4400                                    1000000000
+Michael              13000                                    1000000000
+Pat                   6000                                    1000000000
+Shelley              12000                                    1000000000
+William               8300                                    1000000000
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME, SALARY, COMMISSION_PCT, NVL(COMMISSION_PCT,'NO') FROM EMPLOYEES;
+SELECT FIRST_NAME, SALARY, COMMISSION_PCT, NVL(COMMISSION_PCT,'NO') FROM EMPLOYEES
+                                                              *
+ERROR at line 1:
+ORA-01722: invalid number
+
+
+SQL> SELECT FIRST_NAME, SALARY, COMMISSION_PCT, NVL(COMMISSION_PCT,99999) FROM EMPLOYEES;
+
+FIRST_NAME          SALARY COMMISSION_PCT NVL(COMMISSION_PCT,99999)
+--------------- ---------- -------------- -------------------------
+Steven               24000                                    99999
+Neena                17000                                    99999
+Lex                  17000                                    99999
+Alexander             9000                                    99999
+Bruce                 6000                                    99999
+Diana                 4200                                    99999
+Kevin                 5800                                    99999
+Trenna                3500                                    99999
+Curtis                3100                                    99999
+Randall               2600                                    99999
+Peter                 2500                                    99999
+Eleni                10500             .2                        .2
+Ellen                11000             .3                        .3
+Jonathon              8600             .3                        .3
+Kimerely              7000            .15                       .15
+Jennifer              4400                                    99999
+Michael              13000                                    99999
+Pat                   6000                                    99999
+Shelley              12000                                    99999
+William               8300                                    99999
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME, SALARY, COMMISSION_PCT, NVL(COMMISSION_PCT,0) FROM EMPLOYEES;
+
+FIRST_NAME          SALARY COMMISSION_PCT NVL(COMMISSION_PCT,0)
+--------------- ---------- -------------- ---------------------
+Steven               24000                                    0
+Neena                17000                                    0
+Lex                  17000                                    0
+Alexander             9000                                    0
+Bruce                 6000                                    0
+Diana                 4200                                    0
+Kevin                 5800                                    0
+Trenna                3500                                    0
+Curtis                3100                                    0
+Randall               2600                                    0
+Peter                 2500                                    0
+Eleni                10500             .2                    .2
+Ellen                11000             .3                    .3
+Jonathon              8600             .3                    .3
+Kimerely              7000            .15                   .15
+Jennifer              4400                                    0
+Michael              13000                                    0
+Pat                   6000                                    0
+Shelley              12000                                    0
+William               8300                                    0
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME, SALARY, COMMISSION_PCT, NVL(0,COMMISSION_PCT) FROM EMPLOYEES;
+
+FIRST_NAME          SALARY COMMISSION_PCT NVL(0,COMMISSION_PCT)
+--------------- ---------- -------------- ---------------------
+Steven               24000                                    0
+Neena                17000                                    0
+Lex                  17000                                    0
+Alexander             9000                                    0
+Bruce                 6000                                    0
+Diana                 4200                                    0
+Kevin                 5800                                    0
+Trenna                3500                                    0
+Curtis                3100                                    0
+Randall               2600                                    0
+Peter                 2500                                    0
+Eleni                10500             .2                     0
+Ellen                11000             .3                     0
+Jonathon              8600             .3                     0
+Kimerely              7000            .15                     0
+Jennifer              4400                                    0
+Michael              13000                                    0
+Pat                   6000                                    0
+Shelley              12000                                    0
+William               8300                                    0
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME, SALARY, COMMISSION_PCT, SALARY*COMMISSION_PCT COMM_AMT, SALARY+SALARY*COMMISSION_PCT TOTAL_SALARY FROM EMPLOYEES;
+
+FIRST_NAME          SALARY COMMISSION_PCT   COMM_AMT TOTAL_SALARY
+--------------- ---------- -------------- ---------- ------------
+Steven               24000
+Neena                17000
+Lex                  17000
+Alexander             9000
+Bruce                 6000
+Diana                 4200
+Kevin                 5800
+Trenna                3500
+Curtis                3100
+Randall               2600
+Peter                 2500
+Eleni                10500             .2       2100        12600
+Ellen                11000             .3       3300        14300
+Jonathon              8600             .3       2580        11180
+Kimerely              7000            .15       1050         8050
+Jennifer              4400
+Michael              13000
+Pat                   6000
+Shelley              12000
+William               8300
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME, SALARY, COMMISSION_PCT, SALARY*COMMISSION_PCT COMM_AMT, SALARY+SALARY*NVL(COMMISSION_PCT,0) TOTAL_SALARY FROM EMPLOYEES;
+
+FIRST_NAME          SALARY COMMISSION_PCT   COMM_AMT TOTAL_SALARY
+--------------- ---------- -------------- ---------- ------------
+Steven               24000                                  24000
+Neena                17000                                  17000
+Lex                  17000                                  17000
+Alexander             9000                                   9000
+Bruce                 6000                                   6000
+Diana                 4200                                   4200
+Kevin                 5800                                   5800
+Trenna                3500                                   3500
+Curtis                3100                                   3100
+Randall               2600                                   2600
+Peter                 2500                                   2500
+Eleni                10500             .2       2100        12600
+Ellen                11000             .3       3300        14300
+Jonathon              8600             .3       2580        11180
+Kimerely              7000            .15       1050         8050
+Jennifer              4400                                   4400
+Michael              13000                                  13000
+Pat                   6000                                   6000
+Shelley              12000                                  12000
+William               8300                                   8300
+
+20 rows selected.
+
+SQL>

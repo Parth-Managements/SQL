@@ -1,0 +1,796 @@
+SQL> 
+SQL> REM TO_CHAR : 1 TO CONVERT NUMBER TYPE VALUE INTO CHARACTER TYPE VALUE
+SQL> 
+SQL> REM TO_CHAR : 2 TO CONVERT DATE TYPE VALUE INTO CHARACTER TYPE VALUE
+SQL> 
+SQL> 
+SQL> REM TO_CHAR : TO DISPLAY NUMBER/DATE TYPE VALUE IN USER DEFINED/NON-DEFAULT FORMAT
+SQL> 
+SQL> REM TO_CHAR SYNTAX : TO_CHAR('DATE VALUE' , 'FORMAT')
+SQL> 
+SQL> REM LIST OF VALID DATE FORMAT CHARCTERS : D DD DDD DY DAY Dy Day dy day
+SQL> 
+SQL> REM LIST OF VALID DATE FORMAT CHARCTERS : MM RM Rm rm mon Mon MON month Month MONTH
+SQL> 
+SQL> REM LIST OF VALID DATE FORMAT CHARCTERS : Y YY YYY YYYY RR RRRR YEAR Year year
+SQL> 
+SQL> REM LIST OF VALID DATE FORMAT CHARCTERS : Q J W WW
+SQL> 
+SQL> REM LIST OF VALID DATE FORMAT CHARCTERS : SP TH FM FX
+SQL> 
+SQL> REM LIST OF VALID DATE FORMAT CHARCTERS : HH HH12 HH24 MI SS SSSSS
+SQL> 
+SQL> REM LIST OF VALID DATE FORMAT CHARCTERS : AM PM am pm Am Pm A.M. P.M. a.m. p.m.
+SQL> 
+SQL> 
+SQL> ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MONTH-RRRR HH:MI.SS AM DAY';
+
+Session altered.
+
+SQL> 
+SQL> SELECT SYSDATE FROM EMPLOYEES;
+
+SYSDATE                                                                                                                                                                                                 
+---------------------------------------                                                                                                                                                                 
+03-MAY      -2024 06:51.57 PM FRIDAY                                                                                                                                                                    
+03-MAY      -2024 06:51.57 PM FRIDAY                                                                                                                                                                    
+03-MAY      -2024 06:51.57 PM FRIDAY                                                                                                                                                                    
+03-MAY      -2024 06:51.57 PM FRIDAY                                                                                                                                                                    
+03-MAY      -2024 06:51.57 PM FRIDAY                                                                                                                                                                    
+03-MAY      -2024 06:51.57 PM FRIDAY                                                                                                                                                                    
+03-MAY      -2024 06:51.57 PM FRIDAY                                                                                                                                                                    
+03-MAY      -2024 06:51.57 PM FRIDAY                                                                                                                                                                    
+03-MAY      -2024 06:51.57 PM FRIDAY                                                                                                                                                                    
+03-MAY      -2024 06:51.57 PM FRIDAY                                                                                                                                                                    
+03-MAY      -2024 06:51.57 PM FRIDAY                                                                                                                                                                    
+03-MAY      -2024 06:51.57 PM FRIDAY                                                                                                                                                                    
+03-MAY      -2024 06:51.57 PM FRIDAY                                                                                                                                                                    
+03-MAY      -2024 06:51.57 PM FRIDAY                                                                                                                                                                    
+03-MAY      -2024 06:51.57 PM FRIDAY                                                                                                                                                                    
+03-MAY      -2024 06:51.57 PM FRIDAY                                                                                                                                                                    
+03-MAY      -2024 06:51.57 PM FRIDAY                                                                                                                                                                    
+03-MAY      -2024 06:51.57 PM FRIDAY                                                                                                                                                                    
+03-MAY      -2024 06:51.57 PM FRIDAY                                                                                                                                                                    
+03-MAY      -2024 06:51.57 PM FRIDAY                                                                                                                                                                    
+
+20 rows selected.
+
+SQL> SELECT SYSDATE FROM DUAL;
+
+SYSDATE                                                                                                                                                                                                 
+---------------------------------------                                                                                                                                                                 
+03-MAY      -2024 06:52.04 PM FRIDAY                                                                                                                                                                    
+
+SQL> SELECT SYSDATE , TO_CHAR(SYSDATE,'D DD DDD DY DAY Dy Day dy day') FROM DUAL;
+
+SYSDATE                                 TO_CHAR(SYSDATE,'DDDDDDDYDAYDYDAYDYDAY')                                                                                                                        
+--------------------------------------- --------------------------------------------------------------------------------------------------------------------------------------------------------------  
+03-MAY      -2024 06:52.36 PM FRIDAY    6 03 124 FRI FRIDAY    Fri Friday    fri friday                                                                                                                 
+
+SQL> REM WEDNESDAY : 9 CHARACTERS
+SQL> 
+SQL> SELECT HIRE_dATE FROM EMPLOYEES;
+
+HIRE_DATE                                                                                                                                                                                               
+---------------------------------------                                                                                                                                                                 
+17-JULY     -1987 12:00.00 AM FRIDAY                                                                                                                                                                    
+21-SEPTEMBER-1989 12:00.00 AM THURSDAY                                                                                                                                                                  
+13-JANUARY  -1993 12:00.00 AM WEDNESDAY                                                                                                                                                                 
+03-JANUARY  -1990 12:00.00 AM WEDNESDAY                                                                                                                                                                 
+21-MAY      -1991 12:00.00 AM TUESDAY                                                                                                                                                                   
+07-FEBRUARY -1999 12:00.00 AM SUNDAY                                                                                                                                                                    
+16-NOVEMBER -1999 12:00.00 AM TUESDAY                                                                                                                                                                   
+17-OCTOBER  -1995 12:00.00 AM TUESDAY                                                                                                                                                                   
+29-JANUARY  -1997 12:00.00 AM WEDNESDAY                                                                                                                                                                 
+15-MARCH    -1998 12:00.00 AM SUNDAY                                                                                                                                                                    
+09-JULY     -1998 12:00.00 AM THURSDAY                                                                                                                                                                  
+29-JANUARY  -2000 12:00.00 AM SATURDAY                                                                                                                                                                  
+11-MAY      -1996 12:00.00 AM SATURDAY                                                                                                                                                                  
+24-MARCH    -1998 12:00.00 AM TUESDAY                                                                                                                                                                   
+24-MAY      -1999 12:00.00 AM MONDAY                                                                                                                                                                    
+17-SEPTEMBER-1987 12:00.00 AM THURSDAY                                                                                                                                                                  
+17-FEBRUARY -1996 12:00.00 AM SATURDAY                                                                                                                                                                  
+17-AUGUST   -1997 12:00.00 AM SUNDAY                                                                                                                                                                    
+07-JUNE     -1994 12:00.00 AM TUESDAY                                                                                                                                                                   
+07-JUNE     -1994 12:00.00 AM TUESDAY                                                                                                                                                                   
+
+20 rows selected.
+
+SQL> SELECT SYSDATE , TO_CHAR(SYSDATE,'MM RM Rm rm mon Mon MON month Month MONTH') FROM DUAL;
+
+SYSDATE                                                                                                                                                                                                 
+---------------------------------------                                                                                                                                                                 
+TO_CHAR(SYSDATE,'MMRMRMRMMONMONMONMONTHMONTHMONTH')                                                                                                                                                     
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------                                 
+03-MAY      -2024 06:55.52 PM FRIDAY                                                                                                                                                                    
+05 V    V    v    may May MAY may       May       MAY                                                                                                                                                   
+                                                                                                                                                                                                        
+
+SQL> REM SEPTEMBER : MAX 9 CHARACTER
+SQL> 
+SQL> SELECT HIRE_DATE , TO_CHAR(HIRE_DATE,'D DD DDD DY DAY Dy Day dy day') FROM EMPLOYEES;
+
+HIRE_DATE                               TO_CHAR(HIRE_DATE,'DDDDDDDYDAYDYDAYDYDAY')                                                                                                                      
+--------------------------------------- --------------------------------------------------------------------------------------------------------------------------------------------------------------  
+17-JULY     -1987 12:00.00 AM FRIDAY    6 17 198 FRI FRIDAY    Fri Friday    fri friday                                                                                                                 
+21-SEPTEMBER-1989 12:00.00 AM THURSDAY  5 21 264 THU THURSDAY  Thu Thursday  thu thursday                                                                                                               
+13-JANUARY  -1993 12:00.00 AM WEDNESDAY 4 13 013 WED WEDNESDAY Wed Wednesday wed wednesday                                                                                                              
+03-JANUARY  -1990 12:00.00 AM WEDNESDAY 4 03 003 WED WEDNESDAY Wed Wednesday wed wednesday                                                                                                              
+21-MAY      -1991 12:00.00 AM TUESDAY   3 21 141 TUE TUESDAY   Tue Tuesday   tue tuesday                                                                                                                
+07-FEBRUARY -1999 12:00.00 AM SUNDAY    1 07 038 SUN SUNDAY    Sun Sunday    sun sunday                                                                                                                 
+16-NOVEMBER -1999 12:00.00 AM TUESDAY   3 16 320 TUE TUESDAY   Tue Tuesday   tue tuesday                                                                                                                
+17-OCTOBER  -1995 12:00.00 AM TUESDAY   3 17 290 TUE TUESDAY   Tue Tuesday   tue tuesday                                                                                                                
+29-JANUARY  -1997 12:00.00 AM WEDNESDAY 4 29 029 WED WEDNESDAY Wed Wednesday wed wednesday                                                                                                              
+15-MARCH    -1998 12:00.00 AM SUNDAY    1 15 074 SUN SUNDAY    Sun Sunday    sun sunday                                                                                                                 
+09-JULY     -1998 12:00.00 AM THURSDAY  5 09 190 THU THURSDAY  Thu Thursday  thu thursday                                                                                                               
+29-JANUARY  -2000 12:00.00 AM SATURDAY  7 29 029 SAT SATURDAY  Sat Saturday  sat saturday                                                                                                               
+11-MAY      -1996 12:00.00 AM SATURDAY  7 11 132 SAT SATURDAY  Sat Saturday  sat saturday                                                                                                               
+24-MARCH    -1998 12:00.00 AM TUESDAY   3 24 083 TUE TUESDAY   Tue Tuesday   tue tuesday                                                                                                                
+24-MAY      -1999 12:00.00 AM MONDAY    2 24 144 MON MONDAY    Mon Monday    mon monday                                                                                                                 
+17-SEPTEMBER-1987 12:00.00 AM THURSDAY  5 17 260 THU THURSDAY  Thu Thursday  thu thursday                                                                                                               
+17-FEBRUARY -1996 12:00.00 AM SATURDAY  7 17 048 SAT SATURDAY  Sat Saturday  sat saturday                                                                                                               
+17-AUGUST   -1997 12:00.00 AM SUNDAY    1 17 229 SUN SUNDAY    Sun Sunday    sun sunday                                                                                                                 
+07-JUNE     -1994 12:00.00 AM TUESDAY   3 07 158 TUE TUESDAY   Tue Tuesday   tue tuesday                                                                                                                
+07-JUNE     -1994 12:00.00 AM TUESDAY   3 07 158 TUE TUESDAY   Tue Tuesday   tue tuesday                                                                                                                
+
+20 rows selected.
+
+SQL> SELECT HIRE_DATE , TO_CHAR(HIRE_DATE,'MM RM Rm rm mon Mon MON month Month MONTH') FROM EMPLOYEES;
+
+HIRE_DATE                                                                                                                                                                                               
+---------------------------------------                                                                                                                                                                 
+TO_CHAR(HIRE_DATE,'MMRMRMRMMONMONMONMONTHMONTHMONTH')                                                                                                                                                   
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------                                 
+17-JULY     -1987 12:00.00 AM FRIDAY                                                                                                                                                                    
+07 VII  Vii  vii  jul Jul JUL july      July      JULY                                                                                                                                                  
+                                                                                                                                                                                                        
+21-SEPTEMBER-1989 12:00.00 AM THURSDAY                                                                                                                                                                  
+09 IX   Ix   ix   sep Sep SEP september September SEPTEMBER                                                                                                                                             
+                                                                                                                                                                                                        
+13-JANUARY  -1993 12:00.00 AM WEDNESDAY                                                                                                                                                                 
+01 I    I    i    jan Jan JAN january   January   JANUARY                                                                                                                                               
+                                                                                                                                                                                                        
+03-JANUARY  -1990 12:00.00 AM WEDNESDAY                                                                                                                                                                 
+01 I    I    i    jan Jan JAN january   January   JANUARY                                                                                                                                               
+                                                                                                                                                                                                        
+21-MAY      -1991 12:00.00 AM TUESDAY                                                                                                                                                                   
+05 V    V    v    may May MAY may       May       MAY                                                                                                                                                   
+                                                                                                                                                                                                        
+07-FEBRUARY -1999 12:00.00 AM SUNDAY                                                                                                                                                                    
+02 II   Ii   ii   feb Feb FEB february  February  FEBRUARY                                                                                                                                              
+                                                                                                                                                                                                        
+16-NOVEMBER -1999 12:00.00 AM TUESDAY                                                                                                                                                                   
+
+HIRE_DATE                                                                                                                                                                                               
+---------------------------------------                                                                                                                                                                 
+TO_CHAR(HIRE_DATE,'MMRMRMRMMONMONMONMONTHMONTHMONTH')                                                                                                                                                   
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------                                 
+11 XI   Xi   xi   nov Nov NOV november  November  NOVEMBER                                                                                                                                              
+                                                                                                                                                                                                        
+17-OCTOBER  -1995 12:00.00 AM TUESDAY                                                                                                                                                                   
+10 X    X    x    oct Oct OCT october   October   OCTOBER                                                                                                                                               
+                                                                                                                                                                                                        
+29-JANUARY  -1997 12:00.00 AM WEDNESDAY                                                                                                                                                                 
+01 I    I    i    jan Jan JAN january   January   JANUARY                                                                                                                                               
+                                                                                                                                                                                                        
+15-MARCH    -1998 12:00.00 AM SUNDAY                                                                                                                                                                    
+03 III  Iii  iii  mar Mar MAR march     March     MARCH                                                                                                                                                 
+                                                                                                                                                                                                        
+09-JULY     -1998 12:00.00 AM THURSDAY                                                                                                                                                                  
+07 VII  Vii  vii  jul Jul JUL july      July      JULY                                                                                                                                                  
+                                                                                                                                                                                                        
+29-JANUARY  -2000 12:00.00 AM SATURDAY                                                                                                                                                                  
+01 I    I    i    jan Jan JAN january   January   JANUARY                                                                                                                                               
+                                                                                                                                                                                                        
+11-MAY      -1996 12:00.00 AM SATURDAY                                                                                                                                                                  
+05 V    V    v    may May MAY may       May       MAY                                                                                                                                                   
+
+HIRE_DATE                                                                                                                                                                                               
+---------------------------------------                                                                                                                                                                 
+TO_CHAR(HIRE_DATE,'MMRMRMRMMONMONMONMONTHMONTHMONTH')                                                                                                                                                   
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------                                 
+                                                                                                                                                                                                        
+24-MARCH    -1998 12:00.00 AM TUESDAY                                                                                                                                                                   
+03 III  Iii  iii  mar Mar MAR march     March     MARCH                                                                                                                                                 
+                                                                                                                                                                                                        
+24-MAY      -1999 12:00.00 AM MONDAY                                                                                                                                                                    
+05 V    V    v    may May MAY may       May       MAY                                                                                                                                                   
+                                                                                                                                                                                                        
+17-SEPTEMBER-1987 12:00.00 AM THURSDAY                                                                                                                                                                  
+09 IX   Ix   ix   sep Sep SEP september September SEPTEMBER                                                                                                                                             
+                                                                                                                                                                                                        
+17-FEBRUARY -1996 12:00.00 AM SATURDAY                                                                                                                                                                  
+02 II   Ii   ii   feb Feb FEB february  February  FEBRUARY                                                                                                                                              
+                                                                                                                                                                                                        
+17-AUGUST   -1997 12:00.00 AM SUNDAY                                                                                                                                                                    
+08 VIII Viii viii aug Aug AUG august    August    AUGUST                                                                                                                                                
+                                                                                                                                                                                                        
+07-JUNE     -1994 12:00.00 AM TUESDAY                                                                                                                                                                   
+06 VI   Vi   vi   jun Jun JUN june      June      JUNE                                                                                                                                                  
+                                                                                                                                                                                                        
+
+HIRE_DATE                                                                                                                                                                                               
+---------------------------------------                                                                                                                                                                 
+TO_CHAR(HIRE_DATE,'MMRMRMRMMONMONMONMONTHMONTHMONTH')                                                                                                                                                   
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------                                 
+07-JUNE     -1994 12:00.00 AM TUESDAY                                                                                                                                                                   
+06 VI   Vi   vi   jun Jun JUN june      June      JUNE                                                                                                                                                  
+                                                                                                                                                                                                        
+
+20 rows selected.
+
+SQL> SELECT SYSDATE , TO_CHAR(SYSDATE,'Y YY YYY YYYY RR RRRR YEAR Year year') FROM DUAL;
+
+SYSDATE                                 TO_CHAR(SYSDATE,'YYYYYYYYYYRRRRRRYEARYEARYEAR')                                                                                                                 
+--------------------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------          
+03-MAY      -2024 06:59.02 PM FRIDAY    4 24 024 2024 24 2024 TWENTY TWENTY-FOUR Twenty Twenty-Four twenty twenty-four                                                                                  
+
+SQL> SELECT SYSDATE , TO_CHAR(SYSDATE,'DD DDSP DDTH DDSPTH DDTHSP DdSPTH ddSPTH') FROM DUAL;
+
+SYSDATE                                 TO_CHAR(SYSDATE,'DDDDSPDDTHDDSPTHDDTHSPDDSPTHDDSPTH')                                                                                                           
+--------------------------------------- --------------------------------------------------------------------------------                                                                                
+03-MAY      -2024 07:01.37 PM FRIDAY    03 THREE 03RD THIRD THIRD Third third                                                                                                                           
+
+SQL> SELECT SYSDATE , TO_CHAR(SYSDATE,'MONTH month Month MOnth Month mONTH mOnTh MoNtH moNTH') FROM DUAL;
+
+SYSDATE                                                                                                                                                                                                 
+---------------------------------------                                                                                                                                                                 
+TO_CHAR(SYSDATE,'MONTHMONTHMONTHMONTHMONTHMONTHMONTHMONTHMONTH')                                                                                                                                        
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+03-MAY      -2024 07:03.13 PM FRIDAY                                                                                                                                                                    
+MAY       may       May       MAY       May       may       may       May       may                                                                                                                     
+                                                                                                                                                                                                        
+
+SQL> SELECT SYSDATE , TO_CHAR(SYSDATE,'YEAR YYYYSP RrrrSP') FROM DUAL;
+
+SYSDATE                                 TO_CHAR(SYSDATE,'YEARYYYYSPRRRRSP')                                                                                                                             
+--------------------------------------- --------------------------------------------------------------------------------------------------------------------------------                                
+03-MAY      -2024 07:05.05 PM FRIDAY    TWENTY TWENTY-FOUR TWO THOUSAND TWENTY-FOUR Two Thousand Twenty-Four                                                                                            
+
+SQL> REM LIST OF VALID DATE FORMAT CHARCTERS : D DD DDD DY DAY Dy Day dy day
+SQL> 
+SQL> REM LIST OF VALID DATE FORMAT CHARCTERS : MM RM Rm rm mon Mon MON month Month MONTH
+SQL> 
+SQL> REM LIST OF VALID DATE FORMAT CHARCTERS : Y YY YYY YYYY RR RRRR YEAR Year year
+SQL> 
+SQL> REM LIST OF VALID DATE FORMAT CHARCTERS : Q J W WW
+SQL> 
+SQL> REM LIST OF VALID DATE FORMAT CHARCTERS : SP TH FM FX
+SQL> 
+SQL> REM LIST OF VALID DATE FORMAT CHARCTERS : HH HH12 HH24 MI SS SSSSS
+SQL> 
+SQL> REM LIST OF VALID DATE FORMAT CHARCTERS : AM PM am pm Am Pm A.M. P.M. a.m. p.m.
+SQL> 
+SQL> 
+SQL> 
+SQL> SELECT SYSDATE , TO_CHAR(SYSDATE,'Q J W WW') FROM DUAL;
+
+SYSDATE                                 TO_CHAR(SYSDAT                                                                                                                                                  
+--------------------------------------- --------------                                                                                                                                                  
+03-MAY      -2024 07:06.18 PM FRIDAY    2 2460434 1 18                                                                                                                                                  
+
+SQL> REM JULIAN DATE : 01-JAN-4712BC
+SQL> 
+SQL> REM BEFORE CHRIST : BC
+SQL> 
+SQL> 
+SQL> REM NUMBER INTO WORDS
+SQL> 
+SQL> SELECT TO_CHAR(TO_DATE('&NO','J'),'JSP') FROM DUAL;
+Enter value for no: 1
+old   1: SELECT TO_CHAR(TO_DATE('&NO','J'),'JSP') FROM DUAL
+new   1: SELECT TO_CHAR(TO_DATE('1','J'),'JSP') FROM DUAL
+
+TO_                                                                                                                                                                                                     
+---                                                                                                                                                                                                     
+ONE                                                                                                                                                                                                     
+
+SQL> /
+Enter value for no: 12
+old   1: SELECT TO_CHAR(TO_DATE('&NO','J'),'JSP') FROM DUAL
+new   1: SELECT TO_CHAR(TO_DATE('12','J'),'JSP') FROM DUAL
+
+TO_CHA                                                                                                                                                                                                  
+------                                                                                                                                                                                                  
+TWELVE                                                                                                                                                                                                  
+
+SQL> /
+Enter value for no: 123
+old   1: SELECT TO_CHAR(TO_DATE('&NO','J'),'JSP') FROM DUAL
+new   1: SELECT TO_CHAR(TO_DATE('123','J'),'JSP') FROM DUAL
+
+TO_CHAR(TO_DATE('123','J                                                                                                                                                                                
+------------------------                                                                                                                                                                                
+ONE HUNDRED TWENTY-THREE                                                                                                                                                                                
+
+SQL> /
+Enter value for no: 1234
+old   1: SELECT TO_CHAR(TO_DATE('&NO','J'),'JSP') FROM DUAL
+new   1: SELECT TO_CHAR(TO_DATE('1234','J'),'JSP') FROM DUAL
+
+TO_CHAR(TO_DATE('1234','J'),'JSP')                                                                                                                                                                      
+------------------------------------                                                                                                                                                                    
+ONE THOUSAND TWO HUNDRED THIRTY-FOUR                                                                                                                                                                    
+
+SQL> /
+Enter value for no: 12345
+old   1: SELECT TO_CHAR(TO_DATE('&NO','J'),'JSP') FROM DUAL
+new   1: SELECT TO_CHAR(TO_DATE('12345','J'),'JSP') FROM DUAL
+
+TO_CHAR(TO_DATE('12345','J'),'JSP')                                                                                                                                                                     
+----------------------------------------                                                                                                                                                                
+TWELVE THOUSAND THREE HUNDRED FORTY-FIVE                                                                                                                                                                
+
+SQL> /
+Enter value for no: 99999
+old   1: SELECT TO_CHAR(TO_DATE('&NO','J'),'JSP') FROM DUAL
+new   1: SELECT TO_CHAR(TO_DATE('99999','J'),'JSP') FROM DUAL
+
+TO_CHAR(TO_DATE('99999','J'),'JSP')                                                                                                                                                                     
+---------------------------------------------                                                                                                                                                           
+NINETY-NINE THOUSAND NINE HUNDRED NINETY-NINE                                                                                                                                                           
+
+SQL> /
+Enter value for no: 100000
+old   1: SELECT TO_CHAR(TO_DATE('&NO','J'),'JSP') FROM DUAL
+new   1: SELECT TO_CHAR(TO_DATE('100000','J'),'JSP') FROM DUAL
+
+TO_CHAR(TO_DATE('1000                                                                                                                                                                                   
+---------------------                                                                                                                                                                                   
+ONE HUNDRED  THOUSAND                                                                                                                                                                                   
+
+SQL> /
+Enter value for no: 123456
+old   1: SELECT TO_CHAR(TO_DATE('&NO','J'),'JSP') FROM DUAL
+new   1: SELECT TO_CHAR(TO_DATE('123456','J'),'JSP') FROM DUAL
+
+TO_CHAR(TO_DATE('123456','J'),'JSP')                                                                                                                                                                    
+--------------------------------------------------------                                                                                                                                                
+ONE HUNDRED TWENTY-THREE THOUSAND FOUR HUNDRED FIFTY-SIX                                                                                                                                                
+
+SQL> /
+Enter value for no: 1234567
+old   1: SELECT TO_CHAR(TO_DATE('&NO','J'),'JSP') FROM DUAL
+new   1: SELECT TO_CHAR(TO_DATE('1234567','J'),'JSP') FROM DUAL
+
+TO_CHAR(TO_DATE('1234567','J'),'JSP')                                                                                                                                                                   
+---------------------------------------------------------------------                                                                                                                                   
+ONE MILLION TWO HUNDRED THIRTY-FOUR THOUSAND FIVE HUNDRED SIXTY-SEVEN                                                                                                                                   
+
+SQL> /
+Enter value for no: 12345678
+old   1: SELECT TO_CHAR(TO_DATE('&NO','J'),'JSP') FROM DUAL
+new   1: SELECT TO_CHAR(TO_DATE('12345678','J'),'JSP') FROM DUAL
+SELECT TO_CHAR(TO_DATE('12345678','J'),'JSP') FROM DUAL
+                       *
+ERROR at line 1:
+ORA-01830: date format picture ends before converting entire input string 
+
+
+SQL> SELECT TO_CHAR(TO_DATE('31-DEC-9999'),'J') FROM DUAL;
+SELECT TO_CHAR(TO_DATE('31-DEC-9999'),'J') FROM DUAL
+                       *
+ERROR at line 1:
+ORA-01843: not a valid month 
+
+
+SQL> CONN SCOTT/TIGER
+Connected.
+SQL> SELECT TO_CHAR(TO_DATE('31-DEC-9999'),'J') FROM DUAL;
+
+TO_CHAR                                                                                                                                                                                                 
+-------                                                                                                                                                                                                 
+5373484                                                                                                                                                                                                 
+
+SQL> REM 01-JAN-4712BC : JULIAN DAY NUMBER 1
+SQL> 
+SQL> REM 02-JAN-4712BC : JULIAN DAY NUMBER 2
+SQL> 
+SQL> REM 31-JAN-4712BC : JULIAN DAY NUMBER 31
+SQL> 
+SQL> REM 01-FEB-4712BC : JULIAN DAY NUMBER 32
+SQL> 
+SQL> 
+SQL> 
+SQL> SELECT TO_CHAR(SYSDATE,'J') FROM DUAL;
+
+TO_CHAR                                                                                                                                                                                                 
+-------                                                                                                                                                                                                 
+2460434                                                                                                                                                                                                 
+
+SQL> REM 03-MAY-2024  : JULIAN DAY NUMBER 2460434
+SQL> 
+SQL> REM 31-DEC-9999  : JULIAN DAY NUMBER 5373484
+SQL> 
+SQL> 
+SQL> 
+SQL> SELECT TO_CHAR(TO_DATE('&NO','J'),'JSP') FROM DUAL;
+Enter value for no: 5373484
+old   1: SELECT TO_CHAR(TO_DATE('&NO','J'),'JSP') FROM DUAL
+new   1: SELECT TO_CHAR(TO_DATE('5373484','J'),'JSP') FROM DUAL
+
+TO_CHAR(TO_DATE('5373484','J'),'JSP')                                                                                                                                                                   
+--------------------------------------------------------------------------                                                                                                                              
+FIVE MILLION THREE HUNDRED SEVENTY-THREE THOUSAND FOUR HUNDRED EIGHTY-FOUR                                                                                                                              
+
+SQL> /
+Enter value for no: 5373485
+old   1: SELECT TO_CHAR(TO_DATE('&NO','J'),'JSP') FROM DUAL
+new   1: SELECT TO_CHAR(TO_DATE('5373485','J'),'JSP') FROM DUAL
+SELECT TO_CHAR(TO_DATE('5373485','J'),'JSP') FROM DUAL
+                       *
+ERROR at line 1:
+ORA-01854: julian date must be between 1 and 5373484 
+
+
+SQL> REM LIST OF VALID DATE FORMAT CHARCTERS : D DD DDD DY DAY Dy Day dy day
+SQL> 
+SQL> REM LIST OF VALID DATE FORMAT CHARCTERS : MM RM Rm rm mon Mon MON month Month MONTH
+SQL> 
+SQL> REM LIST OF VALID DATE FORMAT CHARCTERS : Y YY YYY YYYY RR RRRR YEAR Year year
+SQL> 
+SQL> REM LIST OF VALID DATE FORMAT CHARCTERS : Q J W WW
+SQL> 
+SQL> REM LIST OF VALID DATE FORMAT CHARCTERS : SP TH FM FX
+SQL> 
+SQL> REM LIST OF VALID DATE FORMAT CHARCTERS : HH HH12 HH24 MI SS SSSSS
+SQL> 
+SQL> REM LIST OF VALID DATE FORMAT CHARCTERS : AM PM am pm Am Pm A.M. P.M. a.m. p.m.
+SQL> 
+SQL> REM FM : FILL MODE ON/OFF TOGGLE
+SQL> 
+SQL> 
+SQL> ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MONTH-RRRR DAY HH:MI.SS AM';
+
+Session altered.
+
+SQL> SELECT SYSDATE FROM DUAL;
+
+SYSDATE                                                                                                                                                                                                 
+---------------------------------------                                                                                                                                                                 
+03-MAY      -2024 FRIDAY    07:18.17 PM                                                                                                                                                                 
+
+SQL> SELECT SYSDATE , TO_CHAR(SYSDATE,'FMDD-MONTH-RRRR DAY HH:MI.SS AM') FROM DUAL;
+
+SYSDATE                                 TO_CHAR(SYSDATE,'FMDD-MONTH-RRRRDAYHH:MI.SSAM')                                                                                                                 
+--------------------------------------- ---------------------------------------------------------------------------------------------                                                                   
+03-MAY      -2024 FRIDAY    07:18.51 PM 3-MAY-2024 FRIDAY 7:18.51 PM                                                                                                                                    
+
+SQL> SELECT SYSDATE , TO_CHAR(SYSDATE,'FMDD-FMMONTH-RRRR DAY HH:MI.SS AM') FROM DUAL;
+
+SYSDATE                                 TO_CHAR(SYSDATE,'FMDD-FMMONTH-RRRRDAYHH:MI.SSAM')                                                                                                               
+--------------------------------------- ---------------------------------------------------------------------------------------------                                                                   
+03-MAY      -2024 FRIDAY    07:19.23 PM 3-MAY      -2024 FRIDAY    07:19.23 PM                                                                                                                          
+
+SQL> SELECT SYSDATE , TO_CHAR(SYSDATE,'FMDD-FMMONTH-RRRR DAY FMHH:MI.SS AM') FROM DUAL;
+
+SYSDATE                                 TO_CHAR(SYSDATE,'FMDD-FMMONTH-RRRRDAYFMHH:MI.SSAM')                                                                                                             
+--------------------------------------- ---------------------------------------------------------------------------------------------                                                                   
+03-MAY      -2024 FRIDAY    07:19.35 PM 3-MAY      -2024 FRIDAY    7:19.35 PM                                                                                                                           
+
+SQL> 
+SQL> REM DISPLAY THOSE WHO WERE HIRED BEFORE YEAR 96
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < '01-JAN-96';
+SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < '01-JAN-96'
+                                                               *
+ERROR at line 1:
+ORA-01843: not a valid month 
+
+
+SQL> CONN SCOTT/TIGER
+Connected.
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < '01-JAN-96';
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Steven          17-JUL-87                                                                                                                                                                               
+Neena           21-SEP-89                                                                                                                                                                               
+Lex             13-JAN-93                                                                                                                                                                               
+Alexander       03-JAN-90                                                                                                                                                                               
+Bruce           21-MAY-91                                                                                                                                                                               
+Trenna          17-OCT-95                                                                                                                                                                               
+Jennifer        17-SEP-87                                                                                                                                                                               
+Shelley         07-JUN-94                                                                                                                                                                               
+William         07-JUN-94                                                                                                                                                                               
+
+9 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < '01-JANUARY-96';
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Steven          17-JUL-87                                                                                                                                                                               
+Neena           21-SEP-89                                                                                                                                                                               
+Lex             13-JAN-93                                                                                                                                                                               
+Alexander       03-JAN-90                                                                                                                                                                               
+Bruce           21-MAY-91                                                                                                                                                                               
+Trenna          17-OCT-95                                                                                                                                                                               
+Jennifer        17-SEP-87                                                                                                                                                                               
+Shelley         07-JUN-94                                                                                                                                                                               
+William         07-JUN-94                                                                                                                                                                               
+
+9 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < '01-01-96';
+SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < '01-01-96'
+                                                               *
+ERROR at line 1:
+ORA-01843: not a valid month 
+
+
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < TO_DATE('01-01-96','DD-MM-RR');
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Steven          17-JUL-87                                                                                                                                                                               
+Neena           21-SEP-89                                                                                                                                                                               
+Lex             13-JAN-93                                                                                                                                                                               
+Alexander       03-JAN-90                                                                                                                                                                               
+Bruce           21-MAY-91                                                                                                                                                                               
+Trenna          17-OCT-95                                                                                                                                                                               
+Jennifer        17-SEP-87                                                                                                                                                                               
+Shelley         07-JUN-94                                                                                                                                                                               
+William         07-JUN-94                                                                                                                                                                               
+
+9 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < TO_DATE('01-01-96','DD-MM-YY');
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Steven          17-JUL-87                                                                                                                                                                               
+Neena           21-SEP-89                                                                                                                                                                               
+Lex             13-JAN-93                                                                                                                                                                               
+Alexander       03-JAN-90                                                                                                                                                                               
+Bruce           21-MAY-91                                                                                                                                                                               
+Diana           07-FEB-99                                                                                                                                                                               
+Kevin           16-NOV-99                                                                                                                                                                               
+Trenna          17-OCT-95                                                                                                                                                                               
+Curtis          29-JAN-97                                                                                                                                                                               
+Randall         15-MAR-98                                                                                                                                                                               
+Peter           09-JUL-98                                                                                                                                                                               
+Eleni           29-JAN-00                                                                                                                                                                               
+Ellen           11-MAY-96                                                                                                                                                                               
+Jonathon        24-MAR-98                                                                                                                                                                               
+Kimerely        24-MAY-99                                                                                                                                                                               
+Jennifer        17-SEP-87                                                                                                                                                                               
+Michael         17-FEB-96                                                                                                                                                                               
+Pat             17-AUG-97                                                                                                                                                                               
+Shelley         07-JUN-94                                                                                                                                                                               
+William         07-JUN-94                                                                                                                                                                               
+
+20 rows selected.
+
+SQL> REM LIST OF VALID DATE FORMAT CHARCTERS : HH HH12 HH24 MI SS SSSSS
+SQL> 
+SQL> REM LIST OF VALID DATE FORMAT CHARCTERS : AM PM am pm Am Pm A.M. P.M. a.m. p.m.
+SQL> 
+SQL> SELECT SYSDATE , TO_CHAR(SYSDATE,'HH HH12 HH24 MI SS SSSSS') FROM DUAL;
+
+SYSDATE   TO_CHAR(SYSDATE,'HHH                                                                                                                                                                          
+--------- --------------------                                                                                                                                                                          
+03-MAY-24 07 07 19 23 52 69832                                                                                                                                                                          
+
+SQL> ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MONTH-RRRR DAY HH:MI.SS AM';
+
+Session altered.
+
+SQL> 
+SQL> SELECT SYSDATE , TO_CHAR(SYSDATE,'HH HH12 HH24 MI SS SSSSS') FROM DUAL;
+
+SYSDATE                                 TO_CHAR(SYSDATE,'HHH                                                                                                                                            
+--------------------------------------- --------------------                                                                                                                                            
+03-MAY      -2024 FRIDAY    07:24.33 PM 07 07 19 24 33 69873                                                                                                                                            
+
+SQL> REM 1 DAY = 86400 SECONDS
+SQL> 
+SQL> SELECT SYSDATE , TO_CHAR(SYSDATE,'HH HH12 HH24 MI SS SSSSS') FROM DUAL;
+
+SYSDATE                                 TO_CHAR(SYSDATE,'HHH                                                                                                                                            
+--------------------------------------- --------------------                                                                                                                                            
+03-MAY      -2024 FRIDAY    07:25.14 PM 07 07 19 25 14 69914                                                                                                                                            
+
+SQL> SELECT SYSDATE , TO_CHAR(SYSDATE,'HH HH12 HH24 MI SS SSSSS') FROM DUAL;
+
+SYSDATE                                 TO_CHAR(SYSDATE,'HHH                                                                                                                                            
+--------------------------------------- --------------------                                                                                                                                            
+03-MAY      -2024 FRIDAY    07:25.30 PM 07 07 19 25 30 69930                                                                                                                                            
+
+SQL> SELECT SYSDATE , TO_CHAR(SYSDATE,'HH HH12 HH24 MI SS SSSSS') FROM DUAL;
+
+SYSDATE                                 TO_CHAR(SYSDATE,'HHH                                                                                                                                            
+--------------------------------------- --------------------                                                                                                                                            
+03-MAY      -2024 FRIDAY    07:25.33 PM 07 07 19 25 33 69933                                                                                                                                            
+
+SQL> SELECT SYSDATE , TO_CHAR(SYSDATE,'HH HH12 HH24 MI SS SSSSS') FROM DUAL;
+
+SYSDATE                                 TO_CHAR(SYSDATE,'HHH                                                                                                                                            
+--------------------------------------- --------------------                                                                                                                                            
+03-MAY      -2024 FRIDAY    07:25.35 PM 07 07 19 25 35 69935                                                                                                                                            
+
+SQL> REM LIST OF VALID DATE FORMAT CHARCTERS : AM PM am pm Am Pm A.M. P.M. a.m. p.m.
+SQL> 
+SQL> REM 12NOON : MERIDIAN TIME
+SQL> 
+SQL> REM AM : ANTI MERIDIAN : BEFORE 12 NOON
+SQL> 
+SQL> REM PM : POST/PAST MERIDIAN : AFTER 12 NOON
+SQL> 
+SQL> SELECT SYSDATE , TO_CHAR(SYSDATE,'AM PM am pm Am Pm A.M. P.M. a.m. p.m.') FROM DUAL;
+
+SYSDATE                                 TO_CHAR(SYSDATE,'AMPMAMPMAMPMA.M.P.M.                                                                                                                           
+--------------------------------------- -------------------------------------                                                                                                                           
+03-MAY      -2024 FRIDAY    07:27.38 PM PM PM pm pm Pm Pm P.M. P.M. p.m. p.m.                                                                                                                           
+
+SQL> REM LIST OF VALID DATE FORMAT CHARCTERS : D DD DDD DY DAY Dy Day dy day
+SQL> 
+SQL> REM LIST OF VALID DATE FORMAT CHARCTERS : MM RM Rm rm mon Mon MON month Month MONTH
+SQL> 
+SQL> REM LIST OF VALID DATE FORMAT CHARCTERS : Y YY YYY YYYY RR RRRR YEAR Year year
+SQL> 
+SQL> REM LIST OF VALID DATE FORMAT CHARCTERS : Q J W WW
+SQL> 
+SQL> REM LIST OF VALID DATE FORMAT CHARCTERS : SP TH FM FX
+SQL> 
+SQL> REM LIST OF VALID DATE FORMAT CHARCTERS : HH HH12 HH24 MI SS SSSSS
+SQL> 
+SQL> REM LIST OF VALID DATE FORMAT CHARCTERS : AM PM am pm Am Pm A.M. P.M. a.m. p.m.
+SQL> 
+SQL> 
+SQL> SELECT SYSDATE , TO_CHAR(SYSDATE,'"Today is" ddth "day of month" Month, "year" Rrrrsp') FROM DUAL;
+
+SYSDATE                                 TO_CHAR(SYSDATE,'"TODAYIS"DDTH"DAYOFMONTH"MONTH,"YEAR"RRRRSP')                                                                                                  
+--------------------------------------- ----------------------------------------------------------------------------------------------------------------                                                
+03-MAY      -2024 FRIDAY    07:34.31 PM Today is 03rd day of month May      , year Two Thousand Twenty-Four                                                                                             
+
+SQL> SELECT SYSDATE , TO_CHAR(SYSDATE,'FM"Today is" ddth "day of month" Month, "year" Rrrrsp') FROM DUAL;
+
+SYSDATE                                 TO_CHAR(SYSDATE,'FM"TODAYIS"DDTH"DAYOFMONTH"MONTH,"YEAR"RRRRSP')                                                                                                
+--------------------------------------- ----------------------------------------------------------------------------------------------------------------                                                
+03-MAY      -2024 FRIDAY    07:34.49 PM Today is 3rd day of month May, year Two Thousand Twenty-Four                                                                                                    
+
+SQL> SELECT HIRE_dATE , TO_CHAR(HIRE_dATE,'DDTH') FROM EMPLOYEES;
+
+HIRE_DATE                               TO_C                                                                                                                                                            
+--------------------------------------- ----                                                                                                                                                            
+17-JULY     -1987 FRIDAY    12:00.00 AM 17TH                                                                                                                                                            
+21-SEPTEMBER-1989 THURSDAY  12:00.00 AM 21ST                                                                                                                                                            
+13-JANUARY  -1993 WEDNESDAY 12:00.00 AM 13TH                                                                                                                                                            
+03-JANUARY  -1990 WEDNESDAY 12:00.00 AM 03RD                                                                                                                                                            
+21-MAY      -1991 TUESDAY   12:00.00 AM 21ST                                                                                                                                                            
+07-FEBRUARY -1999 SUNDAY    12:00.00 AM 07TH                                                                                                                                                            
+16-NOVEMBER -1999 TUESDAY   12:00.00 AM 16TH                                                                                                                                                            
+17-OCTOBER  -1995 TUESDAY   12:00.00 AM 17TH                                                                                                                                                            
+29-JANUARY  -1997 WEDNESDAY 12:00.00 AM 29TH                                                                                                                                                            
+15-MARCH    -1998 SUNDAY    12:00.00 AM 15TH                                                                                                                                                            
+09-JULY     -1998 THURSDAY  12:00.00 AM 09TH                                                                                                                                                            
+29-JANUARY  -2000 SATURDAY  12:00.00 AM 29TH                                                                                                                                                            
+11-MAY      -1996 SATURDAY  12:00.00 AM 11TH                                                                                                                                                            
+24-MARCH    -1998 TUESDAY   12:00.00 AM 24TH                                                                                                                                                            
+24-MAY      -1999 MONDAY    12:00.00 AM 24TH                                                                                                                                                            
+17-SEPTEMBER-1987 THURSDAY  12:00.00 AM 17TH                                                                                                                                                            
+17-FEBRUARY -1996 SATURDAY  12:00.00 AM 17TH                                                                                                                                                            
+17-AUGUST   -1997 SUNDAY    12:00.00 AM 17TH                                                                                                                                                            
+07-JUNE     -1994 TUESDAY   12:00.00 AM 07TH                                                                                                                                                            
+07-JUNE     -1994 TUESDAY   12:00.00 AM 07TH                                                                                                                                                            
+
+20 rows selected.
+
+SQL> REM LIST OF VALID DATE FORMAT CHARCTERS : D DD DDD DY DAY Dy Day dy day
+SQL> 
+SQL> REM LIST OF VALID DATE FORMAT CHARCTERS : MM RM Rm rm mon Mon MON month Month MONTH
+SQL> 
+SQL> REM LIST OF VALID DATE FORMAT CHARCTERS : Y YY YYY YYYY RR RRRR YEAR Year year
+SQL> 
+SQL> REM LIST OF VALID DATE FORMAT CHARCTERS : Q J W WW
+SQL> 
+SQL> REM LIST OF VALID DATE FORMAT CHARCTERS : SP TH FM FX
+SQL> 
+SQL> REM LIST OF VALID DATE FORMAT CHARCTERS : HH HH12 HH24 MI SS SSSSS
+SQL> 
+SQL> REM LIST OF VALID DATE FORMAT CHARCTERS : AM PM am pm Am Pm A.M. P.M. a.m. p.m.
+SQL> 
+SQL> REM 1 3-5-2024
+SQL> 
+SQL> REM 2 3-may-24
+SQL> 
+SQL> REM 3 Friday
+SQL> 
+SQL> REM 4 Two Thousand Twenty-Four
+SQL> 
+SQL> REM 5 twenty twenty-four
+SQL> 
+SQL> REM 6 CURRENT SECOND OF THE DAY IS 70123
+SQL> 
+SQL> REM 7 7:47p.m.
+SQL> 
+SQL> REM 8 May month falls in 3rd quarter.
+SQL> 
+SQL> REM 9 iii MAY twenty twenty-four
+SQL> 
+SQL> REM 10 Julian day of today is 5345555 (SAMPLE)
+SQL> 
+SQL> 
+SQL> REM 1 3-5-2024
+SQL> 
+SQL> SELECT TO_CHAR(SYSDATE,'FMDD-MM-RRRR') FROM DUAL;
+
+TO_CHAR(SY                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+3-5-2024                                                                                                                                                                                                
+
+SQL> REM 2 3-may-24
+SQL> 
+SQL> SELECT TO_CHAR(SYSDATE,'FMDD-mon-RR') FROM DUAL;
+
+TO_CHAR(SYSDATE,'F                                                                                                                                                                                      
+------------------                                                                                                                                                                                      
+3-may-24                                                                                                                                                                                                
+
+SQL> REM 3 Friday
+SQL> 
+SQL> SELECT TO_CHAR(SYSDATE,'FMDay') FROM DUAL;
+
+TO_CHAR(SYSDATE,'FMDAY')                                                                                                                                                                                
+------------------------------------                                                                                                                                                                    
+Friday                                                                                                                                                                                                  
+
+SQL> REM 4 Two Thousand Twenty-Four
+SQL> 
+SQL> SELECT TO_CHAR(SYSDATE,'Yyyysp') FROM DUAL;
+
+TO_CHAR(SYSDATE,'YYYYSP')                                                                                                                                                                               
+------------------------------------------                                                                                                                                                              
+Two Thousand Twenty-Four                                                                                                                                                                                
+
+SQL> REM 5 twenty twenty-four
+SQL> 
+SQL> SELECT TO_CHAR(SYSDATE,'Year') FROM DUAL;
+
+TO_CHAR(SYSDATE,'YEAR')                                                                                                                                                                                 
+------------------------------------------                                                                                                                                                              
+Twenty Twenty-Four                                                                                                                                                                                      
+
+SQL> REM 6 CURRENT SECOND OF THE DAY IS 70123
+SQL> 
+SQL> SELECT TO_CHAR(SYSDATE,'"CURRENT SECOND OF THE DAY IS" sssss') FROM DUAL;
+
+TO_CHAR(SYSDATE,'"CURRENTSECONDOFT                                                                                                                                                                      
+----------------------------------                                                                                                                                                                      
+CURRENT SECOND OF THE DAY IS 71703                                                                                                                                                                      
+
+SQL> REM 7 7:47p.m.
+SQL> 
+SQL> SELECT TO_CHAR(SYSDATE,'FMHH:MIa.m.') FROM DUAL;
+
+TO_CHAR(S                                                                                                                                                                                               
+---------                                                                                                                                                                                               
+7:55p.m.                                                                                                                                                                                                
+
+SQL> REM 8 May month falls in 3rd quarter.
+SQL> 
+SQL> SELECT TO_CHAR(SYSDATE,'Mon "month falls in" qth "quarter."') FROM DUAL;
+
+TO_CHAR(SYSDATE,'MON"MONTHFALLSIN"QTH"QU                                                                                                                                                                
+----------------------------------------                                                                                                                                                                
+May month falls in 2nd quarter.                                                                                                                                                                         
+
+SQL> REM 9 iii MAY twenty twenty-four
+SQL> 
+SQL> SELECT TO_CHAR(SYSDATE,'fmrm MONTH year') FROM DUAL;
+
+TO_CHAR(SYSDATE,'FMRMMONTHYEAR')                                                                                                                                                                        
+------------------------------------------------------------------------------------                                                                                                                    
+v MAY twenty twenty-four                                                                                                                                                                                
+
+SQL> REM 10 Julian day of today is 5345555 (SAMPLE)
+SQL> 
+SQL> SELECT TO_CHAR(SYSDATE,'"Julian day of today is" J') FROM DUAL;
+
+TO_CHAR(SYSDATE,'"JULIANDAYOFT                                                                                                                                                                          
+------------------------------                                                                                                                                                                          
+Julian day of today is 2460434                                                                                                                                                                          
+
+SQL> SPOOL OFF

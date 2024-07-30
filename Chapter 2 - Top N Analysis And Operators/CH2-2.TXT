@@ -1,0 +1,1162 @@
+SQL> 
+SQL> CL SCR
+
+SQL> REM SORTING : ARRANGING VALUES EITHER IN ASCENDING OR DESCENDING ORDER
+SQL> 
+SQL> REM BY DEFAULT ALL ROWS ARE DISPLAYED IN ROWID's ORDER IN ASCENDING.
+SQL> 
+SQL> SELECT ROWID , E.* FROM EMPLOYEES E;
+
+ROWID              EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL            
+------------------ ----------- --------------- --------------- ----------       
+PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID  
+-------------------- --------- ---------- ---------- -------------- ----------  
+DEPARTMENT_ID                                                                   
+-------------                                                                   
+AAAcDnAAHAAAAVdAAA         100 Steven          King            SKING            
+515.123.4567         17-JUL-87 AD_PRES         24000                            
+           90                                                                   
+                                                                                
+AAAcDnAAHAAAAVdAAB         101 Neena           Kochhar         NKOCHHAR         
+515.123.4568         21-SEP-89 AD_VP           17000                       100  
+           90                                                                   
+
+ROWID              EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL            
+------------------ ----------- --------------- --------------- ----------       
+PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID  
+-------------------- --------- ---------- ---------- -------------- ----------  
+DEPARTMENT_ID                                                                   
+-------------                                                                   
+                                                                                
+AAAcDnAAHAAAAVdAAC         102 Lex             De Haan         LDEHAAN          
+515.123.4569         13-JAN-93 AD_VP           17000                       100  
+           90                                                                   
+                                                                                
+AAAcDnAAHAAAAVdAAD         103 Alexander       Hunold          AHUNOLD          
+590.423.4567         03-JAN-90 IT_PROG          9000                       102  
+
+ROWID              EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL            
+------------------ ----------- --------------- --------------- ----------       
+PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID  
+-------------------- --------- ---------- ---------- -------------- ----------  
+DEPARTMENT_ID                                                                   
+-------------                                                                   
+           60                                                                   
+                                                                                
+AAAcDnAAHAAAAVdAAE         104 Bruce           Ernst           BERNST           
+590.423.4568         21-MAY-91 IT_PROG          6000                       103  
+           60                                                                   
+                                                                                
+AAAcDnAAHAAAAVdAAF         107 Diana           Lorentz         DLORENTZ         
+
+ROWID              EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL            
+------------------ ----------- --------------- --------------- ----------       
+PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID  
+-------------------- --------- ---------- ---------- -------------- ----------  
+DEPARTMENT_ID                                                                   
+-------------                                                                   
+590.423.5567         07-FEB-99 IT_PROG          4200                       103  
+           60                                                                   
+                                                                                
+AAAcDnAAHAAAAVdAAG         124 Kevin           Mourgos         KMOURGOS         
+650.123.5234         16-NOV-99 ST_MAN           5800                       100  
+           50                                                                   
+                                                                                
+
+ROWID              EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL            
+------------------ ----------- --------------- --------------- ----------       
+PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID  
+-------------------- --------- ---------- ---------- -------------- ----------  
+DEPARTMENT_ID                                                                   
+-------------                                                                   
+AAAcDnAAHAAAAVdAAH         141 Trenna          Rajs            TRAJS            
+650.121.8009         17-OCT-95 ST_CLERK         3500                       124  
+           50                                                                   
+                                                                                
+AAAcDnAAHAAAAVdAAI         142 Curtis          Davies          CDAVIES          
+650.121.2994         29-JAN-97 ST_CLERK         3100                       124  
+           50                                                                   
+
+ROWID              EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL            
+------------------ ----------- --------------- --------------- ----------       
+PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID  
+-------------------- --------- ---------- ---------- -------------- ----------  
+DEPARTMENT_ID                                                                   
+-------------                                                                   
+                                                                                
+AAAcDnAAHAAAAVdAAJ         143 Randall         Matos           RMATOS           
+650.121.2874         15-MAR-98 ST_CLERK         2600                       124  
+           50                                                                   
+                                                                                
+AAAcDnAAHAAAAVdAAK         144 Peter           Vargas                           
+650.121.2004         09-JUL-98 ST_CLERK         2500                       124  
+
+ROWID              EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL            
+------------------ ----------- --------------- --------------- ----------       
+PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID  
+-------------------- --------- ---------- ---------- -------------- ----------  
+DEPARTMENT_ID                                                                   
+-------------                                                                   
+           50                                                                   
+                                                                                
+AAAcDnAAHAAAAVdAAL         149 Eleni           Zlotkey         EZLOTKEY         
+011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100  
+           80                                                                   
+                                                                                
+AAAcDnAAHAAAAVdAAM         174 Ellen           Abel            EABEL            
+
+ROWID              EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL            
+------------------ ----------- --------------- --------------- ----------       
+PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID  
+-------------------- --------- ---------- ---------- -------------- ----------  
+DEPARTMENT_ID                                                                   
+-------------                                                                   
+011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149  
+           80                                                                   
+                                                                                
+AAAcDnAAHAAAAVdAAN         176 Jonathon        Taylor          JTAYLOR          
+011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149  
+           80                                                                   
+                                                                                
+
+ROWID              EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL            
+------------------ ----------- --------------- --------------- ----------       
+PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID  
+-------------------- --------- ---------- ---------- -------------- ----------  
+DEPARTMENT_ID                                                                   
+-------------                                                                   
+AAAcDnAAHAAAAVdAAO         178 Kimerely        Grant           KGRANT           
+011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149  
+                                                                                
+                                                                                
+AAAcDnAAHAAAAVdAAP         200 Jennifer        Whalen          JWHALEN          
+515.123.4444         17-SEP-87 AD_ASST          4400                       101  
+           10                                                                   
+
+ROWID              EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL            
+------------------ ----------- --------------- --------------- ----------       
+PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID  
+-------------------- --------- ---------- ---------- -------------- ----------  
+DEPARTMENT_ID                                                                   
+-------------                                                                   
+                                                                                
+AAAcDnAAHAAAAVdAAQ         201 Michael         Hartstein       MHARTSTE         
+515.123.5555         17-FEB-96 MK_MAN          13000                       100  
+           20                                                                   
+                                                                                
+AAAcDnAAHAAAAVdAAR         202 Pat             Fay             PFAY             
+603.123.6666         17-AUG-97 MK_REP           6000                       201  
+
+ROWID              EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL            
+------------------ ----------- --------------- --------------- ----------       
+PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID  
+-------------------- --------- ---------- ---------- -------------- ----------  
+DEPARTMENT_ID                                                                   
+-------------                                                                   
+           20                                                                   
+                                                                                
+AAAcDnAAHAAAAVdAAS         205 Shelley         Higgins         SHIGGINS         
+515.123.8080         07-JUN-94 AC_MGR          12000                       101  
+          110                                                                   
+                                                                                
+AAAcDnAAHAAAAVdAAT         206 William         Gietz           WGIETZ           
+
+ROWID              EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL            
+------------------ ----------- --------------- --------------- ----------       
+PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID  
+-------------------- --------- ---------- ---------- -------------- ----------  
+DEPARTMENT_ID                                                                   
+-------------                                                                   
+515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205  
+          110                                                                   
+                                                                                
+
+20 rows selected.
+
+SQL> SET LINES 200 PAGES 24
+SQL> 
+SQL> R
+  1* SELECT ROWID , E.* FROM EMPLOYEES E
+
+ROWID              EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                  
+------------------ ----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                  
+AAAcDnAAHAAAAVdAAA         100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                  
+AAAcDnAAHAAAAVdAAB         101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                  
+AAAcDnAAHAAAAVdAAC         102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                  
+AAAcDnAAHAAAAVdAAD         103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                  
+AAAcDnAAHAAAAVdAAE         104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                  
+AAAcDnAAHAAAAVdAAF         107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                  
+AAAcDnAAHAAAAVdAAG         124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                  
+AAAcDnAAHAAAAVdAAH         141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                  
+AAAcDnAAHAAAAVdAAI         142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                  
+AAAcDnAAHAAAAVdAAJ         143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                  
+AAAcDnAAHAAAAVdAAK         144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                  
+AAAcDnAAHAAAAVdAAL         149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                  
+AAAcDnAAHAAAAVdAAM         174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                  
+AAAcDnAAHAAAAVdAAN         176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                  
+AAAcDnAAHAAAAVdAAO         178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                
+AAAcDnAAHAAAAVdAAP         200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                  
+AAAcDnAAHAAAAVdAAQ         201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                  
+AAAcDnAAHAAAAVdAAR         202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                  
+AAAcDnAAHAAAAVdAAS         205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                  
+AAAcDnAAHAAAAVdAAT         206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                  
+
+20 rows selected.
+
+SQL> REM IF WE WANT TO SORT ROWS IN DIFFERENT ORDER, WE NEED TO USE ORDER BY ... CLAUSE OF THE SELECT STATEMENT.
+SQL> 
+SQL> SELECT ROWID , E.* FROM EMPLOYEES E ORDER BY SALARY;
+
+ROWID              EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                  
+------------------ ----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                  
+AAAcDnAAHAAAAVdAAK         144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                  
+AAAcDnAAHAAAAVdAAJ         143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                  
+AAAcDnAAHAAAAVdAAI         142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                  
+AAAcDnAAHAAAAVdAAH         141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                  
+AAAcDnAAHAAAAVdAAF         107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                  
+AAAcDnAAHAAAAVdAAP         200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                  
+AAAcDnAAHAAAAVdAAG         124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                  
+AAAcDnAAHAAAAVdAAE         104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                  
+AAAcDnAAHAAAAVdAAR         202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                  
+AAAcDnAAHAAAAVdAAO         178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                
+AAAcDnAAHAAAAVdAAT         206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                  
+AAAcDnAAHAAAAVdAAN         176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                  
+AAAcDnAAHAAAAVdAAD         103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                  
+AAAcDnAAHAAAAVdAAL         149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                  
+AAAcDnAAHAAAAVdAAM         174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                  
+AAAcDnAAHAAAAVdAAS         205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                  
+AAAcDnAAHAAAAVdAAQ         201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                  
+AAAcDnAAHAAAAVdAAB         101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                  
+AAAcDnAAHAAAAVdAAC         102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                  
+AAAcDnAAHAAAAVdAAA         100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                  
+
+20 rows selected.
+
+SQL> REM BY DEFAULT SORTING ORDER IS ASCENDING
+SQL> 
+SQL> REM IF WE WANT TO SORT IN DESCENDING ORDER WE HAVE TO USE DESC KEY WORD
+SQL> 
+SQL> SELECT ROWID , E.* FROM EMPLOYEES E ORDER BY SALARY DESC;
+
+ROWID              EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                  
+------------------ ----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                  
+AAAcDnAAHAAAAVdAAA         100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                  
+AAAcDnAAHAAAAVdAAB         101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                  
+AAAcDnAAHAAAAVdAAC         102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                  
+AAAcDnAAHAAAAVdAAQ         201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                  
+AAAcDnAAHAAAAVdAAS         205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                  
+AAAcDnAAHAAAAVdAAM         174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                  
+AAAcDnAAHAAAAVdAAL         149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                  
+AAAcDnAAHAAAAVdAAD         103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                  
+AAAcDnAAHAAAAVdAAN         176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                  
+AAAcDnAAHAAAAVdAAT         206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                  
+AAAcDnAAHAAAAVdAAO         178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                
+AAAcDnAAHAAAAVdAAE         104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                  
+AAAcDnAAHAAAAVdAAR         202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                  
+AAAcDnAAHAAAAVdAAG         124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                  
+AAAcDnAAHAAAAVdAAP         200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                  
+AAAcDnAAHAAAAVdAAF         107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                  
+AAAcDnAAHAAAAVdAAH         141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                  
+AAAcDnAAHAAAAVdAAI         142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                  
+AAAcDnAAHAAAAVdAAJ         143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                  
+AAAcDnAAHAAAAVdAAK         144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                  
+
+20 rows selected.
+
+SQL> REM WE CAN REFER COLUMN IN 'ORDER BY' CLAUSE IN TWO STYLES : 1 COLUMN NAME 2 COLUMN POSITION/NUMBER IN RESULT
+SQL> 
+SQL> SELECT * FROM EMPLOYEES ORDER BY FIRST_NAME;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+20 rows selected.
+
+SQL> SELECT * FROM EMPLOYEES ORDER BY 2;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+20 rows selected.
+
+SQL> SELECT * FROM EMPLOYEES ORDER BY FIRST_NAME DESC;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+
+20 rows selected.
+
+SQL> SELECT * FROM EMPLOYEES ORDER BY 2 DESC;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+
+20 rows selected.
+
+SQL> REM NUMBER VALUES IN ASCENDING ORDER : LOWEST VALUE FIRST AND HIGHEST VALUE LAST : -9 , -8 ... -1 , 0 , 1 , 2 , ... 8 , 9
+SQL> 
+SQL> REM NUMBER VALUES IN DESCENDING ORDER : HIGHEST VALUE FIRST AND LOWEST VALUE LAST : 9 , 8 ... 1 , 0 , -1 , -2 , ... -8 , -9
+SQL> 
+SQL> REM CHARACTER VALUES IN ASCENDING ORDER : A - Z , a -
+> 
+SQL> 
+SQL> REM CHARACTER VALUES IN ASCENDING ORDER : A - Z , a - z
+SQL> 
+SQL> REM CHARACTER VALUES IN DESCENDING ORDER : z - a , Z - A
+SQL> 
+SQL> 
+SQL> REM DATE VALUES IN ASCENDING ORDER : EARLIEST DATE FIRST : LATEST DATE LAST
+SQL> 
+SQL> REM DATE VALUES IN DESCENDING ORDER : LATEST DATE FIRST : EARLIEST DATE LAST
+SQL> 
+SQL> 
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+20 rows selected.
+
+SQL> REM 1 DISPLAY ROWS IN ASCENDING ORDER OF JOB_ID
+SQL> 
+SQL> REM 2 DISPLAY ROWS IN DESCENDING ORDER OF SALARY
+SQL> 
+SQL> REM 3 DISPLAY ROWS IN ASCENDING ORDER OF HIRE_DATE (USING COLUMN POSITION)
+SQL> 
+SQL> REM 4 DISPLAY ROWS IN DESCENDING ORDER OF LAST_NAME (USING COLUMN POSITION)
+SQL> 
+SQL> SELECT * FROM EMPLOYEES ORDER BY JOB_ID;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+
+20 rows selected.
+
+SQL> SELECT * FROM EMPLOYEES ORDER BY SALARY DESC;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+
+20 rows selected.
+
+SQL> SELECT * FROM EMPLOYEES ORDER BY 6;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+
+20 rows selected.
+
+SQL> SELECT * FROM EMPLOYEES ORDER BY 3 DESC;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+
+20 rows selected.
+
+SQL> SELECT DEPARTMENT_ID , FIRST_NAME FROM EMPLOYEES;
+
+DEPARTMENT_ID FIRST_NAME                                                                                                                                                                                
+------------- ---------------                                                                                                                                                                           
+           90 Steven                                                                                                                                                                                    
+           90 Neena                                                                                                                                                                                     
+           90 Lex                                                                                                                                                                                       
+           60 Alexander                                                                                                                                                                                 
+           60 Bruce                                                                                                                                                                                     
+           60 Diana                                                                                                                                                                                     
+           50 Kevin                                                                                                                                                                                     
+           50 Trenna                                                                                                                                                                                    
+           50 Curtis                                                                                                                                                                                    
+           50 Randall                                                                                                                                                                                   
+           50 Peter                                                                                                                                                                                     
+           80 Eleni                                                                                                                                                                                     
+           80 Ellen                                                                                                                                                                                     
+           80 Jonathon                                                                                                                                                                                  
+              Kimerely                                                                                                                                                                                  
+           10 Jennifer                                                                                                                                                                                  
+           20 Michael                                                                                                                                                                                   
+           20 Pat                                                                                                                                                                                       
+          110 Shelley                                                                                                                                                                                   
+          110 William                                                                                                                                                                                   
+
+20 rows selected.
+
+SQL> SELECT DEPARTMENT_ID , FIRST_NAME FROM EMPLOYEES ORDER BY 1;
+
+DEPARTMENT_ID FIRST_NAME                                                                                                                                                                                
+------------- ---------------                                                                                                                                                                           
+           10 Jennifer                                                                                                                                                                                  
+           20 Michael                                                                                                                                                                                   
+           20 Pat                                                                                                                                                                                       
+           50 Kevin                                                                                                                                                                                     
+           50 Peter                                                                                                                                                                                     
+           50 Randall                                                                                                                                                                                   
+           50 Curtis                                                                                                                                                                                    
+           50 Trenna                                                                                                                                                                                    
+           60 Diana                                                                                                                                                                                     
+           60 Bruce                                                                                                                                                                                     
+           60 Alexander                                                                                                                                                                                 
+           80 Ellen                                                                                                                                                                                     
+           80 Eleni                                                                                                                                                                                     
+           80 Jonathon                                                                                                                                                                                  
+           90 Lex                                                                                                                                                                                       
+           90 Steven                                                                                                                                                                                    
+           90 Neena                                                                                                                                                                                     
+          110 William                                                                                                                                                                                   
+          110 Shelley                                                                                                                                                                                   
+              Kimerely                                                                                                                                                                                  
+
+20 rows selected.
+
+SQL> SELECT DEPARTMENT_ID , FIRST_NAME FROM EMPLOYEES ORDER BY 1 , 2;
+
+DEPARTMENT_ID FIRST_NAME                                                                                                                                                                                
+------------- ---------------                                                                                                                                                                           
+           10 Jennifer                                                                                                                                                                                  
+           20 Michael                                                                                                                                                                                   
+           20 Pat                                                                                                                                                                                       
+           50 Curtis                                                                                                                                                                                    
+           50 Kevin                                                                                                                                                                                     
+           50 Peter                                                                                                                                                                                     
+           50 Randall                                                                                                                                                                                   
+           50 Trenna                                                                                                                                                                                    
+           60 Alexander                                                                                                                                                                                 
+           60 Bruce                                                                                                                                                                                     
+           60 Diana                                                                                                                                                                                     
+           80 Eleni                                                                                                                                                                                     
+           80 Ellen                                                                                                                                                                                     
+           80 Jonathon                                                                                                                                                                                  
+           90 Lex                                                                                                                                                                                       
+           90 Neena                                                                                                                                                                                     
+           90 Steven                                                                                                                                                                                    
+          110 Shelley                                                                                                                                                                                   
+          110 William                                                                                                                                                                                   
+              Kimerely                                                                                                                                                                                  
+
+20 rows selected.
+
+SQL> SELECT DEPARTMENT_ID , FIRST_NAME FROM EMPLOYEES ORDER BY 1 , 2 DESC;
+
+DEPARTMENT_ID FIRST_NAME                                                                                                                                                                                
+------------- ---------------                                                                                                                                                                           
+           10 Jennifer                                                                                                                                                                                  
+           20 Pat                                                                                                                                                                                       
+           20 Michael                                                                                                                                                                                   
+           50 Trenna                                                                                                                                                                                    
+           50 Randall                                                                                                                                                                                   
+           50 Peter                                                                                                                                                                                     
+           50 Kevin                                                                                                                                                                                     
+           50 Curtis                                                                                                                                                                                    
+           60 Diana                                                                                                                                                                                     
+           60 Bruce                                                                                                                                                                                     
+           60 Alexander                                                                                                                                                                                 
+           80 Jonathon                                                                                                                                                                                  
+           80 Ellen                                                                                                                                                                                     
+           80 Eleni                                                                                                                                                                                     
+           90 Steven                                                                                                                                                                                    
+           90 Neena                                                                                                                                                                                     
+           90 Lex                                                                                                                                                                                       
+          110 William                                                                                                                                                                                   
+          110 Shelley                                                                                                                                                                                   
+              Kimerely                                                                                                                                                                                  
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , COMMISSION_PCT FROM EMPLOYEES;
+
+FIRST_NAME      COMMISSION_PCT                                                                                                                                                                          
+--------------- --------------                                                                                                                                                                          
+Steven                                                                                                                                                                                                  
+Neena                                                                                                                                                                                                   
+Lex                                                                                                                                                                                                     
+Alexander                                                                                                                                                                                               
+Bruce                                                                                                                                                                                                   
+Diana                                                                                                                                                                                                   
+Kevin                                                                                                                                                                                                   
+Trenna                                                                                                                                                                                                  
+Curtis                                                                                                                                                                                                  
+Randall                                                                                                                                                                                                 
+Peter                                                                                                                                                                                                   
+Eleni                       .2                                                                                                                                                                          
+Ellen                       .3                                                                                                                                                                          
+Jonathon                    .3                                                                                                                                                                          
+Kimerely                   .15                                                                                                                                                                          
+Jennifer                                                                                                                                                                                                
+Michael                                                                                                                                                                                                 
+Pat                                                                                                                                                                                                     
+Shelley                                                                                                                                                                                                 
+William                                                                                                                                                                                                 
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , COMMISSION_PCT FROM EMPLOYEES ORDER BY 2;
+
+FIRST_NAME      COMMISSION_PCT                                                                                                                                                                          
+--------------- --------------                                                                                                                                                                          
+Kimerely                   .15                                                                                                                                                                          
+Eleni                       .2                                                                                                                                                                          
+Jonathon                    .3                                                                                                                                                                          
+Ellen                       .3                                                                                                                                                                          
+Bruce                                                                                                                                                                                                   
+Diana                                                                                                                                                                                                   
+Kevin                                                                                                                                                                                                   
+Trenna                                                                                                                                                                                                  
+Curtis                                                                                                                                                                                                  
+Randall                                                                                                                                                                                                 
+Peter                                                                                                                                                                                                   
+Jennifer                                                                                                                                                                                                
+Michael                                                                                                                                                                                                 
+Pat                                                                                                                                                                                                     
+Shelley                                                                                                                                                                                                 
+Alexander                                                                                                                                                                                               
+Lex                                                                                                                                                                                                     
+William                                                                                                                                                                                                 
+Steven                                                                                                                                                                                                  
+Neena                                                                                                                                                                                                   
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , COMMISSION_PCT FROM EMPLOYEES ORDER BY 2 DESC;
+
+FIRST_NAME      COMMISSION_PCT                                                                                                                                                                          
+--------------- --------------                                                                                                                                                                          
+Steven                                                                                                                                                                                                  
+William                                                                                                                                                                                                 
+Lex                                                                                                                                                                                                     
+Alexander                                                                                                                                                                                               
+Bruce                                                                                                                                                                                                   
+Diana                                                                                                                                                                                                   
+Kevin                                                                                                                                                                                                   
+Trenna                                                                                                                                                                                                  
+Curtis                                                                                                                                                                                                  
+Randall                                                                                                                                                                                                 
+Peter                                                                                                                                                                                                   
+Neena                                                                                                                                                                                                   
+Shelley                                                                                                                                                                                                 
+Pat                                                                                                                                                                                                     
+Michael                                                                                                                                                                                                 
+Jennifer                                                                                                                                                                                                
+Jonathon                    .3                                                                                                                                                                          
+Ellen                       .3                                                                                                                                                                          
+Eleni                       .2                                                                                                                                                                          
+Kimerely                   .15                                                                                                                                                                          
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , COMMISSION_PCT FROM EMPLOYEES ORDER BY 2;
+
+FIRST_NAME      COMMISSION_PCT                                                                                                                                                                          
+--------------- --------------                                                                                                                                                                          
+Kimerely                   .15                                                                                                                                                                          
+Eleni                       .2                                                                                                                                                                          
+Jonathon                    .3                                                                                                                                                                          
+Ellen                       .3                                                                                                                                                                          
+Bruce                                                                                                                                                                                                   
+Diana                                                                                                                                                                                                   
+Kevin                                                                                                                                                                                                   
+Trenna                                                                                                                                                                                                  
+Curtis                                                                                                                                                                                                  
+Randall                                                                                                                                                                                                 
+Peter                                                                                                                                                                                                   
+Jennifer                                                                                                                                                                                                
+Michael                                                                                                                                                                                                 
+Pat                                                                                                                                                                                                     
+Shelley                                                                                                                                                                                                 
+Alexander                                                                                                                                                                                               
+Lex                                                                                                                                                                                                     
+William                                                                                                                                                                                                 
+Steven                                                                                                                                                                                                  
+Neena                                                                                                                                                                                                   
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , COMMISSION_PCT FROM EMPLOYEES ORDER BY 2 NULLS FIRST;
+
+FIRST_NAME      COMMISSION_PCT                                                                                                                                                                          
+--------------- --------------                                                                                                                                                                          
+Steven                                                                                                                                                                                                  
+William                                                                                                                                                                                                 
+Lex                                                                                                                                                                                                     
+Alexander                                                                                                                                                                                               
+Bruce                                                                                                                                                                                                   
+Diana                                                                                                                                                                                                   
+Kevin                                                                                                                                                                                                   
+Trenna                                                                                                                                                                                                  
+Curtis                                                                                                                                                                                                  
+Randall                                                                                                                                                                                                 
+Peter                                                                                                                                                                                                   
+Neena                                                                                                                                                                                                   
+Shelley                                                                                                                                                                                                 
+Pat                                                                                                                                                                                                     
+Michael                                                                                                                                                                                                 
+Jennifer                                                                                                                                                                                                
+Kimerely                   .15                                                                                                                                                                          
+Eleni                       .2                                                                                                                                                                          
+Jonathon                    .3                                                                                                                                                                          
+Ellen                       .3                                                                                                                                                                          
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , COMMISSION_PCT FROM EMPLOYEES ORDER BY 2 DESC;
+
+FIRST_NAME      COMMISSION_PCT                                                                                                                                                                          
+--------------- --------------                                                                                                                                                                          
+Steven                                                                                                                                                                                                  
+William                                                                                                                                                                                                 
+Lex                                                                                                                                                                                                     
+Alexander                                                                                                                                                                                               
+Bruce                                                                                                                                                                                                   
+Diana                                                                                                                                                                                                   
+Kevin                                                                                                                                                                                                   
+Trenna                                                                                                                                                                                                  
+Curtis                                                                                                                                                                                                  
+Randall                                                                                                                                                                                                 
+Peter                                                                                                                                                                                                   
+Neena                                                                                                                                                                                                   
+Shelley                                                                                                                                                                                                 
+Pat                                                                                                                                                                                                     
+Michael                                                                                                                                                                                                 
+Jennifer                                                                                                                                                                                                
+Jonathon                    .3                                                                                                                                                                          
+Ellen                       .3                                                                                                                                                                          
+Eleni                       .2                                                                                                                                                                          
+Kimerely                   .15                                                                                                                                                                          
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , COMMISSION_PCT FROM EMPLOYEES ORDER BY 2 DESC NULLS LAST;
+
+FIRST_NAME      COMMISSION_PCT                                                                                                                                                                          
+--------------- --------------                                                                                                                                                                          
+Jonathon                    .3                                                                                                                                                                          
+Ellen                       .3                                                                                                                                                                          
+Eleni                       .2                                                                                                                                                                          
+Kimerely                   .15                                                                                                                                                                          
+Bruce                                                                                                                                                                                                   
+Diana                                                                                                                                                                                                   
+Kevin                                                                                                                                                                                                   
+Trenna                                                                                                                                                                                                  
+Curtis                                                                                                                                                                                                  
+Randall                                                                                                                                                                                                 
+Peter                                                                                                                                                                                                   
+Jennifer                                                                                                                                                                                                
+Michael                                                                                                                                                                                                 
+Pat                                                                                                                                                                                                     
+Shelley                                                                                                                                                                                                 
+Alexander                                                                                                                                                                                               
+Lex                                                                                                                                                                                                     
+William                                                                                                                                                                                                 
+Steven                                                                                                                                                                                                  
+Neena                                                                                                                                                                                                   
+
+20 rows selected.
+
+SQL> REM NULLS FIRST : TO KEEP ALL NULL VALUES AT THE TOP OF THE RESULT
+SQL> 
+SQL> REM NULLS LAST : TO KEEP ALL NULL VALUES AT THE BOTTOM OF THE RESULT
+SQL> 
+SQL> REM NULL VALUE BY DEFAULT IS CONSIDERED AS HIGHEST/BIGGEST VALUE.
+SQL> 
+SQL> 
+SQL> 
+SQL> REM ORDER BY 1 , 2 , 3
+SQL> 
+SQL> REM ORDER BY 1 , 2 DESC , 3
+SQL> 
+SQL> REM ORDER BY 1 , 2 DESC , 3 NULLS FIRST
+SQL> 
+SQL> REM ORDER BY 1 , 2 DESC NULLS LAST , 3 NULLS FIRST
+SQL> 
+SQL> REM ORDER BY 1 , HIRE_DATE , 3
+SQL> 
+SQL> REM ORDER BY 1 , HIRE_DATE , PAYMENT
+SQL> 
+SQL> SELECT FIRST_NAME , SALARY PAYMENT FROM EMPLOYEES;
+
+FIRST_NAME         PAYMENT                                                                                                                                                                              
+--------------- ----------                                                                                                                                                                              
+Steven               24000                                                                                                                                                                              
+Neena                17000                                                                                                                                                                              
+Lex                  17000                                                                                                                                                                              
+Alexander             9000                                                                                                                                                                              
+Bruce                 6000                                                                                                                                                                              
+Diana                 4200                                                                                                                                                                              
+Kevin                 5800                                                                                                                                                                              
+Trenna                3500                                                                                                                                                                              
+Curtis                3100                                                                                                                                                                              
+Randall               2600                                                                                                                                                                              
+Peter                 2500                                                                                                                                                                              
+Eleni                10500                                                                                                                                                                              
+Ellen                11000                                                                                                                                                                              
+Jonathon              8600                                                                                                                                                                              
+Kimerely              7000                                                                                                                                                                              
+Jennifer              4400                                                                                                                                                                              
+Michael              13000                                                                                                                                                                              
+Pat                   6000                                                                                                                                                                              
+Shelley              12000                                                                                                                                                                              
+William               8300                                                                                                                                                                              
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , SALARY PAYMENT FROM EMPLOYEES ORDER BY SALARY;
+
+FIRST_NAME         PAYMENT                                                                                                                                                                              
+--------------- ----------                                                                                                                                                                              
+Peter                 2500                                                                                                                                                                              
+Randall               2600                                                                                                                                                                              
+Curtis                3100                                                                                                                                                                              
+Trenna                3500                                                                                                                                                                              
+Diana                 4200                                                                                                                                                                              
+Jennifer              4400                                                                                                                                                                              
+Kevin                 5800                                                                                                                                                                              
+Bruce                 6000                                                                                                                                                                              
+Pat                   6000                                                                                                                                                                              
+Kimerely              7000                                                                                                                                                                              
+William               8300                                                                                                                                                                              
+Jonathon              8600                                                                                                                                                                              
+Alexander             9000                                                                                                                                                                              
+Eleni                10500                                                                                                                                                                              
+Ellen                11000                                                                                                                                                                              
+Shelley              12000                                                                                                                                                                              
+Michael              13000                                                                                                                                                                              
+Neena                17000                                                                                                                                                                              
+Lex                  17000                                                                                                                                                                              
+Steven               24000                                                                                                                                                                              
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , SALARY PAYMENT FROM EMPLOYEES ORDER BY 2
+  2  ;
+
+FIRST_NAME         PAYMENT                                                                                                                                                                              
+--------------- ----------                                                                                                                                                                              
+Peter                 2500                                                                                                                                                                              
+Randall               2600                                                                                                                                                                              
+Curtis                3100                                                                                                                                                                              
+Trenna                3500                                                                                                                                                                              
+Diana                 4200                                                                                                                                                                              
+Jennifer              4400                                                                                                                                                                              
+Kevin                 5800                                                                                                                                                                              
+Bruce                 6000                                                                                                                                                                              
+Pat                   6000                                                                                                                                                                              
+Kimerely              7000                                                                                                                                                                              
+William               8300                                                                                                                                                                              
+Jonathon              8600                                                                                                                                                                              
+Alexander             9000                                                                                                                                                                              
+Eleni                10500                                                                                                                                                                              
+Ellen                11000                                                                                                                                                                              
+Shelley              12000                                                                                                                                                                              
+Michael              13000                                                                                                                                                                              
+Neena                17000                                                                                                                                                                              
+Lex                  17000                                                                                                                                                                              
+Steven               24000                                                                                                                                                                              
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , SALARY PAYMENT FROM EMPLOYEES ORDER BY PAYMENT;
+
+FIRST_NAME         PAYMENT                                                                                                                                                                              
+--------------- ----------                                                                                                                                                                              
+Peter                 2500                                                                                                                                                                              
+Randall               2600                                                                                                                                                                              
+Curtis                3100                                                                                                                                                                              
+Trenna                3500                                                                                                                                                                              
+Diana                 4200                                                                                                                                                                              
+Jennifer              4400                                                                                                                                                                              
+Kevin                 5800                                                                                                                                                                              
+Bruce                 6000                                                                                                                                                                              
+Pat                   6000                                                                                                                                                                              
+Kimerely              7000                                                                                                                                                                              
+William               8300                                                                                                                                                                              
+Jonathon              8600                                                                                                                                                                              
+Alexander             9000                                                                                                                                                                              
+Eleni                10500                                                                                                                                                                              
+Ellen                11000                                                                                                                                                                              
+Shelley              12000                                                                                                                                                                              
+Michael              13000                                                                                                                                                                              
+Neena                17000                                                                                                                                                                              
+Lex                  17000                                                                                                                                                                              
+Steven               24000                                                                                                                                                                              
+
+20 rows selected.
+
+SQL> REM ORDER BY COLUMN NAME/POSITION/ALIAS  ASC/DESC  NULLS FIRST/LAST , ...
+SQL> 
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+20 rows selected.
+
+SQL> SELECT MANAGER_ID , LAST_NAME FROM EMPLOYEES;
+
+MANAGER_ID LAST_NAME                                                                                                                                                                                    
+---------- ---------------                                                                                                                                                                              
+           King                                                                                                                                                                                         
+       100 Kochhar                                                                                                                                                                                      
+       100 De Haan                                                                                                                                                                                      
+       102 Hunold                                                                                                                                                                                       
+       103 Ernst                                                                                                                                                                                        
+       103 Lorentz                                                                                                                                                                                      
+       100 Mourgos                                                                                                                                                                                      
+       124 Rajs                                                                                                                                                                                         
+       124 Davies                                                                                                                                                                                       
+       124 Matos                                                                                                                                                                                        
+       124 Vargas                                                                                                                                                                                       
+       100 Zlotkey                                                                                                                                                                                      
+       149 Abel                                                                                                                                                                                         
+       149 Taylor                                                                                                                                                                                       
+       149 Grant                                                                                                                                                                                        
+       101 Whalen                                                                                                                                                                                       
+       100 Hartstein                                                                                                                                                                                    
+       201 Fay                                                                                                                                                                                          
+       101 Higgins                                                                                                                                                                                      
+       205 Gietz                                                                                                                                                                                        
+
+20 rows selected.
+
+SQL> SELECT MANAGER_ID , LAST_NAME FROM EMPLOYEES ORDER BY 1 NULLS FIRST, 2 DESC;
+
+MANAGER_ID LAST_NAME                                                                                                                                                                                    
+---------- ---------------                                                                                                                                                                              
+           King                                                                                                                                                                                         
+       100 Zlotkey                                                                                                                                                                                      
+       100 Mourgos                                                                                                                                                                                      
+       100 Kochhar                                                                                                                                                                                      
+       100 Hartstein                                                                                                                                                                                    
+       100 De Haan                                                                                                                                                                                      
+       101 Whalen                                                                                                                                                                                       
+       101 Higgins                                                                                                                                                                                      
+       102 Hunold                                                                                                                                                                                       
+       103 Lorentz                                                                                                                                                                                      
+       103 Ernst                                                                                                                                                                                        
+       124 Vargas                                                                                                                                                                                       
+       124 Rajs                                                                                                                                                                                         
+       124 Matos                                                                                                                                                                                        
+       124 Davies                                                                                                                                                                                       
+       149 Taylor                                                                                                                                                                                       
+       149 Grant                                                                                                                                                                                        
+       149 Abel                                                                                                                                                                                         
+       201 Fay                                                                                                                                                                                          
+       205 Gietz                                                                                                                                                                                        
+
+20 rows selected.
+
+SQL> SELECT DEPARTMENT_ID , FIRST_NAME FROM EMPLOYEES;
+
+DEPARTMENT_ID FIRST_NAME                                                                                                                                                                                
+------------- ---------------                                                                                                                                                                           
+           90 Steven                                                                                                                                                                                    
+           90 Neena                                                                                                                                                                                     
+           90 Lex                                                                                                                                                                                       
+           60 Alexander                                                                                                                                                                                 
+           60 Bruce                                                                                                                                                                                     
+           60 Diana                                                                                                                                                                                     
+           50 Kevin                                                                                                                                                                                     
+           50 Trenna                                                                                                                                                                                    
+           50 Curtis                                                                                                                                                                                    
+           50 Randall                                                                                                                                                                                   
+           50 Peter                                                                                                                                                                                     
+           80 Eleni                                                                                                                                                                                     
+           80 Ellen                                                                                                                                                                                     
+           80 Jonathon                                                                                                                                                                                  
+              Kimerely                                                                                                                                                                                  
+           10 Jennifer                                                                                                                                                                                  
+           20 Michael                                                                                                                                                                                   
+           20 Pat                                                                                                                                                                                       
+          110 Shelley                                                                                                                                                                                   
+          110 William                                                                                                                                                                                   
+
+20 rows selected.
+
+SQL> SELECT DEPARTMENT_ID , FIRST_NAME FROM EMPLOYEES ORDER BY 1 DESC , 2 ;
+
+DEPARTMENT_ID FIRST_NAME                                                                                                                                                                                
+------------- ---------------                                                                                                                                                                           
+              Kimerely                                                                                                                                                                                  
+          110 Shelley                                                                                                                                                                                   
+          110 William                                                                                                                                                                                   
+           90 Lex                                                                                                                                                                                       
+           90 Neena                                                                                                                                                                                     
+           90 Steven                                                                                                                                                                                    
+           80 Eleni                                                                                                                                                                                     
+           80 Ellen                                                                                                                                                                                     
+           80 Jonathon                                                                                                                                                                                  
+           60 Alexander                                                                                                                                                                                 
+           60 Bruce                                                                                                                                                                                     
+           60 Diana                                                                                                                                                                                     
+           50 Curtis                                                                                                                                                                                    
+           50 Kevin                                                                                                                                                                                     
+           50 Peter                                                                                                                                                                                     
+           50 Randall                                                                                                                                                                                   
+           50 Trenna                                                                                                                                                                                    
+           20 Michael                                                                                                                                                                                   
+           20 Pat                                                                                                                                                                                       
+           10 Jennifer                                                                                                                                                                                  
+
+20 rows selected.
+
+SQL> SELECT JOB_ID , LAST_NAME FROM EMPLOYEES;
+
+JOB_ID     LAST_NAME                                                                                                                                                                                    
+---------- ---------------                                                                                                                                                                              
+AD_PRES    King                                                                                                                                                                                         
+AD_VP      Kochhar                                                                                                                                                                                      
+AD_VP      De Haan                                                                                                                                                                                      
+IT_PROG    Hunold                                                                                                                                                                                       
+IT_PROG    Ernst                                                                                                                                                                                        
+IT_PROG    Lorentz                                                                                                                                                                                      
+ST_MAN     Mourgos                                                                                                                                                                                      
+ST_CLERK   Rajs                                                                                                                                                                                         
+ST_CLERK   Davies                                                                                                                                                                                       
+ST_CLERK   Matos                                                                                                                                                                                        
+ST_CLERK   Vargas                                                                                                                                                                                       
+SA_MAN     Zlotkey                                                                                                                                                                                      
+SA_REP     Abel                                                                                                                                                                                         
+SA_REP     Taylor                                                                                                                                                                                       
+SA_REP     Grant                                                                                                                                                                                        
+AD_ASST    Whalen                                                                                                                                                                                       
+MK_MAN     Hartstein                                                                                                                                                                                    
+MK_REP     Fay                                                                                                                                                                                          
+AC_MGR     Higgins                                                                                                                                                                                      
+AC_ACCOUNT Gietz                                                                                                                                                                                        
+
+20 rows selected.
+
+SQL> SELECT JOB_ID , LAST_NAME FROM EMPLOYEES ORDER BY 1 , 2 DESC;
+
+JOB_ID     LAST_NAME                                                                                                                                                                                    
+---------- ---------------                                                                                                                                                                              
+AC_ACCOUNT Gietz                                                                                                                                                                                        
+AC_MGR     Higgins                                                                                                                                                                                      
+AD_ASST    Whalen                                                                                                                                                                                       
+AD_PRES    King                                                                                                                                                                                         
+AD_VP      Kochhar                                                                                                                                                                                      
+AD_VP      De Haan                                                                                                                                                                                      
+IT_PROG    Lorentz                                                                                                                                                                                      
+IT_PROG    Hunold                                                                                                                                                                                       
+IT_PROG    Ernst                                                                                                                                                                                        
+MK_MAN     Hartstein                                                                                                                                                                                    
+MK_REP     Fay                                                                                                                                                                                          
+SA_MAN     Zlotkey                                                                                                                                                                                      
+SA_REP     Taylor                                                                                                                                                                                       
+SA_REP     Grant                                                                                                                                                                                        
+SA_REP     Abel                                                                                                                                                                                         
+ST_CLERK   Vargas                                                                                                                                                                                       
+ST_CLERK   Rajs                                                                                                                                                                                         
+ST_CLERK   Matos                                                                                                                                                                                        
+ST_CLERK   Davies                                                                                                                                                                                       
+ST_MAN     Mourgos                                                                                                                                                                                      
+
+20 rows selected.
+
+SQL> REM SELECT FIRST_NAME , SALARY FROM EMPLOYEES ORDER BY PAYMENT;
+SQL> 
+SQL> REM A. SELECT FIRST_NAME , SALARY
+SQL> REM B. FROM EMPLOYEES
+SQL> REM C. ORDER BY
+SQL> REM D. PAYMENT;
+SQL> REM E. None of the above.
+SQL> 
+SQL> 
+SQL> SPOOL OFF

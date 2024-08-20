@@ -1,0 +1,409 @@
+SQL> 
+SQL> REM 2 WHEN OUR MAIN REQUIREMENT/QUESTION HAS SOME HIDDEN REQUIREMENT/QUESTION :
+SQL> 
+SQL> REM DISPLAY THOSE WHO GET HIGHER SALARY THAN Abel.
+SQL> 
+SQL> REM SALARY > ABEL'S SALARY
+SQL> 
+SQL> REM EMPLOYEES > EMPLOYEES
+SQL> 
+SQL> REM 1 STATIC 2 DYNAMIC
+SQL> 
+SQL> REM 1 STATIC
+SQL> 
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+20 rows selected.
+
+SQL> SELECT LAST_NAME , SALARY
+  2  FROM EMPLOYEES
+  3  WHERE SALARY > 11000;
+
+LAST_NAME           SALARY                                                                                                                                                                              
+--------------- ----------                                                                                                                                                                              
+King                 24000                                                                                                                                                                              
+Kochhar              17000                                                                                                                                                                              
+De Haan              17000                                                                                                                                                                              
+Hartstein            13000                                                                                                                                                                              
+Higgins              12000                                                                                                                                                                              
+
+SQL> REM DYNAMIC :
+SQL> 
+SQL> FROM EMPLOYEES
+SP2-0734: unknown command beginning "FROM EMPLO..." - rest of line ignored.
+SQL> 
+SQL> 
+SQL> SELECT LAST_NAME , SALARY
+  2  FROM EMPLOYEES
+  3  WHERE SALARY > (SELECT SALARY FROM EMPLOYEES WHERE LAST_NAME = 'Abel');
+
+LAST_NAME           SALARY                                                                                                                                                                              
+--------------- ----------                                                                                                                                                                              
+King                 24000                                                                                                                                                                              
+Kochhar              17000                                                                                                                                                                              
+De Haan              17000                                                                                                                                                                              
+Hartstein            13000                                                                                                                                                                              
+Higgins              12000                                                                                                                                                                              
+
+SQL> REM DISPLAY THOSE WHO GET HIGHER SALARY THAN Abel.
+SQL> 
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+20 rows selected.
+
+SQL> REM 1 DISPLAY THOSE WHO WERE HIRED BEFORE Hartstein
+SQL> 
+SQL> REM 2 DISPLAY THOSE WHO GETS HIGHER COMMISSION   A M O U N T   THAN Zlotkey
+SQL> 
+SQL> REM 3 DISPLAY THOSE WHO REPORTS TO Kevin
+SQL> 
+SQL> REM 4 DISPLAY THSOE WHO DOES SAME JOB WHICH Bruce DO.
+SQL> 
+SQL> REM 5 DISPLAY THOSE WHO WERE HIRED IN THE SAME YEAR IN WHICH Taylor WAS HIRED.
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 1 DISPLAY THOSE WHO WERE HIRED BEFORE Hartstein
+SQL> 
+SQL> SELECT LAST_NAME , HIRE_DATE
+  2  FROM EMPLOYEES
+  3  WHERE HIRE_DATE < (SELECT HIRE_DATE FROM EMPLOYEES WHERE LAST_NAME = 'Hartstein');
+
+LAST_NAME       HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+King            17-JUL-87                                                                                                                                                                               
+Kochhar         21-SEP-89                                                                                                                                                                               
+De Haan         13-JAN-93                                                                                                                                                                               
+Hunold          03-JAN-90                                                                                                                                                                               
+Ernst           21-MAY-91                                                                                                                                                                               
+Rajs            17-OCT-95                                                                                                                                                                               
+Whalen          17-SEP-87                                                                                                                                                                               
+Higgins         07-JUN-94                                                                                                                                                                               
+Gietz           07-JUN-94                                                                                                                                                                               
+
+9 rows selected.
+
+SQL> REM 2 DISPLAY THOSE WHO GETS HIGHER COMMISSION   A M O U N T   THAN Zlotkey
+SQL> 
+SQL> SELECT LAST_NAME , SALARY * COMMISSION_PCT
+  2  FROM EMPLOYEES
+  3  WHERE SALARY * COMMISSION_PCT > (SELECT SALARY * COMMISSION_PCT FROM EMPLOYEES WHERE LAST_NAME = 'Zlotkey');
+
+LAST_NAME       SALARY*COMMISSION_PCT                                                                                                                                                                   
+--------------- ---------------------                                                                                                                                                                   
+Abel                             3300                                                                                                                                                                   
+Taylor                           2580                                                                                                                                                                   
+
+SQL> REM 3 DISPLAY THOSE WHO REPORTS TO Kevin
+SQL> 
+SQL> SELECT EMPLOYEE_ID , FIRST_NAME , MANAGER_ID
+  2  FROM EMPLOYEES
+  3  WHERE MANAGER_ID = (SELECT EMPLOYEE_ID FROM EMPLOYEES WHERE FIRST_NAME = 'Kevin');
+
+EMPLOYEE_ID FIRST_NAME      MANAGER_ID                                                                                                                                                                  
+----------- --------------- ----------                                                                                                                                                                  
+        141 Trenna                 124                                                                                                                                                                  
+        142 Curtis                 124                                                                                                                                                                  
+        143 Randall                124                                                                                                                                                                  
+        144 Peter                  124                                                                                                                                                                  
+
+SQL> REM 4 DISPLAY THSOE WHO DOES SAME JOB WHICH Bruce DO.
+SQL> 
+SQL> SELECT FIRST_NAME , JOB_ID
+  2  FROM EMPLOYEES
+  3  WHERE JOB_ID = (SELECT JOB_ID FROM EMPLOYEES WHERE FIRST_NAME = 'Bruce');
+
+FIRST_NAME      JOB_ID                                                                                                                                                                                  
+--------------- ----------                                                                                                                                                                              
+Alexander       IT_PROG                                                                                                                                                                                 
+Bruce           IT_PROG                                                                                                                                                                                 
+Diana           IT_PROG                                                                                                                                                                                 
+
+SQL> REM 5 DISPLAY THOSE WHO WERE HIRED IN THE SAME YEAR IN WHICH Taylor WAS HIRED.
+SQL> 
+SQL> SELECT LAST_NAME , TO_CHAR(HIRE_DATE,'RRRR') YEAR
+  2  FROM EMPLOYEES
+  3  WHERE TO_CHAR(HIRE_DATE,'RRRR') = (SELECT TO_CHAR(HIRE_DATE,'RRRR') FROM EMPLOYEES WHERE LAST_NAME = 'Taylor');
+
+LAST_NAME       YEAR                                                                                                                                                                                    
+--------------- ----                                                                                                                                                                                    
+Matos           1998                                                                                                                                                                                    
+Vargas          1998                                                                                                                                                                                    
+Taylor          1998                                                                                                                                                                                    
+
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+20 rows selected.
+
+SQL> REM 1 DISPLAY THOSE WHO REPORTS TO Jonathon's MANAGER
+SQL> 
+SQL> REM 2 DISPLAY THOSE WHO WORKS IN Shiping DEPARTMENT
+SQL> 
+SQL> REM 3 DISPLAY THOSE WHO GETS SALARY IN THE RANGE OF SALARY PAID TO Abel and Lorentz.
+SQL> 
+SQL> rem 4 DISPLAY THSOE WHO WERE HIRED BETWEEN Peter and Alexander
+SQL> 
+SQL> REM 5 DISPLAY THOSE WHO WORKS AT Toronto.
+SQL> 
+SQL> 
+SQL> REM 1 DISPLAY THOSE WHO REPORTS TO Jonathon's MANAGER
+SQL> 
+SQL> SELECT FIRST_NAME , MANAGER_ID
+  2  FROM EMPLOYEES
+  3  WHERE MANAGER_ID IN (SELECT MANAGER_ID FROM EMPLOYEES WHERE FIRST_NAME = 'Jonathon');
+
+FIRST_NAME      MANAGER_ID                                                                                                                                                                              
+--------------- ----------                                                                                                                                                                              
+Ellen                  149                                                                                                                                                                              
+Jonathon               149                                                                                                                                                                              
+Kimerely               149                                                                                                                                                                              
+
+SQL> REM 2 DISPLAY THOSE WHO WORKS IN Shiping DEPARTMENT
+SQL> 
+SQL> SELECT FIRST_NAME , DEPARTMENT_ID
+  2  FROM EMPLOYEES
+  3  WHERE DEPARTMENT_ID IN (SELECT DEPARTMENT_ID FROM DEPARTMENTS WHERE DEPARTMENT_NAME = 'Shiping');
+
+FIRST_NAME      DEPARTMENT_ID                                                                                                                                                                           
+--------------- -------------                                                                                                                                                                           
+Kevin                      50                                                                                                                                                                           
+Peter                      50                                                                                                                                                                           
+Randall                    50                                                                                                                                                                           
+Curtis                     50                                                                                                                                                                           
+Trenna                     50                                                                                                                                                                           
+
+SQL> REM 3 DISPLAY THOSE WHO GETS SALARY IN THE RANGE OF SALARY PAID TO Abel and Lorentz.
+SQL> 
+SQL> SELECT FIRST_NAME , SALARY
+  2  FROM EMPLOYEES
+  3  WHERE SALARY BETWEEN (SELECT MIN(SALARY) FROM EMPLOYEES WHERE FIRST_NAME IN ('Abel','Lorentz')
+  4                   AND (SELECT MAX(SALARY) FROM EMPLOYEES WHERE FIRST_NAME IN ('Abel','Lorentz')
+  5  
+SQL> 
+SQL> SELECT LAST_NAME , SALARY
+  2  FROM EMPLOYEES
+  3  WHERE SALARY BETWEEN (SELECT MIN(SALARY) FROM EMPLOYEES WHERE LAST_NAME IN ('Abel','Lorentz')
+  4                   AND (SELECT MAX(SALARY) FROM EMPLOYEES WHERE LAST_NAME IN ('Abel','Lorentz')
+  5  ORDER BY 2;
+SELECT LAST_NAME , SALARY
+*
+ERROR at line 1:
+ORA-00921: unexpected end of SQL command 
+
+
+SQL> SELECT LAST_NAME , SALARY
+  2  FROM EMPLOYEES
+  3  WHERE SALARY BETWEEN (SELECT MIN(SALARY) FROM EMPLOYEES WHERE LAST_NAME IN ('Abel','Lorentz'))
+  4                   AND (SELECT MAX(SALARY) FROM EMPLOYEES WHERE LAST_NAME IN ('Abel','Lorentz'))
+  5  FROM EMPLOYEES
+  6  
+SQL> 
+SQL> SELECT LAST_NAME , SALARY
+  2  FROM EMPLOYEES
+  3  WHERE SALARY BETWEEN (SELECT MIN(SALARY) FROM EMPLOYEES WHERE LAST_NAME IN ('Abel','Lorentz'))
+  4                   AND (SELECT MAX(SALARY) FROM EMPLOYEES WHERE LAST_NAME IN ('Abel','Lorentz'))
+  5  ORDER BY 2;
+
+LAST_NAME           SALARY                                                                                                                                                                              
+--------------- ----------                                                                                                                                                                              
+Lorentz               4200                                                                                                                                                                              
+Whalen                4400                                                                                                                                                                              
+Mourgos               5800                                                                                                                                                                              
+Ernst                 6000                                                                                                                                                                              
+Fay                   6000                                                                                                                                                                              
+Grant                 7000                                                                                                                                                                              
+Gietz                 8300                                                                                                                                                                              
+Taylor                8600                                                                                                                                                                              
+Hunold                9000                                                                                                                                                                              
+Zlotkey              10500                                                                                                                                                                              
+Abel                 11000                                                                                                                                                                              
+
+11 rows selected.
+
+SQL> SELECT LAST_NAME , SALARY
+  2  FROM EMPLOYEES
+  3  WHERE SALARY >= ANY (SELECT SALARY FROM EMPLOYEES WHERE LAST_NAME IN ('Abel','Lorentz')
+  4  AND   SALARY <= ANY (SELECT SALARY FROM EMPLOYEES WHERE LAST_NAME IN ('Abel','Lorentz')
+  5  ORDER BY 2;
+ORDER BY 2
+*
+ERROR at line 5:
+ORA-00907: missing right parenthesis 
+
+
+SQL> SELECT LAST_NAME , SALARY
+  2  FROM EMPLOYEES
+  3  WHERE SALARY >= ANY (SELECT SALARY FROM EMPLOYEES WHERE LAST_NAME IN ('Abel','Lorentz'))
+  4  AND   SALARY <= ANY (SELECT SALARY FROM EMPLOYEES WHERE LAST_NAME IN ('Abel','Lorentz'))
+  5  ORDER BY 2;
+
+LAST_NAME           SALARY                                                                                                                                                                              
+--------------- ----------                                                                                                                                                                              
+Lorentz               4200                                                                                                                                                                              
+Whalen                4400                                                                                                                                                                              
+Mourgos               5800                                                                                                                                                                              
+Fay                   6000                                                                                                                                                                              
+Ernst                 6000                                                                                                                                                                              
+Grant                 7000                                                                                                                                                                              
+Gietz                 8300                                                                                                                                                                              
+Taylor                8600                                                                                                                                                                              
+Hunold                9000                                                                                                                                                                              
+Zlotkey              10500                                                                                                                                                                              
+Abel                 11000                                                                                                                                                                              
+
+11 rows selected.
+
+SQL> rem 4 DISPLAY THSOE WHO WERE HIRED BETWEEN Peter and Alexander
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_DAT
+  2  
+SQL> SELECT FIRST_NAME , HIRE_DATE
+  2  FROM EMPLOYEES
+  3  WHERE HIRE_DATE BETWEEN (SELECT MIN(HIRE_DATE) FROM EMPLOYEES WHERE FIRST_NAME IN ('Peter','Alexander'))
+  4                      AND (SELECT MAX(HIRE_DATE) FROM EMPLOYEES WHERE FIRST_NAME IN ('Peter','Alexander'))
+  5  ORDER BY 2;
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Alexander       03-JAN-90                                                                                                                                                                               
+Bruce           21-MAY-91                                                                                                                                                                               
+Lex             13-JAN-93                                                                                                                                                                               
+Shelley         07-JUN-94                                                                                                                                                                               
+William         07-JUN-94                                                                                                                                                                               
+Trenna          17-OCT-95                                                                                                                                                                               
+Michael         17-FEB-96                                                                                                                                                                               
+Ellen           11-MAY-96                                                                                                                                                                               
+Curtis          29-JAN-97                                                                                                                                                                               
+Pat             17-AUG-97                                                                                                                                                                               
+Randall         15-MAR-98                                                                                                                                                                               
+Jonathon        24-MAR-98                                                                                                                                                                               
+Peter           09-JUL-98                                                                                                                                                                               
+
+13 rows selected.
+
+SQL> REM 5 DISPLAY THOSE WHO WORKS AT Toronto.
+SQL> 
+SQL> SELECT *
+  2  FROM EMPLOYEES
+  3  WHERE DEPARTMENT_ID IN (SELECT DEPARTMENT_ID FROM EMPLOYEES
+  4  WHERE LOCATION_ID   IN (SELECT LOCATION_ID   FROM LOCATIONS WHERE CITY = 'Toronto'))
+  5  
+SQL> 
+SQL> SELECT *
+  2  FROM EMPLOYEES
+  3  WHERE DEPARTMENT_ID IN (SELECT DEPARTMENT_ID FROM DEPARTMENTS
+  4  WHERE LOCATION_ID   IN (SELECT LOCATION_ID   FROM LOCATIONS WHERE CITY = 'Toronto'));
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+
+SQL> SELECT *
+  2  FROM EMPLOYEES
+  3  WHERE DEPARTMENT_ID IN (SELECT DEPARTMENT_ID FROM DEPARTMENTS NATURAL JOIN LOCATIONS WHERE CITY = 'Toronto');
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+
+SQL> SELECT *
+  2  FROM EMPLOYEES
+  3  WHERE DEPARTMENT_ID IN (SELECT DEPARTMENT_ID FROM DEPARTMENTS JOIN LOCATIONS USING (LOCATION_ID) WHERE CITY = 'Toronto');
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+
+SQL> SELECT *
+  2  FROM EMPLOYEES
+  3  WHERE DEPARTMENT_ID IN (SELECT DEPARTMENT_ID FROM DEPARTMENTS D JOIN LOCATIONS L ON D.LOCATION_ID = L.LOCATION_ID WHERE CITY = 'Toronto');
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+
+SQL> SELECT E.*
+  2  FROM EMPLOYEES E
+  3  JOIN DEPARTMENTS D ON E.DEPARTMENT_ID = D.DEPARTMENT_ID
+  4  JOIN LOCATIONS   L ON D.LOCATION_ID   = L.LOCATION_ID
+  5  WHERE CITY = 'Toronto';
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+
+SQL> SPOOL OFF

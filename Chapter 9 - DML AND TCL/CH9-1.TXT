@@ -1,0 +1,705 @@
+SQL> 
+SQL> REM SQL : Structured Query Language
+SQL> 
+SQL> REM SQL HAS 5 SUB LANGUAGES : 1 DRL/DQL 2 DML 3 TCL 4 DDL 5 DCL
+SQL> 
+SQL> REM DRL/DQL : Data Retrieval/Query Language : SELECT
+SQL> 
+SQL> REM DML : Data Manipulation Language : INSERT UPDATE DELETE      MERGE
+SQL> 
+SQL> REM TCL : Transaction Control Language : COMMIT ROLLBACK SAVEPOINT
+SQL> 
+SQL> REM DDL : Data Definition Language : CREATE ALTER DROP TRUNCATE FLASHBACK PURE      COMMENT RENAME
+SQL> 
+SQL> 
+SQL> 
+SQL> REM DCL : Data Control Language : GRANT REVOKE
+SQL> 
+SQL> 
+SQL> 
+SQL> REM DML : Data Manipulation Language : INSERT UPDATE DELETE      MERGE
+SQL> 
+SQL> REM ANY CHANGES DONE USING DML STATEMENTS ARE LIMITED TO MEMORY/RAM.
+SQL> 
+SQL> REM TO MAKE CHANGES PERMANENT/SAVE, WE NEED TO EXECUTE COMMIT COMMAND.
+SQL> 
+SQL> REM TO UNDO CHANGES FROM RAM/MEMORY, WE NEED TO EXECUTE ROLLBACK COMMAND.
+SQL> 
+SQL> 
+SQL> 
+SQL> REM INSERT : TO ADD NEW ROW(S) TO THE EXISTING TABLE.
+SQL> 
+SQL> REM UPDATE : TO MODIFY/UPDATE/CHANGE/EDIT EXISTING ROW VALUES/DATA.
+SQL> 
+SQL> REM DELETE : TO REMOVE/DELETE EXISTING ROW(S) OF THE TABLE.
+SQL> 
+SQL> 
+SQL> 
+SQL> REM TRANSACTION : BUNCH/GROUP OF DML STATEMENTS EXECUTED ON SINGLE/MULTIPLE TABLES WITHIN SINGLE SESSION IS CALLED TRANSACTION.
+SQL> 
+SQL> REM SESSION : THE TIME PERIOD BETWEEN LOG ON AND LOG OFF IS CALLED SESSION.
+SQL> 
+SQL> 
+SQL> REM 8AM LOG ON (SESSION STARTED)
+SQL> 
+SQL> REM 8.15 INSERT : FIRST TRANSACTION OF SESSION STARTED
+SQL> 
+SQL> REM 8.45 UPDATE
+SQL> 
+SQL> REM 9.10 DELETE
+SQL> 
+SQL> REM 9.30 ROLLBACK (TRANSACTION ENDS HERE, ALL CHANGES ARE UNDONE.
+SQL> 
+SQL> REM 10.15 UPDATE (SECOND TRANSACTION OF SAME SESSION STARTED
+SQL> 
+SQL> REM 10.20 INSERT
+SQL> 
+SQL> REM COMMIT : (TRANSACTION ENDS HERE, ALL CHANGES ARE SAVE PERMANENTLY IN TABLE.
+SQL> 
+SQL> REM 12:00 LOG OFF (SESSION ENDS HERE)
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM TCL STATEMENTS : 1 COMMIT 2 ROLLBACK 3 SAVEPOINT
+SQL> 
+SQL> REM COMMIT : TO SAVE ALL OPEN STATE CHANGES IN TABLE PERMANENTLY.
+SQL> 
+SQL> REM ROLLBACK; : TO UNDO ALL OPEN STATE CHANGES FROM MEMORY/RAM
+SQL> 
+SQL> REM ROLLBACK TO savepoint; : WILL UNDO ALL CHANGES PERFORMED AFTER THE SAID SAVEPOINT.
+SQL> 
+SQL> REM SAVEPOINT : TO BREAK TRANSACTION INTO PARTS. SO THAT AFTERWARDS USING SAVEPOINT NAME, WE CAN UNDO PARTIAL TRANSACTION.
+SQL> 
+SQL> 
+SQL> 
+SQL> CREATE TABLE R1 AS SELECT * FROM REGIONS WHERE 1 = 2;
+
+Table created.
+
+SQL> SELECT * FROM R1;
+
+no rows selected
+
+SQL> REM BELOW STATEMENT WILL START NEW TRANSACTION.
+SQL> 
+SQL> INSERT INTO R1 VALUES (1,'ASIA');
+
+1 row created.
+
+SQL> REM RAM = 1 , TABLE = 0
+SQL> 
+SQL> SELECT * FROM R1;
+
+ REGION_ID REGION_NAME                                                                                                                                                                                  
+---------- -------------------------                                                                                                                                                                    
+         1 ASIA                                                                                                                                                                                         
+
+SQL> INSERT INTO R1 VALUES (2,'AFRICA');
+
+1 row created.
+
+SQL> REM RAM = 2 , TABLE = 0
+SQL> 
+SQL> SELECT * FROM R1;
+
+ REGION_ID REGION_NAME                                                                                                                                                                                  
+---------- -------------------------                                                                                                                                                                    
+         1 ASIA                                                                                                                                                                                         
+         2 AFRICA                                                                                                                                                                                       
+
+SQL> ROLLBACK;
+
+Rollback complete.
+
+SQL> REM ABOVE STATEMENT UNDONE ALL THE CHANGES FROM MEMORY.
+SQL> 
+SQL> SELECT * FROM R1;
+
+no rows selected
+
+SQL> REM RAM = 0 , TABLE = 0
+SQL> 
+SQL> REM TRANSACTION ENDS WHEN WE EXECUTE ROLLBACK.
+SQL> 
+SQL> REM BELOW STATEMENT WILL START NEW TRANSACTION
+SQL> 
+SQL> INSERT INTO R1 VALUES (1,'AMERICA');
+
+1 row created.
+
+SQL> REM RAM/MEMORY = 1 , TABLE = 0
+SQL> 
+SQL> SELECT * FROM R1;
+
+ REGION_ID REGION_NAME                                                                                                                                                                                  
+---------- -------------------------                                                                                                                                                                    
+         1 AMERICA                                                                                                                                                                                      
+
+SQL> INSERT INTO R1 VALUES (1,'AUSTRALIA');
+
+1 row created.
+
+SQL> SELECT * FROM R1;
+
+ REGION_ID REGION_NAME                                                                                                                                                                                  
+---------- -------------------------                                                                                                                                                                    
+         1 AMERICA                                                                                                                                                                                      
+         1 AUSTRALIA                                                                                                                                                                                    
+
+SQL> REM RAM/MEMORY = 2 , TABLE = 0
+SQL> 
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> REM RAM/MEMORY = 0 , TABLE = 2
+SQL> 
+SQL> SELECT * FROM R1;
+
+ REGION_ID REGION_NAME                                                                                                                                                                                  
+---------- -------------------------                                                                                                                                                                    
+         1 AMERICA                                                                                                                                                                                      
+         1 AUSTRALIA                                                                                                                                                                                    
+
+SQL> ROLLBACK;
+
+Rollback complete.
+
+SQL> SELECT * FROM R1;
+
+ REGION_ID REGION_NAME                                                                                                                                                                                  
+---------- -------------------------                                                                                                                                                                    
+         1 AMERICA                                                                                                                                                                                      
+         1 AUSTRALIA                                                                                                                                                                                    
+
+SQL> REM BELOW STATEMENT WILL START NEW TRANSACTION
+SQL> 
+SQL> INSERT INTO R1 VALUES (3,'ANTARCTICA');
+
+1 row created.
+
+SQL> SELECT * FROM R1;
+
+ REGION_ID REGION_NAME                                                                                                                                                                                  
+---------- -------------------------                                                                                                                                                                    
+         1 AMERICA                                                                                                                                                                                      
+         1 AUSTRALIA                                                                                                                                                                                    
+         3 ANTARCTICA                                                                                                                                                                                   
+
+SQL> REM RAM/MEMORY = 1 , TABLE = 2
+SQL> 
+SQL> SAVEPOINT A;
+
+Savepoint created.
+
+SQL> 
+SQL> INSERT INTO R1 VALUES (4,'EUROPE');
+
+1 row created.
+
+SQL> SELECT * FROM R1;
+
+ REGION_ID REGION_NAME                                                                                                                                                                                  
+---------- -------------------------                                                                                                                                                                    
+         1 AMERICA                                                                                                                                                                                      
+         1 AUSTRALIA                                                                                                                                                                                    
+         3 ANTARCTICA                                                                                                                                                                                   
+         4 EUROPE                                                                                                                                                                                       
+
+SQL> REM RAM/MEMORY = 2 , TABLE = 2
+SQL> 
+SQL> REM AT THIS MOMENT WE HAVE 3 CHOICES : 1 COMMIT TO SAVE ALL CHANGES
+SQL> R
+  1* SELECT * FROM R1
+
+ REGION_ID REGION_NAME                                                                                                                                                                                  
+---------- -------------------------                                                                                                                                                                    
+         1 AMERICA                                                                                                                                                                                      
+         1 AUSTRALIA                                                                                                                                                                                    
+         3 ANTARCTICA                                                                                                                                                                                   
+         4 EUROPE                                                                                                                                                                                       
+
+SQL> REM ROLLBACK : TO UNDO ALL CHANGES
+SQL> 
+SQL> REM 3 ROLLBACK TO A; : TO UNDO ALL CHANGES PERFORMED AFTER SAVEPOINT A CREATAION.
+SQL> 
+SQL> REM   COMMIT; : WILL SAVE ALL OPEN STATE CHANGES.
+SQL> 
+SQL> ROLLBACK TO A;
+
+Rollback complete.
+
+SQL> SELECT * FROM R1;
+
+ REGION_ID REGION_NAME                                                                                                                                                                                  
+---------- -------------------------                                                                                                                                                                    
+         1 AMERICA                                                                                                                                                                                      
+         1 AUSTRALIA                                                                                                                                                                                    
+         3 ANTARCTICA                                                                                                                                                                                   
+
+SQL> REM RAM/MEMORY = 1 , TABLE = 2
+SQL> 
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> REM RAM/MEMORY = 0 , TABLE = 3
+SQL> 
+SQL> SELECT * FROM R1;
+
+ REGION_ID REGION_NAME                                                                                                                                                                                  
+---------- -------------------------                                                                                                                                                                    
+         1 AMERICA                                                                                                                                                                                      
+         1 AUSTRALIA                                                                                                                                                                                    
+         3 ANTARCTICA                                                                                                                                                                                   
+
+SQL> ROLLBACK;
+
+Rollback complete.
+
+SQL> SELECT * FROM R1;
+
+ REGION_ID REGION_NAME                                                                                                                                                                                  
+---------- -------------------------                                                                                                                                                                    
+         1 AMERICA                                                                                                                                                                                      
+         1 AUSTRALIA                                                                                                                                                                                    
+         3 ANTARCTICA                                                                                                                                                                                   
+
+SQL> REM CREATE TABLE R1 AS SELECT * FROM REGIONS;
+SQL> 
+SQL> REM 1 INSERT A ROW
+SQL> 
+SQL> REM 2 DISPLAY IT
+SQL> 
+SQL> REM 3 INSERT ANOTHER ROW
+SQL> 
+SQL> REM 4 DISPLAY IT
+SQL> 
+SQL> REM 5 UNOD CHANGES
+SQL> 
+SQL> REM 6 DISPLAY IT
+SQL> 
+SQL> REM 7 INSERT A ROW
+SQL> 
+SQL> REM 8 INSERT ANOTHER ROW
+SQL> 
+SQL> REM 9 SAVE IT
+SQL> 
+SQL> REM 10 DISPLAY IT
+SQL> 
+SQL> REM 11 INSERT A ROW
+SQL> 
+SQL> REM 12 DISPLAY IT
+SQL> 
+SQL> REM 13 CREATE A SAVEPOINT NAMED 'Z'
+SQL> 
+SQL> REM 14 INSERT ANOTHER ROW
+SQL> 
+SQL> REM 15 DISPLAY IT
+SQL> 
+SQL> REM 16 UNDO CHANGES DONE AFTER SAVEPOINT 'Z'
+SQL> 
+SQL> REM 17 DISPLAY IT
+SQL> 
+SQL> REM 18 SAVE REMAINING CHANGES
+SQL> 
+SQL> REM 19 DISPLAY IT
+SQL> 
+SQL> REM 20 DROP TABLE R1;
+SQL> 
+SQL> 
+SQL> 
+SQL> REM DML STATEMENTS :
+SQL> 
+SQL> REM INSERT : IS USED TO ADD NEW ROWS TO THE EXITING TABLE.
+SQL> 
+SQL> REM INSERT HAS TWO SYNTAXES : 1 INSERT ... VALUES ... 2 INSERT ... sub query
+SQL> 
+SQL> REM INSERT ... VALUES ... : CAN INSERT SINGLE ROW PER SINGLE EXECUTION
+SQL> 
+SQL> REM INSERT ... sub query ... : CAN INSERT MULTIPLE ROWS PER SINGLE EXECUTION
+SQL> 
+SQL> 
+SQL> REM INSERT ... VALUES ... SYNTAX : INSERT INTO tablename (column list) VALUES (value list);
+SQL> 
+SQL> 
+SQL> DROP TABLE D1;
+
+Table dropped.
+
+SQL> CREATE TABLE D1 AS SELECT * FROM DEPARTMENTS WHERE 1 = 2;
+
+Table created.
+
+SQL> 
+SQL> DESC DEPARTMENTS
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ DEPARTMENT_ID                                                                                                     NOT NULL NUMBER(4)
+ DEPARTMENT_NAME                                                                                                   NOT NULL VARCHAR2(30)
+ MANAGER_ID                                                                                                                 NUMBER(6)
+ LOCATION_ID                                                                                                                NUMBER(4)
+
+SQL> DESC D1
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ DEPARTMENT_ID                                                                                                              NUMBER(4)
+ DEPARTMENT_NAME                                                                                                   NOT NULL VARCHAR2(30)
+ MANAGER_ID                                                                                                                 NUMBER(6)
+ LOCATION_ID                                                                                                                NUMBER(4)
+
+SQL> SELECT * FROM DEPARTMENTS;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                                     
+------------- ------------------------------ ---------- -----------                                                                                                                                     
+           10 Administration                        200        1700                                                                                                                                     
+           20 Marketing                             201        1800                                                                                                                                     
+           50 Shiping                               124        1500                                                                                                                                     
+           60 IT                                    103        1400                                                                                                                                     
+           80 Sales                                 149        2500                                                                                                                                     
+           90 Executive                             100        1700                                                                                                                                     
+          110 Accounting                            205        1700                                                                                                                                     
+          190 Contracting                                      1700                                                                                                                                     
+
+8 rows selected.
+
+SQL> SELECT * FROM D1;
+
+no rows selected
+
+SQL> INSERT INTO D1 VALUES (10,'ACC',102,1500);
+
+1 row created.
+
+SQL> INSERT INTO D1 VALUES (10,'ACC',102,NULL);
+
+1 row created.
+
+SQL> INSERT INTO D1 VALUES (10,'ACC',DEFAULT,NULL);
+
+1 row created.
+
+SQL> REM VALUES : LITERAL , NULL , '' , DEFAULT , PSEUDOCOLUMN , SUBSTITUITION VARIABLE , FUNCTION , FORMULA , FUNCTION + FORMULA , SCALAR SUB QUERY
+SQL> 
+SQL> INSERT INTO D1 VALUES ('&DID',UPPER('res'),100+6,(SELECT LOCATION_ID FROM LOCATIONS WHERE CITY = 'Seattle'));
+Enter value for did: 30
+old   1: INSERT INTO D1 VALUES ('&DID',UPPER('res'),100+6,(SELECT LOCATION_ID FROM LOCATIONS WHERE CITY = 'Seattle'))
+new   1: INSERT INTO D1 VALUES ('30',UPPER('res'),100+6,(SELECT LOCATION_ID FROM LOCATIONS WHERE CITY = 'Seattle'))
+
+1 row created.
+
+SQL> SELECT * FROM D1;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                                     
+------------- ------------------------------ ---------- -----------                                                                                                                                     
+           10 ACC                                   102        1500                                                                                                                                     
+           10 ACC                                   102                                                                                                                                                 
+           10 ACC                                                                                                                                                                                       
+           30 RES                                   106        1700                                                                                                                                     
+
+SQL> INSERT INTO D1 VALUES ('&DID',UPPER('res'),'',(SELECT LOCATION_ID FROM LOCATIONS WHERE CITY = 'Toronto'));
+Enter value for did: 44
+old   1: INSERT INTO D1 VALUES ('&DID',UPPER('res'),'',(SELECT LOCATION_ID FROM LOCATIONS WHERE CITY = 'Toronto'))
+new   1: INSERT INTO D1 VALUES ('44',UPPER('res'),'',(SELECT LOCATION_ID FROM LOCATIONS WHERE CITY = 'Toronto'))
+
+1 row created.
+
+SQL> SELECT * FROM D1;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                                     
+------------- ------------------------------ ---------- -----------                                                                                                                                     
+           10 ACC                                   102        1500                                                                                                                                     
+           10 ACC                                   102                                                                                                                                                 
+           10 ACC                                                                                                                                                                                       
+           30 RES                                   106        1700                                                                                                                                     
+           44 RES                                              1800                                                                                                                                     
+
+SQL> DROP TABLE E1;
+
+Table dropped.
+
+SQL> REM CREATE TABLE E1 AS SELECT FIRST_NAME , SALARY , HIRE_DATE FROM EMPLOYEES WHERE ROWNUM = 0;
+SQL> 
+SQL> DESC E1
+ERROR:
+ORA-04043: object E1 does not exist 
+
+
+SQL> CREATE TABLE E1 AS SELECT FIRST_NAME , SALARY , HIRE_DATE FROM EMPLOYEES WHERE ROWNUM = 0;
+
+Table created.
+
+SQL> DESC E1
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ FIRST_NAME                                                                                                                 VARCHAR2(15)
+ SALARY                                                                                                                     NUMBER(8,2)
+ HIRE_DATE                                                                                                         NOT NULL DATE
+
+SQL> SELECT * FROM D1;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                                     
+------------- ------------------------------ ---------- -----------                                                                                                                                     
+           10 ACC                                   102        1500                                                                                                                                     
+           10 ACC                                   102                                                                                                                                                 
+           10 ACC                                                                                                                                                                                       
+           30 RES                                   106        1700                                                                                                                                     
+           44 RES                                              1800                                                                                                                                     
+
+SQL> INSERT INTO D1 (DEPARTMENT_NAME , LOCATION_ID , DEPARTMENT_ID , MANAGER_ID) VALUES ('SAL',1500,40,105);
+
+1 row created.
+
+SQL> SELECT * FROM D1;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                                     
+------------- ------------------------------ ---------- -----------                                                                                                                                     
+           10 ACC                                   102        1500                                                                                                                                     
+           10 ACC                                   102                                                                                                                                                 
+           10 ACC                                                                                                                                                                                       
+           30 RES                                   106        1700                                                                                                                                     
+           44 RES                                              1800                                                                                                                                     
+           40 SAL                                   105        1500                                                                                                                                     
+
+6 rows selected.
+
+SQL> INSERT INTO D1 (DEPARTMENT_NAME , LOCATION_ID ) VALUES ('PUR',1900);
+
+1 row created.
+
+SQL> SELECT * FROM D1;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                                     
+------------- ------------------------------ ---------- -----------                                                                                                                                     
+           10 ACC                                   102        1500                                                                                                                                     
+           10 ACC                                   102                                                                                                                                                 
+           10 ACC                                                                                                                                                                                       
+           30 RES                                   106        1700                                                                                                                                     
+           44 RES                                              1800                                                                                                                                     
+           40 SAL                                   105        1500                                                                                                                                     
+              PUR                                              1900                                                                                                                                     
+
+7 rows selected.
+
+SQL> --CREATE TABLE E1 AS SELECT FIRST_NAME , SALARY , HIRE_DATE FROM EMPLOYEES WHERE ROWNUM = 0;
+SQL> 
+SQL> REM 1 'GANESH' , 44444 , '4-APR-04'
+SQL> 
+SQL> REM 2 'RIDDHI' , 55444 , '5-MAY-05'
+SQL> 
+SQL> REM 3 'SIDDHI' , 56644 , '6-JUN-05'
+SQL> 
+SQL> REM 4 77665 , 'SIDDHI' '6-JUN-05'
+SQL> 
+SQL> REM 5 '6-JUN-05' 'SHUBH'
+SQL> 
+SQL> 
+SQL> 
+SQL> REM INSERT ... sub query :
+SQL> 
+SQL> SELECT * FROM E1;
+
+no rows selected
+
+SQL> DESC E1
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ FIRST_NAME                                                                                                                 VARCHAR2(15)
+ SALARY                                                                                                                     NUMBER(8,2)
+ HIRE_DATE                                                                                                         NOT NULL DATE
+
+SQL> INSERT INTO E1 SELECT FIRST_NAME , SALARY , HIRE_DATE FROM EMPLOYEES WHERE DEPARTMENT_ID = 60;
+
+3 rows created.
+
+SQL> SELECT * FROM E1;
+
+FIRST_NAME          SALARY HIRE_DATE                                                                                                                                                                    
+--------------- ---------- ---------------------------------------                                                                                                                                      
+Alexander             9000 03-JANUARY  -1990 12:00.00 AM WEDNESDAY                                                                                                                                      
+Bruce                 6000 21-MAY      -1991 12:00.00 AM TUESDAY                                                                                                                                        
+Diana                 4200 07-FEBRUARY -1999 12:00.00 AM SUNDAY                                                                                                                                         
+
+SQL> SELECT * FROM NLS_SESSION_PARAMETERS;
+
+PARAMETER                      VALUE                                                                                                                                                                    
+------------------------------ ------------------------------                                                                                                                                           
+NLS_LANGUAGE                   AMERICAN                                                                                                                                                                 
+NLS_TERRITORY                  AMERICA                                                                                                                                                                  
+NLS_CURRENCY                   $                                                                                                                                                                        
+NLS_ISO_CURRENCY               AMERICA                                                                                                                                                                  
+NLS_NUMERIC_CHARACTERS         .,                                                                                                                                                                       
+NLS_CALENDAR                   GREGORIAN                                                                                                                                                                
+NLS_DATE_FORMAT                DD-MONTH-RRRR HH:MI.SS AM DAY                                                                                                                                            
+NLS_DATE_LANGUAGE              AMERICAN                                                                                                                                                                 
+NLS_SORT                       BINARY                                                                                                                                                                   
+NLS_TIME_FORMAT                HH.MI.SSXFF AM                                                                                                                                                           
+NLS_TIMESTAMP_FORMAT           DD-MON-RR HH.MI.SSXFF AM                                                                                                                                                 
+NLS_TIME_TZ_FORMAT             HH.MI.SSXFF AM TZR                                                                                                                                                       
+NLS_TIMESTAMP_TZ_FORMAT        DD-MON-RR HH.MI.SSXFF AM TZR                                                                                                                                             
+NLS_DUAL_CURRENCY              $                                                                                                                                                                        
+NLS_COMP                       BINARY                                                                                                                                                                   
+NLS_LENGTH_SEMANTICS           BYTE                                                                                                                                                                     
+NLS_NCHAR_CONV_EXCP            FALSE                                                                                                                                                                    
+
+17 rows selected.
+
+SQL> CONN SCOTT/TIGER
+Connected.
+SQL> 
+SQL> SELECT * FROM E1;
+
+FIRST_NAME          SALARY HIRE_DATE                                                                                                                                                                    
+--------------- ---------- ---------                                                                                                                                                                    
+Alexander             9000 03-JAN-90                                                                                                                                                                    
+Bruce                 6000 21-MAY-91                                                                                                                                                                    
+Diana                 4200 07-FEB-99                                                                                                                                                                    
+
+SQL> DESC E1
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ FIRST_NAME                                                                                                                 VARCHAR2(15)
+ SALARY                                                                                                                     NUMBER(8,2)
+ HIRE_DATE                                                                                                         NOT NULL DATE
+
+SQL> INSERT INTO E1 (FIRST_NAME, HIRE_dATE) SELECT UPPER(FIRST_NAME) , ADD_MONTHS(HIRE_DATE,1) FROM EMPLOYEES WHERE MANAGER_ID = 100;
+
+5 rows created.
+
+SQL> SELECT * FROM E1;
+
+FIRST_NAME          SALARY HIRE_DATE                                                                                                                                                                    
+--------------- ---------- ---------                                                                                                                                                                    
+Alexander             9000 03-JAN-90                                                                                                                                                                    
+Bruce                 6000 21-MAY-91                                                                                                                                                                    
+Diana                 4200 07-FEB-99                                                                                                                                                                    
+NEENA                      21-OCT-89                                                                                                                                                                    
+LEX                        13-FEB-93                                                                                                                                                                    
+KEVIN                      16-DEC-99                                                                                                                                                                    
+ELENI                      29-FEB-00                                                                                                                                                                    
+MICHAEL                    17-MAR-96                                                                                                                                                                    
+
+8 rows selected.
+
+SQL> INSERT INTO E1 SELECT FIRST_NAME , SALARY , HIRE_DATE FROM EMPLOYEES;
+
+20 rows created.
+
+SQL> INSERT INTO E1 SELECT FIRST_NAME , SALARY , HIRE_DATE FROM EMPLOYEES WHERE 'SHREYAM' = 'DEV';
+
+0 rows created.
+
+SQL> CREATE TABLE EDL AS SELECT FIRST_NAME , DEPARTMENT_NAME , CITY FROM EMPLOYEES
+  2  JOIN DEPARTMENTS USING (DEPARTMENT_ID)
+  3  JOIN LOCATIONS   USING (LOCATION_ID)
+  4  WHERE 1 = 2;
+
+Table created.
+
+SQL> SELECT * FROM EDL;
+
+no rows selected
+
+SQL> DESC EDL
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ FIRST_NAME                                                                                                                 VARCHAR2(15)
+ DEPARTMENT_NAME                                                                                                   NOT NULL VARCHAR2(30)
+ CITY                                                                                                              NOT NULL VARCHAR2(30)
+
+SQL> REM 1 INSERT THOSE WHO WORKS IN DEPARTMENT 90
+SQL> 
+SQL> REM 2 INSERT THOSE WHO WORKS AT Toronto
+SQL> 
+SQL> REM 3 INSER THOSE WHO WORKS Shiping DEPARTMENT
+SQL> 
+SQL> REM 4 INSERT DEPARTMENT_NAME AND CITY FOR THOSE WHO WORKS AS IT_PROG
+SQL> 
+SQL> REM 5 INSERT CITY AND DEPARTMENT_NAME FOR THOSE WHO REPORTS TO 149
+SQL> 
+SQL> INSERT INTO EDL SELECT FIRST_NAME , DEPARTMENT_NAME , CITY FROM  EMPLOYEES
+  2   JOIN DEPARTMENTS USING (DEPARTMENT_ID)
+  3   JOIN LOCATIONS USING (LOCATION_ID)
+  4   WHERE DEPARTMENT_ID = 90;
+
+3 rows created.
+
+SQL> 
+SQL> INSERT INTO EDL SELECT FIRST_NAME , DEPARTMENT_NAME , CITY FROM EMPLOYEES
+  2  JOIN DEPARTMENTS USING (DEPARTMENT_ID)
+  3  JOIN LOCATIONS USING (LOCATION_ID)
+  4  WHERE CITY = 'Toronto';
+
+2 rows created.
+
+SQL> 
+SQL> 
+SQL> INSERT INTO EDL SELECT FIRST_NAME , DEPARTMENT_NAME , CITY FROM EMPLOYEES
+  2  JOIN DEPARTMENTS USING (DEPARTMENT_ID)
+  3  JOIN LOCATIONS USING (LOCATION_ID)
+  4  WHERE DEPARTMENT_NAME = 'Shiping';
+
+5 rows created.
+
+SQL> 
+SQL> 
+SQL> INSERT INTO EDL(DEPARTMENT_NAME , CITY) SELECT DEPARTMENT_NAME , CITY FROM EMPLOYEES
+  2  JOIN DEPARTMENTS USING (DEPARTMENT_ID)
+  3  JOIN LOCATIONS USING (LOCATION_ID)
+  4  WHERE JOB_ID  = 'IT_PROG';
+
+3 rows created.
+
+SQL> 
+SQL> 
+SQL> INSERT INTO EDL(CITY , DEPARTMENT_NAME) SELECT CITY , DEPARTMENT_NAME FROM EMPLOYEES
+  2  JOIN DEPARTMENTS USING (DEPARTMENT_ID)
+  3  JOIN LOCATIONS USING (LOCATION_ID)
+  4  WHERE EMPLOYEES.MANAGER_ID  = 149;
+
+2 rows created.
+
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+20 rows selected.
+
+SQL> SELECT * FROM DEPARTMENTS;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                                     
+------------- ------------------------------ ---------- -----------                                                                                                                                     
+           10 Administration                        200        1700                                                                                                                                     
+           20 Marketing                             201        1800                                                                                                                                     
+           50 Shiping                               124        1500                                                                                                                                     
+           60 IT                                    103        1400                                                                                                                                     
+           80 Sales                                 149        2500                                                                                                                                     
+           90 Executive                             100        1700                                                                                                                                     
+          110 Accounting                            205        1700                                                                                                                                     
+          190 Contracting                                      1700                                                                                                                                     
+
+8 rows selected.
+
+SQL> SPOOL OFF

@@ -1,0 +1,563 @@
+SQL> 
+SQL> REM DATE FUNCTIONS + DATE ARITHMETIC
+SQL> 
+SQL> REM LIST OF DATE FUNCTIONS : SYSDATE CURRENT_DATE    ADD_MONTHS MONTHS_BETWEEN    LAST_DAY NEXT_DAY    TRUNC ROUND
+SQL> 
+SQL> REM SYSDATE : IT RETURNS SERVER MACHINE'S DATE AND TIME INFO.
+SQL> 
+SQL> REM CURRENT_DATE : IT RETURNS CURRENT/LOCAL/CLIENT MACHINE'S DATE AND TIME INFO.
+SQL> 
+SQL> SELECT SYSDATE , CURRENT_DATE FROM DUAL;
+
+SYSDATE   CURRENT_D                                                                                                                                                                                     
+--------- ---------                                                                                                                                                                                     
+08-MAR-24 08-MAR-24                                                                                                                                                                                     
+
+SQL> REM DATE DEFAULT DISPLAY FORMAT : DD-MON-RR
+SQL> 
+SQL> 
+SQL> SELECT * FROM NLS_SESSION_PARAMETERS;
+
+PARAMETER                      VALUE                                                                                                                                                                    
+------------------------------ ------------------------------                                                                                                                                           
+NLS_LANGUAGE                   AMERICAN                                                                                                                                                                 
+NLS_TERRITORY                  AMERICA                                                                                                                                                                  
+NLS_CURRENCY                   $                                                                                                                                                                        
+NLS_ISO_CURRENCY               AMERICA                                                                                                                                                                  
+NLS_NUMERIC_CHARACTERS         .,                                                                                                                                                                       
+NLS_CALENDAR                   GREGORIAN                                                                                                                                                                
+NLS_DATE_FORMAT                DD-MON-RR                                                                                                                                                                
+NLS_DATE_LANGUAGE              AMERICAN                                                                                                                                                                 
+NLS_SORT                       BINARY                                                                                                                                                                   
+NLS_TIME_FORMAT                HH.MI.SSXFF AM                                                                                                                                                           
+NLS_TIMESTAMP_FORMAT           DD-MON-RR HH.MI.SSXFF AM                                                                                                                                                 
+NLS_TIME_TZ_FORMAT             HH.MI.SSXFF AM TZR                                                                                                                                                       
+NLS_TIMESTAMP_TZ_FORMAT        DD-MON-RR HH.MI.SSXFF AM TZR                                                                                                                                             
+NLS_DUAL_CURRENCY              $                                                                                                                                                                        
+NLS_COMP                       BINARY                                                                                                                                                                   
+NLS_LENGTH_SEMANTICS           BYTE                                                                                                                                                                     
+NLS_NCHAR_CONV_EXCP            FALSE                                                                                                                                                                    
+
+17 rows selected.
+
+SQL> ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MON-RRRR HH:MI.SS AM';
+
+Session altered.
+
+SQL> 
+SQL> SELECT SYSDATE , CURRENT_DATE FROM DUAL;
+
+SYSDATE                 CURRENT_DATE                                                                                                                                                                    
+----------------------- -----------------------                                                                                                                                                         
+08-MAR-2024 05:19.41 PM 08-MAR-2024 05:19.41 PM                                                                                                                                                         
+
+SQL> REM DATE ARITHMETIC :
+SQL> 
+SQL> REM DATE HAS 7 PARTS/INTERVALS/COMPONENT/VALUES :  CENTURY  YEAR  MONTH  DATE  HOUR  MINUTE  SECOND
+SQL> 
+SQL> REM 1 WE CAN ADD/SUBTRACT ALL ABOVE 7 INTERVAL VALUES TO/FROM DATE
+SQL> 
+SQL> REM 2 WE CAN SUBTRACT A DATE FROM ANOTHER DATE
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 1 WE CAN ADD/SUBTRACT ALL ABOVE 7 INTERVAL VALUES TO/FROM DATE
+SQL> 
+SQL> SELECT SYSDATE , SYSDATE + 3 , SYSDATE - 4 FROM DUAL;
+
+SYSDATE                 SYSDATE+3               SYSDATE-4                                                                                                                                               
+----------------------- ----------------------- -----------------------                                                                                                                                 
+08-MAR-2024 05:22.15 PM 11-MAR-2024 05:22.15 PM 04-MAR-2024 05:22.15 PM                                                                                                                                 
+
+SQL> REM 1 DAY = 24 HOURS
+SQL> 
+SQL> SELECT SYSDATE , SYSDATE + 3/24 , SYSDATE - 4/24 FROM DUAL;
+
+SYSDATE                 SYSDATE+3/24            SYSDATE-4/24                                                                                                                                            
+----------------------- ----------------------- -----------------------                                                                                                                                 
+08-MAR-2024 05:23.40 PM 08-MAR-2024 08:23.40 PM 08-MAR-2024 01:23.40 PM                                                                                                                                 
+
+SQL>  REM 1 HOUR = 60 MINUTES
+SQL> 
+SQL> REM 1 DAY = 24 HOURS
+SQL> 
+SQL> REM 1 DAY = 24 HOURS * 60 MINUTES = 24*60 = 1440 MINUTES
+SQL> 
+SQL> SELECT SYSDATE , SYSDATE + 3/(24*60) , SYSDATE - 4/1440 FROM DUAL;
+
+SYSDATE                 SYSDATE+3/(24*60)       SYSDATE-4/1440                                                                                                                                          
+----------------------- ----------------------- -----------------------                                                                                                                                 
+08-MAR-2024 05:25.24 PM 08-MAR-2024 05:28.24 PM 08-MAR-2024 05:21.24 PM                                                                                                                                 
+
+SQL> REM 1 DAY = 24 * 60 * 60 = 1440 * 60 = 24 * 3600 = 86400 SECONDS
+SQL> 
+SQL> REM 1 DAY = 24 HOURS = 1440 MINUTES = 86400 SECONDS
+SQL> 
+SQL> SELECT SYSDATE , SYSDATE + 3/(24*60*60) , SYSDATE - 4/86400 FROM DUAL;
+
+SYSDATE                 SYSDATE+3/(24*60*60)    SYSDATE-4/86400                                                                                                                                         
+----------------------- ----------------------- -----------------------                                                                                                                                 
+08-MAR-2024 05:27.08 PM 08-MAR-2024 05:27.11 PM 08-MAR-2024 05:27.04 PM                                                                                                                                 
+
+SQL> 
+SQL> SELECT SYSDATE , SYSDATE + 3/(24*60) + 10/86400 FROM DUAL;
+
+SYSDATE                 SYSDATE+3/(24*60)+10/86                                                                                                                                                         
+----------------------- -----------------------                                                                                                                                                         
+08-MAR-2024 05:27.50 PM 08-MAR-2024 05:31.00 PM                                                                                                                                                         
+
+SQL> SELECT SYSDATE , SYSDATE + 3/(24*60) + 10/86400 FROM DUAL;
+
+SYSDATE                 SYSDATE+3/(24*60)+10/86                                                                                                                                                         
+----------------------- -----------------------                                                                                                                                                         
+08-MAR-2024 05:28.09 PM 08-MAR-2024 05:31.19 PM                                                                                                                                                         
+
+SQL> SELECT SYSDATE , SYSDATE + 3/(24*60) - 10/86400 FROM DUAL;
+
+SYSDATE                 SYSDATE+3/(24*60)-10/86                                                                                                                                                         
+----------------------- -----------------------                                                                                                                                                         
+08-MAR-2024 05:28.28 PM 08-MAR-2024 05:31.18 PM                                                                                                                                                         
+
+SQL> REM 1 ADD 4 HOURS TO SYSDATE
+SQL> 
+SQL> REM 2 SUBTRACT 10 MINUTES FROM CURRENT_DATE
+SQL> 
+SQL> REM 3 ADD 2 DAYS AND 10 SECONDS TO SYSDATE
+SQL> 
+SQL> REM 4 SUBTRACT 4 HOURS AND 5 MINUTES FROM CURRENT_DATE
+SQL> 
+SQL> REM 5 ADD 3 DAYS , SUBTRACT 12 SECONDS , ADD 9 MINUTES AND SUBTRACT 6 HOURS : SYSDATE
+SQL> 
+SQL> 
+SQL> 
+SQL> ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MON-RRRR HH:MI.SS AM';
+
+Session altered.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 1 ADD 4 HOURS TO SYSDATE
+SQL> 
+SQL> SELECT SYSDATE , SYSDATE + 4/24 FROM DUAL;
+
+SYSDATE                 SYSDATE+4/24                                                                                                                                                                    
+----------------------- -----------------------                                                                                                                                                         
+08-MAR-2024 05:50.08 PM 08-MAR-2024 09:50.08 PM                                                                                                                                                         
+
+SQL> REM 2 SUBTRACT 10 MINUTES FROM CURRENT_DATE
+SQL> 
+SQL> SELECT CURRENT_DATE , CURRENT_DATE - 10/1440 FROM DUAL;
+
+CURRENT_DATE            CURRENT_DATE-10/1440                                                                                                                                                            
+----------------------- -----------------------                                                                                                                                                         
+08-MAR-2024 05:50.24 PM 08-MAR-2024 05:40.24 PM                                                                                                                                                         
+
+SQL> REM 3 ADD 2 DAYS AND 10 SECONDS TO SYSDATE
+SQL> 
+SQL> SELECT SYSDATE , SYSDATE + 2 + 10/86400 FROM DUAL;
+
+SYSDATE                 SYSDATE+2+10/86400                                                                                                                                                              
+----------------------- -----------------------                                                                                                                                                         
+08-MAR-2024 05:50.42 PM 10-MAR-2024 05:50.52 PM                                                                                                                                                         
+
+SQL> REM 4 SUBTRACT 4 HOURS AND 5 MINUTES FROM CURRENT_DATE
+SQL> 
+SQL> SELECT CURRENT_DATE , CURRENT_DATE - 4/24 - 5 / 1440 FROM DUAL;
+
+CURRENT_DATE            CURRENT_DATE-4/24-5/144                                                                                                                                                         
+----------------------- -----------------------                                                                                                                                                         
+08-MAR-2024 05:51.30 PM 08-MAR-2024 01:46.30 PM                                                                                                                                                         
+
+SQL> REM 5 ADD 3 DAYS , SUBTRACT 12 SECONDS , ADD 9 MINUTES AND SUBTRACT 6 HOURS : SYSDATE
+SQL> 
+SQL> SELECT SYSDATE , SYSDATE + 3 - 12/86400 + 9/1440 - 6/24 FROM DUAL;
+
+SYSDATE                 SYSDATE+3-12/86400+9/14                                                                                                                                                         
+----------------------- -----------------------                                                                                                                                                         
+08-MAR-2024 05:51.58 PM 11-MAR-2024 12:00.46 PM                                                                                                                                                         
+
+SQL> REM 1 WEEK = 7 DAYS
+SQL> 
+SQL> REM ADD 3 WEEKS TO SYSDATE
+SQL> 
+SQL> SELECT SYSDATE , SYSDATE + 7 * 3 FROM DUAL;
+
+SYSDATE                 SYSDATE+7*3                                                                                                                                                                     
+----------------------- -----------------------                                                                                                                                                         
+08-MAR-2024 05:53.26 PM 29-MAR-2024 05:53.26 PM                                                                                                                                                         
+
+SQL> REM 1 MONTH = ?? DAYS
+SQL> 
+SQL> REM 1 MONTH = ?? DAYS = 28/29/30/31 DAYS
+SQL> 
+SQL> REM ADD_MONTHS : TO ADD/SUBTRACT MONTHS/QUARTERS/YEARS/CENTURIES TO/FROM DATE
+SQL> 
+SQL> SELECT SYSDATE , ADD_MONTHS(SYSDATE,2) , ADD_MONTHS(SYSDATE,-3) FROM DUAL;
+
+SYSDATE                 ADD_MONTHS(SYSDATE,2)   ADD_MONTHS(SYSDATE,-3)                                                                                                                                  
+----------------------- ----------------------- -----------------------                                                                                                                                 
+08-MAR-2024 05:54.57 PM 08-MAY-2024 05:54.57 PM 08-DEC-2023 05:54.57 PM                                                                                                                                 
+
+SQL> REM 1 QUARTER = 3 MONTHS
+SQL> 
+SQL> REM ADD 7 QUARTERS TO CURRENT_DATE
+SQL> 
+SQL> SELECT SYSDATE , ADD_MONTHS(SYSDATE,3*7) FROM DUAL;
+
+SYSDATE                 ADD_MONTHS(SYSDATE,3*7)                                                                                                                                                         
+----------------------- -----------------------                                                                                                                                                         
+08-MAR-2024 05:56.05 PM 08-DEC-2025 05:56.05 PM                                                                                                                                                         
+
+SQL> REM SUBTRACT 5 YEARS FRO CURRENT_DATE
+SQL> 
+SQL> SELECT CURRENT_DATE , ADD_MONTHS(CURRENT_DATE,12*-5) FROM DUAL;
+
+CURRENT_DATE            ADD_MONTHS(CURRENT_DATE                                                                                                                                                         
+----------------------- -----------------------                                                                                                                                                         
+08-MAR-2024 05:56.43 PM 08-MAR-2019 05:56.43 PM                                                                                                                                                         
+
+SQL> REM 1 CENTURY = 100 YEARS
+SQL> 
+SQL> REM 1 YEAR =  12 MONTHS
+SQL> 
+SQL> REM 1 CENTURY = 12 * 100 = 1200 YEARS
+SQL> 
+SQL> 
+SQL> REM ADD 3 CENTURIES TO SYSDATE
+SQL> 
+SQL> SELECT SYSDATE , ADD_MONTHS(SYSDATE,3*12*100) FROM DUAL;
+
+SYSDATE                 ADD_MONTHS(SYSDATE,3*12                                                                                                                                                         
+----------------------- -----------------------                                                                                                                                                         
+08-MAR-2024 05:57.59 PM 08-MAR-2324 05:57.59 PM                                                                                                                                                         
+
+SQL> SELECT SYSDATE , ADD_MONTHS(SYSDATE,-3*12*100) FROM DUAL;
+
+SYSDATE                 ADD_MONTHS(SYSDATE,-3*1                                                                                                                                                         
+----------------------- -----------------------                                                                                                                                                         
+08-MAR-2024 05:58.09 PM 08-MAR-1724 05:58.09 PM                                                                                                                                                         
+
+SQL> REM 1 ADD 6 WEEKS TO SYSDATE
+SQL> 
+SQL> REM 2 SUBTRACT 4 MONTHS FROM CURRENT_DATE
+SQL> 
+SQL> REM 3 ADD 7 QUARTERS TO SYSDATE
+SQL> 
+SQL> REM 4 SUBTRACT 3 YEARS FROM CURRENT_DATE
+SQL> 
+SQL> REM 5 ADD 2 CENTURIES TO SYSDATE
+SQL> 
+SQL> 
+SQL> REM 1 ADD 6 WEEKS TO SYSDATE
+SQL> 
+SQL> SELECT SYSDATE , SYSDATE + 7 * 6 FROM DUAL;
+
+SYSDATE                 SYSDATE+7*6                                                                                                                                                                     
+----------------------- -----------------------                                                                                                                                                         
+08-MAR-2024 06:17.39 PM 19-APR-2024 06:17.39 PM                                                                                                                                                         
+
+SQL> REM 2 SUBTRACT 4 MONTHS FROM CURRENT_DATE
+SQL> 
+SQL> SELECT CURRENT_DATE , ADD_MONTHS(CURRENT_DATE,-4) FROM DUAL;
+
+CURRENT_DATE            ADD_MONTHS(CURRENT_DATE                                                                                                                                                         
+----------------------- -----------------------                                                                                                                                                         
+08-MAR-2024 06:18.05 PM 08-NOV-2023 06:18.05 PM                                                                                                                                                         
+
+SQL> REM 3 ADD 7 QUARTERS TO SYSDATE
+SQL> 
+SQL> SELECT SYSDATE , ADD_MONTHS(SYSDATE , 3*7) FROM DUAL;
+
+SYSDATE                 ADD_MONTHS(SYSDATE,3*7)                                                                                                                                                         
+----------------------- -----------------------                                                                                                                                                         
+08-MAR-2024 06:18.35 PM 08-DEC-2025 06:18.35 PM                                                                                                                                                         
+
+SQL> REM 4 SUBTRACT 3 YEARS FROM CURRENT_DATE
+SQL> 
+SQL> SELECT CURRENT_DATE , ADD_MONTHS(CURRENT_DATE,-3*12) FROM DUAL;
+
+CURRENT_DATE            ADD_MONTHS(CURRENT_DATE                                                                                                                                                         
+----------------------- -----------------------                                                                                                                                                         
+08-MAR-2024 06:19.13 PM 08-MAR-2021 06:19.13 PM                                                                                                                                                         
+
+SQL> REM 5 ADD 2 CENTURIES TO SYSDATE
+SQL> 
+SQL> SELECT SYSDATE , ADD_MONTHS(SYSDATE,2*12*100) FROM DUAL;
+
+SYSDATE                 ADD_MONTHS(SYSDATE,2*12                                                                                                                                                         
+----------------------- -----------------------                                                                                                                                                         
+08-MAR-2024 06:19.32 PM 08-MAR-2224 06:19.32 PM                                                                                                                                                         
+
+SQL> REM DATE - DATE = DAYS
+SQL> 
+SQL> SELECT FIRST_NAME , SYSDATE , HIRE_DATE , SYSDATE - HIRE_DATE DAYS_WORKED FROM EMPLOYEES;
+
+FIRST_NAME      SYSDATE                 HIRE_DATE               DAYS_WORKED                                                                                                                             
+--------------- ----------------------- ----------------------- -----------                                                                                                                             
+Steven          08-MAR-2024 06:20.36 PM 17-JUL-1987 12:00.00 AM  13384.7643                                                                                                                             
+Neena           08-MAR-2024 06:20.36 PM 21-SEP-1989 12:00.00 AM  12587.7643                                                                                                                             
+Lex             08-MAR-2024 06:20.36 PM 13-JAN-1993 12:00.00 AM  11377.7643                                                                                                                             
+Alexander       08-MAR-2024 06:20.36 PM 03-JAN-1990 12:00.00 AM  12483.7643                                                                                                                             
+Bruce           08-MAR-2024 06:20.36 PM 21-MAY-1991 12:00.00 AM  11980.7643                                                                                                                             
+Diana           08-MAR-2024 06:20.36 PM 07-FEB-1999 12:00.00 AM  9161.76431                                                                                                                             
+Kevin           08-MAR-2024 06:20.36 PM 16-NOV-1999 12:00.00 AM  8879.76431                                                                                                                             
+Trenna          08-MAR-2024 06:20.36 PM 17-OCT-1995 12:00.00 AM  10370.7643                                                                                                                             
+Curtis          08-MAR-2024 06:20.36 PM 29-JAN-1997 12:00.00 AM  9900.76431                                                                                                                             
+Randall         08-MAR-2024 06:20.36 PM 15-MAR-1998 12:00.00 AM  9490.76431                                                                                                                             
+Peter           08-MAR-2024 06:20.36 PM 09-JUL-1998 12:00.00 AM  9374.76431                                                                                                                             
+Eleni           08-MAR-2024 06:20.36 PM 29-JAN-2000 12:00.00 AM  8805.76431                                                                                                                             
+Ellen           08-MAR-2024 06:20.36 PM 11-MAY-1996 12:00.00 AM  10163.7643                                                                                                                             
+Jonathon        08-MAR-2024 06:20.36 PM 24-MAR-1998 12:00.00 AM  9481.76431                                                                                                                             
+Kimerely        08-MAR-2024 06:20.36 PM 24-MAY-1999 12:00.00 AM  9055.76431                                                                                                                             
+Jennifer        08-MAR-2024 06:20.36 PM 17-SEP-1987 12:00.00 AM  13322.7643                                                                                                                             
+Michael         08-MAR-2024 06:20.36 PM 17-FEB-1996 12:00.00 AM  10247.7643                                                                                                                             
+Pat             08-MAR-2024 06:20.36 PM 17-AUG-1997 12:00.00 AM  9700.76431                                                                                                                             
+Shelley         08-MAR-2024 06:20.36 PM 07-JUN-1994 12:00.00 AM  10867.7643                                                                                                                             
+William         08-MAR-2024 06:20.36 PM 07-JUN-1994 12:00.00 AM  10867.7643                                                                                                                             
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , SYSDATE , HIRE_DATE , TRUNC(SYSDATE - HIRE_DATE) COMPLETED_DAYS_WORKED FROM EMPLOYEES;
+
+FIRST_NAME      SYSDATE                 HIRE_DATE               COMPLETED_DAYS_WORKED                                                                                                                   
+--------------- ----------------------- ----------------------- ---------------------                                                                                                                   
+Steven          08-MAR-2024 06:22.12 PM 17-JUL-1987 12:00.00 AM                 13384                                                                                                                   
+Neena           08-MAR-2024 06:22.12 PM 21-SEP-1989 12:00.00 AM                 12587                                                                                                                   
+Lex             08-MAR-2024 06:22.12 PM 13-JAN-1993 12:00.00 AM                 11377                                                                                                                   
+Alexander       08-MAR-2024 06:22.12 PM 03-JAN-1990 12:00.00 AM                 12483                                                                                                                   
+Bruce           08-MAR-2024 06:22.12 PM 21-MAY-1991 12:00.00 AM                 11980                                                                                                                   
+Diana           08-MAR-2024 06:22.12 PM 07-FEB-1999 12:00.00 AM                  9161                                                                                                                   
+Kevin           08-MAR-2024 06:22.12 PM 16-NOV-1999 12:00.00 AM                  8879                                                                                                                   
+Trenna          08-MAR-2024 06:22.12 PM 17-OCT-1995 12:00.00 AM                 10370                                                                                                                   
+Curtis          08-MAR-2024 06:22.12 PM 29-JAN-1997 12:00.00 AM                  9900                                                                                                                   
+Randall         08-MAR-2024 06:22.12 PM 15-MAR-1998 12:00.00 AM                  9490                                                                                                                   
+Peter           08-MAR-2024 06:22.12 PM 09-JUL-1998 12:00.00 AM                  9374                                                                                                                   
+Eleni           08-MAR-2024 06:22.12 PM 29-JAN-2000 12:00.00 AM                  8805                                                                                                                   
+Ellen           08-MAR-2024 06:22.12 PM 11-MAY-1996 12:00.00 AM                 10163                                                                                                                   
+Jonathon        08-MAR-2024 06:22.12 PM 24-MAR-1998 12:00.00 AM                  9481                                                                                                                   
+Kimerely        08-MAR-2024 06:22.12 PM 24-MAY-1999 12:00.00 AM                  9055                                                                                                                   
+Jennifer        08-MAR-2024 06:22.12 PM 17-SEP-1987 12:00.00 AM                 13322                                                                                                                   
+Michael         08-MAR-2024 06:22.12 PM 17-FEB-1996 12:00.00 AM                 10247                                                                                                                   
+Pat             08-MAR-2024 06:22.12 PM 17-AUG-1997 12:00.00 AM                  9700                                                                                                                   
+Shelley         08-MAR-2024 06:22.12 PM 07-JUN-1994 12:00.00 AM                 10867                                                                                                                   
+William         08-MAR-2024 06:22.12 PM 07-JUN-1994 12:00.00 AM                 10867                                                                                                                   
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , SYSDATE , HIRE_DATE , (SYSDATE - HIRE_DATE)/7 WEEKS_WORKED FROM EMPLOYEES;
+
+FIRST_NAME      SYSDATE                 HIRE_DATE               WEEKS_WORKED                                                                                                                            
+--------------- ----------------------- ----------------------- ------------                                                                                                                            
+Steven          08-MAR-2024 06:22.43 PM 17-JUL-1987 12:00.00 AM    1912.1094                                                                                                                            
+Neena           08-MAR-2024 06:22.43 PM 21-SEP-1989 12:00.00 AM   1798.25225                                                                                                                            
+Lex             08-MAR-2024 06:22.43 PM 13-JAN-1993 12:00.00 AM   1625.39511                                                                                                                            
+Alexander       08-MAR-2024 06:22.43 PM 03-JAN-1990 12:00.00 AM   1783.39511                                                                                                                            
+Bruce           08-MAR-2024 06:22.43 PM 21-MAY-1991 12:00.00 AM   1711.53797                                                                                                                            
+Diana           08-MAR-2024 06:22.43 PM 07-FEB-1999 12:00.00 AM   1308.82368                                                                                                                            
+Kevin           08-MAR-2024 06:22.43 PM 16-NOV-1999 12:00.00 AM   1268.53797                                                                                                                            
+Trenna          08-MAR-2024 06:22.43 PM 17-OCT-1995 12:00.00 AM   1481.53797                                                                                                                            
+Curtis          08-MAR-2024 06:22.43 PM 29-JAN-1997 12:00.00 AM   1414.39511                                                                                                                            
+Randall         08-MAR-2024 06:22.43 PM 15-MAR-1998 12:00.00 AM   1355.82368                                                                                                                            
+Peter           08-MAR-2024 06:22.43 PM 09-JUL-1998 12:00.00 AM   1339.25225                                                                                                                            
+Eleni           08-MAR-2024 06:22.43 PM 29-JAN-2000 12:00.00 AM   1257.96654                                                                                                                            
+Ellen           08-MAR-2024 06:22.43 PM 11-MAY-1996 12:00.00 AM   1451.96654                                                                                                                            
+Jonathon        08-MAR-2024 06:22.43 PM 24-MAR-1998 12:00.00 AM   1354.53797                                                                                                                            
+Kimerely        08-MAR-2024 06:22.43 PM 24-MAY-1999 12:00.00 AM   1293.68083                                                                                                                            
+Jennifer        08-MAR-2024 06:22.43 PM 17-SEP-1987 12:00.00 AM   1903.25225                                                                                                                            
+Michael         08-MAR-2024 06:22.43 PM 17-FEB-1996 12:00.00 AM   1463.96654                                                                                                                            
+Pat             08-MAR-2024 06:22.43 PM 17-AUG-1997 12:00.00 AM   1385.82368                                                                                                                            
+Shelley         08-MAR-2024 06:22.43 PM 07-JUN-1994 12:00.00 AM   1552.53797                                                                                                                            
+William         08-MAR-2024 06:22.43 PM 07-JUN-1994 12:00.00 AM   1552.53797                                                                                                                            
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , SYSDATE , HIRE_DATE , TRUNC((SYSDATE - HIRE_DATE)/7) COMPLETED_WEEKS_WORKED FROM EMPLOYEES;
+
+FIRST_NAME      SYSDATE                 HIRE_DATE               COMPLETED_WEEKS_WORKED                                                                                                                  
+--------------- ----------------------- ----------------------- ----------------------                                                                                                                  
+Steven          08-MAR-2024 06:22.59 PM 17-JUL-1987 12:00.00 AM                   1912                                                                                                                  
+Neena           08-MAR-2024 06:22.59 PM 21-SEP-1989 12:00.00 AM                   1798                                                                                                                  
+Lex             08-MAR-2024 06:22.59 PM 13-JAN-1993 12:00.00 AM                   1625                                                                                                                  
+Alexander       08-MAR-2024 06:22.59 PM 03-JAN-1990 12:00.00 AM                   1783                                                                                                                  
+Bruce           08-MAR-2024 06:22.59 PM 21-MAY-1991 12:00.00 AM                   1711                                                                                                                  
+Diana           08-MAR-2024 06:22.59 PM 07-FEB-1999 12:00.00 AM                   1308                                                                                                                  
+Kevin           08-MAR-2024 06:22.59 PM 16-NOV-1999 12:00.00 AM                   1268                                                                                                                  
+Trenna          08-MAR-2024 06:22.59 PM 17-OCT-1995 12:00.00 AM                   1481                                                                                                                  
+Curtis          08-MAR-2024 06:22.59 PM 29-JAN-1997 12:00.00 AM                   1414                                                                                                                  
+Randall         08-MAR-2024 06:22.59 PM 15-MAR-1998 12:00.00 AM                   1355                                                                                                                  
+Peter           08-MAR-2024 06:22.59 PM 09-JUL-1998 12:00.00 AM                   1339                                                                                                                  
+Eleni           08-MAR-2024 06:22.59 PM 29-JAN-2000 12:00.00 AM                   1257                                                                                                                  
+Ellen           08-MAR-2024 06:22.59 PM 11-MAY-1996 12:00.00 AM                   1451                                                                                                                  
+Jonathon        08-MAR-2024 06:22.59 PM 24-MAR-1998 12:00.00 AM                   1354                                                                                                                  
+Kimerely        08-MAR-2024 06:22.59 PM 24-MAY-1999 12:00.00 AM                   1293                                                                                                                  
+Jennifer        08-MAR-2024 06:22.59 PM 17-SEP-1987 12:00.00 AM                   1903                                                                                                                  
+Michael         08-MAR-2024 06:22.59 PM 17-FEB-1996 12:00.00 AM                   1463                                                                                                                  
+Pat             08-MAR-2024 06:22.59 PM 17-AUG-1997 12:00.00 AM                   1385                                                                                                                  
+Shelley         08-MAR-2024 06:22.59 PM 07-JUN-1994 12:00.00 AM                   1552                                                                                                                  
+William         08-MAR-2024 06:22.59 PM 07-JUN-1994 12:00.00 AM                   1552                                                                                                                  
+
+20 rows selected.
+
+SQL> REM 1 MONTH = ?? DAYS
+SQL> 
+SQL> REM MONTHS_BETWEN : TO FIND NUMBER OF MONTHS BETWEEN TWO DATES.
+SQL> 
+SQL> SELECT FIRST_NAME , SYSDATE , HIRE_DATE , MONTHS_BETWEEN(SYSDATE , HIRE_DATE) MONTHS_WORKED FROM EMPLOYEES;
+
+FIRST_NAME      SYSDATE                 HIRE_DATE               MONTHS_WORKED                                                                                                                           
+--------------- ----------------------- ----------------------- -------------                                                                                                                           
+Steven          08-MAR-2024 06:24.00 PM 17-JUL-1987 12:00.00 AM    439.734409                                                                                                                           
+Neena           08-MAR-2024 06:24.00 PM 21-SEP-1989 12:00.00 AM    413.605376                                                                                                                           
+Lex             08-MAR-2024 06:24.00 PM 13-JAN-1993 12:00.00 AM    373.863441                                                                                                                           
+Alexander       08-MAR-2024 06:24.00 PM 03-JAN-1990 12:00.00 AM    410.186022                                                                                                                           
+Bruce           08-MAR-2024 06:24.00 PM 21-MAY-1991 12:00.00 AM    393.605376                                                                                                                           
+Diana           08-MAR-2024 06:24.00 PM 07-FEB-1999 12:00.00 AM    301.056989                                                                                                                           
+Kevin           08-MAR-2024 06:24.00 PM 16-NOV-1999 12:00.00 AM    291.766667                                                                                                                           
+Trenna          08-MAR-2024 06:24.00 PM 17-OCT-1995 12:00.00 AM    340.734409                                                                                                                           
+Curtis          08-MAR-2024 06:24.00 PM 29-JAN-1997 12:00.00 AM    325.347312                                                                                                                           
+Randall         08-MAR-2024 06:24.00 PM 15-MAR-1998 12:00.00 AM    311.798925                                                                                                                           
+Peter           08-MAR-2024 06:24.00 PM 09-JUL-1998 12:00.00 AM    307.992473                                                                                                                           
+Eleni           08-MAR-2024 06:24.00 PM 29-JAN-2000 12:00.00 AM    289.347312                                                                                                                           
+Ellen           08-MAR-2024 06:24.00 PM 11-MAY-1996 12:00.00 AM    333.927957                                                                                                                           
+Jonathon        08-MAR-2024 06:24.00 PM 24-MAR-1998 12:00.00 AM    311.508602                                                                                                                           
+Kimerely        08-MAR-2024 06:24.00 PM 24-MAY-1999 12:00.00 AM    297.508602                                                                                                                           
+Jennifer        08-MAR-2024 06:24.00 PM 17-SEP-1987 12:00.00 AM    437.734409                                                                                                                           
+Michael         08-MAR-2024 06:24.00 PM 17-FEB-1996 12:00.00 AM    336.734409                                                                                                                           
+Pat             08-MAR-2024 06:24.00 PM 17-AUG-1997 12:00.00 AM    318.734409                                                                                                                           
+Shelley         08-MAR-2024 06:24.00 PM 07-JUN-1994 12:00.00 AM    357.056989                                                                                                                           
+William         08-MAR-2024 06:24.00 PM 07-JUN-1994 12:00.00 AM    357.056989                                                                                                                           
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , SYSDATE-1 , HIRE_DATE , MONTHS_BETWEEN(SYSDATE-1 , HIRE_DATE) MONTHS_WORKED FROM EMPLOYEES;
+
+FIRST_NAME      SYSDATE-1               HIRE_DATE               MONTHS_WORKED                                                                                                                           
+--------------- ----------------------- ----------------------- -------------                                                                                                                           
+Steven          07-MAR-2024 06:24.19 PM 17-JUL-1987 12:00.00 AM    439.702158                                                                                                                           
+Neena           07-MAR-2024 06:24.19 PM 21-SEP-1989 12:00.00 AM    413.573125                                                                                                                           
+Lex             07-MAR-2024 06:24.19 PM 13-JAN-1993 12:00.00 AM     373.83119                                                                                                                           
+Alexander       07-MAR-2024 06:24.19 PM 03-JAN-1990 12:00.00 AM    410.153771                                                                                                                           
+Bruce           07-MAR-2024 06:24.19 PM 21-MAY-1991 12:00.00 AM    393.573125                                                                                                                           
+Diana           07-MAR-2024 06:24.19 PM 07-FEB-1999 12:00.00 AM           301                                                                                                                           
+Kevin           07-MAR-2024 06:24.19 PM 16-NOV-1999 12:00.00 AM    291.734416                                                                                                                           
+Trenna          07-MAR-2024 06:24.19 PM 17-OCT-1995 12:00.00 AM    340.702158                                                                                                                           
+Curtis          07-MAR-2024 06:24.19 PM 29-JAN-1997 12:00.00 AM    325.315061                                                                                                                           
+Randall         07-MAR-2024 06:24.19 PM 15-MAR-1998 12:00.00 AM    311.766674                                                                                                                           
+Peter           07-MAR-2024 06:24.19 PM 09-JUL-1998 12:00.00 AM    307.960222                                                                                                                           
+Eleni           07-MAR-2024 06:24.19 PM 29-JAN-2000 12:00.00 AM    289.315061                                                                                                                           
+Ellen           07-MAR-2024 06:24.19 PM 11-MAY-1996 12:00.00 AM    333.895706                                                                                                                           
+Jonathon        07-MAR-2024 06:24.19 PM 24-MAR-1998 12:00.00 AM    311.476351                                                                                                                           
+Kimerely        07-MAR-2024 06:24.19 PM 24-MAY-1999 12:00.00 AM    297.476351                                                                                                                           
+Jennifer        07-MAR-2024 06:24.19 PM 17-SEP-1987 12:00.00 AM    437.702158                                                                                                                           
+Michael         07-MAR-2024 06:24.19 PM 17-FEB-1996 12:00.00 AM    336.702158                                                                                                                           
+Pat             07-MAR-2024 06:24.19 PM 17-AUG-1997 12:00.00 AM    318.702158                                                                                                                           
+Shelley         07-MAR-2024 06:24.19 PM 07-JUN-1994 12:00.00 AM           357                                                                                                                           
+William         07-MAR-2024 06:24.19 PM 07-JUN-1994 12:00.00 AM           357                                                                                                                           
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , SYSDATE , HIRE_DATE , TRINC(MONTHS_BETWEEN(SYSDATE , HIRE_DATE)) COMPLETED_MONTHS_WORKED FROM EMPLOYEES;
+SELECT FIRST_NAME , SYSDATE , HIRE_DATE , TRINC(MONTHS_BETWEEN(SYSDATE , HIRE_DATE)) COMPLETED_MONTHS_WORKED FROM EMPLOYEES
+                                          *
+ERROR at line 1:
+ORA-00904: "TRINC": invalid identifier 
+
+
+SQL> SELECT FIRST_NAME , SYSDATE , HIRE_DATE , TRUNC(MONTHS_BETWEEN(SYSDATE , HIRE_DATE)) COMPLETED_MONTHS_WORKED FROM EMPLOYEES;
+
+FIRST_NAME      SYSDATE                 HIRE_DATE               COMPLETED_MONTHS_WORKED                                                                                                                 
+--------------- ----------------------- ----------------------- -----------------------                                                                                                                 
+Steven          08-MAR-2024 06:24.43 PM 17-JUL-1987 12:00.00 AM                     439                                                                                                                 
+Neena           08-MAR-2024 06:24.43 PM 21-SEP-1989 12:00.00 AM                     413                                                                                                                 
+Lex             08-MAR-2024 06:24.43 PM 13-JAN-1993 12:00.00 AM                     373                                                                                                                 
+Alexander       08-MAR-2024 06:24.43 PM 03-JAN-1990 12:00.00 AM                     410                                                                                                                 
+Bruce           08-MAR-2024 06:24.43 PM 21-MAY-1991 12:00.00 AM                     393                                                                                                                 
+Diana           08-MAR-2024 06:24.43 PM 07-FEB-1999 12:00.00 AM                     301                                                                                                                 
+Kevin           08-MAR-2024 06:24.43 PM 16-NOV-1999 12:00.00 AM                     291                                                                                                                 
+Trenna          08-MAR-2024 06:24.43 PM 17-OCT-1995 12:00.00 AM                     340                                                                                                                 
+Curtis          08-MAR-2024 06:24.43 PM 29-JAN-1997 12:00.00 AM                     325                                                                                                                 
+Randall         08-MAR-2024 06:24.43 PM 15-MAR-1998 12:00.00 AM                     311                                                                                                                 
+Peter           08-MAR-2024 06:24.43 PM 09-JUL-1998 12:00.00 AM                     307                                                                                                                 
+Eleni           08-MAR-2024 06:24.43 PM 29-JAN-2000 12:00.00 AM                     289                                                                                                                 
+Ellen           08-MAR-2024 06:24.43 PM 11-MAY-1996 12:00.00 AM                     333                                                                                                                 
+Jonathon        08-MAR-2024 06:24.43 PM 24-MAR-1998 12:00.00 AM                     311                                                                                                                 
+Kimerely        08-MAR-2024 06:24.43 PM 24-MAY-1999 12:00.00 AM                     297                                                                                                                 
+Jennifer        08-MAR-2024 06:24.43 PM 17-SEP-1987 12:00.00 AM                     437                                                                                                                 
+Michael         08-MAR-2024 06:24.43 PM 17-FEB-1996 12:00.00 AM                     336                                                                                                                 
+Pat             08-MAR-2024 06:24.43 PM 17-AUG-1997 12:00.00 AM                     318                                                                                                                 
+Shelley         08-MAR-2024 06:24.43 PM 07-JUN-1994 12:00.00 AM                     357                                                                                                                 
+William         08-MAR-2024 06:24.43 PM 07-JUN-1994 12:00.00 AM                     357                                                                                                                 
+
+20 rows selected.
+
+SQL> REM 1 QUARTER = 3 MONTHS
+SQL> 
+SQL> SELECT FIRST_NAME , SYSDATE , HIRE_DATE , TRUNC(MONTHS_BETWEEN(SYSDATE , HIRE_DATE)/3) COMPLETED_QTRS_WORKED FROM EMPLOYEES;
+
+FIRST_NAME      SYSDATE                 HIRE_DATE               COMPLETED_QTRS_WORKED                                                                                                                   
+--------------- ----------------------- ----------------------- ---------------------                                                                                                                   
+Steven          08-MAR-2024 06:25.14 PM 17-JUL-1987 12:00.00 AM                   146                                                                                                                   
+Neena           08-MAR-2024 06:25.14 PM 21-SEP-1989 12:00.00 AM                   137                                                                                                                   
+Lex             08-MAR-2024 06:25.14 PM 13-JAN-1993 12:00.00 AM                   124                                                                                                                   
+Alexander       08-MAR-2024 06:25.14 PM 03-JAN-1990 12:00.00 AM                   136                                                                                                                   
+Bruce           08-MAR-2024 06:25.14 PM 21-MAY-1991 12:00.00 AM                   131                                                                                                                   
+Diana           08-MAR-2024 06:25.14 PM 07-FEB-1999 12:00.00 AM                   100                                                                                                                   
+Kevin           08-MAR-2024 06:25.14 PM 16-NOV-1999 12:00.00 AM                    97                                                                                                                   
+Trenna          08-MAR-2024 06:25.14 PM 17-OCT-1995 12:00.00 AM                   113                                                                                                                   
+Curtis          08-MAR-2024 06:25.14 PM 29-JAN-1997 12:00.00 AM                   108                                                                                                                   
+Randall         08-MAR-2024 06:25.14 PM 15-MAR-1998 12:00.00 AM                   103                                                                                                                   
+Peter           08-MAR-2024 06:25.14 PM 09-JUL-1998 12:00.00 AM                   102                                                                                                                   
+Eleni           08-MAR-2024 06:25.14 PM 29-JAN-2000 12:00.00 AM                    96                                                                                                                   
+Ellen           08-MAR-2024 06:25.14 PM 11-MAY-1996 12:00.00 AM                   111                                                                                                                   
+Jonathon        08-MAR-2024 06:25.14 PM 24-MAR-1998 12:00.00 AM                   103                                                                                                                   
+Kimerely        08-MAR-2024 06:25.14 PM 24-MAY-1999 12:00.00 AM                    99                                                                                                                   
+Jennifer        08-MAR-2024 06:25.14 PM 17-SEP-1987 12:00.00 AM                   145                                                                                                                   
+Michael         08-MAR-2024 06:25.14 PM 17-FEB-1996 12:00.00 AM                   112                                                                                                                   
+Pat             08-MAR-2024 06:25.14 PM 17-AUG-1997 12:00.00 AM                   106                                                                                                                   
+Shelley         08-MAR-2024 06:25.14 PM 07-JUN-1994 12:00.00 AM                   119                                                                                                                   
+William         08-MAR-2024 06:25.14 PM 07-JUN-1994 12:00.00 AM                   119                                                                                                                   
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , SYSDATE , HIRE_DATE , TRUNC(MONTHS_BETWEEN(SYSDATE , HIRE_DATE)/12) COMPLETED_YRS_WORKED FROM EMPLOYEES;
+
+FIRST_NAME      SYSDATE                 HIRE_DATE               COMPLETED_YRS_WORKED                                                                                                                    
+--------------- ----------------------- ----------------------- --------------------                                                                                                                    
+Steven          08-MAR-2024 06:25.28 PM 17-JUL-1987 12:00.00 AM                   36                                                                                                                    
+Neena           08-MAR-2024 06:25.28 PM 21-SEP-1989 12:00.00 AM                   34                                                                                                                    
+Lex             08-MAR-2024 06:25.28 PM 13-JAN-1993 12:00.00 AM                   31                                                                                                                    
+Alexander       08-MAR-2024 06:25.28 PM 03-JAN-1990 12:00.00 AM                   34                                                                                                                    
+Bruce           08-MAR-2024 06:25.28 PM 21-MAY-1991 12:00.00 AM                   32                                                                                                                    
+Diana           08-MAR-2024 06:25.28 PM 07-FEB-1999 12:00.00 AM                   25                                                                                                                    
+Kevin           08-MAR-2024 06:25.28 PM 16-NOV-1999 12:00.00 AM                   24                                                                                                                    
+Trenna          08-MAR-2024 06:25.28 PM 17-OCT-1995 12:00.00 AM                   28                                                                                                                    
+Curtis          08-MAR-2024 06:25.28 PM 29-JAN-1997 12:00.00 AM                   27                                                                                                                    
+Randall         08-MAR-2024 06:25.28 PM 15-MAR-1998 12:00.00 AM                   25                                                                                                                    
+Peter           08-MAR-2024 06:25.28 PM 09-JUL-1998 12:00.00 AM                   25                                                                                                                    
+Eleni           08-MAR-2024 06:25.28 PM 29-JAN-2000 12:00.00 AM                   24                                                                                                                    
+Ellen           08-MAR-2024 06:25.28 PM 11-MAY-1996 12:00.00 AM                   27                                                                                                                    
+Jonathon        08-MAR-2024 06:25.28 PM 24-MAR-1998 12:00.00 AM                   25                                                                                                                    
+Kimerely        08-MAR-2024 06:25.28 PM 24-MAY-1999 12:00.00 AM                   24                                                                                                                    
+Jennifer        08-MAR-2024 06:25.28 PM 17-SEP-1987 12:00.00 AM                   36                                                                                                                    
+Michael         08-MAR-2024 06:25.28 PM 17-FEB-1996 12:00.00 AM                   28                                                                                                                    
+Pat             08-MAR-2024 06:25.28 PM 17-AUG-1997 12:00.00 AM                   26                                                                                                                    
+Shelley         08-MAR-2024 06:25.28 PM 07-JUN-1994 12:00.00 AM                   29                                                                                                                    
+William         08-MAR-2024 06:25.28 PM 07-JUN-1994 12:00.00 AM                   29                                                                                                                    
+
+20 rows selected.
+
+SQL> REM 1 NUMBER OF COMPLETED DAYS WORKED
+SQL> 
+SQL> REM 2 NUMBER OF COMPLETED WEEKS WORKED
+SQL> 
+SQL> REM 3 NUMBER OF COMPLETED MONTHS WORKED
+SQL> 
+SQL> REM 4 NUMBER OF COMPLETED QUARTERS WORKED
+SQL> 
+SQL> REM 5 NUMBER OF COMPLETED YEARS WORKED
+SQL> 
+SQL> 
+SQL> REM 1 NUMBER OF COMPLETED DAYS WORKED
+SQL> 
+SQL> SPOOL OFF

@@ -1,0 +1,464 @@
+SQL> 
+SQL> REM CREATE TABLE :
+SQL> 
+SQL> REM TABLE : IS USED TO STORE DATA PERMANENTLY INSIDE DATABASE.
+SQL> 
+SQL> REM TABLE HAS : 1 DEFINITION 2 DATA
+SQL> 
+SQL> REM DEFINITION HAS : COLUMN NAME , DATA TYPE , SIZE , DEFAULT VALUE , CONSTRAINTS
+SQL> 
+SQL> REM CONSTRAINTS : DATA VALIDATION RULES
+SQL> 
+SQL> REM DATA : ACTUAL VALUES/FIGURE AND FACTS ABOUT BUSINESS TRANSACTION
+SQL> 
+SQL> 
+SQL> 
+SQL> REM WE CAN CREATE TABLE IN TWO STYLES : 1 CREATING TABLE FROM SCRATCH 2 CREATING TABLE USING SUBQUERY/EXISTING TABLE
+SQL> 
+SQL> 
+SQL> REM 1 CREATING TABLE FROM SCRATCH SYNTAX : CREATE TABLE tablename (colunmname datatype (size) DEFAULT default_value column _+constraints , ... , );
+SQL> 
+SQL> 
+SQL> REM 1 CREATING TABLE FROM SCRATCH SYNTAX : CREATE TABLE tablename (colunmname datatype (size) DEFAULT default_value column_level_constraints , ... , table_level_constraints );
+SQL> 
+SQL> 
+SQL> REM RULES FOR TABLE NAMING : 1 CASE INSENSITIVE (DEFAULT) 2 CASE SENSITIVE
+SQL> 
+SQL> REM 1 MINIMUM 1 CHARACTER , MAXIMUM 30 CHARACTERS (UPTO ORACLE 11G VERSION, MAX 128 CHARACTERS FROM 12C VERSION)
+SQL> 
+SQL> REM 2 FIRST CHARACTER MUST BE ALPHABET (A-Z , a-z)
+SQL> 
+SQL> REM 3 REMAINING CHARACTERS MAY BE ALPHABETS , DIGITS OR ANY OF THE 3 SPECIAL CHARACTERS : _ # $
+SQL> 
+SQL> REM 4 WE CAN'T USE SAME TABLE NAME UNDER SAME USER/SCHEMA.
+SQL> 
+SQL> REM 5 WE CAN'T USE ORACLE/SQL KEY/RESERVE WORD AS TABLE NAME, BUT IT MAY BE PART OR COMBINATION.
+SQL> 
+SQL> 
+SQL> REM 1 ABC    2 123    3 #$     4 ABC123    5 ABC123#$    6 REGIONS   7 PURGE     8 MODIFY     9 EMPLOYEE    10 DAUL
+SQL> 
+SQL> REM 1 TRUE   2 FALSE  3 FALSE  4 TRUE      5 TRUE        6 FALSE     7 FALSE     8 FALSE      9 TRUE        10 TRUE
+SQL> 
+SQL> 
+SQL> DROP TABLE PQR;
+
+Table dropped.
+
+SQL> CREATE TABLE PQR (NO NUMBER);
+
+Table created.
+
+SQL> insert into pqr values (10);
+
+1 row created.
+
+SQL> SELECT * FROM Pqr;
+
+        NO                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+        10                                                                                                                                                                                              
+
+SQL> create table pqr(d date);
+create table pqr(d date)
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> REM RULES FOR CASE SENSITIVE NAMING :
+SQL> 
+SQL> REM 1 MINIMUM 1 CHARACTER , MAXIMUM 30 CHARACTERS (UPTO ORACLE 11G VERSION, MAX 128 CHARACTERS FROM 12C VERSION)
+SQL> 
+SQL> REM 2 WE CAN START NAME WITH ANY CHARACTER.
+SQL> 
+SQL> REM 3 WE CAN USE ALMOST ALL CHARACTERS FOR FRAMING NAME.
+SQL> 
+SQL> REM 4 WE CAN USE SAME TABLE NAME UNDER SAME USER/SCHEMA, EITHER CASE OR SPACING MUST BE DIFFERENT.
+SQL> 
+SQL> REM 5 WE CAN USE ORACLE/SQL KEY/RESERVE WORD AS TABLE NAME.
+SQL> 
+SQL> REM 6 WE MUST USE CASE SENSITIVE NAME WITHIN DOUBLE QUOTES.
+SQL> 
+SQL> REM 7 WHENEVEN WE REFER CASE SENSITIVE TABLE WE MUST USE : 1 DOUBLE QUOTES 2 SAME SPELLING 3 SAME CASE 4 SAME SPACING
+SQL> 
+SQL> 
+SQL> DROP TABLE "Abc";
+
+Table dropped.
+
+SQL> DROP TABLE "aBc";
+DROP TABLE "aBc"
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> DROP TABLE "aBC";
+DROP TABLE "aBC"
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> CREATE TABLE "Abc"(no number);
+
+Table created.
+
+SQL> INSERT INTO "Abc" values (10);
+
+1 row created.
+
+SQL> INSERT INTO Abc values (10);
+
+1 row created.
+
+SQL> SELECT * FROM "Abc";
+
+        NO                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+        10                                                                                                                                                                                              
+
+SQL> SELECT * FROM Abc;
+
+        NO                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+        10                                                                                                                                                                                              
+        20                                                                                                                                                                                              
+        10                                                                                                                                                                                              
+
+SQL> REM 1 "ABC 123"   2 "def!@#"   3 pqr%^*   4 "DeLETe"    5 "EMPLOYEES"    6 "DEPARTMENT"    7 "Hi#hello~byE    8 'shri Ganesh'   9 "Ayush'    10 "ab%^&123"
+SQL> 
+SQL> REM 1 TRUE        2 TRUE       3 FALSE    4 TRUE        5 FALSE          6 TRUE            7 FALSE            8 FALSE           9 FALSE      10 TRUE
+SQL> 
+SQL> CREATE TABLE "ab%^&123"(NO NUMBER);
+Enter value for 123: .
+old   1: CREATE TABLE "ab%^&123"(NO NUMBER)
+new   1: CREATE TABLE "ab%^."(NO NUMBER)
+
+Table created.
+
+SQL> 
+SQL> REM 1 TRUE        2 TRUE       3 FALSE    4 TRUE        5 FALSE          6 TRUE            7 FALSE            8 FALSE           9 FALSE      10 FALSE
+SQL> 
+SQL> 
+SQL> DESC "ab%^."
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ NO                                                                                                                         NUMBER
+
+SQL> 
+SQL> 
+SQL> SELECT SYSTIMESTAMP FROM DUAL;
+
+SYSTIMESTAMP                                                                                                                                                                                            
+---------------------------------------------------------------------------                                                                                                                             
+15-NOV-24 07.10.24.196000 PM +05:30                                                                                                                                                                     
+
+SQL> /
+
+SYSTIMESTAMP                                                                                                                                                                                            
+---------------------------------------------------------------------------                                                                                                                             
+15-NOV-24 07.10.31.626000 PM +05:30                                                                                                                                                                     
+
+SQL> /
+
+SYSTIMESTAMP                                                                                                                                                                                            
+---------------------------------------------------------------------------                                                                                                                             
+15-NOV-24 07.10.31.795000 PM +05:30                                                                                                                                                                     
+
+SQL> /
+
+SYSTIMESTAMP                                                                                                                                                                                            
+---------------------------------------------------------------------------                                                                                                                             
+15-NOV-24 07.10.31.962000 PM +05:30                                                                                                                                                                     
+
+SQL> /
+
+SYSTIMESTAMP                                                                                                                                                                                            
+---------------------------------------------------------------------------                                                                                                                             
+15-NOV-24 07.10.32.132000 PM +05:30                                                                                                                                                                     
+
+SQL> /
+
+SYSTIMESTAMP                                                                                                                                                                                            
+---------------------------------------------------------------------------                                                                                                                             
+15-NOV-24 07.10.32.275000 PM +05:30                                                                                                                                                                     
+
+SQL> /
+
+SYSTIMESTAMP                                                                                                                                                                                            
+---------------------------------------------------------------------------                                                                                                                             
+15-NOV-24 07.10.32.434000 PM +05:30                                                                                                                                                                     
+
+SQL> /
+
+SYSTIMESTAMP                                                                                                                                                                                            
+---------------------------------------------------------------------------                                                                                                                             
+15-NOV-24 07.10.32.587000 PM +05:30                                                                                                                                                                     
+
+SQL> /
+
+SYSTIMESTAMP                                                                                                                                                                                            
+---------------------------------------------------------------------------                                                                                                                             
+15-NOV-24 07.10.32.747000 PM +05:30                                                                                                                                                                     
+
+SQL> /
+
+SYSTIMESTAMP                                                                                                                                                                                            
+---------------------------------------------------------------------------                                                                                                                             
+15-NOV-24 07.10.32.907000 PM +05:30                                                                                                                                                                     
+
+SQL> /
+
+SYSTIMESTAMP                                                                                                                                                                                            
+---------------------------------------------------------------------------                                                                                                                             
+15-NOV-24 07.10.33.060000 PM +05:30                                                                                                                                                                     
+
+SQL> /
+
+SYSTIMESTAMP                                                                                                                                                                                            
+---------------------------------------------------------------------------                                                                                                                             
+15-NOV-24 07.10.33.228000 PM +05:30                                                                                                                                                                     
+
+SQL> /
+
+SYSTIMESTAMP                                                                                                                                                                                            
+---------------------------------------------------------------------------                                                                                                                             
+15-NOV-24 07.10.33.380000 PM +05:30                                                                                                                                                                     
+
+SQL> /
+
+SYSTIMESTAMP                                                                                                                                                                                            
+---------------------------------------------------------------------------                                                                                                                             
+15-NOV-24 07.10.33.539000 PM +05:30                                                                                                                                                                     
+
+SQL> /
+
+SYSTIMESTAMP                                                                                                                                                                                            
+---------------------------------------------------------------------------                                                                                                                             
+15-NOV-24 07.10.33.683000 PM +05:30                                                                                                                                                                     
+
+SQL> /
+
+SYSTIMESTAMP                                                                                                                                                                                            
+---------------------------------------------------------------------------                                                                                                                             
+15-NOV-24 07.10.33.818000 PM +05:30                                                                                                                                                                     
+
+SQL> ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MONTH-RRRR HH:MI.SS AM DAY';
+
+Session altered.
+
+SQL> 
+SQL> SELECT SYSDATE , SYSDATE + 4 FROM DUAL;
+
+SYSDATE                                 SYSDATE+4                                                                                                                                                       
+--------------------------------------- ---------------------------------------                                                                                                                         
+15-NOVEMBER -2024 07:32.32 PM FRIDAY    19-NOVEMBER -2024 07:32.32 PM TUESDAY                                                                                                                           
+
+SQL> SELECT SYSDATE , SYSDATE + (4/24) FROM DUAL;
+
+SYSDATE                                 SYSDATE+(4/24)                                                                                                                                                  
+--------------------------------------- ---------------------------------------                                                                                                                         
+15-NOVEMBER -2024 07:33.17 PM FRIDAY    15-NOVEMBER -2024 11:33.17 PM FRIDAY                                                                                                                            
+
+SQL> SELECT SYSDATE , SYSDATE + (4/1440) FROM DUAL;
+
+SYSDATE                                 SYSDATE+(4/1440)                                                                                                                                                
+--------------------------------------- ---------------------------------------                                                                                                                         
+15-NOVEMBER -2024 07:33.47 PM FRIDAY    15-NOVEMBER -2024 07:37.47 PM FRIDAY                                                                                                                            
+
+SQL> SELECT SYSDATE , SYSDATE + (4/86400) FROM DUAL;
+
+SYSDATE                                 SYSDATE+(4/86400)                                                                                                                                               
+--------------------------------------- ---------------------------------------                                                                                                                         
+15-NOVEMBER -2024 07:33.58 PM FRIDAY    15-NOVEMBER -2024 07:34.02 PM FRIDAY                                                                                                                            
+
+SQL> SELECT SYSDATE , SYSDATE + 7 FROM DUAL;
+
+SYSDATE                                 SYSDATE+7                                                                                                                                                       
+--------------------------------------- ---------------------------------------                                                                                                                         
+15-NOVEMBER -2024 07:34.15 PM FRIDAY    22-NOVEMBER -2024 07:34.15 PM FRIDAY                                                                                                                            
+
+SQL> SELECT SYSDATE , SYSDATE + 7*3 FROM DUAL;
+
+SYSDATE                                 SYSDATE+7*3                                                                                                                                                     
+--------------------------------------- ---------------------------------------                                                                                                                         
+15-NOVEMBER -2024 07:34.18 PM FRIDAY    06-DECEMBER -2024 07:34.18 PM FRIDAY                                                                                                                            
+
+SQL> SELECT SYSDATE , ADD_MONTHS(SYSDATE,2) FROM DUAL;
+
+SYSDATE                                 ADD_MONTHS(SYSDATE,2)                                                                                                                                           
+--------------------------------------- ---------------------------------------                                                                                                                         
+15-NOVEMBER -2024 07:34.29 PM FRIDAY    15-JANUARY  -2025 07:34.29 PM WEDNESDAY                                                                                                                         
+
+SQL> SELECT SYSDATE , ADD_MONTHS(SYSDATE,12) FROM DUAL;
+
+SYSDATE                                 ADD_MONTHS(SYSDATE,12)                                                                                                                                          
+--------------------------------------- ---------------------------------------                                                                                                                         
+15-NOVEMBER -2024 07:34.32 PM FRIDAY    15-NOVEMBER -2025 07:34.32 PM SATURDAY                                                                                                                          
+
+SQL> SELECT SYSDATE , ADD_MONTHS(SYSDATE,12*3) FROM DUAL;
+
+SYSDATE                                 ADD_MONTHS(SYSDATE,12*3)                                                                                                                                        
+--------------------------------------- ---------------------------------------                                                                                                                         
+15-NOVEMBER -2024 07:34.36 PM FRIDAY    15-NOVEMBER -2027 07:34.36 PM MONDAY                                                                                                                            
+
+SQL> SELECT SYSDATE , ADD_MONTHS(SYSDATE,12*100) FROM DUAL;
+
+SYSDATE                                 ADD_MONTHS(SYSDATE,12*100)                                                                                                                                      
+--------------------------------------- ---------------------------------------                                                                                                                         
+15-NOVEMBER -2024 07:34.41 PM FRIDAY    15-NOVEMBER -2124 07:34.41 PM WEDNESDAY                                                                                                                         
+
+SQL> SELECT SYSDATE , ADD_MONTHS(SYSDATE,12*100*2) FROM DUAL;
+
+SYSDATE                                 ADD_MONTHS(SYSDATE,12*100*2)                                                                                                                                    
+--------------------------------------- ---------------------------------------                                                                                                                         
+15-NOVEMBER -2024 07:34.45 PM FRIDAY    15-NOVEMBER -2224 07:34.45 PM MONDAY                                                                                                                            
+
+SQL> REM INTERVAL DAY TO SECOND : DAY HOUR MINUTE SECOND FRACTIONALSECOND
+SQL> 
+SQL> SELECT SYSDATE , SYSDATE + TO_DSINTERVAL('2 4:6:8.111') FROM DUAL;
+
+SYSDATE                                 SYSDATE+TO_DSINTERVAL('24:6:8.111')                                                                                                                             
+--------------------------------------- ---------------------------------------                                                                                                                         
+15-NOVEMBER -2024 07:36.18 PM FRIDAY    17-NOVEMBER -2024 11:42.26 PM SUNDAY                                                                                                                            
+
+SQL> SELECT SYSTIMESTAMP , SYSTIMESTAMP + TO_DSINTERVAL('2 4:6:8.111') FROM DUAL;
+
+SYSTIMESTAMP                                                                SYSTIMESTAMP+TO_DSINTERVAL('24:6:8.111')                                                                                    
+--------------------------------------------------------------------------- ---------------------------------------------------------------------------                                                 
+15-NOV-24 07.36.52.405000 PM +05:30                                         17-NOV-24 11.43.00.516000000 PM +05:30                                                                                      
+
+SQL> SELECT SYSTIMESTAMP , SYSTIMESTAMP + TO_YMINTERVAL('2-4') FROM DUAL;
+
+SYSTIMESTAMP                                                                SYSTIMESTAMP+TO_YMINTERVAL('2-4')                                                                                           
+--------------------------------------------------------------------------- ---------------------------------------------------------------------------                                                 
+15-NOV-24 07.38.19.332000 PM +05:30                                         15-MAR-27 07.38.19.332000000 PM +05:30                                                                                      
+
+SQL> SELECT SYSTIMESTAMP , SYSTIMESTAMP + TO_YMINTERVAL('22-4') FROM DUAL;
+
+SYSTIMESTAMP                                                                SYSTIMESTAMP+TO_YMINTERVAL('22-4')                                                                                          
+--------------------------------------------------------------------------- ---------------------------------------------------------------------------                                                 
+15-NOV-24 07.38.50.948000 PM +05:30                                         15-MAR-47 07.38.50.948000000 PM +05:30                                                                                      
+
+SQL> SELECT SYSTIMESTAMP , SYSTIMESTAMP + TO_YMINTERVAL('100-0') FROM DUAL;
+
+SYSTIMESTAMP                                                                SYSTIMESTAMP+TO_YMINTERVAL('100-0')                                                                                         
+--------------------------------------------------------------------------- ---------------------------------------------------------------------------                                                 
+15-NOV-24 07.39.07.268000 PM +05:30                                         15-NOV-24 07.39.07.268000000 PM +05:30                                                                                      
+
+SQL> SELECT * FROM NLS_SESSION_PARAMETERS;
+
+PARAMETER                                                                                                                                                                                               
+------------------------------------------------------------------------------------------------------------------------                                                                                
+VALUE                                                                                                                                                                                                   
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+NLS_LANGUAGE                                                                                                                                                                                            
+AMERICAN                                                                                                                                                                                                
+                                                                                                                                                                                                        
+NLS_TERRITORY                                                                                                                                                                                           
+AMERICA                                                                                                                                                                                                 
+                                                                                                                                                                                                        
+NLS_CURRENCY                                                                                                                                                                                            
+$                                                                                                                                                                                                       
+                                                                                                                                                                                                        
+NLS_ISO_CURRENCY                                                                                                                                                                                        
+AMERICA                                                                                                                                                                                                 
+                                                                                                                                                                                                        
+NLS_NUMERIC_CHARACTERS                                                                                                                                                                                  
+.,                                                                                                                                                                                                      
+                                                                                                                                                                                                        
+NLS_CALENDAR                                                                                                                                                                                            
+GREGORIAN                                                                                                                                                                                               
+                                                                                                                                                                                                        
+NLS_DATE_FORMAT                                                                                                                                                                                         
+DD-MONTH-RRRR HH:MI.SS AM DAY                                                                                                                                                                           
+
+PARAMETER                                                                                                                                                                                               
+------------------------------------------------------------------------------------------------------------------------                                                                                
+VALUE                                                                                                                                                                                                   
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                                                                                                                                                                        
+NLS_DATE_LANGUAGE                                                                                                                                                                                       
+AMERICAN                                                                                                                                                                                                
+                                                                                                                                                                                                        
+NLS_SORT                                                                                                                                                                                                
+BINARY                                                                                                                                                                                                  
+                                                                                                                                                                                                        
+NLS_TIME_FORMAT                                                                                                                                                                                         
+HH.MI.SSXFF AM                                                                                                                                                                                          
+                                                                                                                                                                                                        
+NLS_TIMESTAMP_FORMAT                                                                                                                                                                                    
+DD-MON-RR HH.MI.SSXFF AM                                                                                                                                                                                
+                                                                                                                                                                                                        
+NLS_TIME_TZ_FORMAT                                                                                                                                                                                      
+HH.MI.SSXFF AM TZR                                                                                                                                                                                      
+                                                                                                                                                                                                        
+NLS_TIMESTAMP_TZ_FORMAT                                                                                                                                                                                 
+DD-MON-RR HH.MI.SSXFF AM TZR                                                                                                                                                                            
+                                                                                                                                                                                                        
+NLS_DUAL_CURRENCY                                                                                                                                                                                       
+
+PARAMETER                                                                                                                                                                                               
+------------------------------------------------------------------------------------------------------------------------                                                                                
+VALUE                                                                                                                                                                                                   
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+$                                                                                                                                                                                                       
+                                                                                                                                                                                                        
+NLS_COMP                                                                                                                                                                                                
+BINARY                                                                                                                                                                                                  
+                                                                                                                                                                                                        
+NLS_LENGTH_SEMANTICS                                                                                                                                                                                    
+BYTE                                                                                                                                                                                                    
+                                                                                                                                                                                                        
+NLS_NCHAR_CONV_EXCP                                                                                                                                                                                     
+FALSE                                                                                                                                                                                                   
+                                                                                                                                                                                                        
+
+17 rows selected.
+
+SQL> ALTER SESSION SET NLS_TIMESTAMP_FORMAT = 'DD-MON-RRRR HH.MI.SSXFF AM';
+
+Session altered.
+
+SQL> SELECT SYSTIMESTAMP , SYSTIMESTAMP + TO_YMINTERVAL('100-0') FROM DUAL;
+
+SYSTIMESTAMP                                                                SYSTIMESTAMP+TO_YMINTERVAL('100-0')                                                                                         
+--------------------------------------------------------------------------- ---------------------------------------------------------------------------                                                 
+15-NOV-24 07.39.52.093000 PM +05:30                                         15-NOV-24 07.39.52.093000000 PM +05:30                                                                                      
+
+SQL> ALTER SESSION SET NLS_TIMESTAMP_TZ_FORMAT = 'DD-MON-RRRR HH.MI.SSXFF AM TZR';
+
+Session altered.
+
+SQL> SELECT SYSTIMESTAMP , SYSTIMESTAMP + TO_YMINTERVAL('100-0') FROM DUAL;
+
+SYSTIMESTAMP                                                                SYSTIMESTAMP+TO_YMINTERVAL('100-0')                                                                                         
+--------------------------------------------------------------------------- ---------------------------------------------------------------------------                                                 
+15-NOV-2024 07.40.29.620000 PM +05:30                                       15-NOV-2124 07.40.29.620000000 PM +05:30                                                                                    
+
+SQL> SELECT SYSTIMESTAMP , SYSTIMESTAMP + TO_YMINTERVAL('2-4') + TO_DSINTERVAL('2 4:6:8.111')FROM DUAL;
+
+SYSTIMESTAMP                                                                SYSTIMESTAMP+TO_YMINTERVAL('2-4')+TO_DSINTERVAL('24:6:8.111')                                                               
+--------------------------------------------------------------------------- ---------------------------------------------------------------------------                                                 
+15-NOV-2024 07.41.26.405000 PM +05:30                                       17-MAR-2027 11.47.34.516000000 PM +05:30                                                                                    
+
+SQL> SELECT SYSTIMESTAMP , SYSTIMESTAMP + TO_YMINTERVAL('2-4') - TO_DSINTERVAL('2 4:6:8.111')FROM DUAL;
+
+SYSTIMESTAMP                                                                SYSTIMESTAMP+TO_YMINTERVAL('2-4')-TO_DSINTERVAL('24:6:8.111')                                                               
+--------------------------------------------------------------------------- ---------------------------------------------------------------------------                                                 
+15-NOV-2024 07.41.52.829000 PM +05:30                                       13-MAR-2027 03.35.44.718000000 PM +05:30                                                                                    
+
+SQL> SELECT SYSTIMESTAMP , SYSTIMESTAMP + TO_YMINTERVAL('2-4') + TO_DSINTERVAL('-2 4:6:8.111')FROM DUAL;
+
+SYSTIMESTAMP                                                                SYSTIMESTAMP+TO_YMINTERVAL('2-4')+TO_DSINTERVAL('-24:6:8.111')                                                              
+--------------------------------------------------------------------------- ---------------------------------------------------------------------------                                                 
+15-NOV-2024 07.42.17.460000 PM +05:30                                       13-MAR-2027 03.36.09.349000000 PM +05:30                                                                                    
+
+SQL> SELECT SYSTIMESTAMP , SYSTIMESTAMP + TO_YMINTERVAL('-2-4') + TO_DSINTERVAL('-2 4:6:8.111')FROM DUAL;
+
+SYSTIMESTAMP                                                                SYSTIMESTAMP+TO_YMINTERVAL('-2-4')+TO_DSINTERVAL('-24:6:8.111')                                                             
+--------------------------------------------------------------------------- ---------------------------------------------------------------------------                                                 
+15-NOV-2024 07.42.56.661000 PM +05:30                                       13-JUL-2022 03.36.48.550000000 PM +05:30                                                                                    
+
+SQL> SPOOL OFF

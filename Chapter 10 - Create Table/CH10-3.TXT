@@ -1,0 +1,529 @@
+SQL> 
+SQL> CL SCR
+
+SQL> REM STYLES OF CONSTRAINT NAMING : 1 SYSTEM GENERATED 2 USER DEFINED
+SQL> 
+SQL> DROP TABLE STD5A;
+DROP TABLE STD5A
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> CREATE TABLE STD5A(RNO NUMBER(2) PRIMARY KEY CHECK(RNO BETWEEN 1 AND 30),NM VARCHAR(10) CHECK(NM=UPPER(NM)));
+
+Table created.
+
+SQL> DROP TABLE STD5A;
+
+Table dropped.
+
+SQL> 
+SQL> CREATE TABLE STD5A(RNO NUMBER(2) PRIMARY KEY CHECK(RNO BETWEEN 1 AND 30),NM VARCHAR(10) CHECK(NM=UPPER(NM)) NOT NULL);
+
+Table created.
+
+SQL> INSERT INTO STD5A VALUES (31,'RAM');
+INSERT INTO STD5A VALUES (31,'RAM')
+*
+ERROR at line 1:
+ORA-02290: check constraint (SCOTT.SYS_C0048896) violated 
+
+
+SQL> REM SYSTEM GENERATED CONSTRAINT NAME : SYS_Cnnnnnnn
+SQL> 
+SQL> 
+SQL> REM TO GET CONSTRAINT INFO. : 1 USER_CONSTRAINTS 2 USER_CONS_COLUMNS
+SQL> 
+SQL> DESC USER_CONSTRAINTS
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ OWNER                                                                                                                      VARCHAR2(128)
+ CONSTRAINT_NAME                                                                                                            VARCHAR2(128)
+ CONSTRAINT_TYPE                                                                                                            VARCHAR2(1)
+ TABLE_NAME                                                                                                                 VARCHAR2(128)
+ SEARCH_CONDITION                                                                                                           LONG
+ SEARCH_CONDITION_VC                                                                                                        VARCHAR2(4000)
+ R_OWNER                                                                                                                    VARCHAR2(128)
+ R_CONSTRAINT_NAME                                                                                                          VARCHAR2(128)
+ DELETE_RULE                                                                                                                VARCHAR2(9)
+ STATUS                                                                                                                     VARCHAR2(8)
+ DEFERRABLE                                                                                                                 VARCHAR2(14)
+ DEFERRED                                                                                                                   VARCHAR2(9)
+ VALIDATED                                                                                                                  VARCHAR2(13)
+ GENERATED                                                                                                                  VARCHAR2(14)
+ BAD                                                                                                                        VARCHAR2(3)
+ RELY                                                                                                                       VARCHAR2(4)
+ LAST_CHANGE                                                                                                                DATE
+ INDEX_OWNER                                                                                                                VARCHAR2(128)
+ INDEX_NAME                                                                                                                 VARCHAR2(128)
+ INVALID                                                                                                                    VARCHAR2(7)
+ VIEW_RELATED                                                                                                               VARCHAR2(14)
+ ORIGIN_CON_ID                                                                                                              NUMBER
+
+SQL> DESC USER_CONS_COLUMNS
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ OWNER                                                                                                             NOT NULL VARCHAR2(128)
+ CONSTRAINT_NAME                                                                                                   NOT NULL VARCHAR2(128)
+ TABLE_NAME                                                                                                        NOT NULL VARCHAR2(128)
+ COLUMN_NAME                                                                                                                VARCHAR2(4000)
+ POSITION                                                                                                                   NUMBER
+
+SQL> COL TABLE_NAME FORMAT A30
+SQL> COL COLUMN_NAME FORMAT A30
+SQL> COL CONSTRAINT_NAME FORMAT A30
+SQL> COL R_CONSTRAINT_NAME FORMAT A30
+SQL> COL SEARCH_CONDITION FORMAT A50
+SQL> COL DELETE_RULE FORMAT A50
+SQL> 
+SQL> SELECT TABLE_NAME , COLUMN_NAME , CONSTRAINT_TYPE , CONSTRAINT_NAME , R_CONSTRAINT_NAME , SEARCH_CONDITION , DELETE_RULE
+  2  FROM USER_CONSTRAINTS
+  3  NATURAL JOIN USER_CONS_COLUMNS
+  4  WHERE TABLE_NAME = 'STD5A';
+
+TABLE_NAME                     COLUMN_NAME                    C CONSTRAINT_NAME                R_CONSTRAINT_NAME              SEARCH_CONDITION                                                          
+------------------------------ ------------------------------ - ------------------------------ ------------------------------ --------------------------------------------------                        
+DELETE_RULE                                                                                                                                                                                             
+--------------------------------------------------                                                                                                                                                      
+STD5A                          NM                             C SYS_C0048895                                                  "NM" IS NOT NULL                                                          
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        
+STD5A                          RNO                            C SYS_C0048896                                                  RNO BETWEEN 1 AND 30                                                      
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        
+STD5A                          NM                             C SYS_C0048897                                                  NM=UPPER(NM)                                                              
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        
+STD5A                          RNO                            P SYS_C0048898                                                                                                                            
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        
+
+SQL> SET LINES 500
+SQL> 
+SQL> R
+  1  SELECT TABLE_NAME , COLUMN_NAME , CONSTRAINT_TYPE , CONSTRAINT_NAME , R_CONSTRAINT_NAME , SEARCH_CONDITION , DELETE_RULE
+  2  FROM USER_CONSTRAINTS
+  3  NATURAL JOIN USER_CONS_COLUMNS
+  4* WHERE TABLE_NAME = 'STD5A'
+
+TABLE_NAME                     COLUMN_NAME                    C CONSTRAINT_NAME                R_CONSTRAINT_NAME              SEARCH_CONDITION                                   DELETE_RULE                                                                                                                                                                                                                                                                                                                        
+------------------------------ ------------------------------ - ------------------------------ ------------------------------ -------------------------------------------------- --------------------------------------------------                                                                                                                                                                                                                                                                                 
+STD5A                          NM                             C SYS_C0048895                                                  "NM" IS NOT NULL                                                                                                                                                                                                                                                                                                                                                                      
+STD5A                          RNO                            C SYS_C0048896                                                  RNO BETWEEN 1 AND 30                                                                                                                                                                                                                                                                                                                                                                  
+STD5A                          NM                             C SYS_C0048897                                                  NM=UPPER(NM)                                                                                                                                                                                                                                                                                                                                                                          
+STD5A                          RNO                            P SYS_C0048898                                                                                                                                                                                                                                                                                                                                                                                                                                        
+
+SQL> SELECT TABLE_NAME , COLUMN_NAME , CONSTRAINT_TYPE , CONSTRAINT_NAME , R_CONSTRAINT_NAME , SEARCH_CONDITION , DELETE_RULE
+  2  FROM USER_CONSTRAINTS
+  3  NATURAL JOIN USER_CONS_COLUMNS
+  4  WHERE TABLE_NAME = 'STD5A' AND CONSTRAINT_NAME = 'SYS_C0048896';
+
+TABLE_NAME                     COLUMN_NAME                    C CONSTRAINT_NAME                R_CONSTRAINT_NAME              SEARCH_CONDITION                                   DELETE_RULE                                                                                                                                                                                                                                                                                                                        
+------------------------------ ------------------------------ - ------------------------------ ------------------------------ -------------------------------------------------- --------------------------------------------------                                                                                                                                                                                                                                                                                 
+STD5A                          RNO                            C SYS_C0048896                                                  RNO BETWEEN 1 AND 30                                                                                                                                                                                                                                                                                                                                                                  
+
+SQL> REM STD5B : RNO RANGE 1 TO 30 , NO DUPLICATION , NO NULL VALUES ALOWED
+SQL> 
+SQL> REM         NM : ONLY UPPER CASE CHARACTERS ARE ALLOWED , NO NULL VALUES ALLOWED
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM USER DEFINED CONSTRAINT NAME MUST BE UNIQUE IN WHOLE DATABASE.
+SQL> 
+SQL> 
+SQL> 
+SQL> REM PRIMARY KEY CONSTRAINT IS ALLOWED ONCE PER TABLE.
+SQL> 
+SQL> REM NOT NULL AND UNIQUE ARE ALLOWED ONCE PER COLUMN.
+SQL> 
+SQL> REM CHECK AND REFERENCES ARE ALLOWED MULTIPLE TIMES PER COLUMN.
+SQL> 
+SQL> 
+SQL> REM PK = PRIMARY KEY
+SQL> 
+SQL> REM CK : CHECK
+SQL> 
+SQL> REM UK : UNIQUE
+SQL> 
+SQL> REM RK : REFERENCES
+SQL> 
+SQL> 
+SQL> REM UNIQUE CONSTRAINT NAMING : USERNAME_TABLENAME_COLUMNNAME_CONSTRAINTTYPE#NUMBER
+SQL> 
+SQL> REM SCOTT_STD5A_RNO_PK
+SQL> REM SCOTT_STD5A_RNO_CH#1
+SQL> REM SCOTT_STD5A_NM_CH#1
+SQL> 
+SQL> 
+SQL> DROP TABLE STD5A;
+
+Table dropped.
+
+SQL> CREATE TABLE STD5A(RNO NUMBER(2) CONSTRAINT SCOTT_STD5A_RNO_PK PRIMARY KEY CONSTRAINT SCOTT_STD5A_RNO_CH#1 CHECK(RNO BETWEEN 1 AND 30),NM VARCHAR(10) CONSTRAINT SCOTT_STD5A_NM_CH#1 CHECK(NM=UPPER(NM)) NOT NULL);
+
+Table created.
+
+SQL> SELECT TABLE_NAME , COLUMN_NAME , CONSTRAINT_TYPE , CONSTRAINT_NAME , R_CONSTRAINT_NAME , SEARCH_CONDITION , DELETE_RULE
+  2  FROM USER_CONSTRAINTS
+  3  NATURAL JOIN USER_CONS_COLUMNS
+  4  WHERE TABLE_NAME = 'STD5A'
+  5  ;
+
+TABLE_NAME                     COLUMN_NAME                    C CONSTRAINT_NAME                R_CONSTRAINT_NAME              SEARCH_CONDITION                                   DELETE_RULE                                                                                                                                                                                                                                                                                                                        
+------------------------------ ------------------------------ - ------------------------------ ------------------------------ -------------------------------------------------- --------------------------------------------------                                                                                                                                                                                                                                                                                 
+STD5A                          NM                             C SYS_C0048899                                                  "NM" IS NOT NULL                                                                                                                                                                                                                                                                                                                                                                      
+STD5A                          RNO                            C SCOTT_STD5A_RNO_CH#1                                          RNO BETWEEN 1 AND 30                                                                                                                                                                                                                                                                                                                                                                  
+STD5A                          NM                             C SCOTT_STD5A_NM_CH#1                                           NM=UPPER(NM)                                                                                                                                                                                                                                                                                                                                                                          
+STD5A                          RNO                            P SCOTT_STD5A_RNO_PK                                                                                                                                                                                                                                                                                                                                                                                                                                  
+
+SQL> INSERT INTO STD5A VALUES (31,'RAM');
+INSERT INTO STD5A VALUES (31,'RAM')
+*
+ERROR at line 1:
+ORA-02290: check constraint (SCOTT.SCOTT_STD5A_RNO_CH#1) violated 
+
+
+SQL> INSERT INTO STD5A VALUES (1,'Ram');
+INSERT INTO STD5A VALUES (1,'Ram')
+*
+ERROR at line 1:
+ORA-02290: check constraint (SCOTT.SCOTT_STD5A_NM_CH#1) violated 
+
+
+SQL> INSERT INTO STD5A VALUES (1,'RAM');
+
+1 row created.
+
+SQL> INSERT INTO STD5A VALUES (1,'SITA');
+INSERT INTO STD5A VALUES (1,'SITA')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SCOTT.SCOTT_STD5A_RNO_PK) violated 
+
+
+SQL> INSERT INTO STD5A VALUES (NULL,'SITA');
+INSERT INTO STD5A VALUES (NULL,'SITA')
+                          *
+ERROR at line 1:
+ORA-01400: cannot insert NULL into ("SCOTT"."STD5A"."RNO") 
+
+
+SQL> REM STD5B : RNO RANGE 1 TO 30 , NO DUPLICATION , NO NULL VALUES ALOWED
+SQL> 
+SQL> REM         NM : ONLY UPPER CASE CHARACTERS ARE ALLOWED , NO NULL VALUES ALLOWED
+SQL> 
+SQL> 
+SQL> REM USER_TABLENAME_COLUMNNAME_CONSTRAINTTYPE#NUMBER
+SQL> 
+SQL> 
+SQL> DEPT TABLE : DID (PK) , DNM (CHECK)
+SP2-0734: unknown command beginning "DEPT TABLE..." - rest of line ignored.
+SQL> EMP TABLE : EID (PK) , ENM (CHECK) , MID (RK) , DID (RK)
+SP2-0734: unknown command beginning "EMP TABLE ..." - rest of line ignored.
+SQL> 
+SQL> 
+SQL> REM DEPT TABLE : DID (PK) , DNM (CHECK)
+SQL> 
+SQL> REM EMP TABLE : EID (PK) , ENM (CHECK) , MID (RK) , DID (RK)
+SQL> 
+SQL> DROP TABLE EMP;
+
+Table dropped.
+
+SQL> DROP TABLE DEPT;
+
+Table dropped.
+
+SQL> CREATE TABLE DEPT(DID NUMBER CONSTRAINT SCOTT_DEPT_DID_PK PRIMARY KEY, DNM VARCHAR(10) CONSTRAINT SCOTT_DEPT_DNM_CK CHECK(DNM=UPPER(DNM)));
+
+Table created.
+
+SQL> CREATE TABLE EMP(EID NUMBER CONSTRAINT SCOTT_EMP_EID_PK PRIMARY KEY, ENM VARCHAR(10) CONSTRAINT SCOTT_EMP_ENM_CK#1 CHECK(ENM=UPPER(ENM)),
+  2  MID NUMBER CONSTRAINT SCOTT_EMP_MID_EMP_EID_RK REFERENCES EMP(EID) ,
+  3  DID NUMBER CONSTRAINT SCOTT_EMP_DID_DEPT_DID_RK REFERENCES DEPT(DID));
+
+Table created.
+
+SQL> SELECT TABLE_NAME , COLUMN_NAME , CONSTRAINT_TYPE , CONSTRAINT_NAME , R_CONSTRAINT_NAME , SEARCH_CONDITION , DELETE_RULE
+  2  FROM USER_CONSTRAINTS
+  3  NATURAL JOIN USER_CONS_COLUMNS
+  4  WHERE TABLE_NAME IN ('DEPT','EMP')
+  5  ORDER BY 1;
+
+TABLE_NAME                     COLUMN_NAME                    C CONSTRAINT_NAME                R_CONSTRAINT_NAME              SEARCH_CONDITION                                   DELETE_RULE                                                                                                                                                                                                                                                                                                                        
+------------------------------ ------------------------------ - ------------------------------ ------------------------------ -------------------------------------------------- --------------------------------------------------                                                                                                                                                                                                                                                                                 
+DEPT                           DID                            P SCOTT_DEPT_DID_PK                                                                                                                                                                                                                                                                                                                                                                                                                                   
+DEPT                           DNM                            C SCOTT_DEPT_DNM_CK                                             DNM=UPPER(DNM)                                                                                                                                                                                                                                                                                                                                                                        
+EMP                            MID                            R SCOTT_EMP_MID_EMP_EID_RK       SCOTT_EMP_EID_PK                                                                  NO ACTION                                                                                                                                                                                                                                                                                                                          
+EMP                            EID                            P SCOTT_EMP_EID_PK                                                                                                                                                                                                                                                                                                                                                                                                                                    
+EMP                            DID                            R SCOTT_EMP_DID_DEPT_DID_RK      SCOTT_DEPT_DID_PK                                                                 NO ACTION                                                                                                                                                                                                                                                                                                                          
+EMP                            ENM                            C SCOTT_EMP_ENM_CK#1                                            ENM=UPPER(ENM)                                                                                                                                                                                                                                                                                                                                                                        
+
+6 rows selected.
+
+SQL> REM ORACLE SUPPORTS 3 RELATIONSHIP TYPES : 1 DEFAULT/NO ACTION 2 CASCADE 3 SET NULL
+SQL> 
+SQL> REM PARENT TABLE : THE TABLE WHICH HOLDS REFERRED PRIMARY KEY OR UNIQUE CONSTRAINT IS CALLED PARENT TABLE.
+SQL> 
+SQL> REM CHILD TABLE : THE TABLE WHICH HOLDS REFERENCES CONSTRAINT.
+SQL> 
+SQL> 
+SQL> REM RELATIONSHIP TYPE MATTERS ONLY WHEN WE PERFORM DELETE OPERATION ON PARENT TABLE.
+SQL> 
+SQL> REM WE CAN SPECIFY RELATIONSHIP TYPE IN CHILD TABLE, WITHIN REEFENCES CONSTRAINT.
+SQL> 
+SQL> 
+SQL> REM DEFAULT : IT WILL NOT ALLOW US TO DELETE PARENT ROW IF CORRESPONDING CHILD ROWS EXIST.
+SQL> 
+SQL> REM CASCADE : IT WILL FIRST REMOVE ALL CORRESPONDING CHILD ROWS AND THEN WILL DELETE PARENT.
+SQL> 
+SQL> REM SET NULL : IT WILL FIRST UPDATE REFERENCES COLUMN WITH NULL FOR CORRESPONDING CHILD ROWS AND THEN WILL DELETE PARENT ROW.
+SQL> 
+SQL> 
+SQL> 
+SQL> DROP TABLE C1;
+
+Table dropped.
+
+SQL> DROP TABLE C2;
+
+Table dropped.
+
+SQL> DROP TABLE C3;
+
+Table dropped.
+
+SQL> DROP TABLE P1;
+
+Table dropped.
+
+SQL> DROP TABLE P2;
+
+Table dropped.
+
+SQL> DROP TABLE P3;
+
+Table dropped.
+
+SQL> CREATE TABLE P1 (NO NUMBER PRIMARY KEY, NM VARCHAR(10));
+
+Table created.
+
+SQL> CREATE TABLE P2 (NO NUMBER PRIMARY KEY, NM VARCHAR(10));
+
+Table created.
+
+SQL> CREATE TABLE P3 (NO NUMBER PRIMARY KEY, NM VARCHAR(10));
+
+Table created.
+
+SQL> CREATE TABLE C1 (NO NUMBER REFERENCES P1 , AMT NUMBER);
+
+Table created.
+
+SQL> CREATE TABLE C2 (NO NUMBER REFERENCES P2 ON DELETE CASCADE , AMT NUMBER);
+
+Table created.
+
+SQL> CREATE TABLE C3 (NO NUMBER REFERENCES P3 ON DELETE SET NULL , AMT NUMBER);
+
+Table created.
+
+SQL> INSERT INTO P1 VALUES (1,'GANESH');
+
+1 row created.
+
+SQL> INSERT INTO P1 VALUES (2,'RIDDHI');
+
+1 row created.
+
+SQL> INSERT INTO P1 VALUES (3,'SIDDHI');
+
+1 row created.
+
+SQL> INSERT INTO P2 SELECT * FROM P1;
+
+3 rows created.
+
+SQL> INSERT INTO P3 SELECT * FROM P1;
+
+3 rows created.
+
+SQL> INSERT INTO C1 VALUES (1,10000);
+
+1 row created.
+
+SQL> INSERT INTO C1 VALUES (2,20000);
+
+1 row created.
+
+SQL> INSERT INTO C1 VALUES (2,30000);
+
+1 row created.
+
+SQL> INSERT INTO C2 SELECT * FROM C1;
+
+3 rows created.
+
+SQL> INSERT INTO C3 SELECT * FROM C1;
+
+3 rows created.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> REM DEFAULT : IT WILL NOT ALLOW US TO DELETE PARENT ROW IF CORRESPONDING CHILD ROWS EXIST.
+SQL> 
+SQL> SELECT TABLE_NAME , COLUMN_NAME , CONSTRAINT_TYPE , CONSTRAINT_NAME , R_CONSTRAINT_NAME , SEARCH_CONDITION , DELETE_RULE
+  2  FROM USER_CONSTRAINTS
+  3  NATURAL JOIN USER_CONS_COLUMNS
+  4  WHERE TABLE_NAME IN ('P1','C1')
+  5  ORDER BY 1 DESC;
+
+TABLE_NAME                     COLUMN_NAME                    C CONSTRAINT_NAME                R_CONSTRAINT_NAME              SEARCH_CONDITION                                   DELETE_RULE                                                                                                                                                                                                                                                                                                                        
+------------------------------ ------------------------------ - ------------------------------ ------------------------------ -------------------------------------------------- --------------------------------------------------                                                                                                                                                                                                                                                                                 
+P1                             NO                             P SYS_C0048909                                                                                                                                                                                                                                                                                                                                                                                                                                        
+C1                             NO                             R SYS_C0048912                   SYS_C0048909                                                                      NO ACTION                                                                                                                                                                                                                                                                                                                          
+
+SQL> SELECT * FROM P1;
+
+        NO NM                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+         1 GANESH                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+         2 RIDDHI                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+         3 SIDDHI                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+
+SQL> SELECT * FROM C1;
+
+        NO        AMT                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+         1      10000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+         2      20000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+         2      30000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+
+SQL> DELETE P1 WHERE NO = 2;
+DELETE P1 WHERE NO = 2
+*
+ERROR at line 1:
+ORA-02292: integrity constraint (SCOTT.SYS_C0048912) violated - child record found 
+
+
+SQL> DELETE P1 WHERE NO = 3;
+
+1 row deleted.
+
+SQL> REM CASCADE : IT WILL FIRST REMOVE ALL CORRESPONDING CHILD ROWS AND THEN WILL DELETE PARENT.
+SQL> 
+SQL> SELECT TABLE_NAME , COLUMN_NAME , CONSTRAINT_TYPE , CONSTRAINT_NAME , R_CONSTRAINT_NAME , SEARCH_CONDITION , DELETE_RULE
+  2  FROM USER_CONSTRAINTS
+  3  NATURAL JOIN USER_CONS_COLUMNS
+  4  WHERE TABLE_NAME IN ('PC','CC')
+  5  
+SQL> SELECT TABLE_NAME , COLUMN_NAME , CONSTRAINT_TYPE , CONSTRAINT_NAME , R_CONSTRAINT_NAME , SEARCH_CONDITION , DELETE_RULE
+  2  FROM USER_CONSTRAINTS
+  3  NATURAL JOIN USER_CONS_COLUMNS
+  4  WHERE TABLE_NAME IN ('P2','C2')
+  5  ORDER BY 1 DESC;
+
+TABLE_NAME                     COLUMN_NAME                    C CONSTRAINT_NAME                R_CONSTRAINT_NAME              SEARCH_CONDITION                                   DELETE_RULE                                                                                                                                                                                                                                                                                                                        
+------------------------------ ------------------------------ - ------------------------------ ------------------------------ -------------------------------------------------- --------------------------------------------------                                                                                                                                                                                                                                                                                 
+P2                             NO                             P SYS_C0048910                                                                                                                                                                                                                                                                                                                                                                                                                                        
+C2                             NO                             R SYS_C0048913                   SYS_C0048910                                                                      CASCADE                                                                                                                                                                                                                                                                                                                            
+
+SQL> SELECT * FROM P2;
+
+        NO NM                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+         1 GANESH                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+         2 RIDDHI                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+         3 SIDDHI                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+
+SQL> SELECT * FROM C2;
+
+        NO        AMT                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+         1      10000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+         2      20000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+         2      30000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+
+SQL> DELETE P2 WHERE NO = 2;
+
+1 row deleted.
+
+SQL> SELECT * FROM P2;
+
+        NO NM                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+         1 GANESH                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+         3 SIDDHI                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+
+SQL> SELECT * FROM C2;
+
+        NO        AMT                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+         1      10000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+
+SQL> REM SET NULL : IT WILL FIRST UPDATE REFERENCES COLUMN WITH NULL FOR CORRESPONDING CHILD ROWS AND THEN WILL DELETE PARENT ROW.
+SQL> 
+SQL> SELECT TABLE_NAME , COLUMN_NAME , CONSTRAINT_TYPE , CONSTRAINT_NAME , R_CONSTRAINT_NAME , SEARCH_CONDITION , DELETE_RULE
+  2  FROM USER_CONSTRAINTS
+  3  NATURAL JOIN USER_CONS_COLUMNS
+  4  WHERE TABLE_NAME IN ('P3','C3')
+  5  ORDER BY 1 DESC;
+
+TABLE_NAME                     COLUMN_NAME                    C CONSTRAINT_NAME                R_CONSTRAINT_NAME              SEARCH_CONDITION                                   DELETE_RULE                                                                                                                                                                                                                                                                                                                        
+------------------------------ ------------------------------ - ------------------------------ ------------------------------ -------------------------------------------------- --------------------------------------------------                                                                                                                                                                                                                                                                                 
+P3                             NO                             P SYS_C0048911                                                                                                                                                                                                                                                                                                                                                                                                                                        
+C3                             NO                             R SYS_C0048914                   SYS_C0048911                                                                      SET NULL                                                                                                                                                                                                                                                                                                                           
+
+SQL> SELECT * FROM P3;
+
+        NO NM                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+         1 GANESH                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+         2 RIDDHI                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+         3 SIDDHI                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+
+SQL> SELECT * FROM C3;
+
+        NO        AMT                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+         1      10000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+         2      20000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+         2      30000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+
+SQL> DELETE P3 WHERE NO = 2;
+
+1 row deleted.
+
+SQL> SELECT * FROM P3;
+
+        NO NM                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+         1 GANESH                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+         3 SIDDHI                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+
+SQL> SELECT * FROM C3;
+
+        NO        AMT                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+         1      10000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                20000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                30000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+
+SQL> REM P1 : NO (PK) , NM
+SQL> 
+SQL> REM P2 : NO (PK) , NM
+SQL> 
+SQL> REM P3 : NO (PK) , NM
+SQL> 
+SQL> REM C1 : NO (RK) (DEFAULT RELATIONSHIP TYPE) , AMT
+SQL> 
+SQL> REM C2 : NO (RK) (ON DELETE CASCADE RELATIONSHIP TYPE) , AMT
+SQL> 
+SQL> REM C3 : NO (RK) (ON DELETE SET NULL RELATIONSHIP TYPE) , AMT
+SQL> 
+SQL> SPOOL OFF

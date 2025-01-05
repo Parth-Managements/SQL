@@ -1,0 +1,153 @@
+SQL> 
+SQL> REM CONCEPTS : 1 READ CONSISTENCY 2 CONCURRENCY 3 LOCKING 4 DEAD-LOCK
+SQL> 
+SQL> REM READ CONSISTENCY : ANY DML CHANGES DONE IN ONE SESSION IS NOT AVAILABLE TO OTHER SESSION BEFORE COMMIT.
+SQL> 
+SQL> REM CONCURRENCY : MULTIPLE SESSIONS CAN EXECUTE DML STATEMENTS ON SAME TABLE AT THE SAME TIME BUT ON DIFFERENT SET OF ROWS.
+SQL> 
+SQL> REM LOCKING : WHEN DML OPERATION IS PERFORMED THE ROWS GET LOCKED UNTIL TRANSACTION GETS OVER.
+SQL> 
+SQL> REM DEAD-LOCK : WHEN TWO SESSIONS WAIT FOR EACH OTHER.
+SQL> 
+SQL> 
+SQL> 
+SQL> SELECT * FROM R1;
+
+ REGION_ID REGION_NAME                                                                                                                                                                                  
+---------- -------------------------                                                                                                                                                                    
+         1 Europe                                                                                                                                                                                       
+         3 Asia                                                                                                                                                                                         
+
+SQL> DROP TABLE R1;
+
+Table dropped.
+
+SQL> CREATE TABLE R1 AS SELECT * FROM REGIONS;
+
+Table created.
+
+SQL> SELECT * FROM R1;
+
+ REGION_ID REGION_NAME                                                                                                                                                                                  
+---------- -------------------------                                                                                                                                                                    
+         1 Europe                                                                                                                                                                                       
+         2 Americas                                                                                                                                                                                     
+         3 Asia                                                                                                                                                                                         
+         4 Middle East and Africa                                                                                                                                                                       
+
+SQL> UPDATE R1 SET REGION_NAME = UPPER(REGION_NAME) WHERE REGION_ID = 1;
+
+1 row updated.
+
+SQL> SELECT * FROM R1;
+
+ REGION_ID REGION_NAME                                                                                                                                                                                  
+---------- -------------------------                                                                                                                                                                    
+         1 EUROPE                                                                                                                                                                                       
+         2 Americas                                                                                                                                                                                     
+         3 Asia                                                                                                                                                                                         
+         4 Middle East and Africa                                                                                                                                                                       
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> SELECT * FROM R1;
+
+ REGION_ID REGION_NAME                                                                                                                                                                                  
+---------- -------------------------                                                                                                                                                                    
+         1 EUROPE                                                                                                                                                                                       
+         2 Americas                                                                                                                                                                                     
+         3 Asia                                                                                                                                                                                         
+         4 Middle East and Africa                                                                                                                                                                       
+
+SQL> UPDATE R1 SET REGION_NAME = UPPER(REGION_NAME) WHERE REGION_ID = 2;
+
+1 row updated.
+
+SQL> SELECT * FROM R1;
+
+ REGION_ID REGION_NAME                                                                                                                                                                                  
+---------- -------------------------                                                                                                                                                                    
+         1 EUROPE                                                                                                                                                                                       
+         2 AMERICAS                                                                                                                                                                                     
+         3 Asia                                                                                                                                                                                         
+         4 Middle East and Africa                                                                                                                                                                       
+
+SQL> ROLLBACK;
+
+Rollback complete.
+
+SQL> UPDATE R1 SET REGION_NAME = UPPER(REGION_NAME) WHERE REGION_ID = 2;
+
+1 row updated.
+
+SQL> SELECT * FROM R1;
+
+ REGION_ID REGION_NAME                                                                                                                                                                                  
+---------- -------------------------                                                                                                                                                                    
+         1 EUROPE                                                                                                                                                                                       
+         2 AMERICAS                                                                                                                                                                                     
+         3 Asia                                                                                                                                                                                         
+         4 Middle East and Africa                                                                                                                                                                       
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> SELECT * FROM R1;
+
+ REGION_ID REGION_NAME                                                                                                                                                                                  
+---------- -------------------------                                                                                                                                                                    
+         1 EUROPE                                                                                                                                                                                       
+         2 AMERICAS                                                                                                                                                                                     
+         3 Asia                                                                                                                                                                                         
+         4 Middle East and Africa                                                                                                                                                                       
+
+SQL> UPDATE R1 SET REGION_NAME = UPPER(REGION_NAME) WHERE REGION_ID = 3;
+
+1 row updated.
+
+SQL> SELECT * FROM R1;
+
+ REGION_ID REGION_NAME                                                                                                                                                                                  
+---------- -------------------------                                                                                                                                                                    
+         1 EUROPE                                                                                                                                                                                       
+         2 AMERICAS                                                                                                                                                                                     
+         3 ASIA                                                                                                                                                                                         
+         4 Middle East and Africa                                                                                                                                                                       
+
+SQL> UPDATE R1 SET REGION_NAME = UPPER(REGION_NAME) WHERE REGION_ID = 4;
+UPDATE R1 SET REGION_NAME = UPPER(REGION_NAME) WHERE REGION_ID = 4
+                                  *
+ERROR at line 1:
+ORA-00060: deadlock detected while waiting for resource 
+
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> UPDATE R1 SET REGION_NAME = UPPER(REGION_NAME) WHERE REGION_ID = 4;
+
+1 row updated.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> 
+SQL> 
+SQL> REM DML : INSERT UPDATE DELETE
+SQL> 
+SQL> REM TCL : COMMIT ROLLBACK SAVEPOINT
+SQL> 
+SQL> REM FLASHBACK : TO UNCOMMIT THE COMMITTED CHANGES
+SQL> 
+SQL> REM DDL : TRUNCATE DROP FLASHBACK PURGE     DROP ... PURGE
+SQL> 
+SQL> REM VERSIONS QUERY : 1 AS OF TIMESTAMP 2 VERSION BETWEEN
+SQL> 
+SQL> REM CONCEPTS : READ CONSISTENCY , CONCURRENCY , LOCKING , DEAD-LOCK
+SQL> 
+SQL> SPOOL OFF

@@ -1,0 +1,553 @@
+SQL> 
+SQL> CL SCR
+SP2-1530: Command did not succeed
+SQL> 
+SQL> 
+SQL> REM DATE FUNCTIONS + DATE ARITHMETICS
+SQL> 
+SQL> REM LIST OF DATE FUNCTIONS : SYSDATE CURRENT_DATE   ADD_MONTHS MONTHS_BETWEEN    LAST_DAY NEXT_DAY    TRUNC ROUND
+SQL> 
+SQL> REM SYSDATE : IT RETURNS SERVER MACHINE'S DATE AND TIME INFO.
+SQL> 
+SQL> REM CURRENT_DATE : IT RETURNS CLIENT/CURRENT/LOCAL MACHINE'S DATE AND TIME INFO.
+SQL> 
+SQL> 
+SQL> 
+SQL> SELECT SYSDATE , CURRENT_DATE FROM DUAL;
+
+SYSDATE   CURRENT_D                                                                                                                                                                                     
+--------- ---------                                                                                                                                                                                     
+16-FEB-24 16-FEB-24                                                                                                                                                                                     
+
+SQL> REM DATE DEFAULT FORMAT : DD-MON-RR
+SQL> 
+SQL> REM TO SEE THE CURRENT FORMAT OF DATE : NLS_SESION_PARAMETERS
+SQL> 
+SQL> SELECT * FROM NLS_SESSION_PARAMETERS;
+
+PARAMETER                                                                                                                                                                                               
+------------------------------------------------------------------------------------------------------------------------                                                                                
+VALUE                                                                                                                                                                                                   
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+NLS_LANGUAGE                                                                                                                                                                                            
+AMERICAN                                                                                                                                                                                                
+                                                                                                                                                                                                        
+NLS_TERRITORY                                                                                                                                                                                           
+AMERICA                                                                                                                                                                                                 
+                                                                                                                                                                                                        
+NLS_CURRENCY                                                                                                                                                                                            
+$                                                                                                                                                                                                       
+                                                                                                                                                                                                        
+NLS_ISO_CURRENCY                                                                                                                                                                                        
+AMERICA                                                                                                                                                                                                 
+                                                                                                                                                                                                        
+NLS_NUMERIC_CHARACTERS                                                                                                                                                                                  
+.,                                                                                                                                                                                                      
+                                                                                                                                                                                                        
+NLS_CALENDAR                                                                                                                                                                                            
+GREGORIAN                                                                                                                                                                                               
+                                                                                                                                                                                                        
+NLS_DATE_FORMAT                                                                                                                                                                                         
+
+PARAMETER                                                                                                                                                                                               
+------------------------------------------------------------------------------------------------------------------------                                                                                
+VALUE                                                                                                                                                                                                   
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DD-MON-RR                                                                                                                                                                                               
+                                                                                                                                                                                                        
+NLS_DATE_LANGUAGE                                                                                                                                                                                       
+AMERICAN                                                                                                                                                                                                
+                                                                                                                                                                                                        
+NLS_SORT                                                                                                                                                                                                
+BINARY                                                                                                                                                                                                  
+                                                                                                                                                                                                        
+NLS_TIME_FORMAT                                                                                                                                                                                         
+HH.MI.SSXFF AM                                                                                                                                                                                          
+                                                                                                                                                                                                        
+NLS_TIMESTAMP_FORMAT                                                                                                                                                                                    
+DD-MON-RR HH.MI.SSXFF AM                                                                                                                                                                                
+                                                                                                                                                                                                        
+NLS_TIME_TZ_FORMAT                                                                                                                                                                                      
+HH.MI.SSXFF AM TZR                                                                                                                                                                                      
+                                                                                                                                                                                                        
+NLS_TIMESTAMP_TZ_FORMAT                                                                                                                                                                                 
+DD-MON-RR HH.MI.SSXFF AM TZR                                                                                                                                                                            
+
+PARAMETER                                                                                                                                                                                               
+------------------------------------------------------------------------------------------------------------------------                                                                                
+VALUE                                                                                                                                                                                                   
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                                                                                                                                                                        
+NLS_DUAL_CURRENCY                                                                                                                                                                                       
+$                                                                                                                                                                                                       
+                                                                                                                                                                                                        
+NLS_COMP                                                                                                                                                                                                
+BINARY                                                                                                                                                                                                  
+                                                                                                                                                                                                        
+NLS_LENGTH_SEMANTICS                                                                                                                                                                                    
+BYTE                                                                                                                                                                                                    
+                                                                                                                                                                                                        
+NLS_NCHAR_CONV_EXCP                                                                                                                                                                                     
+FALSE                                                                                                                                                                                                   
+                                                                                                                                                                                                        
+
+17 rows selected.
+
+SQL> COL PARAMETER FORMAT A30
+SQL> COL VALUE FORMAT A30
+SQL> 
+SQL> SELECT * FROM NLS_SESSION_PARAMETERS;
+
+PARAMETER                      VALUE                                                                                                                                                                    
+------------------------------ ------------------------------                                                                                                                                           
+NLS_LANGUAGE                   AMERICAN                                                                                                                                                                 
+NLS_TERRITORY                  AMERICA                                                                                                                                                                  
+NLS_CURRENCY                   $                                                                                                                                                                        
+NLS_ISO_CURRENCY               AMERICA                                                                                                                                                                  
+NLS_NUMERIC_CHARACTERS         .,                                                                                                                                                                       
+NLS_CALENDAR                   GREGORIAN                                                                                                                                                                
+NLS_DATE_FORMAT                DD-MON-RR                                                                                                                                                                
+NLS_DATE_LANGUAGE              AMERICAN                                                                                                                                                                 
+NLS_SORT                       BINARY                                                                                                                                                                   
+NLS_TIME_FORMAT                HH.MI.SSXFF AM                                                                                                                                                           
+NLS_TIMESTAMP_FORMAT           DD-MON-RR HH.MI.SSXFF AM                                                                                                                                                 
+NLS_TIME_TZ_FORMAT             HH.MI.SSXFF AM TZR                                                                                                                                                       
+NLS_TIMESTAMP_TZ_FORMAT        DD-MON-RR HH.MI.SSXFF AM TZR                                                                                                                                             
+NLS_DUAL_CURRENCY              $                                                                                                                                                                        
+NLS_COMP                       BINARY                                                                                                                                                                   
+NLS_LENGTH_SEMANTICS           BYTE                                                                                                                                                                     
+NLS_NCHAR_CONV_EXCP            FALSE                                                                                                                                                                    
+
+17 rows selected.
+
+SQL> REM TO CHANGE THE DATE FORMAT : ALTER SESSION SET parameter_name = 'value';
+SQL> 
+SQL> ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MON-RR HH:MI.SS AM';
+
+Session altered.
+
+SQL> 
+SQL> SELECT SYSDATE , CURRENT_DATE FROM DUAL;
+
+SYSDATE               CURRENT_DATE                                                                                                                                                                      
+--------------------- ---------------------                                                                                                                                                             
+16-FEB-24 04:12.37 PM 16-FEB-24 04:12.37 PM                                                                                                                                                             
+
+SQL> ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MON-RRRR HH:MI.SS AM';
+
+Session altered.
+
+SQL> 
+SQL> SELECT SYSDATE , CURRENT_DATE FROM DUAL;
+
+SYSDATE                 CURRENT_DATE                                                                                                                                                                    
+----------------------- -----------------------                                                                                                                                                         
+16-FEB-2024 04:15.35 PM 16-FEB-2024 04:15.35 PM                                                                                                                                                         
+
+SQL> RME DATE VALUE HAS 7 COMPONENTS/PARTS/INTERVALS :
+SP2-0734: unknown command beginning "RME DATE V..." - rest of line ignored.
+SQL> 
+SQL> REM DATE VALUE HAS 7 COMPONENTS/PARTS/INTERVALS :
+SQL> 
+SQL> REM CENTURY   YEAR   MONTH   DATE/DAY NO.   HOUR   MINUTE   SECOND
+SQL> 
+SQL> REM 20        24     02      16             16     15       35
+SQL> 
+SQL> 
+SQL> 
+SQL> REM DATE ARITHMATIC : 1 DATE +/- INTERVAL = DATE     2 DATE - DATE = DAYS
+SQL> 
+SQL> 
+SQL> SELECT SYSDATE , SYSDATE + 3 , SYSDATE -2 FROM DUAL;
+
+SYSDATE                 SYSDATE+3               SYSDATE-2                                                                                                                                               
+----------------------- ----------------------- -----------------------                                                                                                                                 
+16-FEB-2024 04:17.46 PM 19-FEB-2024 04:17.46 PM 14-FEB-2024 04:17.46 PM                                                                                                                                 
+
+SQL> REM 1 DAY = 24 HOURS = 1440 MINUTES = 86400 SECONDS
+SQL> 
+SQL> SELECT SYSDATE , SYSDATE + 3/24 , SYSDATE -2/24 FROM DUAL;
+
+SYSDATE                 SYSDATE+3/24            SYSDATE-2/24                                                                                                                                            
+----------------------- ----------------------- -----------------------                                                                                                                                 
+16-FEB-2024 04:19.00 PM 16-FEB-2024 07:19.00 PM 16-FEB-2024 02:19.00 PM                                                                                                                                 
+
+SQL> SELECT SYSDATE , SYSDATE + 3/1440 , SYSDATE -2/1440 FROM DUAL;
+
+SYSDATE                 SYSDATE+3/1440          SYSDATE-2/1440                                                                                                                                          
+----------------------- ----------------------- -----------------------                                                                                                                                 
+16-FEB-2024 04:19.20 PM 16-FEB-2024 04:22.20 PM 16-FEB-2024 04:17.20 PM                                                                                                                                 
+
+SQL> SELECT SYSDATE , SYSDATE + 3/86400 , SYSDATE -2/86400 FROM DUAL;
+
+SYSDATE                 SYSDATE+3/86400         SYSDATE-2/86400                                                                                                                                         
+----------------------- ----------------------- -----------------------                                                                                                                                 
+16-FEB-2024 04:19.46 PM 16-FEB-2024 04:19.49 PM 16-FEB-2024 04:19.44 PM                                                                                                                                 
+
+SQL> SELECT SYSDATE , SYSDATE + 5 - 3/24 FROM DUAL;
+
+SYSDATE                 SYSDATE+5-3/24                                                                                                                                                                  
+----------------------- -----------------------                                                                                                                                                         
+16-FEB-2024 04:20.11 PM 21-FEB-2024 01:20.11 PM                                                                                                                                                         
+
+SQL> REM 1 SYSDATE : ADD 3 DAYS
+SQL> 
+SQL> REM 2 CURRENT_DATE : SUBTRACT 6 HOURS
+SQL> 
+SQL> REM 3 SYSDATE : ADD 15 SECONDS
+SQL> 
+SQL> REM 4 CURRENT_DATE : SUBTRACT 4 MINUTES
+SQL> 
+SQL> REM 5 SYSDATE : ADD 6 DAYS , ADD 10 MINUTES
+SQL> 
+SQL> REM 6 CURRENT_DATE : SUBTRACT 3 DAYS , ADD 15 MSECONDS
+SQL> 
+SQL> REM 7 SYSDATE : ADD 10 SECONDS , SUBTRACT 3 HOURS , ADD 2 DAYS
+SQL> 
+SQL> ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MON-RRRR HH:MI.SS AM';
+
+Session altered.
+
+SQL> 
+SQL> 
+SQL> SELECT SYSDATE , SYSDATE +3 FROM DUAL;
+
+SYSDATE                 SYSDATE+3                                                                                                                                                                       
+----------------------- -----------------------                                                                                                                                                         
+16-FEB-2024 04:34.51 PM 19-FEB-2024 04:34.51 PM                                                                                                                                                         
+
+SQL> SELECT CURRENT_DATE , CURRENT_DATE -6/24 FROM DUAL;
+
+CURRENT_DATE            CURRENT_DATE-6/24                                                                                                                                                               
+----------------------- -----------------------                                                                                                                                                         
+16-FEB-2024 04:34.51 PM 16-FEB-2024 10:34.51 AM                                                                                                                                                         
+
+SQL> SELECT SYSDATE , SYSDATE + 15/86400 FROM DUAL;
+
+SYSDATE                 SYSDATE+15/86400                                                                                                                                                                
+----------------------- -----------------------                                                                                                                                                         
+16-FEB-2024 04:34.51 PM 16-FEB-2024 04:35.06 PM                                                                                                                                                         
+
+SQL> SELECT CURRENT_DATE , CURRENT_DATE -4/1440 FROM DUAL;
+
+CURRENT_DATE            CURRENT_DATE-4/1440                                                                                                                                                             
+----------------------- -----------------------                                                                                                                                                         
+16-FEB-2024 04:34.51 PM 16-FEB-2024 04:30.51 PM                                                                                                                                                         
+
+SQL> SELECT SYSDATE , SYSDATE + 6 + 10/1440 FROM DUAL;
+
+SYSDATE                 SYSDATE+6+10/1440                                                                                                                                                               
+----------------------- -----------------------                                                                                                                                                         
+16-FEB-2024 04:34.51 PM 22-FEB-2024 04:44.51 PM                                                                                                                                                         
+
+SQL> SELECT CURRENT_DATE , CURRENT_DATE -3 + 15/86400 FROM DUAL;
+
+CURRENT_DATE            CURRENT_DATE-3+15/86400                                                                                                                                                         
+----------------------- -----------------------                                                                                                                                                         
+16-FEB-2024 04:34.51 PM 13-FEB-2024 04:35.06 PM                                                                                                                                                         
+
+SQL> SELECT SYSDATE , SYSDATE + 2 + 10/86400 -3/24 FROM DUAL;
+
+SYSDATE                 SYSDATE+2+10/86400-3/24                                                                                                                                                         
+----------------------- -----------------------                                                                                                                                                         
+16-FEB-2024 04:34.52 PM 18-FEB-2024 01:35.02 PM                                                                                                                                                         
+
+SQL> 
+SQL> 
+SQL> REM 1 MONTH = ?? DAYS (28/29/30/31)
+SQL> 
+SQL> REM ADD_MONTHS : TO ADD OR SUBTRACT MONTHS,QUARTERS,YEARS AND CENTURIES TO/FROM DATE VALUE.
+SQL> 
+SQL> SELECT SYSDATE , ADD_MONTHS ( SYSDATE , 3 ) FROM DUAL;
+
+SYSDATE                 ADD_MONTHS(SYSDATE,3)                                                                                                                                                           
+----------------------- -----------------------                                                                                                                                                         
+16-FEB-2024 04:36.01 PM 16-MAY-2024 04:36.01 PM                                                                                                                                                         
+
+SQL> SELECT SYSDATE , ADD_MONTHS ( SYSDATE , -3 ) FROM DUAL;
+
+SYSDATE                 ADD_MONTHS(SYSDATE,-3)                                                                                                                                                          
+----------------------- -----------------------                                                                                                                                                         
+16-FEB-2024 04:36.13 PM 16-NOV-2023 04:36.13 PM                                                                                                                                                         
+
+SQL> REM 1 QUARTER = 3 MONTHS
+SQL> 
+SQL> REM 1 YEAR = 4 PARTS = QUARTER = 12/4 = 3 MONTHS IN EACH QUARTER
+SQL> 
+SQL> REM ADD 2 QUARTERS TO SYSDATE
+SQL> 
+SQL> SELECT SYSDATE , ADD_MONTHS(SYSDATE,2*3) FROM DUAL;
+
+SYSDATE                 ADD_MONTHS(SYSDATE,2*3)                                                                                                                                                         
+----------------------- -----------------------                                                                                                                                                         
+16-FEB-2024 04:37.33 PM 16-AUG-2024 04:37.33 PM                                                                                                                                                         
+
+SQL> REM SUBTRACT 3 QUARTERS FROM CURRENT_DATE
+SQL> 
+SQL> SELECT CURRENT_DATE , ADD_MONTHS(CURRENT_DATE,-3*3) FROM DUAL;
+
+CURRENT_DATE            ADD_MONTHS(CURRENT_DATE                                                                                                                                                         
+----------------------- -----------------------                                                                                                                                                         
+16-FEB-2024 04:38.08 PM 16-MAY-2023 04:38.08 PM                                                                                                                                                         
+
+SQL> REM ADD 5 YEARS TO SYSDATE
+SQL> 
+SQL> SELECT SYSDATE , ADD_MONTHS(SYSDATE,5*12) FROM DUAL;
+
+SYSDATE                 ADD_MONTHS(SYSDATE,5*12                                                                                                                                                         
+----------------------- -----------------------                                                                                                                                                         
+16-FEB-2024 04:38.52 PM 16-FEB-2029 04:38.52 PM                                                                                                                                                         
+
+SQL> REM SUBTRACT 4 YEARS FROM SYSDATE
+SQL> 
+SQL> SELECT SYSDATE , ADD_MONTHS(SYSDATE,-4*12) FROM DUAL;
+
+SYSDATE                 ADD_MONTHS(SYSDATE,-4*1                                                                                                                                                         
+----------------------- -----------------------                                                                                                                                                         
+16-FEB-2024 04:39.04 PM 16-FEB-2020 04:39.04 PM                                                                                                                                                         
+
+SQL> REM ADD 3 CENTURIES TO SYSDATE
+SQL> 
+SQL> SELECT SYSDATE , ADD_MONTHS ( SYSDATE , 3*100*12 ) FROM DUAL;
+
+SYSDATE                 ADD_MONTHS(SYSDATE,3*10                                                                                                                                                         
+----------------------- -----------------------                                                                                                                                                         
+16-FEB-2024 04:39.40 PM 16-FEB-2324 04:39.40 PM                                                                                                                                                         
+
+SQL> REM SUBTRACT 2 CENTURIES FROM SYSDATE
+SQL> 
+SQL> SELECT SYSDATE , ADD_MONTHS ( SYSDATE , -2*100*12 ) FROM DUAL;
+
+SYSDATE                 ADD_MONTHS(SYSDATE,-2*1                                                                                                                                                         
+----------------------- -----------------------                                                                                                                                                         
+16-FEB-2024 04:39.58 PM 16-FEB-1824 04:39.58 PM                                                                                                                                                         
+
+SQL> REM ADD 3 WEEKS TO SYSDATE
+SQL> 
+SQL> REM 1 WEEK = 7 DAYS
+SQL> 
+SQL> SELECT SYSDATE , SYSDATE + 3 * 7 FROM DUAL;
+
+SYSDATE                 SYSDATE+3*7                                                                                                                                                                     
+----------------------- -----------------------                                                                                                                                                         
+16-FEB-2024 04:40.54 PM 08-MAR-2024 04:40.54 PM                                                                                                                                                         
+
+SQL> REM CENTURY YEAR QUARTER MONTH WEEK DAY HOUR MINUTE
+SQL> 
+SQL> REM CENTURY YEAR QUARTER MONTH WEEK DAY HOUR MINUTE SECOND
+SQL> 
+SQL> REM 1 ADD 3 MONTHS TO SYSDATE
+SQL> 
+SQL> REM 2 SUBTRACT 6 QUARTERS FROM CURRENT_DATE
+SQL> 
+SQL> REM 3 ADD 7 WEEKS TO CURRENT_DATE
+SQL> 
+SQL> REM 4 SUBTRACT 2 YEARS FROM SYSDATE
+SQL> 
+SQL> REM 5 ADD 3 CENTURIES TO CURRENT_DATE
+SQL> 
+SQL> SELECT SYSDATE , ADD_MONTHS (SYSDATE , 3) FROM DUAL;
+
+SYSDATE                 ADD_MONTHS(SYSDATE,3)                                                                                                                                                           
+----------------------- -----------------------                                                                                                                                                         
+16-FEB-2024 04:52.27 PM 16-MAY-2024 04:52.27 PM                                                                                                                                                         
+
+SQL> SELECT CURRENT_DATE , ADD_MONTHS (CURRENT_DATE , -6*3) FROM
+  2   DUAL;
+
+CURRENT_DATE            ADD_MONTHS(CURRENT_DATE                                                                                                                                                         
+----------------------- -----------------------                                                                                                                                                         
+16-FEB-2024 04:52.38 PM 16-AUG-2022 04:52.38 PM                                                                                                                                                         
+
+SQL> SELECT CURRENT_DATE , CURRENT_DATE + 7*7 FROM DUAL;
+
+CURRENT_DATE            CURRENT_DATE+7*7                                                                                                                                                                
+----------------------- -----------------------                                                                                                                                                         
+16-FEB-2024 04:52.49 PM 05-APR-2024 04:52.49 PM                                                                                                                                                         
+
+SQL> SELECT SYSDATE , ADD_MONTHS (SYSDATE  , -2*12) FROM DUAL;
+
+SYSDATE                 ADD_MONTHS(SYSDATE,-2*1                                                                                                                                                         
+----------------------- -----------------------                                                                                                                                                         
+16-FEB-2024 04:52.49 PM 16-FEB-2022 04:52.49 PM                                                                                                                                                         
+
+SQL> SELECT CURRENT_DATE , ADD_MONTHS (CURRENT_DATE , 3*12*100)
+  2  FROM DUAL;
+
+CURRENT_DATE            ADD_MONTHS(CURRENT_DATE                                                                                                                                                         
+----------------------- -----------------------                                                                                                                                                         
+16-FEB-2024 04:52.50 PM 16-FEB-2324 04:52.50 PM                                                                                                                                                         
+
+SQL> REM DATE - DATE = DAYS
+SQL> 
+SQL> SELECT FIRST_NAME , SYSDATE , HIRE_DATE , SYSDATE - HIRE_DATE DAYS_WORKED FROM EMPLOYEES;
+
+FIRST_NAME      SYSDATE                 HIRE_DATE               DAYS_WORKED                                                                                                                             
+--------------- ----------------------- ----------------------- -----------                                                                                                                             
+Steven          16-FEB-2024 04:53.56 PM 17-JUL-1987 12:00.00 AM  13363.7041                                                                                                                             
+Neena           16-FEB-2024 04:53.56 PM 21-SEP-1989 12:00.00 AM  12566.7041                                                                                                                             
+Lex             16-FEB-2024 04:53.56 PM 13-JAN-1993 12:00.00 AM  11356.7041                                                                                                                             
+Alexander       16-FEB-2024 04:53.56 PM 03-JAN-1990 12:00.00 AM  12462.7041                                                                                                                             
+Bruce           16-FEB-2024 04:53.56 PM 21-MAY-1991 12:00.00 AM  11959.7041                                                                                                                             
+Diana           16-FEB-2024 04:53.56 PM 07-FEB-1999 12:00.00 AM  9140.70412                                                                                                                             
+Kevin           16-FEB-2024 04:53.56 PM 16-NOV-1999 12:00.00 AM  8858.70412                                                                                                                             
+Trenna          16-FEB-2024 04:53.56 PM 17-OCT-1995 12:00.00 AM  10349.7041                                                                                                                             
+Curtis          16-FEB-2024 04:53.56 PM 29-JAN-1997 12:00.00 AM  9879.70412                                                                                                                             
+Randall         16-FEB-2024 04:53.56 PM 15-MAR-1998 12:00.00 AM  9469.70412                                                                                                                             
+Peter           16-FEB-2024 04:53.56 PM 09-JUL-1998 12:00.00 AM  9353.70412                                                                                                                             
+Eleni           16-FEB-2024 04:53.56 PM 29-JAN-2000 12:00.00 AM  8784.70412                                                                                                                             
+Ellen           16-FEB-2024 04:53.56 PM 11-MAY-1996 12:00.00 AM  10142.7041                                                                                                                             
+Jonathon        16-FEB-2024 04:53.56 PM 24-MAR-1998 12:00.00 AM  9460.70412                                                                                                                             
+Kimerely        16-FEB-2024 04:53.56 PM 24-MAY-1999 12:00.00 AM  9034.70412                                                                                                                             
+Jennifer        16-FEB-2024 04:53.56 PM 17-SEP-1987 12:00.00 AM  13301.7041                                                                                                                             
+Michael         16-FEB-2024 04:53.56 PM 17-FEB-1996 12:00.00 AM  10226.7041                                                                                                                             
+Pat             16-FEB-2024 04:53.56 PM 17-AUG-1997 12:00.00 AM  9679.70412                                                                                                                             
+Shelley         16-FEB-2024 04:53.56 PM 07-JUN-1994 12:00.00 AM  10846.7041                                                                                                                             
+William         16-FEB-2024 04:53.56 PM 07-JUN-1994 12:00.00 AM  10846.7041                                                                                                                             
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , SYSDATE , HIRE_DATE , TRUNC(SYSDATE - HIRE_DATE) DAYS_WORKED FROM EMPLOYEES;
+
+FIRST_NAME      SYSDATE                 HIRE_DATE               DAYS_WORKED                                                                                                                             
+--------------- ----------------------- ----------------------- -----------                                                                                                                             
+Steven          16-FEB-2024 04:54.23 PM 17-JUL-1987 12:00.00 AM       13363                                                                                                                             
+Neena           16-FEB-2024 04:54.23 PM 21-SEP-1989 12:00.00 AM       12566                                                                                                                             
+Lex             16-FEB-2024 04:54.23 PM 13-JAN-1993 12:00.00 AM       11356                                                                                                                             
+Alexander       16-FEB-2024 04:54.23 PM 03-JAN-1990 12:00.00 AM       12462                                                                                                                             
+Bruce           16-FEB-2024 04:54.23 PM 21-MAY-1991 12:00.00 AM       11959                                                                                                                             
+Diana           16-FEB-2024 04:54.23 PM 07-FEB-1999 12:00.00 AM        9140                                                                                                                             
+Kevin           16-FEB-2024 04:54.23 PM 16-NOV-1999 12:00.00 AM        8858                                                                                                                             
+Trenna          16-FEB-2024 04:54.23 PM 17-OCT-1995 12:00.00 AM       10349                                                                                                                             
+Curtis          16-FEB-2024 04:54.23 PM 29-JAN-1997 12:00.00 AM        9879                                                                                                                             
+Randall         16-FEB-2024 04:54.23 PM 15-MAR-1998 12:00.00 AM        9469                                                                                                                             
+Peter           16-FEB-2024 04:54.23 PM 09-JUL-1998 12:00.00 AM        9353                                                                                                                             
+Eleni           16-FEB-2024 04:54.23 PM 29-JAN-2000 12:00.00 AM        8784                                                                                                                             
+Ellen           16-FEB-2024 04:54.23 PM 11-MAY-1996 12:00.00 AM       10142                                                                                                                             
+Jonathon        16-FEB-2024 04:54.23 PM 24-MAR-1998 12:00.00 AM        9460                                                                                                                             
+Kimerely        16-FEB-2024 04:54.23 PM 24-MAY-1999 12:00.00 AM        9034                                                                                                                             
+Jennifer        16-FEB-2024 04:54.23 PM 17-SEP-1987 12:00.00 AM       13301                                                                                                                             
+Michael         16-FEB-2024 04:54.23 PM 17-FEB-1996 12:00.00 AM       10226                                                                                                                             
+Pat             16-FEB-2024 04:54.23 PM 17-AUG-1997 12:00.00 AM        9679                                                                                                                             
+Shelley         16-FEB-2024 04:54.23 PM 07-JUN-1994 12:00.00 AM       10846                                                                                                                             
+William         16-FEB-2024 04:54.23 PM 07-JUN-1994 12:00.00 AM       10846                                                                                                                             
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , SYSDATE , HIRE_DATE , TRUNC((SYSDATE - HIRE_DATE)/7) WEEKS_WORKED FROM EMPLOYEES;
+
+FIRST_NAME      SYSDATE                 HIRE_DATE               WEEKS_WORKED                                                                                                                            
+--------------- ----------------------- ----------------------- ------------                                                                                                                            
+Steven          16-FEB-2024 04:54.45 PM 17-JUL-1987 12:00.00 AM         1909                                                                                                                            
+Neena           16-FEB-2024 04:54.45 PM 21-SEP-1989 12:00.00 AM         1795                                                                                                                            
+Lex             16-FEB-2024 04:54.45 PM 13-JAN-1993 12:00.00 AM         1622                                                                                                                            
+Alexander       16-FEB-2024 04:54.45 PM 03-JAN-1990 12:00.00 AM         1780                                                                                                                            
+Bruce           16-FEB-2024 04:54.45 PM 21-MAY-1991 12:00.00 AM         1708                                                                                                                            
+Diana           16-FEB-2024 04:54.45 PM 07-FEB-1999 12:00.00 AM         1305                                                                                                                            
+Kevin           16-FEB-2024 04:54.45 PM 16-NOV-1999 12:00.00 AM         1265                                                                                                                            
+Trenna          16-FEB-2024 04:54.45 PM 17-OCT-1995 12:00.00 AM         1478                                                                                                                            
+Curtis          16-FEB-2024 04:54.45 PM 29-JAN-1997 12:00.00 AM         1411                                                                                                                            
+Randall         16-FEB-2024 04:54.45 PM 15-MAR-1998 12:00.00 AM         1352                                                                                                                            
+Peter           16-FEB-2024 04:54.45 PM 09-JUL-1998 12:00.00 AM         1336                                                                                                                            
+Eleni           16-FEB-2024 04:54.45 PM 29-JAN-2000 12:00.00 AM         1254                                                                                                                            
+Ellen           16-FEB-2024 04:54.45 PM 11-MAY-1996 12:00.00 AM         1448                                                                                                                            
+Jonathon        16-FEB-2024 04:54.45 PM 24-MAR-1998 12:00.00 AM         1351                                                                                                                            
+Kimerely        16-FEB-2024 04:54.45 PM 24-MAY-1999 12:00.00 AM         1290                                                                                                                            
+Jennifer        16-FEB-2024 04:54.45 PM 17-SEP-1987 12:00.00 AM         1900                                                                                                                            
+Michael         16-FEB-2024 04:54.45 PM 17-FEB-1996 12:00.00 AM         1460                                                                                                                            
+Pat             16-FEB-2024 04:54.45 PM 17-AUG-1997 12:00.00 AM         1382                                                                                                                            
+Shelley         16-FEB-2024 04:54.45 PM 07-JUN-1994 12:00.00 AM         1549                                                                                                                            
+William         16-FEB-2024 04:54.45 PM 07-JUN-1994 12:00.00 AM         1549                                                                                                                            
+
+20 rows selected.
+
+SQL> REM 1 MONTH = ?? DAYS
+SQL> 
+SQL> SELECT FIRST_NAME , SYSDATE , HIRE_DATE , TRUNC(MONTHS_BETWEEN(SYSDATE , HIRE_DATE)) MONTHS_WORKED FROM EMPLOYEES;
+
+FIRST_NAME      SYSDATE                 HIRE_DATE               MONTHS_WORKED                                                                                                                           
+--------------- ----------------------- ----------------------- -------------                                                                                                                           
+Steven          16-FEB-2024 04:55.21 PM 17-JUL-1987 12:00.00 AM           438                                                                                                                           
+Neena           16-FEB-2024 04:55.21 PM 21-SEP-1989 12:00.00 AM           412                                                                                                                           
+Lex             16-FEB-2024 04:55.21 PM 13-JAN-1993 12:00.00 AM           373                                                                                                                           
+Alexander       16-FEB-2024 04:55.21 PM 03-JAN-1990 12:00.00 AM           409                                                                                                                           
+Bruce           16-FEB-2024 04:55.21 PM 21-MAY-1991 12:00.00 AM           392                                                                                                                           
+Diana           16-FEB-2024 04:55.21 PM 07-FEB-1999 12:00.00 AM           300                                                                                                                           
+Kevin           16-FEB-2024 04:55.21 PM 16-NOV-1999 12:00.00 AM           291                                                                                                                           
+Trenna          16-FEB-2024 04:55.21 PM 17-OCT-1995 12:00.00 AM           339                                                                                                                           
+Curtis          16-FEB-2024 04:55.21 PM 29-JAN-1997 12:00.00 AM           324                                                                                                                           
+Randall         16-FEB-2024 04:55.21 PM 15-MAR-1998 12:00.00 AM           311                                                                                                                           
+Peter           16-FEB-2024 04:55.21 PM 09-JUL-1998 12:00.00 AM           307                                                                                                                           
+Eleni           16-FEB-2024 04:55.21 PM 29-JAN-2000 12:00.00 AM           288                                                                                                                           
+Ellen           16-FEB-2024 04:55.21 PM 11-MAY-1996 12:00.00 AM           333                                                                                                                           
+Jonathon        16-FEB-2024 04:55.21 PM 24-MAR-1998 12:00.00 AM           310                                                                                                                           
+Kimerely        16-FEB-2024 04:55.21 PM 24-MAY-1999 12:00.00 AM           296                                                                                                                           
+Jennifer        16-FEB-2024 04:55.21 PM 17-SEP-1987 12:00.00 AM           436                                                                                                                           
+Michael         16-FEB-2024 04:55.21 PM 17-FEB-1996 12:00.00 AM           335                                                                                                                           
+Pat             16-FEB-2024 04:55.21 PM 17-AUG-1997 12:00.00 AM           317                                                                                                                           
+Shelley         16-FEB-2024 04:55.21 PM 07-JUN-1994 12:00.00 AM           356                                                                                                                           
+William         16-FEB-2024 04:55.21 PM 07-JUN-1994 12:00.00 AM           356                                                                                                                           
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , SYSDATE , HIRE_DATE , TRUNC((MONTHS_BETWEEN(SYSDATE , HIRE_DATE)/3)) QUARTERS_WORKED FROM EMPLOYEES;
+
+FIRST_NAME      SYSDATE                 HIRE_DATE               QUARTERS_WORKED                                                                                                                         
+--------------- ----------------------- ----------------------- ---------------                                                                                                                         
+Steven          16-FEB-2024 04:55.47 PM 17-JUL-1987 12:00.00 AM             146                                                                                                                         
+Neena           16-FEB-2024 04:55.47 PM 21-SEP-1989 12:00.00 AM             137                                                                                                                         
+Lex             16-FEB-2024 04:55.47 PM 13-JAN-1993 12:00.00 AM             124                                                                                                                         
+Alexander       16-FEB-2024 04:55.47 PM 03-JAN-1990 12:00.00 AM             136                                                                                                                         
+Bruce           16-FEB-2024 04:55.47 PM 21-MAY-1991 12:00.00 AM             130                                                                                                                         
+Diana           16-FEB-2024 04:55.47 PM 07-FEB-1999 12:00.00 AM             100                                                                                                                         
+Kevin           16-FEB-2024 04:55.47 PM 16-NOV-1999 12:00.00 AM              97                                                                                                                         
+Trenna          16-FEB-2024 04:55.47 PM 17-OCT-1995 12:00.00 AM             113                                                                                                                         
+Curtis          16-FEB-2024 04:55.47 PM 29-JAN-1997 12:00.00 AM             108                                                                                                                         
+Randall         16-FEB-2024 04:55.47 PM 15-MAR-1998 12:00.00 AM             103                                                                                                                         
+Peter           16-FEB-2024 04:55.47 PM 09-JUL-1998 12:00.00 AM             102                                                                                                                         
+Eleni           16-FEB-2024 04:55.47 PM 29-JAN-2000 12:00.00 AM              96                                                                                                                         
+Ellen           16-FEB-2024 04:55.47 PM 11-MAY-1996 12:00.00 AM             111                                                                                                                         
+Jonathon        16-FEB-2024 04:55.47 PM 24-MAR-1998 12:00.00 AM             103                                                                                                                         
+Kimerely        16-FEB-2024 04:55.47 PM 24-MAY-1999 12:00.00 AM              98                                                                                                                         
+Jennifer        16-FEB-2024 04:55.47 PM 17-SEP-1987 12:00.00 AM             145                                                                                                                         
+Michael         16-FEB-2024 04:55.47 PM 17-FEB-1996 12:00.00 AM             111                                                                                                                         
+Pat             16-FEB-2024 04:55.47 PM 17-AUG-1997 12:00.00 AM             105                                                                                                                         
+Shelley         16-FEB-2024 04:55.47 PM 07-JUN-1994 12:00.00 AM             118                                                                                                                         
+William         16-FEB-2024 04:55.47 PM 07-JUN-1994 12:00.00 AM             118                                                                                                                         
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , SYSDATE , HIRE_DATE , TRUNC((MONTHS_BETWEEN(SYSDATE , HIRE_DATE)/12)) YEARS_WORKED FROM EMPLOYEES;
+
+FIRST_NAME      SYSDATE                 HIRE_DATE               YEARS_WORKED                                                                                                                            
+--------------- ----------------------- ----------------------- ------------                                                                                                                            
+Steven          16-FEB-2024 04:56.05 PM 17-JUL-1987 12:00.00 AM           36                                                                                                                            
+Neena           16-FEB-2024 04:56.05 PM 21-SEP-1989 12:00.00 AM           34                                                                                                                            
+Lex             16-FEB-2024 04:56.05 PM 13-JAN-1993 12:00.00 AM           31                                                                                                                            
+Alexander       16-FEB-2024 04:56.05 PM 03-JAN-1990 12:00.00 AM           34                                                                                                                            
+Bruce           16-FEB-2024 04:56.05 PM 21-MAY-1991 12:00.00 AM           32                                                                                                                            
+Diana           16-FEB-2024 04:56.05 PM 07-FEB-1999 12:00.00 AM           25                                                                                                                            
+Kevin           16-FEB-2024 04:56.05 PM 16-NOV-1999 12:00.00 AM           24                                                                                                                            
+Trenna          16-FEB-2024 04:56.05 PM 17-OCT-1995 12:00.00 AM           28                                                                                                                            
+Curtis          16-FEB-2024 04:56.05 PM 29-JAN-1997 12:00.00 AM           27                                                                                                                            
+Randall         16-FEB-2024 04:56.05 PM 15-MAR-1998 12:00.00 AM           25                                                                                                                            
+Peter           16-FEB-2024 04:56.05 PM 09-JUL-1998 12:00.00 AM           25                                                                                                                            
+Eleni           16-FEB-2024 04:56.05 PM 29-JAN-2000 12:00.00 AM           24                                                                                                                            
+Ellen           16-FEB-2024 04:56.05 PM 11-MAY-1996 12:00.00 AM           27                                                                                                                            
+Jonathon        16-FEB-2024 04:56.05 PM 24-MAR-1998 12:00.00 AM           25                                                                                                                            
+Kimerely        16-FEB-2024 04:56.05 PM 24-MAY-1999 12:00.00 AM           24                                                                                                                            
+Jennifer        16-FEB-2024 04:56.05 PM 17-SEP-1987 12:00.00 AM           36                                                                                                                            
+Michael         16-FEB-2024 04:56.05 PM 17-FEB-1996 12:00.00 AM           27                                                                                                                            
+Pat             16-FEB-2024 04:56.05 PM 17-AUG-1997 12:00.00 AM           26                                                                                                                            
+Shelley         16-FEB-2024 04:56.05 PM 07-JUN-1994 12:00.00 AM           29                                                                                                                            
+William         16-FEB-2024 04:56.05 PM 07-JUN-1994 12:00.00 AM           29                                                                                                                            
+
+20 rows selected.
+
+SQL> REM DAYS WEEKS MONTHS QUARTERS YEARS
+SQL> 
+SQL> REM 1 FIND NUMBER OF WEEKS WORKS
+SQL> 
+SQL> REM 2 FIND NUMBER OF QUARTERS WORKED
+SQL> 
+SQL> SPOOL OFF

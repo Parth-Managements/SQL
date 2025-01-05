@@ -1,0 +1,1058 @@
+SQL> 
+SQL> REM TABLE LEVEL CONSTRAINTS : REQUIRED WHEN WE WANT TO REFER MULTIPLE COLUMNS WITHIN SINGLE CONSTRAINT.
+SQL> 
+SQL> REM SCHOOL :
+SQL> 
+SQL> REM UNIQUENESS : YEAR_BOARD_MEDIMUM_SHIFT_STANDARD_DIVISION_ROLLNO
+SQL> 
+SQL> 
+SQL> DROP TABLE FEES;
+DROP TABLE FEES
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> DROP TABLE SCHOOL;
+DROP TABLE SCHOOL
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> REM STD DIV RNO
+SQL> 
+SQL> REM PK  UN  UN
+SQL> 
+SQL> REM 1   A   1
+SQL> 
+SQL> REM 1
+SQL> 
+SQL> 
+SQL> REM TABLE LEVEL CONSTRAINTS ARE PLACED AFTER LAST COLUMN DEFINITION,.
+SQL> 
+SQL> REM TABLE LEVEL CONSTRAINTS CAN REFER MULTIPLE COLUMNS WITHIN SINGLE CONSTRAINT.
+SQL> 
+SQL> 
+SQL> 
+SQL> CREATE TABLE SCHOOL(STD NUMBER(2) , DIV CHAR , RNO NUMBER(2) , NM VARCHAR(10) CHECK (NM=UPPER(NM)) , PRIMARY KEY (STD,DIV,RNO));
+
+Table created.
+
+SQL> 
+SQL> REM STD DIV RNO
+SQL> REM   5 A   1
+SQL> REM   5 A   2
+SQL> REM   5 A   3
+SQL> REM   5 B   1
+SQL> REM   5 B   2
+SQL> REM   6 A   1
+SQL> REM   6 A   2
+SQL> 
+SQL> REM   6 A   2 : IT SHOULD NOT ALLOW
+SQL> 
+SQL> INSERT INTO SCHOOL VALUES (5,'A',1,'GANESH');
+
+1 row created.
+
+SQL> INSERT INTO SCHOOL VALUES (5,'A',2,'RIDDHI');
+
+1 row created.
+
+SQL> INSERT INTO SCHOOL VALUES (5,'B',1,'SIDDHI');
+
+1 row created.
+
+SQL> INSERT INTO SCHOOL VALUES (5,'B',1,'SHUBH');
+INSERT INTO SCHOOL VALUES (5,'B',1,'SHUBH')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SCOTT.SYS_C0049526) violated 
+
+
+SQL> DROP TABLE SCHOOL;
+
+Table dropped.
+
+SQL> 
+SQL> REM 1 NOT NULL CONSTRAINT IS NOT ALLOWED AT TABLE LEVEL.
+SQL> 
+SQL> REM 2 REFERENCES CONSTRAINT HAS DIFFERENT SYNTAX FOR TABLE LEVEL.
+SQL> 
+SQL> 
+SQL> CREATE TABLE SCHOOL(STD NUMBER(2) , DIV CHAR , RNO NUMBER(2) , NM VARCHAR(10) CHECK (NM=UPPER(NM)) , NOT NULL , UNIQUE (STD,DIV,RNO));
+CREATE TABLE SCHOOL(STD NUMBER(2) , DIV CHAR , RNO NUMBER(2) , NM VARCHAR(10) CHECK (NM=UPPER(NM)) , NOT NULL , UNIQUE (STD,DIV,RNO))
+                                                                                                     *
+ERROR at line 1:
+ORA-00904: : invalid identifier 
+
+
+SQL> CREATE TABLE SCHOOL(STD NUMBER(2) , DIV CHAR , RNO NUMBER(2) , NM VARCHAR(10) CHECK (NM=UPPER(NM)) , NOT NULL UNIQUE (STD,DIV,RNO));
+CREATE TABLE SCHOOL(STD NUMBER(2) , DIV CHAR , RNO NUMBER(2) , NM VARCHAR(10) CHECK (NM=UPPER(NM)) , NOT NULL UNIQUE (STD,DIV,RNO))
+                                                                                                     *
+ERROR at line 1:
+ORA-00904: : invalid identifier 
+
+
+SQL> CREATE TABLE SCHOOL(STD NUMBER(2) NOT NULL, DIV CHAR NOT NULL, RNO NUMBER(2) NOT NULL, NM VARCHAR(10) CHECK (NM=UPPER(NM)) , UNIQUE (STD,DIV,RNO));
+
+Table created.
+
+SQL> INSERT INTO SCHOOL VALUES (5,'A',1,'GANESH');
+
+1 row created.
+
+SQL> INSERT INTO SCHOOL VALUES (5,'A',2,'RIDDHI');
+
+1 row created.
+
+SQL> INSERT INTO SCHOOL VALUES (5,'B',1,'SIDDHI');
+
+1 row created.
+
+SQL> INSERT INTO SCHOOL VALUES (5,'B',1,'SHUBH');
+INSERT INTO SCHOOL VALUES (5,'B',1,'SHUBH')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SCOTT.SYS_C0049531) violated 
+
+
+SQL> REM SCHOOL : 50 CLASS ROOMS
+SQL> 
+SQL> REM 1 PRINCIPAL OFFICE
+SQL> 
+SQL> REM 2 STAFF ROOM
+SQL> 
+SQL> REM 48 : STD 1 TO 12 EACH HAS 4 DIVISIONS
+SQL> 
+SQL> REM EACH CLASS HAS 15 BENCHES
+SQL> 
+SQL> REM STD 1 TO 4 : 15 X 5 = RNO 1 TO 75
+SQL> 
+SQL> REM STD 5 TO 8 : 15 X 4 = RNO 1 TO 60
+SQL> 
+SQL> REM STD 9 TO 12 : 15 X 3 = RNO 1 TO 45
+SQL> 
+SQL> 
+SQL> DROP TABLE SCHOOL;
+
+Table dropped.
+
+SQL> CREATE TABLE SCHOOL(STD NUMBER(2) , DIV CHAR , RNO NUMBER(2) , NM VARCHAR(10) CHECK(NM=UPPER(NM)),
+  2  CHECK ((STD BETWEEN 1 AND 4 AND RNO BETWEEN 1 AND 75) OR
+  3         (STD BETWEEN 5 AND 8 AND RNO BETWEEN 1 AND 60) OR
+  4         (STD BETWEEN 9 AND 12 AND RNO BETWEEN 1 AND 45));
+       (STD BETWEEN 9 AND 12 AND RNO BETWEEN 1 AND 45))
+                                                      *
+ERROR at line 4:
+ORA-00907: missing right parenthesis 
+
+
+SQL> CREATE TABLE SCHOOL(STD NUMBER(2) , DIV CHAR , RNO NUMBER(2) , NM VARCHAR(10) CHECK(NM=UPPER(NM)),
+  2  CHECK ((STD BETWEEN 1 AND 4 AND RNO BETWEEN 1 AND 75) OR
+  3         (STD BETWEEN 5 AND 8 AND RNO BETWEEN 1 AND 60) OR
+  4         (STD BETWEEN 9 AND 12 AND RNO BETWEEN 1 AND 45)));
+
+Table created.
+
+SQL> INSERT INTO SCHOOL VALUES (5,'A',1,'GANESH');
+
+1 row created.
+
+SQL> INSERT INTO SCHOOL VALUES (5,'A',75,'RIDDHI');
+INSERT INTO SCHOOL VALUES (5,'A',75,'RIDDHI')
+*
+ERROR at line 1:
+ORA-02290: check constraint (SCOTT.SYS_C0049533) violated 
+
+
+SQL> INSERT INTO SCHOOL VALUES (5,'A',60,'RIDDHI');
+
+1 row created.
+
+SQL> INSERT INTO SCHOOL VALUES (9,'A',60,'SIDDHI');
+INSERT INTO SCHOOL VALUES (9,'A',60,'SIDDHI')
+*
+ERROR at line 1:
+ORA-02290: check constraint (SCOTT.SYS_C0049533) violated 
+
+
+SQL> INSERT INTO SCHOOL VALUES (9,'A',45,'SIDDHI');
+
+1 row created.
+
+SQL> INSERT INTO SCHOOL VALUES (9,'A',0,'SIDDHI');
+INSERT INTO SCHOOL VALUES (9,'A',0,'SIDDHI')
+*
+ERROR at line 1:
+ORA-02290: check constraint (SCOTT.SYS_C0049533) violated 
+
+
+SQL> INSERT INTO SCHOOL VALUES (9,'A',-2,'SIDDHI');
+INSERT INTO SCHOOL VALUES (9,'A',-2,'SIDDHI')
+*
+ERROR at line 1:
+ORA-02290: check constraint (SCOTT.SYS_C0049533) violated 
+
+
+SQL> DROP TABLE SCHOOL;
+
+Table dropped.
+
+SQL> CREATE TABLE SCHOOL(STD NUMBER(2) , DIV CHAR CHECK(DIV IN ('A','B','C','D')), RNO NUMBER(2) , NM VARCHAR(10) CHECK(NM=UPPER(NM)),
+  2  CHECK ((STD BETWEEN 1 AND 4 AND RNO BETWEEN 1 AND 75) OR
+  3         (STD BETWEEN 5 AND 8 AND RNO BETWEEN 1 AND 60) OR
+  4         (STD BETWEEN 9 AND 12 AND RNO BETWEEN 1 AND 45)));
+
+Table created.
+
+SQL> INSERT INTO SCHOOL VALUES (5,'A',1,'GANESH');
+
+1 row created.
+
+SQL> INSERT INTO SCHOOL VALUES (5,'A',75,'RIDDHI');
+INSERT INTO SCHOOL VALUES (5,'A',75,'RIDDHI')
+*
+ERROR at line 1:
+ORA-02290: check constraint (SCOTT.SYS_C0049536) violated 
+
+
+SQL> INSERT INTO SCHOOL VALUES (5,'A',60,'RIDDHI');
+
+1 row created.
+
+SQL> INSERT INTO SCHOOL VALUES (5,'b',60,'RIDDHI');
+INSERT INTO SCHOOL VALUES (5,'b',60,'RIDDHI')
+*
+ERROR at line 1:
+ORA-02290: check constraint (SCOTT.SYS_C0049534) violated 
+
+
+SQL> DROP TABLE SCHOOL;
+
+Table dropped.
+
+SQL> REM FEES : STD DIV RNO AMT
+SQL> 
+SQL> CREATE TABLE SCHOOL(STD NUMBER(2) , DIV CHAR , RNO NUMBER(2) , NM VARCHAR(10) CHECK (NM=UPPER(NM)) , PRIMARY KEY (STD,DIV,RNO));
+
+Table created.
+
+SQL> CREATE TABLE FEES(STD NUMBER(2) , DIV CHAR , RNO NUMBER(2) , AMT NUMBER(10),
+  2  REFERENCES SCHOOL(STD,DIV,RNO));
+REFERENCES SCHOOL(STD,DIV,RNO))
+                 *
+ERROR at line 2:
+ORA-00907: missing right parenthesis 
+
+
+SQL> CREATE TABLE FEES(STD NUMBER(2) , DIV CHAR , RNO NUMBER(2) , AMT NUMBER(10),
+  2  FOREIGN KEY (STD,DIV,RNO) REFERENCES SCHOOL(STD,DIV,RNO));
+
+Table created.
+
+SQL> DROP TABLE FEES;
+
+Table dropped.
+
+SQL> CREATE TABLE FEES(STD NUMBER(2) , DIV CHAR , RNO NUMBER(2) , AMT NUMBER(10),
+  2  FOREIGN KEY (STD,DIV,RNO) REFERENCES SCHOOL);
+
+Table created.
+
+SQL> CREATE TABLE FEES(STD NUMBER(2) , DIV CHAR , RNO NUMBER(2) , AMT NUMBER(10),
+  2  FOREIGN KEY (DIV,RNO,STD) REFERENCES SCHOOL(DIV,RNO,STD));
+CREATE TABLE FEES(STD NUMBER(2) , DIV CHAR , RNO NUMBER(2) , AMT NUMBER(10),
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> DROP TABLE FEES;
+
+Table dropped.
+
+SQL> CREATE TABLE FEES(STD NUMBER(2) , DIV CHAR , RNO NUMBER(2) , AMT NUMBER(10),
+  2  FOREIGN KEY (DIV,RNO,STD) REFERENCES SCHOOL(DIV,RNO,STD));
+
+Table created.
+
+SQL> DROP TABLE FEES;
+
+Table dropped.
+
+SQL> CREATE TABLE FEES(STD NUMBER(2) , DIVISION CHAR , RNO NUMBER(2) , AMT NUMBER(10),
+  2  FOREIGN KEY (DIVISION,RNO,STD) REFERENCES SCHOOL(DIV,RNO,STD));
+
+Table created.
+
+SQL> DROP TABLE FEEES;
+DROP TABLE FEEES
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> DROP TABLE FEES;
+
+Table dropped.
+
+SQL> 
+SQL> CREATE TABLE FEES(STD NUMBER(2) , DIV CHAR , RNO NUMBER(2) , AMT NUMBER(10),
+  2  FOREIGN KEY (RNO,DIVISION,STD) REFERENCES SCHOOL);
+FOREIGN KEY (RNO,DIVISION,STD) REFERENCES SCHOOL)
+                 *
+ERROR at line 2:
+ORA-00904: "DIVISION": invalid identifier 
+
+
+SQL> CREATE TABLE FEES(STD NUMBER(2) , DIVISION CHAR , RNO NUMBER(2) , AMT NUMBER(10),
+  2  FOREIGN KEY (RNO,DIVISION,STD) REFERENCES SCHOOL);
+
+Table created.
+
+SQL> REM SCHOOL : STD DIV RNO NM : CPK , CCK , CHECK : DIV , NM
+SQL> 
+SQL> REM FEES   : STD DIV ROLLNO AMT : CR , AMT CHECK(10000 TO 100000)
+SQL> 
+SQL> DROP TABLE FEES;
+
+Table dropped.
+
+SQL> DROP TABLE SCHOOL;
+
+Table dropped.
+
+SQL> 
+SQL> REM SCHOOL : STD DIV RNO NM : CPK , CCK , CHECK : DIV , NM
+SQL> 
+SQL> CREATE TABLE SCHOOL(STD NUMBER(2) , DIV CHAR CHECK(DIV BETWEEN 'A' AND 'D') , RNO NUMBER(2) , NM VARCHAR(10) CHECK(NM=UPPER(NM)),
+  2  PRIMARY KEY (STD,DIV,RNO) ,
+  3  CHECK ((STD BETWEEN 1 AND 4 AND RNO BETWEEN 1 AND 75)
+  4  OR     (STD BETWEEN 5 AND 8 AND RNO BETWEEN 1 AND 60)
+  5  OR     (STD BETWEEN 9 AND 12 AND RNO BETWEEN 1 AND 45)));
+
+Table created.
+
+SQL> REM FEES   : STD DIV ROLLNO AMT : CR , AMT CHECK(10000 TO 100000)
+SQL> 
+SQL> CREATE TABLE FEES (STD NUMBER(2) , DIV CHAR(2) , ROLLNO NUMBER(2) , AMT NUMBER(6) CHECK(AMT BETWEEN 10000 AND 100000),
+  2  FOREIGN KEY (STD , DIV , ROLLNO) REFERENCES SCHOOL(STD,DIV,RNO));
+
+Table created.
+
+SQL> REM CREATING TABLE USING subquery/SELECT statement/EXISTING TABLE(S)
+SQL> 
+SQL> DROP TABLE T1;
+
+Table dropped.
+
+SQL> DROP TABLE T2;
+
+Table dropped.
+
+SQL> DROP TABLE T3;
+
+Table dropped.
+
+SQL> DROP TABLE T4;
+
+Table dropped.
+
+SQL> DROP TABLE T5;
+
+Table dropped.
+
+SQL> DROP TABLE T6;
+
+Table dropped.
+
+SQL> DROP TABLE T7;
+
+Table dropped.
+
+SQL> DROP TABLE T8;
+
+Table dropped.
+
+SQL> DROP TABLE T9;
+
+Table dropped.
+
+SQL> DROP TABLE T10;
+
+Table dropped.
+
+SQL> DROP TABLE T11;
+
+Table dropped.
+
+SQL> DROP TABLE T12;
+
+Table dropped.
+
+SQL> DROP TABLE T13;
+
+Table dropped.
+
+SQL> DROP TABLE T14;
+
+Table dropped.
+
+SQL> DROP TABLE T15;
+
+Table dropped.
+
+SQL> DROP TABLE T16;
+
+Table dropped.
+
+SQL> DROP TABLE T17;
+
+Table dropped.
+
+SQL> DROP TABLE T18;
+
+Table dropped.
+
+SQL> DROP TABLE T19;
+
+Table dropped.
+
+SQL> DROP TABLE T20;
+DROP TABLE T20
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> DROP TABLE T21;
+DROP TABLE T21
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> REM CREATE TABLE tablename AS select statement;
+SQL> 
+SQL> CREATE TABLE T1 AS SELECT * FROM EMPLOYEES;
+
+Table created.
+
+SQL> DESC EMPLOYEES
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPLOYEE_ID                               NOT NULL NUMBER(6)
+ FIRST_NAME                                         VARCHAR2(15)
+ LAST_NAME                                 NOT NULL VARCHAR2(15)
+ EMAIL                                              VARCHAR2(10)
+ PHONE_NUMBER                                       VARCHAR2(20)
+ HIRE_DATE                                 NOT NULL DATE
+ JOB_ID                                    NOT NULL VARCHAR2(10)
+ SALARY                                             NUMBER(8,2)
+ COMMISSION_PCT                                     NUMBER(2,2)
+ MANAGER_ID                                         NUMBER(6)
+ DEPARTMENT_ID                                      NUMBER(4)
+
+SQL> DESC T1
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPLOYEE_ID                               NOT NULL NUMBER(6)
+ FIRST_NAME                                         VARCHAR2(15)
+ LAST_NAME                                 NOT NULL VARCHAR2(15)
+ EMAIL                                              VARCHAR2(10)
+ PHONE_NUMBER                                       VARCHAR2(20)
+ HIRE_DATE                                 NOT NULL DATE
+ JOB_ID                                    NOT NULL VARCHAR2(10)
+ SALARY                                             NUMBER(8,2)
+ COMMISSION_PCT                                     NUMBER(2,2)
+ MANAGER_ID                                         NUMBER(6)
+ DEPARTMENT_ID                                      NUMBER(4)
+
+SQL> SET LINES 200 PAGES 24
+SQL> 
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+20 rows selected.
+
+SQL> SELECT * FROM T1;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+20 rows selected.
+
+SQL> REM WHEN WE CREATE TABLE USING EXISTING TABLE, ONLY NOT NULL CONSTRAINT WILL BE COPIED TO NEW TABLE.
+SQL> 
+SQL> CREATE TABLE T2 AS SELECT FIRST_NAME , JOB_ID , SALARY , HIRE_DATE FROM EMPLOYEES;
+
+Table created.
+
+SQL> DESC T2
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ FIRST_NAME                                                                                                                 VARCHAR2(15)
+ JOB_ID                                                                                                            NOT NULL VARCHAR2(10)
+ SALARY                                                                                                                     NUMBER(8,2)
+ HIRE_DATE                                                                                                         NOT NULL DATE
+
+SQL> SELECT * FROM T2;
+
+FIRST_NAME      JOB_ID         SALARY HIRE_DATE                                                                                                                                                         
+--------------- ---------- ---------- ---------                                                                                                                                                         
+Steven          AD_PRES         24000 17-JUL-87                                                                                                                                                         
+Neena           AD_VP           17000 21-SEP-89                                                                                                                                                         
+Lex             AD_VP           17000 13-JAN-93                                                                                                                                                         
+Alexander       IT_PROG          9000 03-JAN-90                                                                                                                                                         
+Bruce           IT_PROG          6000 21-MAY-91                                                                                                                                                         
+Diana           IT_PROG          4200 07-FEB-99                                                                                                                                                         
+Kevin           ST_MAN           5800 16-NOV-99                                                                                                                                                         
+Trenna          ST_CLERK         3500 17-OCT-95                                                                                                                                                         
+Curtis          ST_CLERK         3100 29-JAN-97                                                                                                                                                         
+Randall         ST_CLERK         2600 15-MAR-98                                                                                                                                                         
+Peter           ST_CLERK         2500 09-JUL-98                                                                                                                                                         
+Eleni           SA_MAN          10500 29-JAN-00                                                                                                                                                         
+Ellen           SA_REP          11000 11-MAY-96                                                                                                                                                         
+Jonathon        SA_REP           8600 24-MAR-98                                                                                                                                                         
+Kimerely        SA_REP           7000 24-MAY-99                                                                                                                                                         
+Jennifer        AD_ASST          4400 17-SEP-87                                                                                                                                                         
+Michael         MK_MAN          13000 17-FEB-96                                                                                                                                                         
+Pat             MK_REP           6000 17-AUG-97                                                                                                                                                         
+Shelley         AC_MGR          12000 07-JUN-94                                                                                                                                                         
+William         AC_ACCOUNT       8300 07-JUN-94                                                                                                                                                         
+
+20 rows selected.
+
+SQL> CREATE TABLE T3 AS SELECT DISTINCT JOB_ID FROM EMPLOYEES ORDER BY 1;
+
+Table created.
+
+SQL> SELECT * FROM T3;
+
+JOB_ID                                                                                                                                                                                                  
+----------                                                                                                                                                                                              
+AC_ACCOUNT                                                                                                                                                                                              
+AC_MGR                                                                                                                                                                                                  
+AD_ASST                                                                                                                                                                                                 
+AD_PRES                                                                                                                                                                                                 
+AD_VP                                                                                                                                                                                                   
+IT_PROG                                                                                                                                                                                                 
+MK_MAN                                                                                                                                                                                                  
+MK_REP                                                                                                                                                                                                  
+SA_MAN                                                                                                                                                                                                  
+SA_REP                                                                                                                                                                                                  
+ST_CLERK                                                                                                                                                                                                
+ST_MAN                                                                                                                                                                                                  
+
+12 rows selected.
+
+SQL> CREATE TABLE T4 AS SELECT FIRST_NAME , JOB_ID , SALARY FROM EMPLOYEES WHERE SALARY BETWEEN 6000 AND 11000 ORDER BY 3;
+
+Table created.
+
+SQL> SELECT * FROM T4;
+
+FIRST_NAME      JOB_ID         SALARY                                                                                                                                                                   
+--------------- ---------- ----------                                                                                                                                                                   
+Bruce           IT_PROG          6000                                                                                                                                                                   
+Pat             MK_REP           6000                                                                                                                                                                   
+Kimerely        SA_REP           7000                                                                                                                                                                   
+William         AC_ACCOUNT       8300                                                                                                                                                                   
+Jonathon        SA_REP           8600                                                                                                                                                                   
+Alexander       IT_PROG          9000                                                                                                                                                                   
+Eleni           SA_MAN          10500                                                                                                                                                                   
+Ellen           SA_REP          11000                                                                                                                                                                   
+
+8 rows selected.
+
+SQL> CREATE TABLE T5 AS SELECT FIRST_NAME , LOWER(EMAIL) , JOB_ID , SALARY * 12 FROM EMPLOYEES WHERE SALARY BETWEEN 6000 AND 11000 ORDER BY 3;
+CREATE TABLE T5 AS SELECT FIRST_NAME , LOWER(EMAIL) , JOB_ID , SALARY * 12 FROM EMPLOYEES WHERE SALARY BETWEEN 6000 AND 11000 ORDER BY 3
+                                       *
+ERROR at line 1:
+ORA-00998: must name this expression with a column alias 
+
+
+SQL> CREATE TABLE T5 AS SELECT FIRST_NAME , LOWER(EMAIL) EMAIL , JOB_ID , SALARY * 12 FROM EMPLOYEES WHERE SALARY BETWEEN 6000 AND 11000 ORDER BY 3;
+CREATE TABLE T5 AS SELECT FIRST_NAME , LOWER(EMAIL) EMAIL , JOB_ID , SALARY * 12 FROM EMPLOYEES WHERE SALARY BETWEEN 6000 AND 11000 ORDER BY 3
+                                                                            *
+ERROR at line 1:
+ORA-00998: must name this expression with a column alias 
+
+
+SQL> CREATE TABLE T5 AS SELECT FIRST_NAME , LOWER(EMAIL) EMAIL , JOB_ID , SALARY * 12 YEARLY_SALARY FROM EMPLOYEES WHERE SALARY BETWEEN 6000 AND 11000 ORDER BY 3;
+
+Table created.
+
+SQL> DESC T5
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ FIRST_NAME                                                                                                                 VARCHAR2(15)
+ EMAIL                                                                                                                      VARCHAR2(10)
+ JOB_ID                                                                                                            NOT NULL VARCHAR2(10)
+ YEARLY_SALARY                                                                                                              NUMBER
+
+SQL> SELECT * FROM T5;
+
+FIRST_NAME      EMAIL      JOB_ID     YEARLY_SALARY                                                                                                                                                     
+--------------- ---------- ---------- -------------                                                                                                                                                     
+William         wgietz     AC_ACCOUNT         99600                                                                                                                                                     
+Bruce           bernst     IT_PROG            72000                                                                                                                                                     
+Alexander       ahunold    IT_PROG           108000                                                                                                                                                     
+Pat             pfay       MK_REP             72000                                                                                                                                                     
+Eleni           ezlotkey   SA_MAN            126000                                                                                                                                                     
+Kimerely        kgrant     SA_REP             84000                                                                                                                                                     
+Jonathon        jtaylor    SA_REP            103200                                                                                                                                                     
+Ellen           eabel      SA_REP            132000                                                                                                                                                     
+
+8 rows selected.
+
+SQL> CREATE TABLE T6 AS SELECT FIRST_NAME , SALARY ,
+  2  CASE WHEN SALARY BETWEEN 1 AND 6000 THEN 'LOW'
+  3       WHEN SALARY BETWEEN 6001 AND 12000 THEN 'MEDIUM' ELSE 'HIGH' END "RANGE"
+  4  FROM EMPLOYEES;
+
+Table created.
+
+SQL> SELECT * FROM T6;
+
+FIRST_NAME          SALARY RANGE                                                                                                                                                                        
+--------------- ---------- ------                                                                                                                                                                       
+Steven               24000 HIGH                                                                                                                                                                         
+Neena                17000 HIGH                                                                                                                                                                         
+Lex                  17000 HIGH                                                                                                                                                                         
+Alexander             9000 MEDIUM                                                                                                                                                                       
+Bruce                 6000 LOW                                                                                                                                                                          
+Diana                 4200 LOW                                                                                                                                                                          
+Kevin                 5800 LOW                                                                                                                                                                          
+Trenna                3500 LOW                                                                                                                                                                          
+Curtis                3100 LOW                                                                                                                                                                          
+Randall               2600 LOW                                                                                                                                                                          
+Peter                 2500 LOW                                                                                                                                                                          
+Eleni                10500 MEDIUM                                                                                                                                                                       
+Ellen                11000 MEDIUM                                                                                                                                                                       
+Jonathon              8600 MEDIUM                                                                                                                                                                       
+Kimerely              7000 MEDIUM                                                                                                                                                                       
+Jennifer              4400 LOW                                                                                                                                                                          
+Michael              13000 HIGH                                                                                                                                                                         
+Pat                   6000 LOW                                                                                                                                                                          
+Shelley              12000 MEDIUM                                                                                                                                                                       
+William               8300 MEDIUM                                                                                                                                                                       
+
+20 rows selected.
+
+SQL> CREATE TABLE T7 AS SELECT JOB_ID , MIN(SALARY) JOB_MIN_SAL , MAX(SALARY) JOB_MAX_SAL FROM EMPLOYEES;
+CREATE TABLE T7 AS SELECT JOB_ID , MIN(SALARY) JOB_MIN_SAL , MAX(SALARY) JOB_MAX_SAL FROM EMPLOYEES
+                          *
+ERROR at line 1:
+ORA-00937: not a single-group group function 
+
+
+SQL> CREATE TABLE T7 AS SELECT JOB_ID , MIN(SALARY) JOB_MIN_SAL , MAX(SALARY) JOB_MAX_SAL FROM EMPLOYEES GROUP BY JOB_ID ORDER BY 1;
+
+Table created.
+
+SQL> SELECT * FROM T7;
+
+JOB_ID     JOB_MIN_SAL JOB_MAX_SAL                                                                                                                                                                      
+---------- ----------- -----------                                                                                                                                                                      
+AC_ACCOUNT        8300        8300                                                                                                                                                                      
+AC_MGR           12000       12000                                                                                                                                                                      
+AD_ASST           4400        4400                                                                                                                                                                      
+AD_PRES          24000       24000                                                                                                                                                                      
+AD_VP            17000       17000                                                                                                                                                                      
+IT_PROG           4200        9000                                                                                                                                                                      
+MK_MAN           13000       13000                                                                                                                                                                      
+MK_REP            6000        6000                                                                                                                                                                      
+SA_MAN           10500       10500                                                                                                                                                                      
+SA_REP            7000       11000                                                                                                                                                                      
+ST_CLERK          2500        3500                                                                                                                                                                      
+ST_MAN            5800        5800                                                                                                                                                                      
+
+12 rows selected.
+
+SQL> CREATE TABLE T8 AS SELECT TO_CHAR(HIRE_DATE,'RRRR') YEAR ,
+  2  SUM(CASE WHEN HIRE_DATE < '1JAN92' THEN SALARY END) SUM_SAL_UPTO_92,
+  3  SUM(CASE WHEN HIRE_DATE BETWEEN '1JAN92' AND '31DEC97' THEN SALARY END) SUM_SAL_92_97,
+  4  SUM(CASE WHEN HIRE_DATE > '31DEC97' THEN SALARY END) SUM_SAL_98_ONWARDS
+  5  FROM EMPLOYEES
+  6  GROUP BY TO_CHAR(HIRE_DATE,'RRRR')
+  7  ORDER BY 1
+  8  
+SQL> 
+SQL> CREATE TABLE T8 AS SELECT TO_CHAR(HIRE_DATE,'RRRR') YEAR ,
+  2  SUM(CASE WHEN HIRE_DATE < '1JAN92' THEN SALARY END) SUM_SAL_UPTO_91,
+  3  SUM(CASE WHEN HIRE_DATE BETWEEN '1JAN92' AND '31DEC97' THEN SALARY END) SUM_SAL_92_97,
+  4  SUM(CASE WHEN HIRE_DATE > '31DEC97' THEN SALARY END) SUM_SAL_98_ONWARDS
+  5  FROM EMPLOYEES
+  6  GROUP BY TO_CHAR(HIRE_DATE,'RRRR')
+  7  ORDER BY 1;
+
+Table created.
+
+SQL> SELECT * FROM T8;
+
+YEAR SUM_SAL_UPTO_91 SUM_SAL_92_97 SUM_SAL_98_ONWARDS                                                                                                                                                   
+---- --------------- ------------- ------------------                                                                                                                                                   
+1987           28400                                                                                                                                                                                    
+1989           17000                                                                                                                                                                                    
+1990            9000                                                                                                                                                                                    
+1991            6000                                                                                                                                                                                    
+1993                         17000                                                                                                                                                                      
+1994                         20300                                                                                                                                                                      
+1995                          3500                                                                                                                                                                      
+1996                         24000                                                                                                                                                                      
+1997                          9100                                                                                                                                                                      
+1998                                            13700                                                                                                                                                   
+1999                                            17000                                                                                                                                                   
+2000                                            10500                                                                                                                                                   
+
+12 rows selected.
+
+SQL> CREATE TABLE T9 AS SELECT DEPARTMENT_ID ,
+  2  SUM(CASE WHEN HIRE_DATE < '1JAN92' THEN SALARY END) SUM_SAL_UPTO_91,
+  3  SUM(CASE WHEN HIRE_DATE BETWEEN '1JAN92' AND '31DEC97' THEN SALARY END) SUM_SAL_92_97,
+  4  SUM(CASE WHEN HIRE_DATE > '31DEC97' THEN SALARY END) SUM_SAL_98_ONWARDS
+  5  FROM EMPLOYEES
+  6  GROUP BY DEPARTMENT_ID
+  7  ORDER BY 1;
+
+Table created.
+
+SQL> SELECT * FROM T9;
+
+DEPARTMENT_ID SUM_SAL_UPTO_91 SUM_SAL_92_97 SUM_SAL_98_ONWARDS                                                                                                                                          
+------------- --------------- ------------- ------------------                                                                                                                                          
+           10            4400                                                                                                                                                                           
+           20                         19000                                                                                                                                                             
+           50                          6600              10900                                                                                                                                          
+           60           15000                             4200                                                                                                                                          
+           80                         11000              19100                                                                                                                                          
+           90           41000         17000                                                                                                                                                             
+          110                         20300                                                                                                                                                             
+                                                          7000                                                                                                                                          
+
+8 rows selected.
+
+SQL> CREATE TABLE T10 AS SELECT DEPARTMENT_NAME , CITY FROM DEPARTMENTS NATURAL JOIN LOCATIONS;
+
+Table created.
+
+SQL> SELECT * FROM T10;
+
+DEPARTMENT_NAME                CITY                                                                                                                                                                     
+------------------------------ ------------------------------                                                                                                                                           
+Administration                 Seattle                                                                                                                                                                  
+Marketing                      Toronto                                                                                                                                                                  
+Shiping                        South San Francisco                                                                                                                                                      
+IT                             Southlake                                                                                                                                                                
+Sales                          Oxford                                                                                                                                                                   
+Executive                      Seattle                                                                                                                                                                  
+Accounting                     Seattle                                                                                                                                                                  
+Contracting                    Seattle                                                                                                                                                                  
+
+8 rows selected.
+
+SQL> CREATE TABLE T11 AS SELECT FIRST_NAME , DEPARTMENT_NAME , CITY FROM DEPARTMENTS NATURAL JOIN LOCATIONS
+  2  INNER JOIN EMPLOYEES USING (DEPARTMENT_ID);
+
+Table created.
+
+SQL> SELECT * FROM T11;
+
+FIRST_NAME      DEPARTMENT_NAME                CITY                                                                                                                                                     
+--------------- ------------------------------ ------------------------------                                                                                                                           
+Diana           IT                             Southlake                                                                                                                                                
+Bruce           IT                             Southlake                                                                                                                                                
+Alexander       IT                             Southlake                                                                                                                                                
+Kevin           Shiping                        South San Francisco                                                                                                                                      
+Peter           Shiping                        South San Francisco                                                                                                                                      
+Randall         Shiping                        South San Francisco                                                                                                                                      
+Curtis          Shiping                        South San Francisco                                                                                                                                      
+Trenna          Shiping                        South San Francisco                                                                                                                                      
+Jennifer        Administration                 Seattle                                                                                                                                                  
+Lex             Executive                      Seattle                                                                                                                                                  
+Steven          Executive                      Seattle                                                                                                                                                  
+Neena           Executive                      Seattle                                                                                                                                                  
+William         Accounting                     Seattle                                                                                                                                                  
+Shelley         Accounting                     Seattle                                                                                                                                                  
+Michael         Marketing                      Toronto                                                                                                                                                  
+Pat             Marketing                      Toronto                                                                                                                                                  
+Ellen           Sales                          Oxford                                                                                                                                                   
+Eleni           Sales                          Oxford                                                                                                                                                   
+Jonathon        Sales                          Oxford                                                                                                                                                   
+
+19 rows selected.
+
+SQL> CREATE TABLE T12 AS SELECT FIRST_NAME , JOB_ID , JOB_TITLE , SALARY , GRADE_LEVEL
+  2  FROM EMPLOYEES
+  3  JOIN JOBS USING (JOB_ID)
+  4  JOIN JOB_GRADES ON SALARY BETWEEN LOWEST_SAL AND HIGHEST_SAL;
+
+Table created.
+
+SQL> SELECT * FROM T12;
+
+FIRST_NAME      JOB_ID     JOB_TITLE                               SALARY GRA                                                                                                                           
+--------------- ---------- ----------------------------------- ---------- ---                                                                                                                           
+Steven          AD_PRES    President                                24000 E                                                                                                                             
+Neena           AD_VP      Administration Vice President            17000 E                                                                                                                             
+Lex             AD_VP      Administration Vice President            17000 E                                                                                                                             
+Michael         MK_MAN     Marketing Manager                        13000 D                                                                                                                             
+Shelley         AC_MGR     Accounting Manager                       12000 D                                                                                                                             
+Ellen           SA_REP     Sales Representative                     11000 D                                                                                                                             
+Eleni           SA_MAN     Sales Manager                            10500 D                                                                                                                             
+Alexander       IT_PROG    Programmer                                9000 C                                                                                                                             
+Jonathon        SA_REP     Sales Representative                      8600 C                                                                                                                             
+William         AC_ACCOUNT Public Accountant                         8300 C                                                                                                                             
+Kimerely        SA_REP     Sales Representative                      7000 C                                                                                                                             
+Bruce           IT_PROG    Programmer                                6000 C                                                                                                                             
+Pat             MK_REP     Marketing Representative                  6000 C                                                                                                                             
+Kevin           ST_MAN     Stock Manager                             5800 B                                                                                                                             
+Jennifer        AD_ASST    Administration Assistant                  4400 B                                                                                                                             
+Diana           IT_PROG    Programmer                                4200 B                                                                                                                             
+Trenna          ST_CLERK   Stock Clerk                               3500 B                                                                                                                             
+Curtis          ST_CLERK   Stock Clerk                               3100 B                                                                                                                             
+Randall         ST_CLERK   Stock Clerk                               2600 A                                                                                                                             
+Peter           ST_CLERK   Stock Clerk                               2500 A                                                                                                                             
+
+20 rows selected.
+
+SQL> CREATE TABLE T13 AS SELECT FIRST_NAME , DEPARTMENT_NAME
+  2  FROM EMPLOYEES
+  3  FULL JOIN DEPARTMENTS USING (DEPARTMENT_ID);
+
+Table created.
+
+SQL> SELECT * FROM T13;
+
+FIRST_NAME      DEPARTMENT_NAME                                                                                                                                                                         
+--------------- ------------------------------                                                                                                                                                          
+Steven          Executive                                                                                                                                                                               
+Neena           Executive                                                                                                                                                                               
+Lex             Executive                                                                                                                                                                               
+Alexander       IT                                                                                                                                                                                      
+Bruce           IT                                                                                                                                                                                      
+Diana           IT                                                                                                                                                                                      
+Kevin           Shiping                                                                                                                                                                                 
+Trenna          Shiping                                                                                                                                                                                 
+Curtis          Shiping                                                                                                                                                                                 
+Randall         Shiping                                                                                                                                                                                 
+Peter           Shiping                                                                                                                                                                                 
+Eleni           Sales                                                                                                                                                                                   
+Ellen           Sales                                                                                                                                                                                   
+Jonathon        Sales                                                                                                                                                                                   
+Kimerely                                                                                                                                                                                                
+Jennifer        Administration                                                                                                                                                                          
+Michael         Marketing                                                                                                                                                                               
+Pat             Marketing                                                                                                                                                                               
+Shelley         Accounting                                                                                                                                                                              
+William         Accounting                                                                                                                                                                              
+                Contracting                                                                                                                                                                             
+
+21 rows selected.
+
+SQL> CREATE TABLE T14 AS SELECT E.FIRST_NAME EMP_NAME , C.FIRST_NAME DEPT_COLL_NAME
+  2  FROM EMPLOYEES E
+  3  JOIN EMPLOYEES C ON ON E.DEPARTMENT_ID = C.DEPARTMENT_ID AND E.EMPLOYEE_ID < C.EMPLOYEE_ID;
+JOIN EMPLOYEES C ON ON E.DEPARTMENT_ID = C.DEPARTMENT_ID AND E.EMPLOYEE_ID < C.EMPLOYEE_ID
+                    *
+ERROR at line 3:
+ORA-00936: missing expression 
+
+
+SQL> CREATE TABLE T14 AS SELECT E.FIRST_NAME EMP_NAME , C.FIRST_NAME DEPT_COLL_NAME
+  2  FROM EMPLOYEES E
+  3  JOIN EMPLOYEES C ON E.DEPARTMENT_ID = C.DEPARTMENT_ID AND E.EMPLOYEE_ID < C.EMPLOYEE_ID;
+
+Table created.
+
+SQL> SELECT * FROM T14;
+
+EMP_NAME        DEPT_COLL_NAME                                                                                                                                                                          
+--------------- ---------------                                                                                                                                                                         
+Steven          Neena                                                                                                                                                                                   
+Steven          Lex                                                                                                                                                                                     
+Neena           Lex                                                                                                                                                                                     
+Alexander       Bruce                                                                                                                                                                                   
+Alexander       Diana                                                                                                                                                                                   
+Bruce           Diana                                                                                                                                                                                   
+Kevin           Trenna                                                                                                                                                                                  
+Kevin           Curtis                                                                                                                                                                                  
+Trenna          Curtis                                                                                                                                                                                  
+Kevin           Randall                                                                                                                                                                                 
+Trenna          Randall                                                                                                                                                                                 
+Curtis          Randall                                                                                                                                                                                 
+Kevin           Peter                                                                                                                                                                                   
+Trenna          Peter                                                                                                                                                                                   
+Curtis          Peter                                                                                                                                                                                   
+Randall         Peter                                                                                                                                                                                   
+Eleni           Ellen                                                                                                                                                                                   
+Eleni           Jonathon                                                                                                                                                                                
+Ellen           Jonathon                                                                                                                                                                                
+Michael         Pat                                                                                                                                                                                     
+Shelley         William                                                                                                                                                                                 
+
+21 rows selected.
+
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+20 rows selected.
+
+SQL> SELECT * FROM MPSEMP;
+
+     EMPNO ENAME      JOB               MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                  
+---------- ---------- ---------- ---------- --------- ---------- ---------- ----------                                                                                                                  
+      7839 KING       PRESIDENT             17-NOV-81       6000                    10                                                                                                                  
+      7782 CLARK      MANAGER          7839 09-JUN-81       2940                    10                                                                                                                  
+      7566 JONES      MANAGER          7839 02-APR-81     3272.5                    20                                                                                                                  
+      7902 FORD       ANALYST          7566 04-DEC-81                  3000         20                                                                                                                  
+      7698 BLAKE      MANAGER          7839 01-MAY-91       2850                    30                                                                                                                  
+      7369 SMITH      CLERK            7902 17-DEC-80       1200                    20                                                                                                                  
+      7499 ALLEN      SALESMAN         7698 20-FEB-81       2400        300         30                                                                                                                  
+      7521 WARD       SALESMAN         7698 22-FEB-81       1250        500         30                                                                                                                  
+      7654 MARTIN     SALESMAN         7698 28-SEP-81       1250       1400         30                                                                                                                  
+      7788 SCOTT      ANALYST          7566 09-DEC-82       4290        900         20                                                                                                                  
+      7844 TURNER     SALESMAN         7698 08-SEP-81       2160          0         30                                                                                                                  
+      7876 ADAMS      CLERK            7788 12-JAN-89                  1100         20                                                                                                                  
+      7900 JAMES      CLERK            7698 03-DEC-81                  1000         30                                                                                                                  
+      7934 MILLER     CLERK            7782 23-JAN-82       1872                    10                                                                                                                  
+
+14 rows selected.
+
+SQL> CREATE TABLE T15 AS SELECT EMPLOYEE_ID , FIRST_NAME FROM EMPLOYEES
+  2  UNION
+  3  SELECT EMPNO , ENAME FROM MPSEMP;
+
+Table created.
+
+SQL> SELECT * FROM T15;
+
+EMPLOYEE_ID FIRST_NAME                                                                                                                                                                                  
+----------- ---------------                                                                                                                                                                             
+        100 Steven                                                                                                                                                                                      
+        101 Neena                                                                                                                                                                                       
+        102 Lex                                                                                                                                                                                         
+        103 Alexander                                                                                                                                                                                   
+        104 Bruce                                                                                                                                                                                       
+        107 Diana                                                                                                                                                                                       
+        124 Kevin                                                                                                                                                                                       
+        141 Trenna                                                                                                                                                                                      
+        142 Curtis                                                                                                                                                                                      
+        143 Randall                                                                                                                                                                                     
+        144 Peter                                                                                                                                                                                       
+        149 Eleni                                                                                                                                                                                       
+        174 Ellen                                                                                                                                                                                       
+        176 Jonathon                                                                                                                                                                                    
+        178 Kimerely                                                                                                                                                                                    
+        200 Jennifer                                                                                                                                                                                    
+        201 Michael                                                                                                                                                                                     
+        202 Pat                                                                                                                                                                                         
+        205 Shelley                                                                                                                                                                                     
+        206 William                                                                                                                                                                                     
+       7369 SMITH                                                                                                                                                                                       
+
+EMPLOYEE_ID FIRST_NAME                                                                                                                                                                                  
+----------- ---------------                                                                                                                                                                             
+       7499 ALLEN                                                                                                                                                                                       
+       7521 WARD                                                                                                                                                                                        
+       7566 JONES                                                                                                                                                                                       
+       7654 MARTIN                                                                                                                                                                                      
+       7698 BLAKE                                                                                                                                                                                       
+       7782 CLARK                                                                                                                                                                                       
+       7788 SCOTT                                                                                                                                                                                       
+       7839 KING                                                                                                                                                                                        
+       7844 TURNER                                                                                                                                                                                      
+       7876 ADAMS                                                                                                                                                                                       
+       7900 JAMES                                                                                                                                                                                       
+       7902 FORD                                                                                                                                                                                        
+       7934 MILLER                                                                                                                                                                                      
+
+34 rows selected.
+
+SQL> REM 1 CREATE TABLE WITH DATA AND DEFINITION USING DEPARTMENTS TABLE.
+SQL> 
+SQL> REM 2 CREATE TABLE WHICH WILL HOLD ONLY FIRST_NAME AND JOB_ID COLUMNS.
+SQL> 
+SQL> REM 3 CREATE TABLE WHICH WILL HOLD ONLY THOSE WHOSE SALARY IS HIGHER THAN 10000
+SQL> 
+SQL> REM 4 CREATE TABLE WHICH WILL HOLD FULL_NAME AND TOTAL_PAYMENT. (SALARY + COMMISSION    A M O U N T)
+SQL> 
+SQL> REM 5 CREATE TABLE WHICH WILL HOLD MANAGER_ID AND NUMBER OF EMPLOYEES REPORTING TO EACH.
+SQL> 
+SQL> REM 6 CREATE TABLE WHICH WILL HOLD DEPARTMENT_NAME AND STATE_PROVINCE
+SQL> 
+SQL> REM 7 CREATE TABLE WHICH WILL HOLD ROWS 6 TO 13 OF EMPLOYEES TABLE.
+SQL> 
+SQL> REM 8 CREATE TABLE WHICH WILL HOLD DATA IN DESCENDING ORDER OF SALARY.
+SQL> 
+SQL> REM 9 CREATE TABLE WHICH WILL COMBINE VERTICALLY LAST_NAME OF EMPLOYEES TABLE AND ENAME OF EMPLOYEES TABLE
+SQL> 
+SQL> REM 10 CREATE TABLE LIKE LOCATIONS WHICH SHOULD NOT HOLD ANY DATA.
+SQL> 
+SQL> SPOOL OFF

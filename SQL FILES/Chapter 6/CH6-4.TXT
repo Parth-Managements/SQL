@@ -1,0 +1,749 @@
+SQL> 
+SQL> REM FIRST_NAME , DEPARTMENT_NAME , CITY , COUNTRY_NAME , REGION_NAME , JOB_ID , JOB_TITLE , SALARY , GRADE_LEVEL
+SQL> 
+SQL> REM E            D                 L      C              R             E/JOBS   JOBS        E        JOB_GRADES
+SQL> 
+SQL> 
+SQL> 
+SQL> SELECT FIRST_NAME , DEPARTMENT_NAME , CITY , COUNTRY_NAME , REGION_NAME , JOB_ID , JOB_TITLE , SALARY , GRADE_LEVEL
+  2  FROM EMPLOYEES
+  3  JOIN DEPARTMENTS USING (DEPARTMENT_ID)
+  4  JOIN LOCATIONS   USING (LOCATION_ID)
+  5  JOIN COUNTRIES   USING (COUNTRY_ID)
+  6  JOIN REGIONS     USING (REGION_ID)
+  7  JOIN JOBS        USING (JOB_ID)
+  8  JOIN JOB_GRADES  ON SALARY BETWEEN LOWEST_SAL AND HIGHEST_SAL;
+
+FIRST_NAME      DEPARTMENT_NAME                CITY                           COUNTRY_NAME                             REGION_NAME               JOB_ID     JOB_TITLE                                   
+--------------- ------------------------------ ------------------------------ ---------------------------------------- ------------------------- ---------- -----------------------------------         
+    SALARY GRA                                                                                                                                                                                          
+---------- ---                                                                                                                                                                                          
+Steven          Executive                      Seattle                        United States of America                 Americas                  AD_PRES    President                                   
+     24000 E                                                                                                                                                                                            
+                                                                                                                                                                                                        
+Neena           Executive                      Seattle                        United States of America                 Americas                  AD_VP      Administration Vice President               
+     17000 E                                                                                                                                                                                            
+                                                                                                                                                                                                        
+Lex             Executive                      Seattle                        United States of America                 Americas                  AD_VP      Administration Vice President               
+     17000 E                                                                                                                                                                                            
+                                                                                                                                                                                                        
+Michael         Marketing                      Toronto                        Canada                                   Americas                  MK_MAN     Marketing Manager                           
+     13000 D                                                                                                                                                                                            
+                                                                                                                                                                                                        
+Shelley         Accounting                     Seattle                        United States of America                 Americas                  AC_MGR     Accounting Manager                          
+     12000 D                                                                                                                                                                                            
+                                                                                                                                                                                                        
+Ellen           Sales                          Oxford                         United Kingdom                           Europe                    SA_REP     Sales Representative                        
+     11000 D                                                                                                                                                                                            
+                                                                                                                                                                                                        
+Eleni           Sales                          Oxford                         United Kingdom                           Europe                    SA_MAN     Sales Manager                               
+
+FIRST_NAME      DEPARTMENT_NAME                CITY                           COUNTRY_NAME                             REGION_NAME               JOB_ID     JOB_TITLE                                   
+--------------- ------------------------------ ------------------------------ ---------------------------------------- ------------------------- ---------- -----------------------------------         
+    SALARY GRA                                                                                                                                                                                          
+---------- ---                                                                                                                                                                                          
+     10500 D                                                                                                                                                                                            
+                                                                                                                                                                                                        
+Alexander       IT                             Southlake                      United States of America                 Americas                  IT_PROG    Programmer                                  
+      9000 C                                                                                                                                                                                            
+                                                                                                                                                                                                        
+Jonathon        Sales                          Oxford                         United Kingdom                           Europe                    SA_REP     Sales Representative                        
+      8600 C                                                                                                                                                                                            
+                                                                                                                                                                                                        
+William         Accounting                     Seattle                        United States of America                 Americas                  AC_ACCOUNT Public Accountant                           
+      8300 C                                                                                                                                                                                            
+                                                                                                                                                                                                        
+Pat             Marketing                      Toronto                        Canada                                   Americas                  MK_REP     Marketing Representative                    
+      6000 C                                                                                                                                                                                            
+                                                                                                                                                                                                        
+Bruce           IT                             Southlake                      United States of America                 Americas                  IT_PROG    Programmer                                  
+      6000 C                                                                                                                                                                                            
+                                                                                                                                                                                                        
+Kevin           Shiping                        South San Francisco            United States of America                 Americas                  ST_MAN     Stock Manager                               
+      5800 B                                                                                                                                                                                            
+
+FIRST_NAME      DEPARTMENT_NAME                CITY                           COUNTRY_NAME                             REGION_NAME               JOB_ID     JOB_TITLE                                   
+--------------- ------------------------------ ------------------------------ ---------------------------------------- ------------------------- ---------- -----------------------------------         
+    SALARY GRA                                                                                                                                                                                          
+---------- ---                                                                                                                                                                                          
+                                                                                                                                                                                                        
+Jennifer        Administration                 Seattle                        United States of America                 Americas                  AD_ASST    Administration Assistant                    
+      4400 B                                                                                                                                                                                            
+                                                                                                                                                                                                        
+Diana           IT                             Southlake                      United States of America                 Americas                  IT_PROG    Programmer                                  
+      4200 B                                                                                                                                                                                            
+                                                                                                                                                                                                        
+Trenna          Shiping                        South San Francisco            United States of America                 Americas                  ST_CLERK   Stock Clerk                                 
+      3500 B                                                                                                                                                                                            
+                                                                                                                                                                                                        
+Curtis          Shiping                        South San Francisco            United States of America                 Americas                  ST_CLERK   Stock Clerk                                 
+      3100 B                                                                                                                                                                                            
+                                                                                                                                                                                                        
+Randall         Shiping                        South San Francisco            United States of America                 Americas                  ST_CLERK   Stock Clerk                                 
+      2600 A                                                                                                                                                                                            
+                                                                                                                                                                                                        
+Peter           Shiping                        South San Francisco            United States of America                 Americas                  ST_CLERK   Stock Clerk                                 
+      2500 A                                                                                                                                                                                            
+                                                                                                                                                                                                        
+
+19 rows selected.
+
+SQL> SET LINES 300
+SQL> 
+SQL> R
+  1  SELECT FIRST_NAME , DEPARTMENT_NAME , CITY , COUNTRY_NAME , REGION_NAME , JOB_ID , JOB_TITLE , SALARY , GRADE_LEVEL
+  2  FROM EMPLOYEES
+  3  JOIN DEPARTMENTS USING (DEPARTMENT_ID)
+  4  JOIN LOCATIONS   USING (LOCATION_ID)
+  5  JOIN COUNTRIES   USING (COUNTRY_ID)
+  6  JOIN REGIONS     USING (REGION_ID)
+  7  JOIN JOBS        USING (JOB_ID)
+  8* JOIN JOB_GRADES  ON SALARY BETWEEN LOWEST_SAL AND HIGHEST_SAL
+
+FIRST_NAME      DEPARTMENT_NAME                CITY                           COUNTRY_NAME                             REGION_NAME               JOB_ID     JOB_TITLE                               SALARY GRA                                                                                              
+--------------- ------------------------------ ------------------------------ ---------------------------------------- ------------------------- ---------- ----------------------------------- ---------- ---                                                                                              
+Steven          Executive                      Seattle                        United States of America                 Americas                  AD_PRES    President                                24000 E                                                                                                
+Neena           Executive                      Seattle                        United States of America                 Americas                  AD_VP      Administration Vice President            17000 E                                                                                                
+Lex             Executive                      Seattle                        United States of America                 Americas                  AD_VP      Administration Vice President            17000 E                                                                                                
+Michael         Marketing                      Toronto                        Canada                                   Americas                  MK_MAN     Marketing Manager                        13000 D                                                                                                
+Shelley         Accounting                     Seattle                        United States of America                 Americas                  AC_MGR     Accounting Manager                       12000 D                                                                                                
+Ellen           Sales                          Oxford                         United Kingdom                           Europe                    SA_REP     Sales Representative                     11000 D                                                                                                
+Eleni           Sales                          Oxford                         United Kingdom                           Europe                    SA_MAN     Sales Manager                            10500 D                                                                                                
+Alexander       IT                             Southlake                      United States of America                 Americas                  IT_PROG    Programmer                                9000 C                                                                                                
+Jonathon        Sales                          Oxford                         United Kingdom                           Europe                    SA_REP     Sales Representative                      8600 C                                                                                                
+William         Accounting                     Seattle                        United States of America                 Americas                  AC_ACCOUNT Public Accountant                         8300 C                                                                                                
+Pat             Marketing                      Toronto                        Canada                                   Americas                  MK_REP     Marketing Representative                  6000 C                                                                                                
+Bruce           IT                             Southlake                      United States of America                 Americas                  IT_PROG    Programmer                                6000 C                                                                                                
+Kevin           Shiping                        South San Francisco            United States of America                 Americas                  ST_MAN     Stock Manager                             5800 B                                                                                                
+Jennifer        Administration                 Seattle                        United States of America                 Americas                  AD_ASST    Administration Assistant                  4400 B                                                                                                
+Diana           IT                             Southlake                      United States of America                 Americas                  IT_PROG    Programmer                                4200 B                                                                                                
+Trenna          Shiping                        South San Francisco            United States of America                 Americas                  ST_CLERK   Stock Clerk                               3500 B                                                                                                
+Curtis          Shiping                        South San Francisco            United States of America                 Americas                  ST_CLERK   Stock Clerk                               3100 B                                                                                                
+Randall         Shiping                        South San Francisco            United States of America                 Americas                  ST_CLERK   Stock Clerk                               2600 A                                                                                                
+Peter           Shiping                        South San Francisco            United States of America                 Americas                  ST_CLERK   Stock Clerk                               2500 A                                                                                                
+
+19 rows selected.
+
+SQL> REM FIRST_NAME , DEPARTMENT_NAME , CITY , COUNTRY_NAME , REGION_NAME , JOB_ID , JOB_TITLE , SALARY , GRADE_LEVEL
+SQL> 
+SQL> REM 1 R C L D E JOBS JOB_GRADES (INNER JOIN ON)
+SQL> 
+SQL> REM 2 USING ON USING ON USING ON
+SQL> 
+SQL> 
+SQL> REM 1 R C L D E JOBS JOB_GRADES (INNER JOIN ON)
+SQL> 
+SQL> SELECT FIRST_NAME , DEPARTMENT_NAME , CITY , COUNTRY_NAME , REGION_NAME , JOB_ID , JOB_TITLE , SALARY , GRADE_LEVEL
+  2  FROM REGIONS R
+  3  JOIN COUNTRIES C ON R.REGION_ID = C.REGION_ID
+  4  JOIN LOCATIONS L ON C.COUNTRY_ID = L.COUNTRY_ID
+  5  JOIN DEPARTMENTS D ON L.LOCATION_ID = D.LOCATION_ID
+  6  JOIN EMPLOYEES E ON D.DEPARTMENT_ID = E.DEPARTMENT_ID
+  7  JOIN JOBS J ON E.JOB_ID = J.JOB_ID
+  8  JOIN JOB_GRADES JG ON E.SALARY BETWEEN JG.LOWEST_SAL AND JG.HIGHEST_SAL;
+SELECT FIRST_NAME , DEPARTMENT_NAME , CITY , COUNTRY_NAME , REGION_NAME , JOB_ID , JOB_TITLE , SALARY , GRADE_LEVEL
+                                                                          *
+ERROR at line 1:
+ORA-00918: column ambiguously defined 
+
+
+SQL> SELECT FIRST_NAME , DEPARTMENT_NAME , CITY , COUNTRY_NAME , REGION_NAME , E.JOB_ID , JOB_TITLE , SALARY , GRADE_LEVEL
+  2  FROM REGIONS R
+  3  JOIN COUNTRIES C ON R.REGION_ID = C.REGION_ID
+  4  JOIN LOCATIONS L ON C.COUNTRY_ID = L.COUNTRY_ID
+  5  JOIN DEPARTMENTS D ON L.LOCATION_ID = D.LOCATION_ID
+  6  JOIN EMPLOYEES E ON D.DEPARTMENT_ID = E.DEPARTMENT_ID
+  7  JOIN JOBS J ON E.JOB_ID = J.JOB_ID
+  8  JOIN JOB_GRADES JG ON E.SALARY BETWEEN JG.LOWEST_SAL AND JG.HIGHEST_SAL;
+
+FIRST_NAME      DEPARTMENT_NAME                CITY                           COUNTRY_NAME                             REGION_NAME               JOB_ID     JOB_TITLE                               SALARY GRA                                                                                              
+--------------- ------------------------------ ------------------------------ ---------------------------------------- ------------------------- ---------- ----------------------------------- ---------- ---                                                                                              
+Steven          Executive                      Seattle                        United States of America                 Americas                  AD_PRES    President                                24000 E                                                                                                
+Neena           Executive                      Seattle                        United States of America                 Americas                  AD_VP      Administration Vice President            17000 E                                                                                                
+Lex             Executive                      Seattle                        United States of America                 Americas                  AD_VP      Administration Vice President            17000 E                                                                                                
+Michael         Marketing                      Toronto                        Canada                                   Americas                  MK_MAN     Marketing Manager                        13000 D                                                                                                
+Shelley         Accounting                     Seattle                        United States of America                 Americas                  AC_MGR     Accounting Manager                       12000 D                                                                                                
+Ellen           Sales                          Oxford                         United Kingdom                           Europe                    SA_REP     Sales Representative                     11000 D                                                                                                
+Eleni           Sales                          Oxford                         United Kingdom                           Europe                    SA_MAN     Sales Manager                            10500 D                                                                                                
+Alexander       IT                             Southlake                      United States of America                 Americas                  IT_PROG    Programmer                                9000 C                                                                                                
+Jonathon        Sales                          Oxford                         United Kingdom                           Europe                    SA_REP     Sales Representative                      8600 C                                                                                                
+William         Accounting                     Seattle                        United States of America                 Americas                  AC_ACCOUNT Public Accountant                         8300 C                                                                                                
+Pat             Marketing                      Toronto                        Canada                                   Americas                  MK_REP     Marketing Representative                  6000 C                                                                                                
+Bruce           IT                             Southlake                      United States of America                 Americas                  IT_PROG    Programmer                                6000 C                                                                                                
+Kevin           Shiping                        South San Francisco            United States of America                 Americas                  ST_MAN     Stock Manager                             5800 B                                                                                                
+Jennifer        Administration                 Seattle                        United States of America                 Americas                  AD_ASST    Administration Assistant                  4400 B                                                                                                
+Diana           IT                             Southlake                      United States of America                 Americas                  IT_PROG    Programmer                                4200 B                                                                                                
+Trenna          Shiping                        South San Francisco            United States of America                 Americas                  ST_CLERK   Stock Clerk                               3500 B                                                                                                
+Curtis          Shiping                        South San Francisco            United States of America                 Americas                  ST_CLERK   Stock Clerk                               3100 B                                                                                                
+Randall         Shiping                        South San Francisco            United States of America                 Americas                  ST_CLERK   Stock Clerk                               2600 A                                                                                                
+Peter           Shiping                        South San Francisco            United States of America                 Americas                  ST_CLERK   Stock Clerk                               2500 A                                                                                                
+
+19 rows selected.
+
+SQL> REM 2 USING ON USING ON USING ON
+SQL> 
+SQL> SELECT FIRST_NAME , DEPARTMENT_NAME , CITY , COUNTRY_NAME , REGION_NAME , E.JOB_ID , JOB_TITLE , SALARY , GRADE_LEVEL
+  2  FROM EMPLOYEES E
+  3  JOIN DEPARTMENTS D USING (DEPARTMENT_ID)
+  4  JOIN LOCATIONS   L ON D.LOCATION_ID = L.LOCATION_ID
+  5  JOIN COUNTRIES   C USING (COUNTRY_ID)
+  6  JOIN REGIONS     R ON C.REGION_ID = R.REGION_ID
+  7  JOIN JOBS        J USING (JOB_ID)
+  8  JOIN JOB_GRADES JG ON E.SALARY BETWEEN JG.LOWEST_SAL AND JG.HIGHEST_SAL;
+SELECT FIRST_NAME , DEPARTMENT_NAME , CITY , COUNTRY_NAME , REGION_NAME , E.JOB_ID , JOB_TITLE , SALARY , GRADE_LEVEL
+                                                                          *
+ERROR at line 1:
+ORA-00904: "E"."JOB_ID": invalid identifier 
+
+
+SQL> SELECT FIRST_NAME , DEPARTMENT_NAME , CITY , COUNTRY_NAME , REGION_NAME , JOB_ID , JOB_TITLE , SALARY , GRADE_LEVEL
+  2  FROM EMPLOYEES E
+  3  JOIN DEPARTMENTS D USING (DEPARTMENT_ID)
+  4  JOIN LOCATIONS   L ON D.LOCATION_ID = L.LOCATION_ID
+  5  JOIN COUNTRIES   C USING (COUNTRY_ID)
+  6  JOIN REGIONS     R ON C.REGION_ID = R.REGION_ID
+  7  JOIN JOBS        J USING (JOB_ID)
+  8  JOIN JOB_GRADES JG ON E.SALARY BETWEEN JG.LOWEST_SAL AND JG.HIGHEST_SAL;
+
+FIRST_NAME      DEPARTMENT_NAME                CITY                           COUNTRY_NAME                             REGION_NAME               JOB_ID     JOB_TITLE                               SALARY GRA                                                                                              
+--------------- ------------------------------ ------------------------------ ---------------------------------------- ------------------------- ---------- ----------------------------------- ---------- ---                                                                                              
+Steven          Executive                      Seattle                        United States of America                 Americas                  AD_PRES    President                                24000 E                                                                                                
+Neena           Executive                      Seattle                        United States of America                 Americas                  AD_VP      Administration Vice President            17000 E                                                                                                
+Lex             Executive                      Seattle                        United States of America                 Americas                  AD_VP      Administration Vice President            17000 E                                                                                                
+Michael         Marketing                      Toronto                        Canada                                   Americas                  MK_MAN     Marketing Manager                        13000 D                                                                                                
+Shelley         Accounting                     Seattle                        United States of America                 Americas                  AC_MGR     Accounting Manager                       12000 D                                                                                                
+Ellen           Sales                          Oxford                         United Kingdom                           Europe                    SA_REP     Sales Representative                     11000 D                                                                                                
+Eleni           Sales                          Oxford                         United Kingdom                           Europe                    SA_MAN     Sales Manager                            10500 D                                                                                                
+Alexander       IT                             Southlake                      United States of America                 Americas                  IT_PROG    Programmer                                9000 C                                                                                                
+Jonathon        Sales                          Oxford                         United Kingdom                           Europe                    SA_REP     Sales Representative                      8600 C                                                                                                
+William         Accounting                     Seattle                        United States of America                 Americas                  AC_ACCOUNT Public Accountant                         8300 C                                                                                                
+Pat             Marketing                      Toronto                        Canada                                   Americas                  MK_REP     Marketing Representative                  6000 C                                                                                                
+Bruce           IT                             Southlake                      United States of America                 Americas                  IT_PROG    Programmer                                6000 C                                                                                                
+Kevin           Shiping                        South San Francisco            United States of America                 Americas                  ST_MAN     Stock Manager                             5800 B                                                                                                
+Jennifer        Administration                 Seattle                        United States of America                 Americas                  AD_ASST    Administration Assistant                  4400 B                                                                                                
+Diana           IT                             Southlake                      United States of America                 Americas                  IT_PROG    Programmer                                4200 B                                                                                                
+Trenna          Shiping                        South San Francisco            United States of America                 Americas                  ST_CLERK   Stock Clerk                               3500 B                                                                                                
+Curtis          Shiping                        South San Francisco            United States of America                 Americas                  ST_CLERK   Stock Clerk                               3100 B                                                                                                
+Randall         Shiping                        South San Francisco            United States of America                 Americas                  ST_CLERK   Stock Clerk                               2600 A                                                                                                
+Peter           Shiping                        South San Francisco            United States of America                 Americas                  ST_CLERK   Stock Clerk                               2500 A                                                                                                
+
+19 rows selected.
+
+SQL> REM OUTER JOIN :
+SQL> 
+SQL> REM OUTER JOIN : TO GET EXTRA/ADDITIONAL/UNMATHCED ROWS IN RESULT SET
+SQL> 
+SQL> SELECT * FROM COUNTRIES;
+
+CO COUNTRY_NAME                              REGION_ID                                                                                                                                                                                                                                                      
+-- ---------------------------------------- ----------                                                                                                                                                                                                                                                      
+CA Canada                                            2                                                                                                                                                                                                                                                      
+DE Germany                                           1                                                                                                                                                                                                                                                      
+UK United Kingdom                                    1                                                                                                                                                                                                                                                      
+US United States of America                          2                                                                                                                                                                                                                                                      
+
+SQL> SELECT * FROM REGIONS;
+
+ REGION_ID REGION_NAME                                                                                                                                                                                                                                                                                      
+---------- -------------------------                                                                                                                                                                                                                                                                        
+         1 Europe                                                                                                                                                                                                                                                                                           
+         2 Americas                                                                                                                                                                                                                                                                                         
+         3 Asia                                                                                                                                                                                                                                                                                             
+         4 Middle East and Africa                                                                                                                                                                                                                                                                           
+
+SQL> SELECT *
+  2  FROM COUNTRIES
+  3  NATURAL JOIN REGIONS;
+
+ REGION_ID CO COUNTRY_NAME                             REGION_NAME                                                                                                                                                                                                                                          
+---------- -- ---------------------------------------- -------------------------                                                                                                                                                                                                                            
+         1 DE Germany                                  Europe                                                                                                                                                                                                                                               
+         1 UK United Kingdom                           Europe                                                                                                                                                                                                                                               
+         2 CA Canada                                   Americas                                                                                                                                                                                                                                             
+         2 US United States of America                 Americas                                                                                                                                                                                                                                             
+
+SQL> SELECT *
+  2  FROM COUNTRIES
+  3  JOIN REGIONS USING (REGION_ID);
+
+ REGION_ID CO COUNTRY_NAME                             REGION_NAME                                                                                                                                                                                                                                          
+---------- -- ---------------------------------------- -------------------------                                                                                                                                                                                                                            
+         1 DE Germany                                  Europe                                                                                                                                                                                                                                               
+         1 UK United Kingdom                           Europe                                                                                                                                                                                                                                               
+         2 CA Canada                                   Americas                                                                                                                                                                                                                                             
+         2 US United States of America                 Americas                                                                                                                                                                                                                                             
+
+SQL> SELECT *
+  2  FROM COUNTRIES C
+  3  JOIN REGIONS R ON C.REGION_ID = R.REGION_ID;
+
+CO COUNTRY_NAME                              REGION_ID  REGION_ID REGION_NAME                                                                                                                                                                                                                               
+-- ---------------------------------------- ---------- ---------- -------------------------                                                                                                                                                                                                                 
+DE Germany                                           1          1 Europe                                                                                                                                                                                                                                    
+UK United Kingdom                                    1          1 Europe                                                                                                                                                                                                                                    
+CA Canada                                            2          2 Americas                                                                                                                                                                                                                                  
+US United States of America                          2          2 Americas                                                                                                                                                                                                                                  
+
+SQL> REM COUNTRY_NAME , REGION_NAME
+SQL> 
+SQL> REM COUNTRIES      REGIONS
+SQL> 
+SQL> REM                EXTRA ROWS
+SQL> 
+SQL> 
+SQL> SELECT COUNTRY_NAME , REGION_NAME
+  2  FROM COUNTRIES JOIN REGIONS USING (REGION_ID);
+
+COUNTRY_NAME                             REGION_NAME                                                                                                                                                                                                                                                        
+---------------------------------------- -------------------------                                                                                                                                                                                                                                          
+Germany                                  Europe                                                                                                                                                                                                                                                             
+United Kingdom                           Europe                                                                                                                                                                                                                                                             
+Canada                                   Americas                                                                                                                                                                                                                                                           
+United States of America                 Americas                                                                                                                                                                                                                                                           
+
+SQL> SELECT COUNTRY_NAME , REGION_NAME
+  2  FROM COUNTRIES INNER JOIN REGIONS USING (REGION_ID);
+
+COUNTRY_NAME                             REGION_NAME                                                                                                                                                                                                                                                        
+---------------------------------------- -------------------------                                                                                                                                                                                                                                          
+Germany                                  Europe                                                                                                                                                                                                                                                             
+United Kingdom                           Europe                                                                                                                                                                                                                                                             
+Canada                                   Americas                                                                                                                                                                                                                                                           
+United States of America                 Americas                                                                                                                                                                                                                                                           
+
+SQL> SELECT COUNTRY_NAME , REGION_NAME
+  2  FROM COUNTRIES OUTER JOIN REGIONS USING (REGION_ID);
+
+COUNTRY_NAME                             REGION_NAME                                                                                                                                                                                                                                                        
+---------------------------------------- -------------------------                                                                                                                                                                                                                                          
+Germany                                  Europe                                                                                                                                                                                                                                                             
+United Kingdom                           Europe                                                                                                                                                                                                                                                             
+Canada                                   Americas                                                                                                                                                                                                                                                           
+United States of America                 Americas                                                                                                                                                                                                                                                           
+
+SQL> REM OUTER JOIN SYNTAX : FROM TABLE1 LEFT/RIGHT/FULL OUTER JOIN TABLE2 USING (COMMON COLUMN LIST, COMMA SEPARATED)
+SQL> 
+SQL> REM OUTER JOIN SYNTAX 2 : FROM TABLE1 LEFT/RIGHT/FULL OUTER JOIN TABLE2 ON join condition(s)
+SQL> 
+SQL> SELECT OUTER.COUNTRY_NAME , REGION_NAME
+  2  FROM COUNTRIES OUTER JOIN REGIONS USING (REGION_ID);
+
+COUNTRY_NAME                             REGION_NAME                                                                                                                                                                                                                                                        
+---------------------------------------- -------------------------                                                                                                                                                                                                                                          
+Germany                                  Europe                                                                                                                                                                                                                                                             
+United Kingdom                           Europe                                                                                                                                                                                                                                                             
+Canada                                   Americas                                                                                                                                                                                                                                                           
+United States of America                 Americas                                                                                                                                                                                                                                                           
+
+SQL> SELECT COUNTRIES.COUNTRY_NAME , REGION_NAME
+  2  FROM COUNTRIES OUTER JOIN REGIONS USING (REGION_ID);
+SELECT COUNTRIES.COUNTRY_NAME , REGION_NAME
+       *
+ERROR at line 1:
+ORA-00904: "COUNTRIES"."COUNTRY_NAME": invalid identifier 
+
+
+SQL> REM COUNTRY_NAME , REGION_NAME
+SQL> 
+SQL> REM COUNTRIES      REGIONS
+SQL> 
+SQL> REM                EXTRA ROWS
+SQL> 
+SQL> SELECT COUNTRY_NAME , REGION_NAME
+  2  FROM COUNTRIES RIGHT OUTER JOIN REGIONS USING (REGION_ID);
+
+COUNTRY_NAME                             REGION_NAME                                                                                                                                                                                                                                                        
+---------------------------------------- -------------------------                                                                                                                                                                                                                                          
+Canada                                   Americas                                                                                                                                                                                                                                                           
+Germany                                  Europe                                                                                                                                                                                                                                                             
+United Kingdom                           Europe                                                                                                                                                                                                                                                             
+United States of America                 Americas                                                                                                                                                                                                                                                           
+                                         Middle East and Africa                                                                                                                                                                                                                                             
+                                         Asia                                                                                                                                                                                                                                                               
+
+6 rows selected.
+
+SQL> REM 1 LEFT 2 FULL
+SQL> 
+SQL> SELECT COUNTRY_NAME , REGION_NAME
+  2  FROM REGIONS LEFT OUTER JOIN COUNTRIES USING (REGION_ID);
+
+COUNTRY_NAME                             REGION_NAME                                                                                                                                                                                                                                                        
+---------------------------------------- -------------------------                                                                                                                                                                                                                                          
+Canada                                   Americas                                                                                                                                                                                                                                                           
+Germany                                  Europe                                                                                                                                                                                                                                                             
+United Kingdom                           Europe                                                                                                                                                                                                                                                             
+United States of America                 Americas                                                                                                                                                                                                                                                           
+                                         Middle East and Africa                                                                                                                                                                                                                                             
+                                         Asia                                                                                                                                                                                                                                                               
+
+6 rows selected.
+
+SQL> SELECT COUNTRY_NAME , REGION_NAME
+  2  FROM REGIONS LEFT JOIN COUNTRIES USING (REGION_ID);
+
+COUNTRY_NAME                             REGION_NAME                                                                                                                                                                                                                                                        
+---------------------------------------- -------------------------                                                                                                                                                                                                                                          
+Canada                                   Americas                                                                                                                                                                                                                                                           
+Germany                                  Europe                                                                                                                                                                                                                                                             
+United Kingdom                           Europe                                                                                                                                                                                                                                                             
+United States of America                 Americas                                                                                                                                                                                                                                                           
+                                         Middle East and Africa                                                                                                                                                                                                                                             
+                                         Asia                                                                                                                                                                                                                                                               
+
+6 rows selected.
+
+SQL> SELECT COUNTRY_NAME , REGION_NAME
+  2  FROM REGIONS FULL JOIN COUNTRIES USING (REGION_ID);
+
+COUNTRY_NAME                             REGION_NAME                                                                                                                                                                                                                                                        
+---------------------------------------- -------------------------                                                                                                                                                                                                                                          
+Canada                                   Americas                                                                                                                                                                                                                                                           
+Germany                                  Europe                                                                                                                                                                                                                                                             
+United Kingdom                           Europe                                                                                                                                                                                                                                                             
+United States of America                 Americas                                                                                                                                                                                                                                                           
+                                         Middle East and Africa                                                                                                                                                                                                                                             
+                                         Asia                                                                                                                                                                                                                                                               
+
+6 rows selected.
+
+SQL> REM ON
+SQL> 
+SQL> REM 1 LEFT 2 RIGHT 3 FULL
+SQL> 
+SQL> SELECT * FROM LOCATIONS;
+
+LOCATION_ID STREET_ADRESS                            POSTAL_CODE  CITY                           STATE_PROVINCE            CO                                                                                                                                                                               
+----------- ---------------------------------------- ------------ ------------------------------ ------------------------- --                                                                                                                                                                               
+       1400 2014 Jabberwocky Rd                      26192        Southlake                      Texas                     US                                                                                                                                                                               
+       1500 2011 Interiors Blvd                      99236        South San Francisco            California                US                                                                                                                                                                               
+       1700 2004 Charade Rd                          98199        Seattle                        Washington                US                                                                                                                                                                               
+       1800 460 Bloor St. W.                         ON M5S 1X8   Toronto                        Ontario                   CA                                                                                                                                                                               
+       2500 Magdalen Centre, The Oxford Science Park OX9 9ZB      Oxford                         Oxford                    UK                                                                                                                                                                               
+
+SQL> SELECT * FROM COUNTRIES;
+
+CO COUNTRY_NAME                              REGION_ID                                                                                                                                                                                                                                                      
+-- ---------------------------------------- ----------                                                                                                                                                                                                                                                      
+CA Canada                                            2                                                                                                                                                                                                                                                      
+DE Germany                                           1                                                                                                                                                                                                                                                      
+UK United Kingdom                                    1                                                                                                                                                                                                                                                      
+US United States of America                          2                                                                                                                                                                                                                                                      
+
+SQL> REM CITY , COUNTRY_NAME
+SQL> 
+SQL> SELECT CITY , COUNTRY_NAME
+  2  FROM LOCATIONS L RIGHT OUTER JOIN COUNTRIES ON L.COUNTRY_ID = C.COUNTRY_ID;
+FROM LOCATIONS L RIGHT OUTER JOIN COUNTRIES ON L.COUNTRY_ID = C.COUNTRY_ID
+                                                              *
+ERROR at line 2:
+ORA-00904: "C"."COUNTRY_ID": invalid identifier 
+
+
+SQL> SELECT * FROM COUNTRIES;
+
+CO COUNTRY_NAME                              REGION_ID                                                                                                                                                                                                                                                      
+-- ---------------------------------------- ----------                                                                                                                                                                                                                                                      
+CA Canada                                            2                                                                                                                                                                                                                                                      
+DE Germany                                           1                                                                                                                                                                                                                                                      
+UK United Kingdom                                    1                                                                                                                                                                                                                                                      
+US United States of America                          2                                                                                                                                                                                                                                                      
+
+SQL> DESC COUNTRIES;
+ Name                                                                                                                                                                          Null?    Type
+ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------------------------------------------------------
+ COUNTRY_ID                                                                                                                                                                    NOT NULL CHAR(2)
+ COUNTRY_NAME                                                                                                                                                                           VARCHAR2(40)
+ REGION_ID                                                                                                                                                                              NUMBER
+
+SQL> DESC LOCATIONS
+ Name                                                                                                                                                                          Null?    Type
+ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------------------------------------------------------
+ LOCATION_ID                                                                                                                                                                   NOT NULL NUMBER(4)
+ STREET_ADRESS                                                                                                                                                                          VARCHAR2(40)
+ POSTAL_CODE                                                                                                                                                                            VARCHAR2(12)
+ CITY                                                                                                                                                                          NOT NULL VARCHAR2(30)
+ STATE_PROVINCE                                                                                                                                                                         VARCHAR2(25)
+ COUNTRY_ID                                                                                                                                                                             CHAR(2)
+
+SQL> SELECT CITY , COUNTRY_NAME
+  2  FROM LOCATIONS L RIGHT OUTER JOIN COUNTRIES C ON L.COUNTRY_ID = C.COUNTRY_ID;
+
+CITY                           COUNTRY_NAME                                                                                                                                                                                                                                                                 
+------------------------------ ----------------------------------------                                                                                                                                                                                                                                     
+Southlake                      United States of America                                                                                                                                                                                                                                                     
+South San Francisco            United States of America                                                                                                                                                                                                                                                     
+Seattle                        United States of America                                                                                                                                                                                                                                                     
+Toronto                        Canada                                                                                                                                                                                                                                                                       
+Oxford                         United Kingdom                                                                                                                                                                                                                                                               
+                               Germany                                                                                                                                                                                                                                                                      
+
+6 rows selected.
+
+SQL> SELECT CITY , COUNTRY_NAME
+  2  FROM COUNTRIES C LEFT OUTER JOIN LOCATIONS L ON L.COUNTRY_ID = C.COUNTRY_ID;
+
+CITY                           COUNTRY_NAME                                                                                                                                                                                                                                                                 
+------------------------------ ----------------------------------------                                                                                                                                                                                                                                     
+Southlake                      United States of America                                                                                                                                                                                                                                                     
+South San Francisco            United States of America                                                                                                                                                                                                                                                     
+Seattle                        United States of America                                                                                                                                                                                                                                                     
+Toronto                        Canada                                                                                                                                                                                                                                                                       
+Oxford                         United Kingdom                                                                                                                                                                                                                                                               
+                               Germany                                                                                                                                                                                                                                                                      
+
+6 rows selected.
+
+SQL> SELECT CITY , COUNTRY_NAME
+  2  FROM COUNTRIES C FULL OUTER JOIN LOCATIONS L ON L.COUNTRY_ID = C.COUNTRY_ID;
+
+CITY                           COUNTRY_NAME                                                                                                                                                                                                                                                                 
+------------------------------ ----------------------------------------                                                                                                                                                                                                                                     
+Southlake                      United States of America                                                                                                                                                                                                                                                     
+South San Francisco            United States of America                                                                                                                                                                                                                                                     
+Seattle                        United States of America                                                                                                                                                                                                                                                     
+Toronto                        Canada                                                                                                                                                                                                                                                                       
+Oxford                         United Kingdom                                                                                                                                                                                                                                                               
+                               Germany                                                                                                                                                                                                                                                                      
+
+6 rows selected.
+
+SQL> SELECT FIRST_NAME , DEPARTMENT_ID FROM EMPLOYEES;
+
+FIRST_NAME      DEPARTMENT_ID                                                                                                                                                                                                                                                                               
+--------------- -------------                                                                                                                                                                                                                                                                               
+Steven                     90                                                                                                                                                                                                                                                                               
+Neena                      90                                                                                                                                                                                                                                                                               
+Lex                        90                                                                                                                                                                                                                                                                               
+Alexander                  60                                                                                                                                                                                                                                                                               
+Bruce                      60                                                                                                                                                                                                                                                                               
+Diana                      60                                                                                                                                                                                                                                                                               
+Kevin                      50                                                                                                                                                                                                                                                                               
+Trenna                     50                                                                                                                                                                                                                                                                               
+Curtis                     50                                                                                                                                                                                                                                                                               
+Randall                    50                                                                                                                                                                                                                                                                               
+Peter                      50                                                                                                                                                                                                                                                                               
+Eleni                      80                                                                                                                                                                                                                                                                               
+Ellen                      80                                                                                                                                                                                                                                                                               
+Jonathon                   80                                                                                                                                                                                                                                                                               
+Kimerely                                                                                                                                                                                                                                                                                                    
+Jennifer                   10                                                                                                                                                                                                                                                                               
+Michael                    20                                                                                                                                                                                                                                                                               
+Pat                        20                                                                                                                                                                                                                                                                               
+Shelley                   110                                                                                                                                                                                                                                                                               
+William                   110                                                                                                                                                                                                                                                                               
+
+20 rows selected.
+
+SQL> SELECT DEPARTMENT_NAME , DEPARTMENT_ID FROM DEPARTMENTS;
+
+DEPARTMENT_NAME                DEPARTMENT_ID                                                                                                                                                                                                                                                                
+------------------------------ -------------                                                                                                                                                                                                                                                                
+Administration                            10                                                                                                                                                                                                                                                                
+Marketing                                 20                                                                                                                                                                                                                                                                
+Shiping                                   50                                                                                                                                                                                                                                                                
+IT                                        60                                                                                                                                                                                                                                                                
+Sales                                     80                                                                                                                                                                                                                                                                
+Executive                                 90                                                                                                                                                                                                                                                                
+Accounting                               110                                                                                                                                                                                                                                                                
+Contracting                              190                                                                                                                                                                                                                                                                
+
+8 rows selected.
+
+SQL> SELECT FIRST_NAME , DEPARTMENT_NAME
+  2  FROM EMPLOYEES FULL JOIN DEPARTMENTS USING (DEPARTMENT_ID);
+
+FIRST_NAME      DEPARTMENT_NAME                                                                                                                                                                                                                                                                             
+--------------- ------------------------------                                                                                                                                                                                                                                                              
+Steven          Executive                                                                                                                                                                                                                                                                                   
+Neena           Executive                                                                                                                                                                                                                                                                                   
+Lex             Executive                                                                                                                                                                                                                                                                                   
+Alexander       IT                                                                                                                                                                                                                                                                                          
+Bruce           IT                                                                                                                                                                                                                                                                                          
+Diana           IT                                                                                                                                                                                                                                                                                          
+Kevin           Shiping                                                                                                                                                                                                                                                                                     
+Trenna          Shiping                                                                                                                                                                                                                                                                                     
+Curtis          Shiping                                                                                                                                                                                                                                                                                     
+Randall         Shiping                                                                                                                                                                                                                                                                                     
+Peter           Shiping                                                                                                                                                                                                                                                                                     
+Eleni           Sales                                                                                                                                                                                                                                                                                       
+Ellen           Sales                                                                                                                                                                                                                                                                                       
+Jonathon        Sales                                                                                                                                                                                                                                                                                       
+Kimerely                                                                                                                                                                                                                                                                                                    
+Jennifer        Administration                                                                                                                                                                                                                                                                              
+Michael         Marketing                                                                                                                                                                                                                                                                                   
+Pat             Marketing                                                                                                                                                                                                                                                                                   
+Shelley         Accounting                                                                                                                                                                                                                                                                                  
+William         Accounting                                                                                                                                                                                                                                                                                  
+                Contracting                                                                                                                                                                                                                                                                                 
+
+21 rows selected.
+
+SQL> REM DISPLAY FIRST_NAME , DEPARTMENT_NAME (IT SHOULD ADD EXTRA ROWS OF BOTH THE TABLES, USE 'ON' SYNTAX)
+SQL> 
+SQL> SELECT FIRST_NAME , DEPARTMENT_NAME
+  2  FROM EMPLOYEES E
+  3  FULL JOIN DEPARTMENTS D ON E.DEPARTMENT_ID = D.DEPARTMENT_ID;
+
+FIRST_NAME      DEPARTMENT_NAME                                                                                                                                                                                                                                                                             
+--------------- ------------------------------                                                                                                                                                                                                                                                              
+Steven          Executive                                                                                                                                                                                                                                                                                   
+Neena           Executive                                                                                                                                                                                                                                                                                   
+Lex             Executive                                                                                                                                                                                                                                                                                   
+Alexander       IT                                                                                                                                                                                                                                                                                          
+Bruce           IT                                                                                                                                                                                                                                                                                          
+Diana           IT                                                                                                                                                                                                                                                                                          
+Kevin           Shiping                                                                                                                                                                                                                                                                                     
+Trenna          Shiping                                                                                                                                                                                                                                                                                     
+Curtis          Shiping                                                                                                                                                                                                                                                                                     
+Randall         Shiping                                                                                                                                                                                                                                                                                     
+Peter           Shiping                                                                                                                                                                                                                                                                                     
+Eleni           Sales                                                                                                                                                                                                                                                                                       
+Ellen           Sales                                                                                                                                                                                                                                                                                       
+Jonathon        Sales                                                                                                                                                                                                                                                                                       
+Kimerely                                                                                                                                                                                                                                                                                                    
+Jennifer        Administration                                                                                                                                                                                                                                                                              
+Michael         Marketing                                                                                                                                                                                                                                                                                   
+Pat             Marketing                                                                                                                                                                                                                                                                                   
+Shelley         Accounting                                                                                                                                                                                                                                                                                  
+William         Accounting                                                                                                                                                                                                                                                                                  
+                Contracting                                                                                                                                                                                                                                                                                 
+
+21 rows selected.
+
+SQL> SELECT * FROM LOCATIONS;
+
+LOCATION_ID STREET_ADRESS                            POSTAL_CODE  CITY                           STATE_PROVINCE            CO                                                                                                                                                                               
+----------- ---------------------------------------- ------------ ------------------------------ ------------------------- --                                                                                                                                                                               
+       1400 2014 Jabberwocky Rd                      26192        Southlake                      Texas                     US                                                                                                                                                                               
+       1500 2011 Interiors Blvd                      99236        South San Francisco            California                US                                                                                                                                                                               
+       1700 2004 Charade Rd                          98199        Seattle                        Washington                US                                                                                                                                                                               
+       1800 460 Bloor St. W.                         ON M5S 1X8   Toronto                        Ontario                   CA                                                                                                                                                                               
+       2500 Magdalen Centre, The Oxford Science Park OX9 9ZB      Oxford                         Oxford                    UK                                                                                                                                                                               
+
+SQL> SELECT * FROM COUNTRIES;
+
+CO COUNTRY_NAME                              REGION_ID                                                                                                                                                                                                                                                      
+-- ---------------------------------------- ----------                                                                                                                                                                                                                                                      
+CA Canada                                            2                                                                                                                                                                                                                                                      
+DE Germany                                           1                                                                                                                                                                                                                                                      
+UK United Kingdom                                    1                                                                                                                                                                                                                                                      
+US United States of America                          2                                                                                                                                                                                                                                                      
+
+SQL> SELECT * FROM REGIONS;
+
+ REGION_ID REGION_NAME                                                                                                                                                                                                                                                                                      
+---------- -------------------------                                                                                                                                                                                                                                                                        
+         1 Europe                                                                                                                                                                                                                                                                                           
+         2 Americas                                                                                                                                                                                                                                                                                         
+         3 Asia                                                                                                                                                                                                                                                                                             
+         4 Middle East and Africa                                                                                                                                                                                                                                                                           
+
+SQL> REM CITY , COUNTRY_NAME (EXTRA) , REGION_NAME (EXTRA)
+SQL> 
+SQL> REM 1 LEFT , USING
+SQL> 
+SQL> REM 2 RIGHT , ON
+SQL> 
+SQL> REM 3 FULL , USING + ON
+SQL> 
+SQL> REM 4 LEFT + RIGHT , USING + ON
+SQL> 
+SQL> 
+SQL> REM 1 LEFT , USING
+SQL> 
+SQL> SELECT CITY , COUNTRY_NAME , REGION_NAME
+  2  FROM REGIONS LEFT JOIN COUNTRIES USING (REGION_ID)
+  3  LEFT JOIN LOCATIONS USING (COUNTRY_ID);
+
+CITY                           COUNTRY_NAME                             REGION_NAME                                                                                                                                                                                                                         
+------------------------------ ---------------------------------------- -------------------------                                                                                                                                                                                                           
+Southlake                      United States of America                 Americas                                                                                                                                                                                                                            
+South San Francisco            United States of America                 Americas                                                                                                                                                                                                                            
+Seattle                        United States of America                 Americas                                                                                                                                                                                                                            
+Toronto                        Canada                                   Americas                                                                                                                                                                                                                            
+Oxford                         United Kingdom                           Europe                                                                                                                                                                                                                              
+                               Germany                                  Europe                                                                                                                                                                                                                              
+                                                                        Middle East and Africa                                                                                                                                                                                                              
+                                                                        Asia                                                                                                                                                                                                                                
+
+8 rows selected.
+
+SQL> REM 2 RIGHT , ON
+SQL> 
+SQL> SELECT CITY , COUNTRY_NAME , REGION_NAME
+  2  FROM LOCATIONS
+  3  
+SQL> SELECT CITY , COUNTRY_NAME , REGION_NAME
+  2  FROM LOCATIONS L
+  3  RIGHT COUNTRIES C ON L.COUNTRY_ID = C.COUNTRY_ID
+  4  RIGHT JOIN REGIONS R ON C.REGION_ID = R.REGION_ID
+  5  
+SQL> 
+SQL> SELECT CITY , COUNTRY_NAME , REGION_NAME
+  2  FROM LOCATIONS L
+  3  RIGHT JOIN COUNTRIES C ON L.COUNTRY_ID = C.COUNTRY_ID
+  4  RIGHT JOIN REGIONS R ON C.REGION_ID = R.REGION_ID;
+
+CITY                           COUNTRY_NAME                             REGION_NAME                                                                                                                                                                                                                         
+------------------------------ ---------------------------------------- -------------------------                                                                                                                                                                                                           
+Southlake                      United States of America                 Americas                                                                                                                                                                                                                            
+South San Francisco            United States of America                 Americas                                                                                                                                                                                                                            
+Seattle                        United States of America                 Americas                                                                                                                                                                                                                            
+Toronto                        Canada                                   Americas                                                                                                                                                                                                                            
+Oxford                         United Kingdom                           Europe                                                                                                                                                                                                                              
+                               Germany                                  Europe                                                                                                                                                                                                                              
+                                                                        Middle East and Africa                                                                                                                                                                                                              
+                                                                        Asia                                                                                                                                                                                                                                
+
+8 rows selected.
+
+SQL> REM 3 FULL , USING + ON
+SQL> 
+SQL> SELECT CITY , COUNTRY_NAME , REGION_NAME
+  2  FROM LOCATIONS L
+  3  FULL JOIN COUNTRIES C USING (COUNTRY_ID)
+  4  FULL JOIN REGIONS   R ON C.REGION_ID = R.REGION_ID;
+
+CITY                           COUNTRY_NAME                             REGION_NAME                                                                                                                                                                                                                         
+------------------------------ ---------------------------------------- -------------------------                                                                                                                                                                                                           
+Southlake                      United States of America                 Americas                                                                                                                                                                                                                            
+South San Francisco            United States of America                 Americas                                                                                                                                                                                                                            
+Seattle                        United States of America                 Americas                                                                                                                                                                                                                            
+Toronto                        Canada                                   Americas                                                                                                                                                                                                                            
+Oxford                         United Kingdom                           Europe                                                                                                                                                                                                                              
+                               Germany                                  Europe                                                                                                                                                                                                                              
+                                                                        Middle East and Africa                                                                                                                                                                                                              
+                                                                        Asia                                                                                                                                                                                                                                
+
+8 rows selected.
+
+SQL> REM 4 LEFT + RIGHT , USING + ON
+SQL> 
+SQL> SELECT CITY , COUNTRY_NAME , REGION_NAME
+  2  FROM COUNTRIES C
+  3  LEFT JOIN LOCATIONS L USING (COUNTRY_ID)
+  4  RIGHT JOIN REGIONS R ON C.REGION_ID = R.REGION_ID;
+
+CITY                           COUNTRY_NAME                             REGION_NAME                                                                                                                                                                                                                         
+------------------------------ ---------------------------------------- -------------------------                                                                                                                                                                                                           
+Southlake                      United States of America                 Americas                                                                                                                                                                                                                            
+South San Francisco            United States of America                 Americas                                                                                                                                                                                                                            
+Seattle                        United States of America                 Americas                                                                                                                                                                                                                            
+Toronto                        Canada                                   Americas                                                                                                                                                                                                                            
+Oxford                         United Kingdom                           Europe                                                                                                                                                                                                                              
+                               Germany                                  Europe                                                                                                                                                                                                                              
+                                                                        Middle East and Africa                                                                                                                                                                                                              
+                                                                        Asia                                                                                                                                                                                                                                
+
+8 rows selected.
+
+SQL> REM ABOVE EXAMPLES : UNDERSTANDING
+SQL> 
+SQL> REM JOB_GRADES
+SQL> 
+SQL> REM JOB_HISTORY
+SQL> 
+SQL> REM ONLY EXTRA ROWS
+SQL> 
+SQL> SPOOL OFF

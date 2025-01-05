@@ -1,0 +1,704 @@
+SQL> 
+SQL> REM DATE FUNCTIONS : SYSDATE CURRENT_DATE   ADD_MONTHS MONTHS_BETWEEN     LAST_DAY NEXT_DAY     TRUNC ROUND
+SQL> 
+SQL> REM TRUNC :
+SQL> 
+SQL> REM TRUNC SYNTAX : TRUNC ( 'date' , 'interval' )
+SQL> 
+SQL> REM interval : 1 MONTH 2 Q/QUARTER 3 YEAR
+SQL> 
+SQL> REM IF WE TRUNC DATE WITH 'MONTH' IT WILL RETURN SAME/INPUT MONTH'S FIRST DATE
+SQL> 
+SQL> REM IF WE TRUNC DATE WITH 'Q' IT WILL RETURN SAME/INPUT QUARTER'S FIRST DATE
+SQL> 
+SQL> REM IF WE TRUNC DATE WITH 'YEAR' IT WILL RETURN SAME/INPUT YEAR'S FIRST DATE
+SQL> 
+SQL> 
+SQL> SELECT SYSDATE FROM DUAL;
+
+SYSDATE                                                                                                                                                                                                 
+---------                                                                                                                                                                                               
+22-MAR-24                                                                                                                                                                                               
+
+SQL> SELECT SYSDATE , TRUNC(SYSDATE,'MONTH') FROM DUAL;
+
+SYSDATE   TRUNC(SYS                                                                                                                                                                                     
+--------- ---------                                                                                                                                                                                     
+22-MAR-24 01-MAR-24                                                                                                                                                                                     
+
+SQL> SELECT SYSDATE , TRUNC(SYSDATE,'MON') FROM DUAL;
+
+SYSDATE   TRUNC(SYS                                                                                                                                                                                     
+--------- ---------                                                                                                                                                                                     
+22-MAR-24 01-MAR-24                                                                                                                                                                                     
+
+SQL> SELECT SYSDATE , TRUNC(SYSDATE,'MM') FROM DUAL;
+
+SYSDATE   TRUNC(SYS                                                                                                                                                                                     
+--------- ---------                                                                                                                                                                                     
+22-MAR-24 01-MAR-24                                                                                                                                                                                     
+
+SQL> REM 1 YEAR = 4 QUARTERS
+SQL> 
+SQL> REM 1 QUARTER = 3 MONTHS
+SQL> 
+SQL> REM Q1 : 01-JAN TO 31-MAR
+SQL> 
+SQL> REM Q2 : 01-APR TO 30-JUN
+SQL> 
+SQL> REM Q3 : 01-JUL TO 30-SEP
+SQL> 
+SQL> REM Q4 : 01-OCT TO 31-DEC
+SQL> 
+SQL> 
+SQL> 
+SQL> SELECT SYSDATE , TRUNC(SYSDATE,'Q') FROM DUAL;
+
+SYSDATE   TRUNC(SYS                                                                                                                                                                                     
+--------- ---------                                                                                                                                                                                     
+22-MAR-24 01-JAN-24                                                                                                                                                                                     
+
+SQL> REM WHEN WE TRUNC DATE WITH 'Q' IT WILL RETURN SAME/INPUT QUARTER'S FIRST DATE.
+SQL> 
+SQL> REM WHEN WE TRUNC DATE WITH 'YEAR' IT WILL RETURN SAME/INPUT YEAR'S FIRST DATE.
+SQL> 
+SQL> 
+SQL> SELECT SYSDATE , TRUNC(SYSDATE,'YYYY') FROM DUAL;
+
+SYSDATE   TRUNC(SYS                                                                                                                                                                                     
+--------- ---------                                                                                                                                                                                     
+22-MAR-24 01-JAN-24                                                                                                                                                                                     
+
+SQL> SELECT SYSDATE , TRUNC(SYSDATE,'YY') FROM DUAL;
+
+SYSDATE   TRUNC(SYS                                                                                                                                                                                     
+--------- ---------                                                                                                                                                                                     
+22-MAR-24 01-JAN-24                                                                                                                                                                                     
+
+SQL> SELECT SYSDATE , TRUNC(SYSDATE,'RR') FROM DUAL;
+
+SYSDATE   TRUNC(SYS                                                                                                                                                                                     
+--------- ---------                                                                                                                                                                                     
+22-MAR-24 01-JAN-24                                                                                                                                                                                     
+
+SQL> SELECT SYSDATE , TRUNC(SYSDATE,'RRRR') FROM DUAL;
+
+SYSDATE   TRUNC(SYS                                                                                                                                                                                     
+--------- ---------                                                                                                                                                                                     
+22-MAR-24 01-JAN-24                                                                                                                                                                                     
+
+SQL> SELECT SYSDATE , TRUNC(SYSDATE,'YEAR') FROM DUAL;
+
+SYSDATE   TRUNC(SYS                                                                                                                                                                                     
+--------- ---------                                                                                                                                                                                     
+22-MAR-24 01-JAN-24                                                                                                                                                                                     
+
+SQL> REM 1 FIND NUMBER OF DAYS WORKED IN JOINING MONTH
+SQL> 
+SQL> REM 2 FIND DAY NUMBER OF MONTH ON WHICH EMPLOYEE HAS JOINED THE COMPANY
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 1 FIND NUMBER OF DAYS WORKED IN JOINING MONTH
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_DATE , ADD_MONTHS(TRUNC(HIRE_DATE,'MONTH'),1)-HIRE_DATE DAYS_WORKED FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE DAYS_WORKED                                                                                                                                                                   
+--------------- --------- -----------                                                                                                                                                                   
+Steven          17-JUL-87          15                                                                                                                                                                   
+Neena           21-SEP-89          10                                                                                                                                                                   
+Lex             13-JAN-93          19                                                                                                                                                                   
+Alexander       03-JAN-90          29                                                                                                                                                                   
+Bruce           21-MAY-91          11                                                                                                                                                                   
+Diana           07-FEB-99          22                                                                                                                                                                   
+Kevin           16-NOV-99          15                                                                                                                                                                   
+Trenna          17-OCT-95          15                                                                                                                                                                   
+Curtis          29-JAN-97           3                                                                                                                                                                   
+Randall         15-MAR-98          17                                                                                                                                                                   
+Peter           09-JUL-98          23                                                                                                                                                                   
+Eleni           29-JAN-00           3                                                                                                                                                                   
+Ellen           11-MAY-96          21                                                                                                                                                                   
+Jonathon        24-MAR-98           8                                                                                                                                                                   
+Kimerely        24-MAY-99           8                                                                                                                                                                   
+Jennifer        17-SEP-87          14                                                                                                                                                                   
+Michael         17-FEB-96          13                                                                                                                                                                   
+Pat             17-AUG-97          15                                                                                                                                                                   
+Shelley         07-JUN-94          24                                                                                                                                                                   
+William         07-JUN-94          24                                                                                                                                                                   
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE , LAST_DAY(HIRE_DATE)-HIRE_DATE+1 DAYS_WORKED FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE DAYS_WORKED                                                                                                                                                                   
+--------------- --------- -----------                                                                                                                                                                   
+Steven          17-JUL-87          15                                                                                                                                                                   
+Neena           21-SEP-89          10                                                                                                                                                                   
+Lex             13-JAN-93          19                                                                                                                                                                   
+Alexander       03-JAN-90          29                                                                                                                                                                   
+Bruce           21-MAY-91          11                                                                                                                                                                   
+Diana           07-FEB-99          22                                                                                                                                                                   
+Kevin           16-NOV-99          15                                                                                                                                                                   
+Trenna          17-OCT-95          15                                                                                                                                                                   
+Curtis          29-JAN-97           3                                                                                                                                                                   
+Randall         15-MAR-98          17                                                                                                                                                                   
+Peter           09-JUL-98          23                                                                                                                                                                   
+Eleni           29-JAN-00           3                                                                                                                                                                   
+Ellen           11-MAY-96          21                                                                                                                                                                   
+Jonathon        24-MAR-98           8                                                                                                                                                                   
+Kimerely        24-MAY-99           8                                                                                                                                                                   
+Jennifer        17-SEP-87          14                                                                                                                                                                   
+Michael         17-FEB-96          13                                                                                                                                                                   
+Pat             17-AUG-97          15                                                                                                                                                                   
+Shelley         07-JUN-94          24                                                                                                                                                                   
+William         07-JUN-94          24                                                                                                                                                                   
+
+20 rows selected.
+
+SQL> REM 2 FIND DAY NUMBER OF MONTH ON WHICH EMPLOYEE HAS JOINED THE COMPANY
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_DATE , SUBSTR(HIRE_DATE,1,2) DAYS_NUMBER FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE DAYS_NUM                                                                                                                                                                      
+--------------- --------- --------                                                                                                                                                                      
+Steven          17-JUL-87 17                                                                                                                                                                            
+Neena           21-SEP-89 21                                                                                                                                                                            
+Lex             13-JAN-93 13                                                                                                                                                                            
+Alexander       03-JAN-90 03                                                                                                                                                                            
+Bruce           21-MAY-91 21                                                                                                                                                                            
+Diana           07-FEB-99 07                                                                                                                                                                            
+Kevin           16-NOV-99 16                                                                                                                                                                            
+Trenna          17-OCT-95 17                                                                                                                                                                            
+Curtis          29-JAN-97 29                                                                                                                                                                            
+Randall         15-MAR-98 15                                                                                                                                                                            
+Peter           09-JUL-98 09                                                                                                                                                                            
+Eleni           29-JAN-00 29                                                                                                                                                                            
+Ellen           11-MAY-96 11                                                                                                                                                                            
+Jonathon        24-MAR-98 24                                                                                                                                                                            
+Kimerely        24-MAY-99 24                                                                                                                                                                            
+Jennifer        17-SEP-87 17                                                                                                                                                                            
+Michael         17-FEB-96 17                                                                                                                                                                            
+Pat             17-AUG-97 17                                                                                                                                                                            
+Shelley         07-JUN-94 07                                                                                                                                                                            
+William         07-JUN-94 07                                                                                                                                                                            
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE , LPAD(HIRE_DATE,2) DAYS_NUMBER FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE DAYS_NUM                                                                                                                                                                      
+--------------- --------- --------                                                                                                                                                                      
+Steven          17-JUL-87 17                                                                                                                                                                            
+Neena           21-SEP-89 21                                                                                                                                                                            
+Lex             13-JAN-93 13                                                                                                                                                                            
+Alexander       03-JAN-90 03                                                                                                                                                                            
+Bruce           21-MAY-91 21                                                                                                                                                                            
+Diana           07-FEB-99 07                                                                                                                                                                            
+Kevin           16-NOV-99 16                                                                                                                                                                            
+Trenna          17-OCT-95 17                                                                                                                                                                            
+Curtis          29-JAN-97 29                                                                                                                                                                            
+Randall         15-MAR-98 15                                                                                                                                                                            
+Peter           09-JUL-98 09                                                                                                                                                                            
+Eleni           29-JAN-00 29                                                                                                                                                                            
+Ellen           11-MAY-96 11                                                                                                                                                                            
+Jonathon        24-MAR-98 24                                                                                                                                                                            
+Kimerely        24-MAY-99 24                                                                                                                                                                            
+Jennifer        17-SEP-87 17                                                                                                                                                                            
+Michael         17-FEB-96 17                                                                                                                                                                            
+Pat             17-AUG-97 17                                                                                                                                                                            
+Shelley         07-JUN-94 07                                                                                                                                                                            
+William         07-JUN-94 07                                                                                                                                                                            
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE , RPAD(HIRE_DATE,2) DAYS_NUMBER FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE DAYS_NUM                                                                                                                                                                      
+--------------- --------- --------                                                                                                                                                                      
+Steven          17-JUL-87 17                                                                                                                                                                            
+Neena           21-SEP-89 21                                                                                                                                                                            
+Lex             13-JAN-93 13                                                                                                                                                                            
+Alexander       03-JAN-90 03                                                                                                                                                                            
+Bruce           21-MAY-91 21                                                                                                                                                                            
+Diana           07-FEB-99 07                                                                                                                                                                            
+Kevin           16-NOV-99 16                                                                                                                                                                            
+Trenna          17-OCT-95 17                                                                                                                                                                            
+Curtis          29-JAN-97 29                                                                                                                                                                            
+Randall         15-MAR-98 15                                                                                                                                                                            
+Peter           09-JUL-98 09                                                                                                                                                                            
+Eleni           29-JAN-00 29                                                                                                                                                                            
+Ellen           11-MAY-96 11                                                                                                                                                                            
+Jonathon        24-MAR-98 24                                                                                                                                                                            
+Kimerely        24-MAY-99 24                                                                                                                                                                            
+Jennifer        17-SEP-87 17                                                                                                                                                                            
+Michael         17-FEB-96 17                                                                                                                                                                            
+Pat             17-AUG-97 17                                                                                                                                                                            
+Shelley         07-JUN-94 07                                                                                                                                                                            
+William         07-JUN-94 07                                                                                                                                                                            
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE , HIRE_DATE - TRUNC(HIRE_dATE,'MM') + 1 DAYS_NUMBER FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE DAYS_NUMBER                                                                                                                                                                   
+--------------- --------- -----------                                                                                                                                                                   
+Steven          17-JUL-87          17                                                                                                                                                                   
+Neena           21-SEP-89          21                                                                                                                                                                   
+Lex             13-JAN-93          13                                                                                                                                                                   
+Alexander       03-JAN-90           3                                                                                                                                                                   
+Bruce           21-MAY-91          21                                                                                                                                                                   
+Diana           07-FEB-99           7                                                                                                                                                                   
+Kevin           16-NOV-99          16                                                                                                                                                                   
+Trenna          17-OCT-95          17                                                                                                                                                                   
+Curtis          29-JAN-97          29                                                                                                                                                                   
+Randall         15-MAR-98          15                                                                                                                                                                   
+Peter           09-JUL-98           9                                                                                                                                                                   
+Eleni           29-JAN-00          29                                                                                                                                                                   
+Ellen           11-MAY-96          11                                                                                                                                                                   
+Jonathon        24-MAR-98          24                                                                                                                                                                   
+Kimerely        24-MAY-99          24                                                                                                                                                                   
+Jennifer        17-SEP-87          17                                                                                                                                                                   
+Michael         17-FEB-96          17                                                                                                                                                                   
+Pat             17-AUG-97          17                                                                                                                                                                   
+Shelley         07-JUN-94           7                                                                                                                                                                   
+William         07-JUN-94           7                                                                                                                                                                   
+
+20 rows selected.
+
+SQL> REM 1 FIND DAY NUMBER OF JOINING QUARTER ON WHICH COMPANY HAS HIRED EMPLOYEE.
+SQL> 
+SQL> REM 2 FUND NUMBER OF DAYS WORKED IN JOINING QUARTER
+SQL> 
+SQL> 
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_DATE , HIRE_DATE - TRUNC(HIRE_DATE,'Q') + 1 QTR_DAY_NUMBER FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE QTR_DAY_NUMBER                                                                                                                                                                
+--------------- --------- --------------                                                                                                                                                                
+Steven          17-JUL-87             17                                                                                                                                                                
+Neena           21-SEP-89             83                                                                                                                                                                
+Lex             13-JAN-93             13                                                                                                                                                                
+Alexander       03-JAN-90              3                                                                                                                                                                
+Bruce           21-MAY-91             51                                                                                                                                                                
+Diana           07-FEB-99             38                                                                                                                                                                
+Kevin           16-NOV-99             47                                                                                                                                                                
+Trenna          17-OCT-95             17                                                                                                                                                                
+Curtis          29-JAN-97             29                                                                                                                                                                
+Randall         15-MAR-98             74                                                                                                                                                                
+Peter           09-JUL-98              9                                                                                                                                                                
+Eleni           29-JAN-00             29                                                                                                                                                                
+Ellen           11-MAY-96             41                                                                                                                                                                
+Jonathon        24-MAR-98             83                                                                                                                                                                
+Kimerely        24-MAY-99             54                                                                                                                                                                
+Jennifer        17-SEP-87             79                                                                                                                                                                
+Michael         17-FEB-96             48                                                                                                                                                                
+Pat             17-AUG-97             48                                                                                                                                                                
+Shelley         07-JUN-94             68                                                                                                                                                                
+William         07-JUN-94             68                                                                                                                                                                
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE , ADD_MONTHS(TRUNC(HIRE_DATE,'Q'),3) - HIRE_DATE DAYS_WORKED_IN_JQ FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE DAYS_WORKED_IN_JQ                                                                                                                                                             
+--------------- --------- -----------------                                                                                                                                                             
+Steven          17-JUL-87                76                                                                                                                                                             
+Neena           21-SEP-89                10                                                                                                                                                             
+Lex             13-JAN-93                78                                                                                                                                                             
+Alexander       03-JAN-90                88                                                                                                                                                             
+Bruce           21-MAY-91                41                                                                                                                                                             
+Diana           07-FEB-99                53                                                                                                                                                             
+Kevin           16-NOV-99                46                                                                                                                                                             
+Trenna          17-OCT-95                76                                                                                                                                                             
+Curtis          29-JAN-97                62                                                                                                                                                             
+Randall         15-MAR-98                17                                                                                                                                                             
+Peter           09-JUL-98                84                                                                                                                                                             
+Eleni           29-JAN-00                63                                                                                                                                                             
+Ellen           11-MAY-96                51                                                                                                                                                             
+Jonathon        24-MAR-98                 8                                                                                                                                                             
+Kimerely        24-MAY-99                38                                                                                                                                                             
+Jennifer        17-SEP-87                14                                                                                                                                                             
+Michael         17-FEB-96                44                                                                                                                                                             
+Pat             17-AUG-97                45                                                                                                                                                             
+Shelley         07-JUN-94                24                                                                                                                                                             
+William         07-JUN-94                24                                                                                                                                                             
+
+20 rows selected.
+
+SQL> REM 1 FIND DAY NUMBER OF JOINING YEAR ON WHICH COMPANY HAS HIRED EMPLOYEE.
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_DATE , HIRE_DATE - TRUNC(HIRE_DATE,'YEAR') + 1 YEAR_DAY_NUMBER FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE YEAR_DAY_NUMBER                                                                                                                                                               
+--------------- --------- ---------------                                                                                                                                                               
+Steven          17-JUL-87             198                                                                                                                                                               
+Neena           21-SEP-89             264                                                                                                                                                               
+Lex             13-JAN-93              13                                                                                                                                                               
+Alexander       03-JAN-90               3                                                                                                                                                               
+Bruce           21-MAY-91             141                                                                                                                                                               
+Diana           07-FEB-99              38                                                                                                                                                               
+Kevin           16-NOV-99             320                                                                                                                                                               
+Trenna          17-OCT-95             290                                                                                                                                                               
+Curtis          29-JAN-97              29                                                                                                                                                               
+Randall         15-MAR-98              74                                                                                                                                                               
+Peter           09-JUL-98             190                                                                                                                                                               
+Eleni           29-JAN-00              29                                                                                                                                                               
+Ellen           11-MAY-96             132                                                                                                                                                               
+Jonathon        24-MAR-98              83                                                                                                                                                               
+Kimerely        24-MAY-99             144                                                                                                                                                               
+Jennifer        17-SEP-87             260                                                                                                                                                               
+Michael         17-FEB-96              48                                                                                                                                                               
+Pat             17-AUG-97             229                                                                                                                                                               
+Shelley         07-JUN-94             158                                                                                                                                                               
+William         07-JUN-94             158                                                                                                                                                               
+
+20 rows selected.
+
+SQL> REM 2 FIND NUMBER OF DAYS WORKED IN JOINING YEAR
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_DATE , ADD_MONTHS(TRUNC(HIRE_DATE,'YEAR'),12) - HIRE_DATE DAYS_WORKED_IN_JY FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE DAYS_WORKED_IN_JY                                                                                                                                                             
+--------------- --------- -----------------                                                                                                                                                             
+Steven          17-JUL-87               168                                                                                                                                                             
+Neena           21-SEP-89               102                                                                                                                                                             
+Lex             13-JAN-93               353                                                                                                                                                             
+Alexander       03-JAN-90               363                                                                                                                                                             
+Bruce           21-MAY-91               225                                                                                                                                                             
+Diana           07-FEB-99               328                                                                                                                                                             
+Kevin           16-NOV-99                46                                                                                                                                                             
+Trenna          17-OCT-95                76                                                                                                                                                             
+Curtis          29-JAN-97               337                                                                                                                                                             
+Randall         15-MAR-98               292                                                                                                                                                             
+Peter           09-JUL-98               176                                                                                                                                                             
+Eleni           29-JAN-00               338                                                                                                                                                             
+Ellen           11-MAY-96               235                                                                                                                                                             
+Jonathon        24-MAR-98               283                                                                                                                                                             
+Kimerely        24-MAY-99               222                                                                                                                                                             
+Jennifer        17-SEP-87               106                                                                                                                                                             
+Michael         17-FEB-96               319                                                                                                                                                             
+Pat             17-AUG-97               137                                                                                                                                                             
+Shelley         07-JUN-94               208                                                                                                                                                             
+William         07-JUN-94               208                                                                                                                                                             
+
+20 rows selected.
+
+SQL> REM ROUND :
+SQL> 
+SQL> REM ROUND SYNTAX : ROUND ( 'date' , 'interval' )
+SQL> 
+SQL> REM interval : 1 MONTH 2 Q/QUARTER 3 YEAR
+SQL> 
+SQL> SELECT ROUND(3.4) , ROUND(3.5) FROM DUAL;
+
+ROUND(3.4) ROUND(3.5)                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+         3          4                                                                                                                                                                                   
+
+SQL> REM FH : 0-4 , SH : 5-9
+SQL> 
+SQL> REM 1 MONTH = ?? DAYS (28/29/30/31)
+SQL> 
+SQL> REM FIRST HALF : 1-15 , SECOND HALF : 16-..  (28/29/30/31)
+SQL> 
+SQL> REM WHEN WE ROUND DATE WITH MONTH, IF DATE FALLS IN FIRST HALF, IT WILL RETURN SAME MONTH'S FIRST DATE, OTHERWISE IT WILL RETURN NEXT MONTH'S FIRST DATE.
+SQL> 
+SQL> REM Q1 : 01-JAN TO 31-MAR : FIRST HALF : 01-JAN TO 15-FEB , SECOND HALF : 16-FEB TO 31-MAR
+SQL> 
+SQL> REM Q2 : 01-APR TO 30-JUN : FIRST HALF : 01-APR TO 15-MAY , SECOND HALF : 16-MAY TO 30-JUN
+SQL> 
+SQL> REM Q3 : 01-JUL TO 30-SEP : FIRST HALF : 01-JUL TO 15-AUG , SECOND HALF : 16-AUG TO 30-SEP
+SQL> 
+SQL> REM Q4 : 01-OCT TO 31-DEC : FIRST HALF : 01-OCT TO 15-NOV , SECOND HALF : 16-NOV TO 31-DEC
+SQL> 
+SQL> 
+SQL> REM WHEN WE ROUND DATE WITH Q/QUARTER, IF DATE FALLS IN FIRST HALF, IT WILL RETURN SAME QUARTER'S FIRST DATE, OTHERWISE IT WILL RETURN NEXT QUARTER'S FIRST DATE.
+SQL> 
+SQL> REM 1 YEAR = 12 MONTHS
+SQL> 
+SQL> REM FIRST HALF : 01-JAN TO 30-JUN , SECOND HALF : 01-JUL TO 31-DEC
+SQL> 
+SQL> REM WHEN WE ROUND DATE WITH YEAR, IF DATE FALLS IN FIRST HALF, IT WILL RETURN SAME YEAR'S FIRST DATE, OTHERWISE IT WILL RETURN NEXT YEAR'S FIRST DATE.
+SQL> 
+SQL> 
+SQL> SELECT HIRE_DATE FROM EMPLOYEES FETCH FIRST 5 ROWS ONLY;
+
+HIRE_DATE                                                                                                                                                                                               
+---------                                                                                                                                                                                               
+17-JUL-87                                                                                                                                                                                               
+21-SEP-89                                                                                                                                                                                               
+13-JAN-93                                                                                                                                                                                               
+03-JAN-90                                                                                                                                                                                               
+21-MAY-91                                                                                                                                                                                               
+
+SQL> REM ROUND(MONTH) , ROUND(Q) , ROUND(YEAR)
+SQL> 
+SQL> 
+SQL> 
+SQL> SELECT HIRE_DATE , TO_CHAR(HIRE_DATE,'MM') FROM EMPLOYEES;
+
+HIRE_DATE TO                                                                                                                                                                                            
+--------- --                                                                                                                                                                                            
+17-JUL-87 07                                                                                                                                                                                            
+21-SEP-89 09                                                                                                                                                                                            
+13-JAN-93 01                                                                                                                                                                                            
+03-JAN-90 01                                                                                                                                                                                            
+21-MAY-91 05                                                                                                                                                                                            
+07-FEB-99 02                                                                                                                                                                                            
+16-NOV-99 11                                                                                                                                                                                            
+17-OCT-95 10                                                                                                                                                                                            
+29-JAN-97 01                                                                                                                                                                                            
+15-MAR-98 03                                                                                                                                                                                            
+09-JUL-98 07                                                                                                                                                                                            
+29-JAN-00 01                                                                                                                                                                                            
+11-MAY-96 05                                                                                                                                                                                            
+24-MAR-98 03                                                                                                                                                                                            
+24-MAY-99 05                                                                                                                                                                                            
+17-SEP-87 09                                                                                                                                                                                            
+17-FEB-96 02                                                                                                                                                                                            
+17-AUG-97 08                                                                                                                                                                                            
+07-JUN-94 06                                                                                                                                                                                            
+07-JUN-94 06                                                                                                                                                                                            
+
+20 rows selected.
+
+SQL> SELECT HIRE_DATE , ROUND(HIRE_DATE,'MM') FROM EMPLOYEES;
+
+HIRE_DATE ROUND(HIR                                                                                                                                                                                     
+--------- ---------                                                                                                                                                                                     
+17-JUL-87 01-AUG-87                                                                                                                                                                                     
+21-SEP-89 01-OCT-89                                                                                                                                                                                     
+13-JAN-93 01-JAN-93                                                                                                                                                                                     
+03-JAN-90 01-JAN-90                                                                                                                                                                                     
+21-MAY-91 01-JUN-91                                                                                                                                                                                     
+07-FEB-99 01-FEB-99                                                                                                                                                                                     
+16-NOV-99 01-DEC-99                                                                                                                                                                                     
+17-OCT-95 01-NOV-95                                                                                                                                                                                     
+29-JAN-97 01-FEB-97                                                                                                                                                                                     
+15-MAR-98 01-MAR-98                                                                                                                                                                                     
+09-JUL-98 01-JUL-98                                                                                                                                                                                     
+29-JAN-00 01-FEB-00                                                                                                                                                                                     
+11-MAY-96 01-MAY-96                                                                                                                                                                                     
+24-MAR-98 01-APR-98                                                                                                                                                                                     
+24-MAY-99 01-JUN-99                                                                                                                                                                                     
+17-SEP-87 01-OCT-87                                                                                                                                                                                     
+17-FEB-96 01-MAR-96                                                                                                                                                                                     
+17-AUG-97 01-SEP-97                                                                                                                                                                                     
+07-JUN-94 01-JUN-94                                                                                                                                                                                     
+07-JUN-94 01-JUN-94                                                                                                                                                                                     
+
+20 rows selected.
+
+SQL> SELECT HIRE_DATE , ROUND(HIRE_DATE,'Q') FROM EMPLOYEES;
+
+HIRE_DATE ROUND(HIR                                                                                                                                                                                     
+--------- ---------                                                                                                                                                                                     
+17-JUL-87 01-JUL-87                                                                                                                                                                                     
+21-SEP-89 01-OCT-89                                                                                                                                                                                     
+13-JAN-93 01-JAN-93                                                                                                                                                                                     
+03-JAN-90 01-JAN-90                                                                                                                                                                                     
+21-MAY-91 01-JUL-91                                                                                                                                                                                     
+07-FEB-99 01-JAN-99                                                                                                                                                                                     
+16-NOV-99 01-JAN-00                                                                                                                                                                                     
+17-OCT-95 01-OCT-95                                                                                                                                                                                     
+29-JAN-97 01-JAN-97                                                                                                                                                                                     
+15-MAR-98 01-APR-98                                                                                                                                                                                     
+09-JUL-98 01-JUL-98                                                                                                                                                                                     
+29-JAN-00 01-JAN-00                                                                                                                                                                                     
+11-MAY-96 01-APR-96                                                                                                                                                                                     
+24-MAR-98 01-APR-98                                                                                                                                                                                     
+24-MAY-99 01-JUL-99                                                                                                                                                                                     
+17-SEP-87 01-OCT-87                                                                                                                                                                                     
+17-FEB-96 01-APR-96                                                                                                                                                                                     
+17-AUG-97 01-OCT-97                                                                                                                                                                                     
+07-JUN-94 01-JUL-94                                                                                                                                                                                     
+07-JUN-94 01-JUL-94                                                                                                                                                                                     
+
+20 rows selected.
+
+SQL> SELECT HIRE_DATE , ROUND(HIRE_DATE,'YYYY') FROM EMPLOYEES;
+
+HIRE_DATE ROUND(HIR                                                                                                                                                                                     
+--------- ---------                                                                                                                                                                                     
+17-JUL-87 01-JAN-88                                                                                                                                                                                     
+21-SEP-89 01-JAN-90                                                                                                                                                                                     
+13-JAN-93 01-JAN-93                                                                                                                                                                                     
+03-JAN-90 01-JAN-90                                                                                                                                                                                     
+21-MAY-91 01-JAN-91                                                                                                                                                                                     
+07-FEB-99 01-JAN-99                                                                                                                                                                                     
+16-NOV-99 01-JAN-00                                                                                                                                                                                     
+17-OCT-95 01-JAN-96                                                                                                                                                                                     
+29-JAN-97 01-JAN-97                                                                                                                                                                                     
+15-MAR-98 01-JAN-98                                                                                                                                                                                     
+09-JUL-98 01-JAN-99                                                                                                                                                                                     
+29-JAN-00 01-JAN-00                                                                                                                                                                                     
+11-MAY-96 01-JAN-96                                                                                                                                                                                     
+24-MAR-98 01-JAN-98                                                                                                                                                                                     
+24-MAY-99 01-JAN-99                                                                                                                                                                                     
+17-SEP-87 01-JAN-88                                                                                                                                                                                     
+17-FEB-96 01-JAN-96                                                                                                                                                                                     
+17-AUG-97 01-JAN-98                                                                                                                                                                                     
+07-JUN-94 01-JAN-94                                                                                                                                                                                     
+07-JUN-94 01-JAN-94                                                                                                                                                                                     
+
+20 rows selected.
+
+SQL> REM 1 DISPLAY THOSE WHO WERE HIRED IN FIRST HALF OF ANY MONTH. (TRUNC , ROUND)
+SQL> 
+SQL> REM 2 DISPLAY THOSE WHO WERE HIRED IN SECOND HALF OF ANY QUARTER. 1 TRUNC , ROUND 2 TRUNC , ROUND , ADD_MONTHS 3 TRUNC , ROUND , MONTHS_BETWEEN
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 1 DISPLAY THOSE WHO WERE HIRED IN FIRST HALF OF ANY MONTH. (TRUNC , ROUND)
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE TRUNC(HIRE_DATE,'MM') = ROUND(HIRE_DATE,'MM');
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Lex             13-JAN-93                                                                                                                                                                               
+Alexander       03-JAN-90                                                                                                                                                                               
+Diana           07-FEB-99                                                                                                                                                                               
+Randall         15-MAR-98                                                                                                                                                                               
+Peter           09-JUL-98                                                                                                                                                                               
+Ellen           11-MAY-96                                                                                                                                                                               
+Shelley         07-JUN-94                                                                                                                                                                               
+William         07-JUN-94                                                                                                                                                                               
+
+8 rows selected.
+
+SQL> REM 2 DISPLAY THOSE WHO WERE HIRED IN SECOND HALF OF ANY QUARTER. 1 TRUNC , ROUND 2 TRUNC , ROUND , ADD_MONTHS 3 TRUNC , ROUND , MONTHS_BETWEEN
+SQL> 
+SQL> REM 1 DISPLAY THOSE WHO WERE HIRED IN FIRST HALF OF ANY MONTH. (TRUNC , ROUND)
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE < ROUND(HIRE_DATE,'MM');
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Steven          17-JUL-87                                                                                                                                                                               
+Neena           21-SEP-89                                                                                                                                                                               
+Bruce           21-MAY-91                                                                                                                                                                               
+Kevin           16-NOV-99                                                                                                                                                                               
+Trenna          17-OCT-95                                                                                                                                                                               
+Curtis          29-JAN-97                                                                                                                                                                               
+Eleni           29-JAN-00                                                                                                                                                                               
+Jonathon        24-MAR-98                                                                                                                                                                               
+Kimerely        24-MAY-99                                                                                                                                                                               
+Jennifer        17-SEP-87                                                                                                                                                                               
+Michael         17-FEB-96                                                                                                                                                                               
+Pat             17-AUG-97                                                                                                                                                                               
+
+12 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE TRUNC(HIRE_DATE,'MM') < ROUND(HIRE_DATE,'MM');
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Steven          17-JUL-87                                                                                                                                                                               
+Neena           21-SEP-89                                                                                                                                                                               
+Bruce           21-MAY-91                                                                                                                                                                               
+Kevin           16-NOV-99                                                                                                                                                                               
+Trenna          17-OCT-95                                                                                                                                                                               
+Curtis          29-JAN-97                                                                                                                                                                               
+Eleni           29-JAN-00                                                                                                                                                                               
+Jonathon        24-MAR-98                                                                                                                                                                               
+Kimerely        24-MAY-99                                                                                                                                                                               
+Jennifer        17-SEP-87                                                                                                                                                                               
+Michael         17-FEB-96                                                                                                                                                                               
+Pat             17-AUG-97                                                                                                                                                                               
+
+12 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE NOT TRUNC(HIRE_DATE,'MM') < ROUND(HIRE_DATE,'MM');
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Lex             13-JAN-93                                                                                                                                                                               
+Alexander       03-JAN-90                                                                                                                                                                               
+Diana           07-FEB-99                                                                                                                                                                               
+Randall         15-MAR-98                                                                                                                                                                               
+Peter           09-JUL-98                                                                                                                                                                               
+Ellen           11-MAY-96                                                                                                                                                                               
+Shelley         07-JUN-94                                                                                                                                                                               
+William         07-JUN-94                                                                                                                                                                               
+
+8 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE TRUNC(HIRE_DATE,'MM') >= ROUND(HIRE_DATE,'MM');
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Lex             13-JAN-93                                                                                                                                                                               
+Alexander       03-JAN-90                                                                                                                                                                               
+Diana           07-FEB-99                                                                                                                                                                               
+Randall         15-MAR-98                                                                                                                                                                               
+Peter           09-JUL-98                                                                                                                                                                               
+Ellen           11-MAY-96                                                                                                                                                                               
+Shelley         07-JUN-94                                                                                                                                                                               
+William         07-JUN-94                                                                                                                                                                               
+
+8 rows selected.
+
+SQL> REM 2 DISPLAY THOSE WHO WERE HIRED IN SECOND HALF OF ANY QUARTER. 1 TRUNC , ROUND 2 TRUNC , ROUND , ADD_MONTHS 3 TRUNC , ROUND , MONTHS_BETWEEN
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE TRUNC(HIRE_dATE,'Q') < ROUND(HIRE_DATE,'Q');
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Neena           21-SEP-89                                                                                                                                                                               
+Bruce           21-MAY-91                                                                                                                                                                               
+Kevin           16-NOV-99                                                                                                                                                                               
+Randall         15-MAR-98                                                                                                                                                                               
+Jonathon        24-MAR-98                                                                                                                                                                               
+Kimerely        24-MAY-99                                                                                                                                                                               
+Jennifer        17-SEP-87                                                                                                                                                                               
+Michael         17-FEB-96                                                                                                                                                                               
+Pat             17-AUG-97                                                                                                                                                                               
+Shelley         07-JUN-94                                                                                                                                                                               
+William         07-JUN-94                                                                                                                                                                               
+
+11 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE ADD(TRUNC(HIRE_dATE,'Q'),3) = ROUND(HIRE_DATE,'Q');
+SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE ADD(TRUNC(HIRE_dATE,'Q'),3) = ROUND(HIRE_DATE,'Q')
+                                                   *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE ADD_MONTHS(TRUNC(HIRE_dATE,'Q'),3) = ROUND(HIRE_DATE,'Q');
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Neena           21-SEP-89                                                                                                                                                                               
+Bruce           21-MAY-91                                                                                                                                                                               
+Kevin           16-NOV-99                                                                                                                                                                               
+Randall         15-MAR-98                                                                                                                                                                               
+Jonathon        24-MAR-98                                                                                                                                                                               
+Kimerely        24-MAY-99                                                                                                                                                                               
+Jennifer        17-SEP-87                                                                                                                                                                               
+Michael         17-FEB-96                                                                                                                                                                               
+Pat             17-AUG-97                                                                                                                                                                               
+Shelley         07-JUN-94                                                                                                                                                                               
+William         07-JUN-94                                                                                                                                                                               
+
+11 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE MONTHS_BETWEEN(ROUND(HIRE_dATE,'Q') , TRUNC(HIRE_DATE,'Q'))  =3;
+
+FIRST_NAME      HIRE_DATE                                                                                                                                                                               
+--------------- ---------                                                                                                                                                                               
+Neena           21-SEP-89                                                                                                                                                                               
+Bruce           21-MAY-91                                                                                                                                                                               
+Kevin           16-NOV-99                                                                                                                                                                               
+Randall         15-MAR-98                                                                                                                                                                               
+Jonathon        24-MAR-98                                                                                                                                                                               
+Kimerely        24-MAY-99                                                                                                                                                                               
+Jennifer        17-SEP-87                                                                                                                                                                               
+Michael         17-FEB-96                                                                                                                                                                               
+Pat             17-AUG-97                                                                                                                                                                               
+Shelley         07-JUN-94                                                                                                                                                                               
+William         07-JUN-94                                                                                                                                                                               
+
+11 rows selected.
+
+SQL> SPOOL OFF
